@@ -13,6 +13,10 @@
 #include "gpio.h"
 #endif // __has_include("gpio.h")
 
+#if __has_include("usart.h")
+#include "usart.h"
+#endif // __has_include("usart.h")
+
 #if __has_include("i2c.h")
 #include "i2c.h"
 #endif // __has_include("i2c.h")
@@ -21,14 +25,13 @@
 #include "tim.h"
 #endif // __has_include("tim.h")
 
-#if __has_include("usart.h")
-#include "usart.h"
-#endif // __has_include("usart.h")
-
 #endif // __has_include
 
 #define getTick() HAL_GetTick()
 #define delay(__ms) HAL_Delay(__ms)
+#define gpioRead(GPIOx, GPIO_Pin) HAL_GPIO_ReadPin(GPIOx, GPIO_Pin)
+#define gpioWrite(GPIOx, GPIO_Pin, PinState) HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState)
+#define gpioToggle(GPIOx, GPIO_Pin) HAL_GPIO_TogglePin(GPIOx, GPIO_Pin)
 
 #ifdef __gpio_H
 class GPIO {
@@ -41,11 +44,11 @@ public:
     }
 
     GPIO_PinState read(){
-        return HAL_GPIO_ReadPin(GPIOx, GPIO_Pin);
+        return gpioRead(GPIOx, GPIO_Pin);
     }
 
     void write(GPIO_PinState PinState){
-        HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState);
+        gpioWrite(GPIOx, GPIO_Pin, PinState);
     }
 
     void set(){
@@ -57,10 +60,30 @@ public:
     }
 
     void toggle(){
-        HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);
+        gpioToggle(GPIOx, GPIO_Pin);
     }
 };
 #endif // __gpio_H
+
+#ifdef __usart_H
+template<class T>
+class UART {
+private:
+    UART_HandleTypeDef *huart;
+public:
+    UART(UART_HandleTypeDef &huart): huart(&huart){
+
+    }
+
+    HAL_StatusTypeDef transmit(T &pData, uint32_t timeout){
+        return HAL_UART_Transmit(huart, (uint8_t *) &pData, sizeof(T), timeout);
+    }
+
+    HAL_StatusTypeDef receive(T &pData, uint32_t timeout){
+        return HAL_UART_Receive(huart, (uint8_t *) &pData, sizeof(T), timeout);
+    }
+};
+#endif // __usart_H
 
 #ifdef __i2c_H
 template<class T>
@@ -120,6 +143,10 @@ public:
             return true;
         }
     }
+
+    uint32_t getCounterPeriod(){
+        return counterPeriod;
+    }
 };
 
 class Motor {
@@ -131,8 +158,8 @@ public:
 
     }
 
-    Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg) {
-        Motor(PWM(htimPos, channelPos), PWM(htimNeg, channelNeg))
+    Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg): positive(PWM(htimPos, channelPos)), negative(PWM(htimNeg, channelNeg)){
+
     }
 
     bool setSpeed(bool forward, uint32_t compare){
@@ -150,26 +177,7 @@ public:
         return setSpeed(!back, (uint32_t) speed);
     }
 };
+
 #endif // __tim_H
-
-#ifdef __usart_H
-template<class T>
-class UART {
-private:
-    UART_HandleTypeDef *huart;
-public:
-    UART(UART_HandleTypeDef &huart): huart(&huart){
-
-    }
-
-    HAL_StatusTypeDef transmit(T &pData, uint32_t timeout){
-        return HAL_UART_Transmit(huart, (uint8_t *) &pData, sizeof(T), timeout);
-    }
-
-    HAL_StatusTypeDef receive(T &pData, uint32_t timeout){
-        return HAL_UART_Receive(huart, (uint8_t *) &pData, sizeof(T), timeout);
-    }
-};
-#endif // __usart_H
 
 #endif //HAL_EXTENSION_HPP
