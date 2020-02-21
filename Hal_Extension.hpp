@@ -79,15 +79,17 @@ public:
 
 class DIPSwitch {
 private:
-    std::array<GPIO, 7> gpioArray;
-    uint8_t size = 0;
+    std::vector<GPIO> list;
 public:
+    DIPSwitch() {
+
+    }
+
     bool add(GPIO gpio){
-        if(size == 7){
+        if(getSize() == 7){
             return false;
         }
-        gpioArray[size] = gpio;
-        size ++;
+        list.push_back(gpio);
         return true;
     }
 
@@ -96,13 +98,13 @@ public:
     }
 
     uint8_t getSize(){
-        return size;
+        return list.size();
     }
 
     uint8_t getAddress(){
         uint8_t builder = 0;
-        for(int i = 0; i < size; i++){
-            builder |= gpioArray[i].read() << i;
+        for(int i = 0; i < getSize(); i++){
+            builder |= list[i].read() << i;
         }
         return builder;
     }
@@ -201,6 +203,28 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
     }
 }
 
+class UART_Logger {
+private:
+    UART<const char> uart;
+    uint32_t timeout;
+public:
+    UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F): uart(UART<const char>(huart)), timeout(timeout){
+
+    }
+
+    void print(const char* text){
+        do {
+            uart.transmit(*text++, timeout);
+        } while(*text);
+    }
+
+    void println(const char* text){
+        print(text);
+        uart.transmit('\r', timeout);
+        uart.transmit('\n', timeout);
+    }
+};
+
 #endif // __usart_H
 
 #ifdef __i2c_H
@@ -231,13 +255,9 @@ template<class T>
 class I2C_Slave {
 private:
     I2C_HandleTypeDef* hi2c;
-    uint8_t address = 0x00;
+    uint8_t address;
 public:
-    I2C_Slave(I2C_HandleTypeDef &hi2c): hi2c(&hi2c) {
-
-    }
-
-    I2C_Slave(I2C_HandleTypeDef &hi2c, uint8_t address): hi2c(&hi2c), address(address) {
+    I2C_Slave(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00): hi2c(&hi2c), address(address) {
 
     }
 
@@ -322,14 +342,10 @@ template<class T>
 class I2C_Slave_DMA {
 private:
     I2C_HandleTypeDef* hi2c;
-    uint8_t address = 0x00;
+    uint8_t address;
     T *data;
 public:
-    I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, T &data): hi2c(&hi2c), address(address), data(&data) {
-
-    }
-
-    I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, uint8_t address, T &data): hi2c(&hi2c), address(address), data(&data) {
+    I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00, T &data): hi2c(&hi2c), address(address), data(&data) {
 
     }
 
