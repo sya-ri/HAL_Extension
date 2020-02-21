@@ -49,7 +49,7 @@
 
 ### コンストラクタ
 > ##### DIPSwitch()
-> 例: `DIPSwitch() dip();`
+> 例: `DIPSwitch dip;`
 
 ### 関数
 > ##### bool add(GPIO gpio)
@@ -133,7 +133,7 @@
 > ```c++
 > 例:
 > uart.setTxCallback([]{
->     printf("Tx\n");
+>     logger.println("Tx\n");
 > });
 > ```
 
@@ -142,7 +142,7 @@
 > ```c++
 > 例:
 > uart.setRxCallback([]{
->     printf("Rx\n");
+>     logger.println("Rx\n");
 > });
 > ```
 
@@ -151,9 +151,25 @@
 > ```c++
 > 例:
 > uart.setErrorCallback([]{
->     printf("Error\n");
+>     logger.println("Error\n");
 > });
 > ```
+
+## class UART_Logger
+
+### コンストラクタ
+> ### UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F)
+> ピンとタイムアウト時間を設定します  
+> 例: `UART_Logger logger(huart2);`
+
+### 関数
+> #### void print(const char* text)
+> 一文字ずつ送信します  
+> 例: `logger.print("Hello");`
+
+> #### void println(const char* text)
+> 送信後に改行します  
+> 例: `logger.println("HelloWorld");`
 
 ## class I2C_Master 
 #### template\<class T\>
@@ -180,12 +196,7 @@
 #### template\<class T\>
 
 ### コンストラクタ
-> #### I2C_Slave(I2C_HandleTypeDef &hi2c, uint8_t address)
-> ピンのみを設定します  
-> 自局アドレスは 0x00 になります  
-> 例: `I2C_Slave<uint16_t> slave(hi2c1);`
-
-> #### I2C_Slave(I2C_HandleTypeDef &hi2c, uint8_t address)
+> #### I2C_Slave(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00)
 > ピンと自局アドレスを設定します  
 > 例: `I2C_Slave<uint16_t> slave(hi2c1, 0x01);`
 
@@ -216,7 +227,7 @@
 ### コンストラクタ
 > #### I2C_Master_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, T &data)
 > ピンと送信先アドレス・連携させる変数を設定します  
-> 例: `I2C_Master<uint16_t> master(hi2c1, 0x01, data);`
+> 例: `I2C_Master_DMA<uint16_t> master(hi2c1, 0x01, data);`
 
 ### 関数
 > #### void init()
@@ -236,7 +247,7 @@
 > ```c++
 > 例:
 > master.setTxCallback([]{
->     printf("Tx\n");
+>     logger.println("Tx\n");
 > });
 > ```
 
@@ -245,7 +256,53 @@
 > ```c++
 > 例:
 > master.setRxCallback([]{
->     printf("Rx\n");
+>     logger.println("Rx\n");
+> });
+> ```
+
+## class I2C_Slave_DMA
+
+### コンストラクタ
+> #### I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00, T &data)
+> ピンと自局アドレス・連携させた変数を設定します  
+> 例: `I2C_Slave_DMA<uint16_t> slave(hi2c1, 0x01, data);`
+
+### 関数
+> #### void init()
+> 自局アドレスを反映させ、再初期化します  
+> 例: `slave.init();`
+
+> #### void init(uint8_t address)
+> 自局アドレスを上書きし、再初期化します  
+> 例: `slave.init(0x01);`
+
+> #### void init(DIPSwitch builder)
+> 自局アドレスを上書きし、再初期化します  
+> 例: `slave.init(dip);`
+
+> #### HAL_StatusTypeDef startTransmit()
+> HAL_I2C_Slave_Transmit_DMA() の結果を返します  
+> 例: `slave.startTransmit();`
+
+> #### HAL_StatusTypeDef startReceive()
+> HAL_I2C_Slave_Receive_DMA() の結果を返します  
+> 例: `slave.startReceive();`
+
+> #### void setTxCallback(std::function<void()> function)
+> 送信完了時の割り込み関数を設定します  
+> ```c++
+> 例:
+> slave.setTxCallback([]{
+>     logger.println("Tx\n");
+> });
+> ```
+
+> #### void setRxCallback(std::function<void()> function)
+> 受信完了時の割り込み関数を設定します
+> ```c++
+> 例:
+> slave.setRxCallback([]{
+>     logger.println("Rx\n");
 > });
 > ```
 
@@ -340,6 +397,6 @@
 > ```c++
 > 例:
 > master.setCallback([]{
->     printf("Complete\n");
+>     logger.println("Complete\n");
 > });
 > ```
