@@ -2,12 +2,16 @@
 // Created by @fly_in_pig on 2020/01/28.
 // Version
 // - 1.0 : 2020/01/29
+// - 2.0 : 2020/02/21
 //
 
 #ifndef HAL_EXTENSION_HPP
 #define HAL_EXTENSION_HPP
 
 #include "main.h"
+#include <map>
+#include <array>
+#include <functional>
 
 #ifdef __has_include // since C++ 17
 
@@ -27,6 +31,10 @@
 #include "tim.h"
 #endif // __has_include("tim.h")
 
+#if __has_include("adc.h")
+#include "adc.h"
+#endif // __has_include("adc.h")
+
 #endif // __has_include
 
 #define getTick() HAL_GetTick()
@@ -34,6 +42,9 @@
 #define gpioRead(GPIOx, GPIO_Pin) HAL_GPIO_ReadPin(GPIOx, GPIO_Pin)
 #define gpioWrite(GPIOx, GPIO_Pin, PinState) HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState)
 #define gpioToggle(GPIOx, GPIO_Pin) HAL_GPIO_TogglePin(GPIOx, GPIO_Pin)
+
+#define __function_map(Key) std::map<Key, std::function<void()>>
+#define __map_contains(Map, Key) (Map.find(Key) != Map.end())
 
 #ifdef __gpio_H
 class GPIO {
@@ -65,6 +76,37 @@ public:
         gpioToggle(GPIOx, GPIO_Pin);
     }
 };
+
+class DIPSwitch {
+private:
+    std::array<GPIO, 7> gpioArray;
+    uint8_t size = 0;
+public:
+    bool add(GPIO gpio){
+        if(size == 7){
+            return false;
+        }
+        gpioArray[size] = gpio;
+        size ++;
+        return true;
+    }
+
+    bool add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
+        return add(GPIO(GPIOx, GPIO_Pin));
+    }
+
+    uint8_t getSize(){
+        return size;
+    }
+
+    uint8_t getAddress(){
+        uint8_t builder = 0;
+        for(int i = 0; i < size; i++){
+            builder |= gpioArray[i].read() << i;
+        }
+        return builder;
+    }
+};
 #endif // __gpio_H
 
 #ifdef __usart_H
@@ -77,24 +119,125 @@ public:
 
     }
 
-    HAL_StatusTypeDef transmit(T &pData, uint32_t timeout){
-        return HAL_UART_Transmit(huart, (uint8_t *) &pData, sizeof(T), timeout);
+    HAL_StatusTypeDef transmit(T &data, uint32_t timeout){
+        return HAL_UART_Transmit(huart, (uint8_t *) &data, sizeof(T), timeout);
     }
 
-    HAL_StatusTypeDef receive(T &pData, uint32_t timeout){
-        return HAL_UART_Receive(huart, (uint8_t *) &pData, sizeof(T), timeout);
+    HAL_StatusTypeDef receive(T &data, uint32_t timeout){
+        return HAL_UART_Receive(huart, (uint8_t *) &data, sizeof(T), timeout);
     }
 };
+
+static __function_map(UART_HandleTypeDef *) __uart_tx_callback;
+static __function_map(UART_HandleTypeDef *) __uart_rx_callback;
+static __function_map(UART_HandleTypeDef *) __uart_error_callback;
+
+template<class T>
+class UART_DMA {
+private:
+    UART_HandleTypeDef *huart;
+    T *data;
+public:
+    UART_DMA(UART_HandleTypeDef &huart, T &data): huart(&huart), data(&data){
+
+    }
+
+    HAL_StatusTypeDef startTransmit(){
+        return HAL_UART_Transmit_DMA(huart, (uint8_t *) data, sizeof(T));
+    }
+
+    HAL_StatusTypeDef startReceive(){
+        return HAL_UART_Receive_DMA(huart, (uint8_t *) data, sizeof(T));
+    }
+
+    HAL_StatusTypeDef pause(){
+        return HAL_UART_DMAPause(huart);
+    }
+
+    HAL_StatusTypeDef resume(){
+        return HAL_UART_DMAResume(huart);
+    }
+
+    HAL_StatusTypeDef stop(){
+        return HAL_UART_DMAStop(huart);
+    }
+
+    void setTxCallback(std::function<void()> function){
+        __uart_tx_callback[huart] = function;
+    }
+
+    void setRxCallback(std::function<void()> function){
+        __uart_rx_callback[huart] = function;
+    }
+
+    void setErrorCallback(std::function<void()> function){
+        __uart_error_callback[huart] = function;
+    }
+};
+
+#ifdef CONFIG_UART_USE_HALF_CALLBACK
+void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart){
+#else  // CONFIG_UART_USE_HALF_CALLBACK
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
+#endif // CONFIG_UART_USE_HALF_CALLBACK
+    if(__map_contains(__uart_tx_callback, huart)){
+        __uart_tx_callback[huart]();
+    }
+}
+
+#ifdef CONFIG_UART_USE_HALF_CALLBACK
+void HAL_UART_RxHalfCpltCallback(UART_HandleTypeDef *huart){
+#else  // CONFIG_UART_USE_HALF_CALLBACK
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+#endif // CONFIG_UART_USE_HALF_CALLBACK
+    if(__map_contains(__uart_rx_callback, huart)){
+        __uart_rx_callback[huart]();
+    }
+}
+
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
+    if(__map_contains(__uart_error_callback, huart)){
+        __uart_error_callback[huart]();
+    }
+}
+
 #endif // __usart_H
 
 #ifdef __i2c_H
 template<class T>
-class I2C {
+class I2C_Master {
 private:
-    I2C_HandleTypeDef *hi2c;
-    uint8_t address;
+    I2C_HandleTypeDef* hi2c;
 public:
-    I2C(I2C_HandleTypeDef &hi2c, uint8_t address): hi2c(&hi2c), address(address) {
+    I2C_Master(I2C_HandleTypeDef &hi2c): hi2c(&hi2c){
+
+    }
+
+    void init(){
+        HAL_I2C_DeInit(hi2c);
+        HAL_I2C_Init(hi2c);
+    }
+
+    HAL_StatusTypeDef transmit(uint8_t target, T &data, uint32_t timeout){
+        return HAL_I2C_Master_Transmit(hi2c, target << 1, (uint8_t *) &data, sizeof(T), timeout);
+    }
+
+    HAL_StatusTypeDef receive(uint8_t target, T &data, uint32_t timeout){
+        return HAL_I2C_Master_Receive(hi2c, target << 1, (uint8_t *) &data, sizeof(T), timeout);
+    }
+};
+
+template<class T>
+class I2C_Slave {
+private:
+    I2C_HandleTypeDef* hi2c;
+    uint8_t address = 0x00;
+public:
+    I2C_Slave(I2C_HandleTypeDef &hi2c): hi2c(&hi2c) {
+
+    }
+
+    I2C_Slave(I2C_HandleTypeDef &hi2c, uint8_t address): hi2c(&hi2c), address(address) {
 
     }
 
@@ -104,22 +247,139 @@ public:
         HAL_I2C_Init(hi2c);
     }
 
-    HAL_StatusTypeDef masterTransmit(uint8_t target, T &pData, uint32_t timeout){
-        return HAL_I2C_Master_Transmit(hi2c, target << 1, (uint8_t *) &pData, sizeof(T), timeout);
+    void init(uint8_t address){
+        this->address = address;
+        init();
     }
 
-    HAL_StatusTypeDef masterReceive(uint8_t target, T &pData, uint32_t timeout){
-        return HAL_I2C_Master_Receive(hi2c, target << 1, (uint8_t *) &pData, sizeof(T), timeout);
+#ifdef __gpio_H
+    void init(DIPSwitch builder){
+        init(builder.getAddress());
+    }
+#endif // __gpio_H
+
+    HAL_StatusTypeDef transmit(T &data, uint32_t timeout){
+        return HAL_I2C_Slave_Transmit(hi2c, (uint8_t *) &data, sizeof(T), timeout);
     }
 
-    HAL_StatusTypeDef slaveTransmit(T &pData, uint32_t timeout){
-        return HAL_I2C_Slave_Transmit(hi2c, (uint8_t *) &pData, sizeof(T), timeout);
-    }
-
-    HAL_StatusTypeDef slaveReceive(T &pData, uint32_t timeout){
-        return HAL_I2C_Slave_Receive(hi2c, (uint8_t *) &pData, sizeof(T), timeout);
+    HAL_StatusTypeDef receive(T &data, uint32_t timeout){
+        return HAL_I2C_Slave_Receive(hi2c, (uint8_t *) &data, sizeof(T), timeout);
     }
 };
+
+static __function_map(I2C_HandleTypeDef *) __i2c_master_tx_callback;
+static __function_map(I2C_HandleTypeDef *) __i2c_master_rx_callback;
+
+template<class T>
+class I2C_Master_DMA {
+private:
+    I2C_HandleTypeDef* hi2c;
+    uint8_t target;
+    T *data;
+public:
+    I2C_Master_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, T &data): hi2c(&hi2c), target(target), data(&data){
+
+    }
+
+    void init(){
+        HAL_I2C_DeInit(hi2c);
+        HAL_I2C_Init(hi2c);
+    }
+
+    HAL_StatusTypeDef startTransmit(){
+        return HAL_I2C_Master_Transmit_DMA(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
+    }
+
+    HAL_StatusTypeDef startReceive(){
+        return HAL_I2C_Master_Receive_DMA(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
+    }
+
+    void setTxCallback(std::function<void()> function){
+        __i2c_master_tx_callback[hi2c] = function;
+    }
+
+    void setRxCallback(std::function<void()> function){
+        __i2c_master_rx_callback[hi2c] = function;
+    }
+};
+
+void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c){
+    if(__map_contains(__i2c_master_tx_callback, hi2c)){
+        __i2c_master_tx_callback[hi2c]();
+    }
+}
+
+void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c){
+    if(__map_contains(__i2c_master_rx_callback, hi2c)){
+        __i2c_master_rx_callback[hi2c]();
+    }
+}
+
+static __function_map(I2C_HandleTypeDef *) __i2c_slave_tx_callback;
+static __function_map(I2C_HandleTypeDef *) __i2c_slave_rx_callback;
+
+template<class T>
+class I2C_Slave_DMA {
+private:
+    I2C_HandleTypeDef* hi2c;
+    uint8_t address = 0x00;
+    T *data;
+public:
+    I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, T &data): hi2c(&hi2c), address(address), data(&data) {
+
+    }
+
+    I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, uint8_t address, T &data): hi2c(&hi2c), address(address), data(&data) {
+
+    }
+
+    void init(){
+        HAL_I2C_DeInit(hi2c);
+        hi2c->Init.OwnAddress1 = address << 1;
+        HAL_I2C_Init(hi2c);
+    }
+
+    void init(uint8_t address){
+        this->address = address;
+        init();
+    }
+
+#ifdef __gpio_H
+    void init(DIPSwitch builder){
+        init(builder.getAddress());
+    }
+#endif // __gpio_H
+
+    HAL_StatusTypeDef startTransmit(){
+        return HAL_I2C_Slave_Transmit_DMA(hi2c, (uint8_t *) &data, sizeof(T));
+    }
+
+    HAL_StatusTypeDef startReceive(){
+        return HAL_I2C_Slave_Receive_DMA(hi2c, (uint8_t *) &data, sizeof(T));
+    }
+
+    void setTxCallback(std::function<void()> function){
+        __i2c_slave_tx_callback[hi2c] = function;
+    }
+
+    void setRxCallback(std::function<void()> function){
+        __i2c_slave_rx_callback[hi2c] = function;
+    }
+};
+
+void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c){
+    if(__map_contains(__i2c_slave_tx_callback, hi2c)){
+        __i2c_slave_tx_callback[hi2c]();
+    }
+}
+
+void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c){
+    if(__map_contains(__i2c_slave_rx_callback, hi2c)){
+        __i2c_slave_rx_callback[hi2c]();
+    }
+}
+
+
 #endif // __i2c_H
 
 #ifdef __tim_H
@@ -133,8 +393,12 @@ public:
         counterPeriod = htim.Init.Period;
     }
 
-    void init(){
+    void start(){
         HAL_TIM_PWM_Start(&htim, channel);
+    }
+
+    void stop(){
+        HAL_TIM_PWM_Stop(&htim, channel);
     }
 
     bool setCompare(uint32_t compare){
@@ -164,6 +428,16 @@ public:
 
     }
 
+    void start(){
+        positive.start();
+        negative.start();
+    }
+
+    void stop(){
+        positive.stop();
+        negative.stop();
+    }
+
     bool setSpeed(bool forward, uint32_t compare){
         if(forward){
             return positive.setCompare(compare) && negative.setCompare(0);
@@ -181,5 +455,58 @@ public:
 };
 
 #endif // __tim_H
+
+#ifdef __adc_H
+
+static __function_map(ADC_HandleTypeDef *) __adc_callback;
+
+class ADC_DMA {
+private:
+    ADC_HandleTypeDef *hadc;
+    uint32_t *adcBuf;
+    uint8_t numberOfConversions;
+public:
+    ADC_DMA(ADC_HandleTypeDef &hadc, uint8_t numberOfConversions): hadc(&hadc), numberOfConversions(numberOfConversions){
+        adcBuf = new uint32_t[numberOfConversions];
+    }
+
+    ~ADC_DMA(){
+        delete[] adcBuf;
+    }
+
+    void start(){
+        HAL_ADC_Start_DMA(hadc, adcBuf, numberOfConversions);
+    }
+
+    void stop(){
+        HAL_ADC_Stop_DMA(hadc);
+    }
+
+    uint32_t get(uint8_t index) {
+        if (index < numberOfConversions) {
+            return adcBuf[index];
+        }
+        throw std::out_of_range("Over NumberOfConversions");
+    }
+
+    void setCallback(std::function<void()> function){
+        __adc_callback[hadc] = function;
+    }
+};
+
+#ifdef CONFIG_ADC_USE_HALF_CALLBACK
+void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
+#else  // CONFIG_ADC_USE_HALF_CALLBACK
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
+#endif // CONFIG_ADC_USE_HALF_CALLBACK
+    if(__map_contains(__adc_callback, hadc)){
+        __adc_callback[hadc]();
+    }
+}
+
+#endif // __adc_H
+
+#undef __function_map
+#undef __map_contains
 
 #endif //HAL_EXTENSION_HPP
