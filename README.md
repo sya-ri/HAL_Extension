@@ -1,4 +1,4 @@
-# Hal_Extension - version 2.0
+# Hal_Extension - version 2.1
 
 ## define
 > #### getTick()
@@ -293,7 +293,7 @@
 > ```c++
 > 例:
 > slave.setTxCallback([]{
->     logger.println("Tx\n");
+>     logger.println("Tx");
 > });
 > ```
 
@@ -302,7 +302,7 @@
 > ```c++
 > 例:
 > slave.setRxCallback([]{
->     logger.println("Rx\n");
+>     logger.println("Rx");
 > });
 > ```
 
@@ -397,6 +397,6 @@
 > ```c++
 > 例:
 > master.setCallback([]{
->     logger.println("Complete\n");
+>     logger.println("Complete");
 > });
 > ```
