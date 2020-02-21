@@ -130,8 +130,8 @@
 
 > #### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
-> 例:
 > ```c++
+> 例:
 > uart.setTxCallback([]{
 >     printf("Tx\n");
 > });
