@@ -1,8 +1,9 @@
-//
-// Created by @fly_in_pig on 2020/01/28.
-// Version
-// - 1.0 : 2020/01/29
-// - 2.0 : 2020/02/21
+// Hal_Extension
+// Version:
+// - 1.0 : 2020/01/29 @fly_in_pig
+// - 2.0 : 2020/02/21 @fly_in_pig
+// - 2.1 : 2020/02/21 @fly_in_pig
+// - 2.2 : 2020/02/22 @fly_in_pig
 //
 
 #ifndef HAL_EXTENSION_HPP
@@ -10,7 +11,7 @@
 
 #include "main.h"
 #include <map>
-#include <array>
+#include <vector>
 #include <functional>
 
 #ifdef __has_include // since C++ 17
@@ -345,7 +346,7 @@ private:
     uint8_t address;
     T *data;
 public:
-    I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00, T &data): hi2c(&hi2c), address(address), data(&data) {
+    I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, T &data, uint8_t address = 0x00): hi2c(&hi2c), data(&data), address(address) {
 
     }
 
