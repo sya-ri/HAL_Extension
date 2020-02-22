@@ -1,4 +1,4 @@
-# Hal_Extension - version 2.1
+# Hal_Extension - version 2.2
 
 ## define
 > #### getTick()
@@ -263,9 +263,9 @@
 ## class I2C_Slave_DMA
 
 ### コンストラクタ
-> #### I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00, T &data)
+> #### I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, T &data, uint8_t address = 0x00)
 > ピンと自局アドレス・連携させた変数を設定します  
-> 例: `I2C_Slave_DMA<uint16_t> slave(hi2c1, 0x01, data);`
+> 例: `I2C_Slave_DMA<uint16_t> slave(hi2c1, data, 0x01);`
 
 ### 関数
 > #### void init()
