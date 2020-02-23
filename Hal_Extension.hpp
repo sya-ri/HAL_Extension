@@ -1,9 +1,10 @@
-// Hal_Extension
+// Hal_Extension 2.3
 // Version:
 // - 1.0 : 2020/01/29 @fly_in_pig
 // - 2.0 : 2020/02/21 @fly_in_pig
 // - 2.1 : 2020/02/21 @fly_in_pig
 // - 2.2 : 2020/02/22 @fly_in_pig
+// - 2.3 : 2020/02/23 @fly_in_pig
 //
 
 #ifndef HAL_EXTENSION_HPP
@@ -12,6 +13,7 @@
 #include "main.h"
 #include <map>
 #include <vector>
+#include <queue>
 #include <functional>
 
 #ifdef __has_include // since C++ 17
@@ -83,7 +85,7 @@ private:
     std::vector<GPIO> list;
 public:
     DIPSwitch() {
-
+        list.reserve(7);
     }
 
     bool add(GPIO gpio){
@@ -113,6 +115,10 @@ public:
 #endif // __gpio_H
 
 #ifdef __usart_H
+static __function_map(UART_HandleTypeDef *) __uart_tx_callback;
+static __function_map(UART_HandleTypeDef *) __uart_rx_callback;
+static __function_map(UART_HandleTypeDef *) __uart_error_callback;
+
 template<class T>
 class UART {
 private:
@@ -131,9 +137,35 @@ public:
     }
 };
 
-static __function_map(UART_HandleTypeDef *) __uart_tx_callback;
-static __function_map(UART_HandleTypeDef *) __uart_rx_callback;
-static __function_map(UART_HandleTypeDef *) __uart_error_callback;
+template<class T>
+class UART_IT {
+private:
+    UART_HandleTypeDef *huart;
+public:
+    UART_IT(UART_HandleTypeDef &huart): huart(&huart){
+
+    }
+
+    HAL_StatusTypeDef transmit(T &data){
+        return HAL_UART_Transmit_IT(huart, (uint8_t *) &data, sizeof(T));
+    }
+
+    HAL_StatusTypeDef receive(T &data){
+        return HAL_UART_Receive_IT(huart, (uint8_t *) &data, sizeof(T));
+    }
+
+    void setTxCallback(std::function<void()> function){
+        __uart_tx_callback[huart] = function;
+    }
+
+    void setRxCallback(std::function<void()> function){
+        __uart_rx_callback[huart] = function;
+    }
+
+    void setErrorCallback(std::function<void()> function){
+        __uart_error_callback[huart] = function;
+    }
+};
 
 template<class T>
 class UART_DMA {
@@ -178,6 +210,43 @@ public:
     }
 };
 
+class UART_Logger {
+private:
+    UART_IT<const char> uart;
+    std::queue<char> buffer;
+    bool isBusy = false;
+
+    void checkBuffer(){
+        char front = buffer.front();
+        buffer.pop();
+        uart.transmit(front);
+    }
+public:
+    UART_Logger(UART_HandleTypeDef &huart): uart(UART_IT<const char>(huart)){
+        uart.setTxCallback([this]{
+            if (buffer.empty()) {
+                isBusy = false;
+            } else {
+                checkBuffer();
+            }
+        });
+    }
+
+    void print(const char* text){
+        do {
+            buffer.push(*text++);
+        } while(*text);
+        if(isBusy) return;
+        checkBuffer();
+        isBusy = true;
+    }
+
+    void println(const char* text){
+        print(text);
+        print("\r\n");
+    }
+};
+
 #ifdef CONFIG_UART_USE_HALF_CALLBACK
 void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart){
 #else  // CONFIG_UART_USE_HALF_CALLBACK
@@ -203,32 +272,15 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
         __uart_error_callback[huart]();
     }
 }
-
-class UART_Logger {
-private:
-    UART<const char> uart;
-    uint32_t timeout;
-public:
-    UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F): uart(UART<const char>(huart)), timeout(timeout){
-
-    }
-
-    void print(const char* text){
-        do {
-            uart.transmit(*text++, timeout);
-        } while(*text);
-    }
-
-    void println(const char* text){
-        print(text);
-        uart.transmit('\r', timeout);
-        uart.transmit('\n', timeout);
-    }
-};
-
 #endif // __usart_H
 
 #ifdef __i2c_H
+static __function_map(I2C_HandleTypeDef *) __i2c_master_tx_callback;
+static __function_map(I2C_HandleTypeDef *) __i2c_master_rx_callback;
+static __function_map(I2C_HandleTypeDef *) __i2c_slave_tx_callback;
+static __function_map(I2C_HandleTypeDef *) __i2c_slave_rx_callback;
+static __function_map(I2C_HandleTypeDef *) __i2c_error_callback;
+
 template<class T>
 class I2C_Master {
 private:
@@ -288,9 +340,6 @@ public:
     }
 };
 
-static __function_map(I2C_HandleTypeDef *) __i2c_master_tx_callback;
-static __function_map(I2C_HandleTypeDef *) __i2c_master_rx_callback;
-
 template<class T>
 class I2C_Master_DMA {
 private:
@@ -322,22 +371,11 @@ public:
     void setRxCallback(std::function<void()> function){
         __i2c_master_rx_callback[hi2c] = function;
     }
+
+    void setErrorCallback(std::function<void()> function){
+        __i2c_error_callback[hi2c] = function;
+    }
 };
-
-void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c){
-    if(__map_contains(__i2c_master_tx_callback, hi2c)){
-        __i2c_master_tx_callback[hi2c]();
-    }
-}
-
-void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c){
-    if(__map_contains(__i2c_master_rx_callback, hi2c)){
-        __i2c_master_rx_callback[hi2c]();
-    }
-}
-
-static __function_map(I2C_HandleTypeDef *) __i2c_slave_tx_callback;
-static __function_map(I2C_HandleTypeDef *) __i2c_slave_rx_callback;
 
 template<class T>
 class I2C_Slave_DMA {
@@ -382,7 +420,106 @@ public:
     void setRxCallback(std::function<void()> function){
         __i2c_slave_rx_callback[hi2c] = function;
     }
+
+    void setErrorCallback(std::function<void()> function){
+        __i2c_error_callback[hi2c] = function;
+    }
 };
+
+template<class T>
+class I2C_Master_IT {
+private:
+    I2C_HandleTypeDef* hi2c;
+public:
+    I2C_Master_IT(I2C_HandleTypeDef &hi2c): hi2c(&hi2c){
+
+    }
+
+    void init(){
+        HAL_I2C_DeInit(hi2c);
+        HAL_I2C_Init(hi2c);
+    }
+
+    HAL_StatusTypeDef transmit(uint8_t target, T &data){
+        return HAL_I2C_Master_Transmit_IT(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
+    }
+
+    HAL_StatusTypeDef receive(uint8_t target, T &data){
+        return HAL_I2C_Master_Receive_IT(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
+    }
+
+    void setTxCallback(std::function<void()> function){
+        __i2c_slave_tx_callback[hi2c] = function;
+    }
+
+    void setRxCallback(std::function<void()> function){
+        __i2c_slave_rx_callback[hi2c] = function;
+    }
+
+    void setErrorCallback(std::function<void()> function){
+        __i2c_error_callback[hi2c] = function;
+    }
+};
+
+template<class T>
+class I2C_Slave_IT {
+private:
+    I2C_HandleTypeDef* hi2c;
+    uint8_t address;
+public:
+    I2C_Slave_IT(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00): hi2c(&hi2c), address(address) {
+
+    }
+
+    void init(){
+        HAL_I2C_DeInit(hi2c);
+        hi2c->Init.OwnAddress1 = address << 1;
+        HAL_I2C_Init(hi2c);
+    }
+
+    void init(uint8_t address){
+        this->address = address;
+        init();
+    }
+
+#ifdef __gpio_H
+    void init(DIPSwitch builder){
+        init(builder.getAddress());
+    }
+#endif // __gpio_H
+
+    HAL_StatusTypeDef transmit(T &data){
+        return HAL_I2C_Slave_Transmit_IT(hi2c, (uint8_t *) &data, sizeof(T));
+    }
+
+    HAL_StatusTypeDef receive(T &data){
+        return HAL_I2C_Slave_Receive_IT(hi2c, (uint8_t *) &data, sizeof(T));
+    }
+
+    void setTxCallback(std::function<void()> function){
+        __i2c_slave_tx_callback[hi2c] = function;
+    }
+
+    void setRxCallback(std::function<void()> function){
+        __i2c_slave_rx_callback[hi2c] = function;
+    }
+
+    void setErrorCallback(std::function<void()> function){
+        __i2c_error_callback[hi2c] = function;
+    }
+};
+
+void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c){
+    if(__map_contains(__i2c_master_tx_callback, hi2c)){
+        __i2c_master_tx_callback[hi2c]();
+    }
+}
+
+void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c){
+    if(__map_contains(__i2c_master_rx_callback, hi2c)){
+        __i2c_master_rx_callback[hi2c]();
+    }
+}
 
 void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c){
     if(__map_contains(__i2c_slave_tx_callback, hi2c)){
@@ -396,7 +533,11 @@ void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c){
     }
 }
 
-
+void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c){
+    if(__map_contains(__i2c_error_callback, hi2c)){
+        __i2c_error_callback[hi2c]();
+    }
+}
 #endif // __i2c_H
 
 #ifdef __tim_H
@@ -471,10 +612,69 @@ public:
     }
 };
 
+class Encoder {
+private:
+    TIM_HandleTypeDef *htim;
+    bool isStart = false;
+    uint16_t lastRawCount = 0;
+    uint16_t rawCount = 0;
+    int32_t count = 0;
+public:
+    Encoder(TIM_HandleTypeDef &htim): htim(&htim){
+
+    }
+
+    void start(){
+        int16_t lastCount = count;
+        if(!isStart){
+            HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
+        }
+        __HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
+        __HAL_TIM_SET_COUNTER(htim , 0);
+        isStart = true;
+        update();
+        count = lastCount;
+    }
+
+    void stop(){
+        update();
+        if(isStart){
+            HAL_TIM_Encoder_Stop(htim, TIM_CHANNEL_ALL);
+        }
+        __HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
+        __HAL_TIM_SET_COUNTER(htim , 0);
+        isStart = false;
+    }
+
+    void update(){
+        if(!isStart) return;
+        lastRawCount = rawCount;
+        if (__HAL_TIM_GET_FLAG(htim, TIM_FLAG_UPDATE)) {
+            rawCount = __HAL_TIM_GET_COUNTER(htim);
+            if (rawCount > lastRawCount) {
+                count += (rawCount - __HAL_TIM_GET_AUTORELOAD(htim)) - lastRawCount;
+            } else {
+                count += rawCount - (lastRawCount - __HAL_TIM_GET_AUTORELOAD(htim));
+            }
+            __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
+        } else {
+            rawCount = __HAL_TIM_GET_COUNTER(htim);
+            count += rawCount - lastRawCount;
+        }
+    }
+
+    int32_t getCount(){
+        return count;
+    }
+
+    void resetCount(){
+        update();
+        count = 0;
+    }
+};
 #endif // __tim_H
 
 #ifdef __adc_H
-
 static __function_map(ADC_HandleTypeDef *) __adc_callback;
 
 class ADC_DMA {
@@ -485,6 +685,12 @@ private:
 public:
     ADC_DMA(ADC_HandleTypeDef &hadc, uint8_t numberOfConversions): hadc(&hadc), numberOfConversions(numberOfConversions){
         adcBuf = new uint32_t[numberOfConversions];
+        if(hadc.Init.ContinuousConvMode != ENABLE || hadc.Init.DMAContinuousRequests != ENABLE){
+            HAL_ADC_DeInit(&hadc);
+            hadc.Init.ContinuousConvMode = ENABLE;
+            hadc.Init.DMAContinuousRequests = ENABLE;
+            HAL_ADC_Init(&hadc);
+        }
     }
 
     ~ADC_DMA(){
@@ -520,7 +726,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
         __adc_callback[hadc]();
     }
 }
-
 #endif // __adc_H
 
 #undef __function_map
