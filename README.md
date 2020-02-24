@@ -22,19 +22,19 @@
 ## define
 #### 関数の短縮
 > ##### getTick()
-> ####### HAL_GetTick()
+> ###### HAL_GetTick()
 
 > ##### delay(__ms)
-> ####### HAL_Delay(__ms)
+> ###### HAL_Delay(__ms)
 
 > ##### gpioRead(GPIOx, GPIO_Pin)
-> ####### HAL_GPIO_ReadPin(GPIOx, GPIO_Pin)
+> ###### HAL_GPIO_ReadPin(GPIOx, GPIO_Pin)
 
 > ##### gpioWrite(GPIOx, GPIO_Pin, PinState)
-> ####### HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState)
+> ###### HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState)
 
 > ##### gpioToggle(GPIOx, GPIO_Pin)
-> ####### HAL_GPIO_TogglePin(GPIOx, GPIO_Pin)
+> ###### HAL_GPIO_TogglePin(GPIOx, GPIO_Pin)
 
 #### コンフィグ
 > ##### CONFIG_UART_USE_HALF_CALLBACK
@@ -49,54 +49,87 @@
 ### コンストラクタ
 > ##### GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 > Read / Write をするピンを設定します  
-> 例: `GPIO pa5(GPIOA, GPIO_PIN_5);`
+> ```c++
+> 例:
+> GPIO pa5(GPIOA, GPIO_PIN_5);
+> ```
 
 ### 関数
 > ##### GPIO_PinState read()
 > gpioRead() の結果を返します  
-> 例: `pa5.read();`
+> ```c++
+> 例:
+> pa5.read();
+> ```
 
 > ##### void write(GPIO_PinState PinState)
 > gpioWrite() を実行します  
-> 例: `pa5.write(GPIO_PIN_SET);`  
-> 例: `pa5.write(GPIO_PIN_RESET);`
+> ```c++
+> 例:
+> pa5.write(GPIO_PIN_SET);
+> pa5.write(GPIO_PIN_RESET);
+> ```
 
 > ##### void set()
 > write(GPIO_PIN_SET) を実行します  
-> 例: `pa5.set();`
+> ```c++
+> 例:
+> pa5.set();
+> ```
 
 > ##### void reset()
 > write(GPIO_PIN_RESET) を実行します  
-> 例: `pa5.reset();`
+> ```c++
+> 例:
+> pa5.reset();
+> ```
 
 > ##### void toggle()
 > gpioToggle() を実行します  
-> 例: `pa5.toggle();`
+> ```c++
+> 例:
+> pa5.toggle();
+> ```
 
 ## class DIPSwitch
 ### コンストラクタ
 > ##### DIPSwitch(bool flip = false)
-> 例: `DIPSwitch dip;`  
-> 例: `DIPSwitch dip(true);`
+> ```c++
+> 例:
+> DIPSwitch dip;
+> DIPSwitch dip(true);
+> ```
 
 ### 関数
 > ##### bool add(GPIO gpio)
 > スイッチのピンを追加します  
 > 最大登録数は7つです  
-> 例: `dip.add(pa5);`
+> ```c++
+> 例:
+> dip.add(pa5);
+> ```
 
 > ##### bool add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
-> `bool add(GPIO gpio)` の結果を返します   
-> 例: `dip.add(GPIOA, GPIO_PIN_5);`
+> `bool add(GPIO gpio)` の結果を返します  
+> ```c++
+> 例:
+> dip.add(GPIOA, GPIO_PIN_5);
+> ```
 
 > ##### uint8_t getSize()
 > 追加済みのスイッチ数を取得します  
-> 例: `dip.getSize();`
+> ```c++
+> 例:
+> uint8_t size = dip.getSize();
+> ```
 
 > ##### uint8_t getAddress()
 > 追加したスイッチを使用してアドレスを取得します  
 > flip を有効にしておくと 全ビット反転された結果が出力されます  
-> 例: `dip.getAddress();`
+> ```c++
+> 例:
+> uint8_t address = dip.getAddress();
+> ```
 
 ## class UART
 #### template\<class T\>
@@ -105,17 +138,28 @@
 
 > #### UART(UART_HandleTypeDef &huart)
 > ピンを設定します  
-> 例: `UART<uint16_t> uart(huart2);`
+> ```c++
+> 例:
+> UART<uint16_t> uart(huart2);
+> ```
 
 ### 関数
 
 > #### HAL_StatusTypeDef transmit(T &data, uint32_t timeout)
 > HAL_UART_Transmit() の結果を返します  
-> 例: `uart.transmit(data, 0x0F);`
+> ```c++
+> 例:
+> uint16_t data = 0xAC;
+> uart.transmit(data, 0x0F);
+> ```
 
 > #### HAL_StatusTypeDef receive(T &data, uint32_t timeout)
 > HAL_UART_Receive() の結果を返します  
-> 例: `uart.receive(data, 0x0F);`
+> ```c++
+> 例:
+> uint16_t data;
+> uart.receive(data, 0x0F);
+> ```
 
 ## class UART_DMA
 #### template\<class T\>
@@ -123,34 +167,53 @@
 ### コンストラクタ
 > #### UART_DMA(UART_HandleTypeDef &huart, T &data)
 > ピンと連携させる変数を設定します  
-> 例: `UART_DMA<uint16_t> uart(huart2, data);`
+> ```c++
+> 例:
+> uint16_t data;
+> UART_DMA<uint16_t> uart(huart2, data);
+> ```
 
 ### 関数
 > #### HAL_StatusTypeDef startTransmit()
 > 連携させた変数の値を使い、送信を始めます  
 > HAL_UART_Transmit_DMA の結果を返します  
-> 例: `uart.startTransmit();`
+> ```c++
+> 例:
+> uart.startTransmit();
+> ```
 
 > #### HAL_StatusTypeDef startReceive()
 > 受信を始めます  
 > 連携させた変数の値が自動で変わります  
 > HAL_UART_Receive_DMA の結果を返します  
-> 例: `uart.startReceive();`
+> ```c++
+> 例:
+> uart.startReceive();
+> ```
 
 > #### HAL_StatusTypeDef pause()
 > 送受信を一時停止します  
 > HAL_UART_DMAPause の結果を返します  
-> 例: `uart.pause();`
+> ```c++
+> 例:
+> uart.pause();
+> ```
 
 > #### HAL_StatusTypeDef resume()
 > 送受信を再開します  
 > HAL_UART_DMAResume の結果を返します  
-> 例: `uart.resume();`
+> ```c++
+> 例:
+> uart.resume();
+> ```
 
 > #### HAL_StatusTypeDef stop()
 > 送受信を終了します  
 > HAL_UART_DMAStop の結果を返します  
-> 例: `uart.stop();`
+> ```c++
+> 例:
+> uart.stop();
+> ```
 
 > #### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
@@ -185,16 +248,25 @@
 ### コンストラクタ
 > #### UART_IT(UART_HandleTypeDef &huart)
 > ピンを設定します  
-> 例: `UART_IT<uint16_t> uart(huart2);`
+> ```c++
+> 例:
+> UART_IT<uint16_t> uart(huart2);
+> ```
 
 ### 関数
 > #### HAL_StatusTypeDef transmit(T &data)
 > HAL_UART_Transmit_IT() の結果を返します  
-> 例: `uart.transmit(data);`
+> ```c++
+> 例:
+> uart.transmit(data);
+> ```
 
 > #### HAL_StatusTypeDef receive(T &data)
 > HAL_UART_Receive_IT() の結果を返します  
-> 例: `uart.receive(data);`
+> ```c++
+> 例:
+> uart.receive(data);
+> ```
 
 > #### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
@@ -227,16 +299,25 @@
 ### コンストラクタ
 > ### UART_Logger(UART_HandleTypeDef &huart)
 > ピンを設定します  
-> 例: `UART_Logger logger(huart2);`
+> ```c++
+> 例:
+> UART_Logger logger(huart2);
+> ```
 
 ### 関数
 > #### void print(const char* text)
 > 一文字ずつ送信します  
-> 例: `logger.print("Hello");`
+> ```c++
+> 例:
+> logger.print("Hello");
+> ```
 
 > #### void println(const char* text)
 > 送信後に改行します  
-> 例: `logger.println("HelloWorld");`
+> ```c++
+> 例:
+> logger.println("HelloWorld");
+> ```
 
 ## class I2C_Master
 #### template\<class T\>
@@ -244,20 +325,34 @@
 ### コンストラクタ
 > #### I2C_Master(I2C_HandleTypeDef &hi2c)
 > ピンを設定します  
-> 例: `I2C_Master<uint16_t> master(hi2c1);`
+> ```c++
+> 例:
+> I2C_Master<uint8_t> master(hi2c1);
+> ```
 
 ### 関数
 > #### void init()
 > 再初期化します  
-> 例: `master.init();`
+> ```c++
+> 例:
+> master.init();
+> ```
 
 > #### HAL_StatusTypeDef transmit(uint8_t target, T &data, uint32_t timeout)
 > HAL_I2C_Master_Transmit() の結果を返します  
-> 例: `master.transmit(0x02, data, 0x0F);`
+> ```c++
+> 例:
+> uint8_t data = 0xAC;
+> master.transmit(0x02, data, 0x0F);
+> ```
 
 > #### HAL_StatusTypeDef receive(uint8_t target, T &data, uint32_t timeout)
 > HAL_I2C_Master_Receive() の結果を返します  
-> 例: `master.receive(0x02, data, 0x0F);`
+> ```c++
+> 例:
+> uint8_t data;
+> master.receive(0x02, data, 0x0F);
+> ```
 
 ## class I2C_Slave
 #### template\<class T\>
@@ -265,28 +360,50 @@
 ### コンストラクタ
 > #### I2C_Slave(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00)
 > ピンと自局アドレスを設定します  
-> 例: `I2C_Slave<uint16_t> slave(hi2c1, 0x01);`
+> 自局アドレスを省略することも可能です
+> ```c++
+> 例:
+> I2C_Slave<uint8_t> slave(hi2c1, 0x01);
+> I2C_Slave<uint8_t> slave(hi2c1);
+> ```
 
 ### 関数
 > #### void init()
 > 自局アドレスを反映させ、再初期化します  
-> 例: `slave.init();`
+> ```c++
+> 例:
+> slave.init();
+> ```
 
 > #### void init(uint8_t address)
 > 自局アドレスを上書きし、再初期化します  
-> 例: `slave.init(0x01);`
+> ```c++
+> 例:
+> slave.init(0x01);
+> ```
 
 > #### void init(DIPSwitch builder)
-> 自局アドレスを上書きし、再初期化します  
-> 例: `slave.init(dip);`
+> 自局アドレスをDIPSwitch::getAddress()を使用して上書きし、再初期化します  
+> ```c++
+> 例:
+> slave.init(dip);
+> ```
 
 > #### HAL_StatusTypeDef transmit(T &data, uint32_t timeout)
 > HAL_I2C_Slave_Transmit() の結果を返します  
-> 例: `slave.transmit(data, 0x0F);`
+> ```c++
+> 例:
+> uint8_t data = 0xAC;
+> slave.transmit(data, 0x0F);
+> ```
 
 > #### HAL_StatusTypeDef receive(T &data, uint32_t timeout)
 > HAL_I2C_Slave_Receive() の結果を返します  
-> 例: `slave.receive(data, 0x0F);`
+> ```c++
+> 例:
+> uint8_t data;
+> slave.receive(data, 0x0F);
+> ```
 
 ## class I2C_Master_DMA
 #### template\<class T\>
@@ -294,20 +411,33 @@
 ### コンストラクタ
 > #### I2C_Master_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, T &data)
 > ピンと送信先アドレス・連携させる変数を設定します  
-> 例: `I2C_Master_DMA<uint16_t> master(hi2c1, 0x01, data);`
+> ```c++
+> 例:
+> uint16_t data;
+> I2C_Master_DMA<uint16_t> master(hi2c1, 0x01, data);
+> ```
 
 ### 関数
 > #### void init()
 > 再初期化します  
-> 例: `master.init();`
+> ```c++
+> 例:
+> master.init();
+> ```
 
 > #### HAL_StatusTypeDef startTransmit()
 > HAL_I2C_Master_Transmit_DMA() の結果を返します  
-> 例: `master.startTransmit();`
+> ```c++
+> 例:
+> master.startTransmit();
+> ```
 
 > #### HAL_StatusTypeDef startReceive()
 > HAL_I2C_Master_Receive_DMA() の結果を返します  
-> 例: `master.startReceive();`
+> ```c++
+> 例:
+> master.startReceive();
+> ```
 
 > #### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
@@ -340,28 +470,47 @@
 ### コンストラクタ
 > #### I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, T &data, uint8_t address = 0x00)
 > ピンと自局アドレス・連携させた変数を設定します  
-> 例: `I2C_Slave_DMA<uint16_t> slave(hi2c1, data, 0x01);`
+> ```c++
+> 例:
+> uint16_t data;
+> I2C_Slave_DMA<uint16_t> slave(hi2c1, data, 0x01);
+> ```
 
 ### 関数
 > #### void init()
 > 自局アドレスを反映させ、再初期化します  
-> 例: `slave.init();`
+> ```c++
+> 例:
+> slave.init();
+> ```
 
 > #### void init(uint8_t address)
 > 自局アドレスを上書きし、再初期化します  
-> 例: `slave.init(0x01);`
+> ```c++
+> 例:
+> slave.init(0x01);
+> ```
 
 > #### void init(DIPSwitch builder)
 > 自局アドレスを上書きし、再初期化します  
-> 例: `slave.init(dip);`
+> ```c++
+> 例:
+> slave.init(dip);
+> ```
 
 > #### HAL_StatusTypeDef startTransmit()
 > HAL_I2C_Slave_Transmit_DMA() の結果を返します  
-> 例: `slave.startTransmit();`
+> ```c++
+> 例:
+> slave.startTransmit();
+> ```
 
 > #### HAL_StatusTypeDef startReceive()
 > HAL_I2C_Slave_Receive_DMA() の結果を返します  
-> 例: `slave.startReceive();`
+> ```c++
+> 例:
+> slave.startReceive();
+> ```
 
 > #### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
@@ -396,20 +545,34 @@
 ### コンストラクタ
 > #### I2C_Master_IT(I2C_HandleTypeDef &hi2c)
 > ピンを設定します  
-> 例: `I2C_Master_IT<uint16_t> master(hi2c1);`
+> ```c++
+> 例:
+> I2C_Master_IT<uint16_t> master(hi2c1);
+> ```
 
 ### 関数
 > #### void init()
 > 再初期化します  
-> 例: `master.init();`
+> ```c++
+> 例:
+> master.init();
+> ```
 
 > #### HAL_StatusTypeDef transmit(uint8_t target, T &data)
 > HAL_I2C_Master_Transmit_IT() の結果を返します  
-> 例: `master.transmit(0x02, data);`
+> ```c++
+> 例:
+> uint16_t data = 0xAC;
+> master.transmit(0x02, data);
+> ```
 
 > #### HAL_StatusTypeDef receive(uint8_t target, T &data)
 > HAL_I2C_Master_Receive_IT() の結果を返します  
-> 例: `master.receive(0x02, data);`
+> ```c++
+> 例:
+> uint16_t data;
+> master.receive(0x02, data);
+> ```
 
 > #### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
@@ -444,28 +607,48 @@
 ### コンストラクタ
 > #### I2C_Slave_IT(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00)
 > ピンと自局アドレスを設定します  
-> 例: `I2C_Slave_IT<uint16_t> slave(hi2c1, 0x01);`
+> ```c++
+> 例:
+> I2C_Slave_IT<uint16_t> slave(hi2c1, 0x01);
+> ```
 
 ### 関数
 > #### void init()
 > 自局アドレスを反映させ、再初期化します  
-> 例: `slave.init();`
+> ```c++
+> 例:
+> slave.init();
+> ```
 
 > #### void init(uint8_t address)
 > 自局アドレスを上書きし、再初期化します  
-> 例: `slave.init(0x01);`
+> ```c++
+> 例:
+> slave.init(0x01);
+> ```
 
 > #### void init(DIPSwitch builder)
 > 自局アドレスを上書きし、再初期化します  
-> 例: `slave.init(dip);`
+> ```c++
+> 例:
+> slave.init(dip);
+> ```
 
 > #### HAL_StatusTypeDef transmit(T &data)
 > HAL_I2C_Slave_Transmit_IT() の結果を返します  
-> 例: `slave.transmit(data);`
+> ```c++
+> 例:
+> uint16_t data = 0xAC;
+> slave.transmit(data);
+> ```
 
 > #### HAL_StatusTypeDef receive(T &data)
 > HAL_I2C_Slave_Receive_IT() の結果を返します  
-> 例: `slave.receive(data);`
+> ```c++
+> 例:
+> uint16_t data;
+> slave.receive(data);
+> ```
 
 > #### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
@@ -498,106 +681,171 @@
 ### コンストラクタ
 > #### PWM(TIM_HandleTypeDef &htim, uint32_t channel)
 > ピンを設定します  
-> 例: `PWM pwm(htim2, TIM_CHANNEL_1);`
+> ```c++
+> 例:
+> PWM pwm(htim2, TIM_CHANNEL_1);
+> ```
 
 ### 関数
 > #### void start()
 > HAL_TIM_PWM_Start() を実行します  
-> 例: `pwm.start();`
+> ```c++
+> 例:
+> pwm.start();
+> ```
 
 > #### void stop()
 > HAL_TIM_PWM_Stop() を実行します  
-> 例: `pwm.stop();`
+> ```c++
+> 例:
+> pwm.stop();
+> ```
 
 > #### bool setCompare(uint32_t compare)
 > __HAL_TIM_SET_COMPARE() を実行します  
 > compare が CounterPeriod より大きかった場合、正常に動作しないので設定がキャンセルされ、 false が返ります  
-> 例: `pwm.setCompare(100);`
+> ```c++
+> 例:
+> pwm.setCompare(100);
+> ```
 
 > #### uint32_t getCounterPeriod()
 > CounterPeriod を返します  
-> 例: `pwm.getCounterPeriod();`
+> ```c++
+> 例:
+> uint32_t counterPeriod = pwm.getCounterPeriod();
+> ```
 
 ## class Motor
 ### コンストラクタ
 > #### Motor(PWM positive, PWM negative)
 > 正転と逆転のPWMを設定します  
-> 例: `Motor motor(posPwm, negPwm);`
+> ```c++
+> 例:
+> Motor motor(posPwm, negPwm);
+> ```
 
 > #### Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg)
 > 正転と逆転のピンを設定します  
 > 内部的にはPWMクラスに変換されています  
-> 例: `Motor motor(htim2, TIM_CHANNEL_1, htim3, TIM_CHANNEL_1);`
+> ```c++
+> 例:
+> Motor motor(htim2, TIM_CHANNEL_1, htim3, TIM_CHANNEL_1);
+> ```
 
 ### 関数
 > #### void start()
 > PWM::start を実行します  
-> 例: `motor.start();`
+> ```c++
+> 例:
+> motor.start();
+> ```
 
 > #### void stop()
 > PWM::stop を実行します  
-> 例: `motor.stop();`
+> ```c++
+> 例:
+> motor.stop();
+> ```
 
 > #### bool setSpeed(bool forward, uint32_t compare)
 > 正転・逆転 と compare を送ります  
 > true が正転 / false が逆転 です  
 > PWM::setCompare() の結果を返します  
-> 例: `motor.setSpeed(true, 400);`
+> ```c++
+> 例:
+> motor.setSpeed(true, 400);
+> motor.setSpeed(false, 400);
+> ```
 
 > #### bool setSpeed(int64_t speed)
 > 正の数は正転 / 負の数は逆転  
 > 絶対値が compare になります  
 > 内部的には setSpeed(bool, uint32_t) を実行しています  
 > 処理が多くなるので上記の関数を直接使うことを推奨します  
-> 例: `motor.setSpeed(400);`
+> ```c++
+> 例:
+> motor.setSpeed(400);
+> motor.setSpeed(-400);
+> ```
 
 ## class Encoder
 ### コンストラクタ
 > #### Encoder(TIM_HandleTypeDef &htim)
 > ピンを設定します  
-> 例: `Encoder encoder(htim2);`
+> ```c++
+> 例:
+> Encoder encoder(htim2);
+> ```
 
 ### 関数
 > #### void start()
 > カウントを開始します  
-> 例: `encoder.start();`
+> ```c++
+> 例:
+> encoder.start();
+> ```
 
 > #### void stop()
 > カウントを停止します  
-> 例: `encoder.stop();`
+> ```c++
+> 例:
+> encoder.stop();
+> ```
 
 > #### void update()
 > カウントを更新します  
-> 例: `encoder.update();`
+> ```c++
+> 例:
+> encoder.update();
+> ```
 
 > #### int32_t getCount()
 > カウントを取得します  
-> 例: `encoder.getCount();`
+> ```c++
+> 例:
+> encoder.getCount();
+> ```
 
 > #### void resetCount()
 > カウントを停止します  
-> 例: `encoder.resetCount();`
+> ```c++
+> 例:
+> encoder.resetCount();
+> ```
 
 ## class ADC_DMA
 ### コンストラクタ
 > #### ADC_DMA(ADC_HandleTypeDef &hadc, uint8_t numberOfConversions)
 > ピンとDMAを行う数を設定します  
-> 例: `ADC_DMA adc(hadc1, 2);`
+> ```c++
+> 例:
+> ADC_DMA adc(hadc1, 2);
+> ```
 
 ### 関数
 > #### void start()
 > ADCを開始します  
-> 例: `adc.start();`
+> ```c++
+> 例:
+> adc.start();
+> ```
 
 > #### void stop()
 > ADCを終了します  
-> 例: `adc.stop();`
+> ```c++
+> 例:
+> adc.stop();
+> ```
 
 > #### uint32_t get(uint8_t index)
 > ADCバッファの値を返します  
 > index が numberOfConversions を超えている場合、  
-> バッファの範囲外なので std::out_of_range が発生します
-> 例: `adc.get(0);`
+> バッファの範囲外なので std::out_of_range が発生します  
+> ```c++
+> 例:
+> adc.get(0);
+> ```
 
 > #### void setCallback(std::function<void()> function)
 > ADC完了時の割り込み関数を設定します
