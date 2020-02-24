@@ -1,1 +1,1 @@
-# [Hal_Extension Wiki](https://gitlab.com/grcc/library/hal_extension/wikis/home)
+# [HAL_Extension Wiki](https://gitlab.com/grcc/library/hal_extension/wikis/home)
