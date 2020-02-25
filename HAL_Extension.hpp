@@ -1,5 +1,5 @@
 //
-// Hal_Extension 2.3.1
+// Hal_Extension 2.3.2
 //
 
 #ifndef HAL_EXTENSION_HPP
@@ -124,7 +124,7 @@ public:
 
     }
 
-    HAL_StatusTypeDef transmit(T &data, uint32_t timeout){
+    HAL_StatusTypeDef transmit(const T &data, uint32_t timeout){
         return HAL_UART_Transmit(huart, (uint8_t *) &data, sizeof(T), timeout);
     }
 
@@ -142,7 +142,7 @@ public:
 
     }
 
-    HAL_StatusTypeDef transmit(T &data){
+    HAL_StatusTypeDef transmit(const T &data){
         return HAL_UART_Transmit_IT(huart, (uint8_t *) &data, sizeof(T));
     }
 
@@ -208,6 +208,27 @@ public:
 
 class UART_Logger {
 private:
+    UART<const char> uart;
+    uint32_t timeout;
+public:
+    UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F): uart(UART<const char>(huart)), timeout(timeout){
+
+    }
+
+    void print(const char* text){
+        do {
+            uart.transmit(*text++, timeout);
+        } while(*text);
+    }
+
+    void println(const char* text){
+        print(text);
+        print("\r\n");
+    }
+};
+
+class UART_Logger_IT {
+private:
     UART_IT<const char> uart;
     std::queue<char> buffer;
     bool isBusy = false;
@@ -218,7 +239,7 @@ private:
         uart.transmit(front);
     }
 public:
-    UART_Logger(UART_HandleTypeDef &huart): uart(UART_IT<const char>(huart)){
+    UART_Logger_IT(UART_HandleTypeDef &huart): uart(UART_IT<const char>(huart)){
         uart.setTxCallback([this]{
             if (buffer.empty()) {
                 isBusy = false;
@@ -291,7 +312,7 @@ public:
         HAL_I2C_Init(hi2c);
     }
 
-    HAL_StatusTypeDef transmit(uint8_t target, T &data, uint32_t timeout){
+    HAL_StatusTypeDef transmit(uint8_t target, const T &data, uint32_t timeout){
         return HAL_I2C_Master_Transmit(hi2c, target << 1, (uint8_t *) &data, sizeof(T), timeout);
     }
 
@@ -316,7 +337,7 @@ public:
         HAL_I2C_Init(hi2c);
     }
 
-    void init(uint8_t address){
+    void init(const uint8_t address){
         this->address = address;
         init();
     }
@@ -327,7 +348,7 @@ public:
     }
 #endif // __gpio_H
 
-    HAL_StatusTypeDef transmit(T &data, uint32_t timeout){
+    HAL_StatusTypeDef transmit(const T &data, uint32_t timeout){
         return HAL_I2C_Slave_Transmit(hi2c, (uint8_t *) &data, sizeof(T), timeout);
     }
 
@@ -436,7 +457,7 @@ public:
         HAL_I2C_Init(hi2c);
     }
 
-    HAL_StatusTypeDef transmit(uint8_t target, T &data){
+    HAL_StatusTypeDef transmit(uint8_t target, const T &data){
         return HAL_I2C_Master_Transmit_IT(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
     }
 
@@ -484,7 +505,7 @@ public:
     }
 #endif // __gpio_H
 
-    HAL_StatusTypeDef transmit(T &data){
+    HAL_StatusTypeDef transmit(const T &data){
         return HAL_I2C_Slave_Transmit_IT(hi2c, (uint8_t *) &data, sizeof(T));
     }
 
@@ -611,21 +632,22 @@ public:
 class Encoder {
 private:
     TIM_HandleTypeDef *htim;
+    uint32_t channel;
     bool isStart = false;
     uint16_t lastRawCount = 0;
     uint16_t rawCount = 0;
     int32_t count = 0;
 public:
-    Encoder(TIM_HandleTypeDef &htim): htim(&htim){
+    Encoder(TIM_HandleTypeDef &htim, uint32_t channel = TIM_CHANNEL_ALL): htim(&htim), channel(channel){
 
     }
 
     void start(){
         int16_t lastCount = count;
         if(!isStart){
-            HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
+            HAL_TIM_Encoder_Start(htim, channel);
         }
-        __HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
+        __HAL_TIM_CLEAR_FLAG(htim, channel);
         __HAL_TIM_SET_COUNTER(htim , 0);
         isStart = true;
         update();
@@ -635,9 +657,9 @@ public:
     void stop(){
         update();
         if(isStart){
-            HAL_TIM_Encoder_Stop(htim, TIM_CHANNEL_ALL);
+            HAL_TIM_Encoder_Stop(htim, channel);
         }
-        __HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
+        __HAL_TIM_CLEAR_FLAG(htim, channel);
         __HAL_TIM_SET_COUNTER(htim , 0);
         isStart = false;
     }
