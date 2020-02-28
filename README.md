@@ -1,9 +1,10 @@
-# HAL_Extension - 2.3.2
+# HAL_Extension - 2.3.3
 
 ### 目次
 [#define](#define)  
 [class GPIO](#class-gpio)  
 [class DIPSwitch](#class-dipswitch)  
+[class SevenSegment](#class-sevensegment)  
 [class UART](#class-uart)  
 [class UART_DMA](#class-uart_dma)  
 [class UART_IT](#class-uart_it)  
@@ -25,8 +26,8 @@
 > ##### getTick()
 > **HAL_GetTick()**
 
-> ##### delay(__ms)
-> **HAL_Delay(__ms)**
+> ##### delay(\_\_ms)
+> **HAL_Delay(\_\_ms)**
 
 > ##### gpioRead(GPIOx, GPIO_Pin)
 > **HAL_GPIO_ReadPin(GPIOx, GPIO_Pin)**
@@ -66,6 +67,13 @@ PinOut: GPIO_Input / GPIO_Output
 > ```c++
 > 例:
 > pa5.read();
+> ```
+
+> ##### GPIO_PinState readBool()
+> read() の結果が GPIO_PIN_SET であれば true を返します 
+> ```c++
+> 例:
+> pa5.readBool();
 > ```
 
 > ##### void write(GPIO_PinState PinState)
@@ -112,19 +120,21 @@ PinOut: GPIO_Input
 > ```
 
 ### 関数
-> ##### bool add(GPIO gpio)
+> ##### DIPSwitch& add(GPIO gpio)
 > スイッチのピンを追加します  
 > 最大登録数は7つです  
 > ```c++
 > 例:
-> dip.add(pa5);
+> dip.add(pa5)
+>    .add(pa6) // 以下省略
 > ```
 
-> ##### bool add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
-> `bool add(GPIO gpio)` の結果を返します  
+> ##### DIPSwitch& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+> add(GPIO gpio) の結果を返します  
 > ```c++
 > 例:
-> dip.add(GPIOA, GPIO_PIN_5);
+> dip.add(GPIOA, GPIO_PIN_5)
+>    .add(GPIOA, GPIO_PIN_6) // 以下省略
 > ```
 
 > ##### uint8_t getSize()
@@ -140,6 +150,59 @@ PinOut: GPIO_Input
 > ```c++
 > 例:
 > uint8_t address = dip.getAddress();
+> ```
+
+## class SevenSegment
+### CubeMX
+```
+PinOut: GPIO_Input
+```
+
+### コンストラクタ
+> ##### SevenSegment()
+> ```c++
+> 例:
+> SevenSegment sevenSegment;
+> ```
+
+### 関数
+> ##### SevenSegment& add(GPIO gpio)
+> スイッチのピンを追加します  
+> 登録順は a → b → ... f → g → point
+> ```c++
+> 例:
+> sevenSegment.add(pa5)
+>             .add(pa6) // 以下省略
+> ```
+
+> ##### SevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+> add(GPIO gpio) の結果を返します  
+> ```c++
+> 例:
+> sevenSegment.add(GPIOA, GPIO_PIN_5)
+>             .add(GPIOA, GPIO_PIN_6) // 以下省略
+> ```
+
+> ##### bool setLight(uint8_t lightData)
+> ビットで7セグの設定をします  
+> ```c++
+> 例:
+> sevenSegment.setLight(0b01101101);
+> ```
+
+> ##### bool set(uint8_t hex, bool point = false)
+> 16進数で7セグの設定をします  
+> point を true にすると小数点が光ります
+> ```c++
+> 例:
+> sevenSegment.set(0xC); // false は省略可能
+> sevenSegment.set(0xC, true);
+> ```
+
+> #### bool isAvailable()
+> 登録数が8個であれば true を返します  
+> ```c++
+> sevenSegment.isAvailable();
 > ```
 
 ## class UART
@@ -841,7 +904,7 @@ TIMn
 > ```
 
 > #### bool setCompare(uint32_t compare)
-> __HAL_TIM_SET_COMPARE() を実行します  
+> \_\_HAL_TIM_SET_COMPARE() を実行します  
 > compare が CounterPeriod より大きかった場合、設定がキャンセルされ、 false が返ります  
 > ```c++
 > 例:
