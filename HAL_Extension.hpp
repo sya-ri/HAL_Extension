@@ -1,5 +1,5 @@
 //
-// Hal_Extension 2.3.2
+// Hal_Extension 2.3.3
 //
 
 #ifndef HAL_EXTENSION_HPP
@@ -58,6 +58,10 @@ public:
         return gpioRead(GPIOx, GPIO_Pin);
     }
 
+    bool readBool(){
+    	return gpioRead(GPIOx, GPIO_Pin) == GPIO_PIN_SET;
+    }
+
     void write(GPIO_PinState PinState){
         gpioWrite(GPIOx, GPIO_Pin, PinState);
     }
@@ -84,15 +88,14 @@ public:
         list.reserve(7);
     }
 
-    bool add(GPIO gpio){
-        if(getSize() == 7){
-            return false;
+    DIPSwitch& add(GPIO gpio){
+        if(getSize() < 7){
+        	list.push_back(gpio);
         }
-        list.push_back(gpio);
-        return true;
+        return *this;
     }
 
-    bool add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
+    DIPSwitch& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
         return add(GPIO(GPIOx, GPIO_Pin));
     }
 
@@ -108,12 +111,78 @@ public:
         return flip? ~builder : builder;
     }
 };
+
+class SevenSegment {
+private:
+	std::vector<GPIO> list;
+
+	uint8_t convertLightData(uint8_t hex){
+		switch(hex){
+			case 0x0: return 0b0111111;
+			case 0x1: return 0b0000110;
+			case 0x2: return 0b1011011;
+			case 0x3: return 0b1001111;
+			case 0x4: return 0b1100110;
+			case 0x5: return 0b1101101;
+			case 0x6: return 0b1111101;
+			case 0x7: return 0b0000111;
+			case 0x8: return 0b1111111;
+			case 0x9: return 0b1101111;
+			case 0xA: return 0b1110111;
+			case 0xB: return 0b1111100;
+			case 0xC: return 0b0111001;
+			case 0xD: return 0b1011110;
+			case 0xE: return 0b1111001;
+			case 0xF: return 0b1110001;
+			default: return 0;
+		}
+	}
+public:
+	SevenSegment() {
+		list.reserve(8);
+	}
+
+	SevenSegment& add(GPIO gpio){
+		if(!isAvailable()){
+			list.push_back(gpio);
+		}
+		return *this;
+	}
+
+	SevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
+		return add(GPIO(GPIOx, GPIO_Pin));
+	}
+
+	bool setLight(uint8_t lightData){
+		if(!isAvailable()) return false;
+		uint8_t mask = 1;
+		for(auto segment : list){
+			segment.write((GPIO_PinState) (lightData & mask));
+			mask <<= 1;
+		}
+		return true;
+	}
+
+	bool set(uint8_t hex, bool point = false){
+		uint8_t lightData = convertLightData(hex);
+		if(point){
+			lightData |= 1 << 7;
+		}
+		return setLight(lightData);
+	}
+
+	bool isAvailable(){
+		return list.size() == 8;
+	}
+};
 #endif // __gpio_H
 
 #ifdef __usart_H
-static __function_map(UART_HandleTypeDef *) __uart_tx_callback;
-static __function_map(UART_HandleTypeDef *) __uart_rx_callback;
-static __function_map(UART_HandleTypeDef *) __uart_error_callback;
+namespace {
+	__function_map(UART_HandleTypeDef *) __uart_tx_callback;
+	__function_map(UART_HandleTypeDef *) __uart_rx_callback;
+	__function_map(UART_HandleTypeDef *) __uart_error_callback;
+}
 
 template<class T>
 class UART {
@@ -292,11 +361,13 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
 #endif // __usart_H
 
 #ifdef __i2c_H
-static __function_map(I2C_HandleTypeDef *) __i2c_master_tx_callback;
-static __function_map(I2C_HandleTypeDef *) __i2c_master_rx_callback;
-static __function_map(I2C_HandleTypeDef *) __i2c_slave_tx_callback;
-static __function_map(I2C_HandleTypeDef *) __i2c_slave_rx_callback;
-static __function_map(I2C_HandleTypeDef *) __i2c_error_callback;
+namespace {
+	__function_map(I2C_HandleTypeDef *) __i2c_master_tx_callback;
+	__function_map(I2C_HandleTypeDef *) __i2c_master_rx_callback;
+	__function_map(I2C_HandleTypeDef *) __i2c_slave_tx_callback;
+	__function_map(I2C_HandleTypeDef *) __i2c_slave_rx_callback;
+	__function_map(I2C_HandleTypeDef *) __i2c_error_callback;
+}
 
 template<class T>
 class I2C_Master {
@@ -693,7 +764,9 @@ public:
 #endif // __tim_H
 
 #ifdef __adc_H
-static __function_map(ADC_HandleTypeDef *) __adc_callback;
+namespace {
+	__function_map(ADC_HandleTypeDef *) __adc_callback;
+}
 
 class ADC_DMA {
 private:
