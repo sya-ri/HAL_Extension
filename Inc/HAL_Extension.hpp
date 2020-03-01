@@ -277,7 +277,7 @@ public:
 
 class UART_Logger {
 private:
-    UART<const char> uart;
+	UART_HandleTypeDef *huart;
     uint32_t timeout;
 public:
     UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F): huart(&huart), timeout(timeout){
@@ -304,8 +304,8 @@ public:
 
 class UART_Logger_IT {
 private:
-    UART_IT<const char> uart;
-    std::queue<char> buffer;
+	UART_HandleTypeDef *huart;
+    std::queue<std::string> buffer;
     bool isBusy = false;
 
     void checkBuffer(){
