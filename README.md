@@ -20,6 +20,7 @@
 [class Motor](#class-motor)  
 [class Encoder](#class-encoder)  
 [class ADC_DMA](#class-adc_dma)  
+[wrapper.cpp / wrapper.hpp](#wrapper)
 
 ## define
 #### 関数の短縮
@@ -1100,3 +1101,58 @@ ADCn:
 >     logger.println("Complete");
 > });
 > ```
+
+## wrapper
+wrapper.hpp と wrapper.cpp は STM32 を C++ で開発するために必要なファイルです  
+
+### CubeMX
+```
+Project Manager
+ → Code Generator
+  → Generated files
+   → Generate peripheral initialization as a pair of '.c/.h' files per peripheral にチェック
+     (チェックを付けることでファイル分けされ、wrapper.cpp で #include 出来るようになる)
+```
+
+### main.c
+```c
+/* USER CODE BEGIN Includes */
+#include "wrapper.hpp"
+/* USER CODE END Includes */
+
+// 省略
+
+  /* USER CODE BEGIN 2 */
+  init();
+  /* USER CODE END 2 */
+
+// 省略
+
+    /* USER CODE BEGIN 3 */
+	  loop();
+  }
+  /* USER CODE END 3 */
+```
+以上の三箇所を書き足して main.c を保存
+
+### wrapper.cpp
+```c++
+/* HAL_Extension Configuration */
+
+/* HAL_Extension Configuration */
+```
+上記の部分に [コンフィグ](#コンフィグ) の define を記述する
+
+```c++
+void init(void){
+
+}
+```
+上記の関数に、無限ループ前に実行したい処理を記述する
+
+```c++
+void loop(void){
+
+}
+```
+上記の関数に、無限ループ内で実行したい処理を記述する
