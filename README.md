@@ -1,4 +1,4 @@
-# HAL_Extension - 2.3.3
+# HAL_Extension - 2.3.4
 
 ### 目次
 [#define](#define)  
@@ -413,15 +413,17 @@ USARTn
 > ```
 
 ### 関数
+> #### void print(std::string text)
 > #### void print(const char* text)
-> 一文字ずつ送信します  
+> 送信します  
 > ```c++
 > 例:
 > logger.print("Hello");
 > ```
 
+> #### void println(std::string text)
 > #### void println(const char* text)
-> 送信後に改行します  
+> 末尾に \r\n を連結させて送信します  
 > ```c++
 > 例:
 > logger.println("HelloWorld");
@@ -441,19 +443,21 @@ USARTn
 > UART_IT を使用しての送信になります  
 > ```c++
 > 例:
-> UART_Logger logger(huart2);
+> UART_Logger_IT logger(huart2);
 > ```
 
 ### 関数
+> #### void print(std::string text)
 > #### void print(const char* text)
-> 一文字ずつ送信します  
+> 送信します  
 > ```c++
 > 例:
 > logger.print("Hello");
 > ```
 
+> #### void println(std::string text)
 > #### void println(const char* text)
-> 送信後に改行します  
+> 末尾に \r\n を連結させて送信します  
 > ```c++
 > 例:
 > logger.println("HelloWorld");
