@@ -37,11 +37,15 @@ public:
         HAL_ADC_Stop_DMA(hadc);
     }
 
-    uint32_t get(uint8_t index) {
+    uint8_t get8(uint8_t index) {
+        return (uint8_t)(get(index) >> 4);
+    }
+
+    uint16_t get(uint8_t index) {
         if (index < numberOfConversions) {
-            return adcBuf[index];
+            return (uint16_t) adcBuf[index];
         }
-        throw std::out_of_range("Over NumberOfConversions");
+        return UINT16_MAX;
     }
 
     void setCallback(std::function<void()> function){
