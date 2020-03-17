@@ -1,5 +1,5 @@
 //
-// Hal_Extension 3.0.0
+// Hal_Extension 3.0.1
 //
 
 #ifndef HAL_EXTENSION_HPP
@@ -11,29 +11,30 @@
 
 #if __has_include("gpio.h")
 #include "gpio.h"
-#include "HAL_Extension_gpio.hpp"
 #endif // __has_include("gpio.h")
 
 #if __has_include("usart.h")
 #include "usart.h"
-#include "HAL_Extension_usart.hpp"
 #endif // __has_include("usart.h")
 
 #if __has_include("i2c.h")
 #include "i2c.h"
-#include "HAL_Extension_i2c.hpp"
 #endif // __has_include("i2c.h")
 
 #if __has_include("tim.h")
 #include "tim.h"
-#include "HAL_Extension_tim.hpp"
 #endif // __has_include("tim.h")
 
 #if __has_include("adc.h")
 #include "adc.h"
-#include "HAL_Extension_adc.hpp"
 #endif // __has_include("adc.h")
 
 #endif // __has_include
+
+#include "HAL_Extension_gpio.hpp"
+#include "HAL_Extension_usart.hpp"
+#include "HAL_Extension_i2c.hpp"
+#include "HAL_Extension_tim.hpp"
+#include "HAL_Extension_adc.hpp"
 
 #endif //HAL_EXTENSION_HPP
