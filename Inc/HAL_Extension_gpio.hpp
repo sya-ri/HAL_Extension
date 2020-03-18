@@ -104,18 +104,18 @@ public:
 		list.reserve(8);
 	}
 
-	SevenSegment& add(GPIO gpio){
+	virtual SevenSegment& add(GPIO gpio){
 		if(!isAvailable()){
 			list.push_back(gpio);
 		}
 		return *this;
 	}
 
-	SevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
+	virtual SevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
 		return add(GPIO(GPIOx, GPIO_Pin));
 	}
 
-	bool setLight(uint8_t lightData){
+	virtual bool setLight(uint8_t lightData){
 		if(!isAvailable()) return false;
 		uint8_t mask = 1;
 		for(auto segment : list){
@@ -126,7 +126,7 @@ public:
 		return true;
 	}
 
-	bool set(int8_t hex, bool point = false){
+	virtual bool set(int8_t hex, bool point = false){
 		uint8_t lightData;
 		if(hex < 0){
 			lightData = lightDataTable[16];
@@ -139,11 +139,11 @@ public:
 		return setLight(lightData);
 	}
 
-	bool clear(){
+	virtual bool clear(){
 		return setLight(0);
 	}
 
-	bool isAvailable(){
+	virtual bool isAvailable(){
 		return list.size() == 8;
 	}
 };
@@ -200,7 +200,7 @@ class DynamicSevenSegment {
 private:
 	SevenSegment sevenSegment;
 	std::vector<GPIO> digitList;
-	uint8_t digitCursor;
+	uint8_t digitCursor = 0;
 	std::vector<int8_t> splitNum;
 	uint8_t system;
 	bool zeroFill;
@@ -212,7 +212,7 @@ public:
 	}
 
 	DynamicSevenSegment& add(GPIO gpio){
-		list.push_back(gpio);
+		digitList.push_back(gpio);
 		return *this;
 	}
 
