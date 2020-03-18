@@ -1,5 +1,5 @@
 //
-// Hal_Extension 3.0.2
+// Hal_Extension 3.0.3
 //
 
 #ifndef HAL_EXTENSION_HPP

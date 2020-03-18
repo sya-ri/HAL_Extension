@@ -3,6 +3,7 @@
 
 #ifdef __gpio_H
 
+#include "HAL_Extension_util.hpp"
 #include <vector>
 
 namespace {
@@ -41,7 +42,7 @@ public:
     }
 
     bool readBool(){
-    	return gpioRead(GPIOx, GPIO_Pin) == GPIO_PIN_SET;
+    	return read() == GPIO_PIN_SET;
     }
 
     void write(GPIO_PinState PinState){
