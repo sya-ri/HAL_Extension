@@ -1,11 +1,11 @@
 //
-// Hal_Extension 3.0.4
+// Hal_Extension 3.0.5
 //
 
 #ifndef HAL_EXTENSION_HPP
 #define HAL_EXTENSION_HPP
 
-#include "Hal_Extension_util.hpp"
+#include "HAL_Extension_util.hpp"
 
 #ifdef __has_include // since C++ 17
 

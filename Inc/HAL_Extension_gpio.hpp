@@ -98,7 +98,7 @@ public:
 class SevenSegment {
 private:
 	std::vector<GPIO> list;
-    bool flip;
+	bool flip;
 public:
 	SevenSegment(bool flip = false): flip(flip) {
 		list.reserve(8);
@@ -150,15 +150,20 @@ public:
 
 class FixedSevenSegment: public SevenSegment {
 private:
-	GPIO pointGpio = nullptr;
+	std::vector<GPIO> list;
+	bool flip;
+	bool enablePoint = false;
+	GPIO pointGpio;
 public:
-	FixedSevenSegment() override {
+	FixedSevenSegment(bool flip = false): flip(flip) {
 		list.reserve(4);
 	}
 
-	FixedSevenSegment& add(GPIO gpio) override {
+	FixedSevenSegment& add(GPIO gpio) {
 		if(!isAvailable()){
 			list.push_back(gpio);
+		} else if(!enablePoint) {
+			pointGpio = gpio;
 		}
 		return *this;
 	}
@@ -173,7 +178,7 @@ public:
 
 	bool set(int8_t hex, bool point = false) override {
 		if(isAvailable()){
-			if(point && pointGpio != nullptr){
+			if(point && enablePoint){
 				pointGpio.set();
 			}
 			for(int i = 0; i < 4; i++){
