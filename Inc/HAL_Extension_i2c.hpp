@@ -2,9 +2,10 @@
 #define HAL_EXTENSION_I2C_HPP
 #ifdef __i2c_H
 
+#include "HAL_Extension_gpio.hpp"
+#include "HAL_Extension_util.hpp"
 #include <map>
 #include <functional>
-#include "HAL_Extension_gpio.hpp"
 
 namespace {
     std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_master_tx_callback;

@@ -2,6 +2,7 @@
 #define HAL_EXTENSION_TIM_HPP
 #ifdef __tim_H
 
+#include "HAL_Extension_util.hpp"
 #include <map>
 #include <functional>
 
@@ -75,7 +76,7 @@ public:
     bool setSpeed(int64_t speed){
         bool back = speed < 0;
         if(UINT32_MAX < speed) return false;
-        return setSpeed(!back, (uint32_t) (back? -speed : speed);
+        return setSpeed(!back, (uint32_t) (back? -speed : speed));
     }
 };
 

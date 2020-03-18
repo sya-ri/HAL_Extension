@@ -2,6 +2,7 @@
 #define HAL_EXTENSION_UART_HPP
 #ifdef __usart_H
 
+#include "HAL_Extension_util.hpp"
 #include <map>
 #include <functional>
 #include <queue>

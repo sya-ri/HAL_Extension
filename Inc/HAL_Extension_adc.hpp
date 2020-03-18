@@ -2,6 +2,7 @@
 #define HAL_EXTENSION_ADC_HPP
 #ifdef __adc_H
 
+#include "HAL_Extension_util.hpp"
 #include <map>
 #include <functional>
 
