@@ -78,6 +78,7 @@ public:
         return flip? ~builder : builder;
     }
 };
+
 namespace {
 	const std::array<const uint8_t, 17> lightDataTable = {
 		0b0111111, // 0x0
@@ -99,18 +100,24 @@ namespace {
 		0b1000000  //  -
 	};
 }
+
 class SevenSegment {
 private:
 	std::vector<GPIO> list;
 	bool flip;
+	bool enablePoint = false;
+	GPIO pointGpio;
 public:
 	SevenSegment(bool flip = false): flip(flip) {
-		list.reserve(8);
+		list.reserve(7);
 	}
 
 	virtual SevenSegment& add(GPIO gpio){
 		if(!isAvailable()){
 			list.push_back(gpio);
+		} else if(!enablePoint) {
+			pointGpio = gpio;
+			enablePoint = true;
 		}
 		return *this;
 	}
@@ -126,6 +133,10 @@ public:
 			uint8_t outData = lightData & mask;
 			segment.write((GPIO_PinState) (flip? ~outData : outData));
 			mask <<= 1;
+		}
+		if(enablePoint){
+			uint8_t outData = lightData & mask;
+			point.write((GPIO_PinState) (flip? ~outData : outData));
 		}
 		return true;
 	}
@@ -148,7 +159,7 @@ public:
 	}
 
 	virtual bool isAvailable(){
-		return list.size() == 8;
+		return list.size() == 7;
 	}
 };
 
