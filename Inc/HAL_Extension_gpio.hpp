@@ -136,7 +136,7 @@ public:
 		}
 		if(enablePoint){
 			uint8_t outData = lightData & mask;
-			point.write((GPIO_PinState) (flip? ~outData : outData));
+			pointGpio.write((GPIO_PinState) (flip? ~outData : outData));
 		}
 		return true;
 	}
