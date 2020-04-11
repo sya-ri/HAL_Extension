@@ -1,28 +1,47 @@
-# HAL_Extension - 2.3.4
+# HAL_Extension - 4.0
 
 ### 目次
-[#define](#define)  
+#### - [HAL_Extension\_util.hpp](#HAL_Extension_util.hpp)
+[#define](#define)
+
+#### - [HAL\_Extension\_gpio.hpp](#HAL_Extension_gpio.hpp)
 [class GPIO](#class-gpio)  
 [class DIPSwitch](#class-dipswitch)  
 [class SevenSegment](#class-sevensegment)  
+[class FixedSevenSegment](#class-fixedsevensegment)  
+[class DynamicSevenSegment](#class-dynamicsevensegment)
+
+#### - [HAL\_Extension\_usart.hpp](#HAL_Extension_usart.hpp)
 [class UART](#class-uart)  
 [class UART_DMA](#class-uart_dma)  
 [class UART_IT](#class-uart_it)  
 [class UART_Logger](#class-uart_logger)  
 [class UART_Logger_IT](#class-uart_logger_it)  
+
+#### - [HAL\_Extension\_i2c.hpp](#HAL_Extension_i2c.hpp)
 [class I2C_Master](#class-i2c_master)  
 [class I2C_Slave](#class-i2c_slave)  
 [class I2C_Master_DMA](#class-i2c_master_dma)  
 [class I2C_Slave_DMA](#class-i2c_slave_dma)  
 [class I2C_Master_IT](#class-i2c_master_it)  
 [class I2C_Slave_IT](#class-i2c_slave_it)  
+
+#### - [HAL\_Extension\_tim.hpp](#HAL_Extension_tim.hpp)
 [class PWM](#class-pwm)  
 [class Motor](#class-motor)  
 [class Encoder](#class-encoder)  
-[class ADC_DMA](#class-adc_dma)  
-[wrapper.cpp / wrapper.hpp](#wrapper)
 
-## define
+#### - [HAL\_Extension\_adc.hpp](#HAL_Extension_adc.hpp)
+[class ADC_DMA](#class-adc_dma)  
+
+#### - [wrapper.cpp / wrapper.hpp](#wrapper)
+
+## HAL_Extension.hpp
+自動でヘッダファイルをincludeしてくれます
+クラスや関数が干渉しないのであればこれをincludeしてください
+
+## HAL_Extension_util.hpp
+### define
 #### 関数の短縮
 > ##### getTick()
 > **HAL_GetTick()**
@@ -39,6 +58,10 @@
 > ##### gpioToggle(GPIOx, GPIO_Pin)
 > **HAL_GPIO_TogglePin(GPIOx, GPIO_Pin)**
 
+#### 入力マクロ
+> ##### map_contains(Map, Key)
+> **(Map.find(Key) != Map.end())**
+
 #### コンフィグ
 > ##### CONFIG_UART_USE_HALF_CALLBACK
 > UARTのコールバック関数をハーフに変更します  
@@ -48,6 +71,7 @@
 > ADCのコールバック関数をハーフに変更します  
 > 実行されない場合に定義してください
 
+## HAL_Extension_gpio.hpp
 ## class GPIO
 ### CubeMX
 ```
@@ -156,7 +180,7 @@ PinOut: GPIO_Input
 ## class SevenSegment
 ### CubeMX
 ```
-PinOut: GPIO_Input
+PinOut: GPIO_Output
 ```
 
 ### コンストラクタ
@@ -206,6 +230,54 @@ PinOut: GPIO_Input
 > sevenSegment.isAvailable();
 > ```
 
+## class FixedSevenSegment
+### CubeMX
+```
+PinOut: GPIO_Output
+```
+
+### コンストラクタ
+> ##### FixedSevenSegment(bool flip = false)
+
+### 関数
+> ##### FixedSevenSegment& add(GPIO gpio)
+
+> ##### FixedSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+
+> ##### bool setLight(uint8_t lightData)
+
+> ##### bool set(int8_t hex, bool point = false)
+
+> ##### bool clear()
+
+> ##### bool isAvailable()
+
+## class DynamicSevenSegment
+### CubeMX
+```
+PinOut: GPIO_Output
+```
+
+### コンストラクタ
+> ##### DynamicSevenSegment(SevenSegment sevenSegment, bool hex = false, bool zeroFill = false, bool allowSign = false)
+
+### 関数
+> ##### DynamicSevenSegment& add(GPIO gpio)
+
+> ##### DynamicSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+
+> ##### void update(int64_t num)
+
+> ##### void updateFixedPoint(float num, uint8_t point)
+
+> ##### void updateFloatPoint(float num)
+
+> ##### void next()
+
+> ##### void stop()
+
+## HAL_Extension_usart.hpp
+
 ## class UART
 #### template\<class T\>
 
@@ -215,7 +287,7 @@ PinOut: USARTn_TX / USARTn_RX
 ```
 
 ### コンストラクタ
-> #### UART(UART_HandleTypeDef &huart)
+> ##### UART(UART_HandleTypeDef &huart)
 > ピンを設定します  
 > ```c++
 > 例:
@@ -223,7 +295,7 @@ PinOut: USARTn_TX / USARTn_RX
 > ```
 
 ### 関数
-> #### HAL_StatusTypeDef transmit(const T &data, uint32_t timeout)
+> ##### HAL_StatusTypeDef transmit(const T &data, uint32_t timeout)
 > HAL_UART_Transmit() の結果を返します  
 > ```c++
 > 例:
@@ -232,7 +304,7 @@ PinOut: USARTn_TX / USARTn_RX
 > uart.transmit(0x35, 0x0F); // 変数ではなくリテラルも使用可能
 > ```
 
-> #### HAL_StatusTypeDef receive(T &data, uint32_t timeout)
+> ##### HAL_StatusTypeDef receive(T &data, uint32_t timeout)
 > HAL_UART_Receive() の結果を返します  
 > ```c++
 > 例:
@@ -257,7 +329,7 @@ USARTn
 [CONFIG_UART_USE_HALF_CALLBACK](#config_uart_use_half_callback)
 
 ### コンストラクタ
-> #### UART_DMA(UART_HandleTypeDef &huart, T &data)
+> ##### UART_DMA(UART_HandleTypeDef &huart, T &data)
 > ピンと連携させる変数を設定します  
 > ```c++
 > 例:
@@ -266,7 +338,7 @@ USARTn
 > ```
 
 ### 関数
-> #### HAL_StatusTypeDef startTransmit()
+> ##### HAL_StatusTypeDef startTransmit()
 > 連携させた変数の値を使い、送信を始めます  
 > HAL_UART_Transmit_DMA の結果を返します  
 > ```c++
@@ -274,7 +346,7 @@ USARTn
 > uart.startTransmit();
 > ```
 
-> #### HAL_StatusTypeDef startReceive()
+> ##### HAL_StatusTypeDef startReceive()
 > 受信を始めます  
 > 連携させた変数の値が自動で変わります  
 > HAL_UART_Receive_DMA の結果を返します  
@@ -283,7 +355,7 @@ USARTn
 > uart.startReceive();
 > ```
 
-> #### HAL_StatusTypeDef pause()
+> ##### HAL_StatusTypeDef pause()
 > 送受信を一時停止します  
 > HAL_UART_DMAPause の結果を返します  
 > ```c++
@@ -291,7 +363,7 @@ USARTn
 > uart.pause();
 > ```
 
-> #### HAL_StatusTypeDef resume()
+> ##### HAL_StatusTypeDef resume()
 > 送受信を再開します  
 > HAL_UART_DMAResume の結果を返します  
 > ```c++
@@ -299,7 +371,7 @@ USARTn
 > uart.resume();
 > ```
 
-> #### HAL_StatusTypeDef stop()
+> ##### HAL_StatusTypeDef stop()
 > 送受信を終了します  
 > HAL_UART_DMAStop の結果を返します  
 > ```c++
@@ -307,7 +379,7 @@ USARTn
 > uart.stop();
 > ```
 
-> #### void setTxCallback(std::function<void()> function)
+> ##### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
 > ```c++
 > 例:
@@ -316,7 +388,7 @@ USARTn
 > });
 > ```
 
-> #### void setRxCallback(std::function<void()> function)
+> ##### void setRxCallback(std::function<void()> function)
 > 受信完了時の割り込み関数を設定します  
 > ```c++
 > 例:
@@ -325,7 +397,7 @@ USARTn
 > });
 > ```
 
-> #### void setErrorCallback(std::function<void()> function)
+> ##### void setErrorCallback(std::function<void()> function)
 > エラー取得時の割り込み関数を設定します  
 > ```c++
 > 例:
@@ -349,7 +421,7 @@ USARTn
 [CONFIG_UART_USE_HALF_CALLBACK](#config_uart_use_half_callback)
 
 ### コンストラクタ
-> #### UART_IT(UART_HandleTypeDef &huart)
+> ##### UART_IT(UART_HandleTypeDef &huart)
 > ピンを設定します  
 > ```c++
 > 例:
@@ -357,7 +429,7 @@ USARTn
 > ```
 
 ### 関数
-> #### HAL_StatusTypeDef transmit(const T &data)
+> ##### HAL_StatusTypeDef transmit(const T &data)
 > HAL_UART_Transmit_IT() の結果を返します  
 > ```c++
 > 例:
@@ -365,14 +437,14 @@ USARTn
 > uart.transmit(0x35); // 変数ではなくリテラルも使用可能
 > ```
 
-> #### HAL_StatusTypeDef receive(T &data)
+> ##### HAL_StatusTypeDef receive(T &data)
 > HAL_UART_Receive_IT() の結果を返します  
 > ```c++
 > 例:
 > uart.receive(data);
 > ```
 
-> #### void setTxCallback(std::function<void()> function)
+> ##### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
 > ```c++
 > 例:
@@ -381,7 +453,7 @@ USARTn
 > });
 > ```
 
-> #### void setRxCallback(std::function<void()> function)
+> ##### void setRxCallback(std::function<void()> function)
 > 受信完了時の割り込み関数を設定します  
 > ```c++
 > 例:
@@ -390,7 +462,7 @@ USARTn
 > });
 > ```
 
-> #### void setErrorCallback(std::function<void()> function)
+> ##### void setErrorCallback(std::function<void()> function)
 > エラー取得時の割り込み関数を設定します  
 > ```c++
 > 例:
@@ -404,7 +476,7 @@ USARTn
 [class UART](#class-uart)　を参照してください
 
 ### コンストラクタ
-> ### UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F)
+> ##### UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F)
 > ピンとタイムアウト時間を設定します    
 > UART を使用しての送信になります  
 > ```c++
@@ -414,16 +486,16 @@ USARTn
 > ```
 
 ### 関数
-> #### void print(std::string text)
-> #### void print(const char* text)
+> ##### void print(std::string text)
+> ##### void print(const char* text)
 > 送信します  
 > ```c++
 > 例:
 > logger.print("Hello");
 > ```
 
-> #### void println(std::string text)
-> #### void println(const char* text)
+> ##### void println(std::string text)
+> ##### void println(const char* text)
 > 末尾に \r\n を連結させて送信します  
 > ```c++
 > 例:
@@ -439,7 +511,7 @@ USARTn
 [CONFIG_UART_USE_HALF_CALLBACK](#config_uart_use_half_callback)
 
 ### コンストラクタ
-> ### UART_Logger_IT(UART_HandleTypeDef &huart)
+> ##### UART_Logger_IT(UART_HandleTypeDef &huart)
 > ピンを設定します  
 > UART_IT を使用しての送信になります  
 > ```c++
@@ -448,21 +520,23 @@ USARTn
 > ```
 
 ### 関数
-> #### void print(std::string text)
-> #### void print(const char* text)
+> ##### void print(std::string text)
+> ##### void print(const char* text)
 > 送信します  
 > ```c++
 > 例:
 > logger.print("Hello");
 > ```
 
-> #### void println(std::string text)
-> #### void println(const char* text)
+> ##### void println(std::string text)
+> ##### void println(const char* text)
 > 末尾に \r\n を連結させて送信します  
 > ```c++
 > 例:
 > logger.println("HelloWorld");
 > ```
+
+## HAL_Extension_i2c.hpp
 
 ## class I2C_Master
 #### template\<class T\>
@@ -473,7 +547,7 @@ PinOut: I2Cn_SCL & I2Cn_SDA
 ```
 
 ### コンストラクタ
-> #### I2C_Master(I2C_HandleTypeDef &hi2c)
+> ##### I2C_Master(I2C_HandleTypeDef &hi2c)
 > ピンを設定します  
 > ```c++
 > 例:
@@ -481,14 +555,14 @@ PinOut: I2Cn_SCL & I2Cn_SDA
 > ```
 
 ### 関数
-> #### void init()
+> ##### void init()
 > 再初期化します  
 > ```c++
 > 例:
 > master.init();
 > ```
 
-> #### HAL_StatusTypeDef transmit(uint8_t target, const T &data, uint32_t timeout)
+> ##### HAL_StatusTypeDef transmit(uint8_t target, const T &data, uint32_t timeout)
 > HAL_I2C_Master_Transmit() の結果を返します  
 > ```c++
 > 例:
@@ -497,7 +571,7 @@ PinOut: I2Cn_SCL & I2Cn_SDA
 > master.transmit(0x02, 0x35, 0x0F); // 変数ではなくリテラルも使用可能
 > ```
 
-> #### HAL_StatusTypeDef receive(uint8_t target, T &data, uint32_t timeout)
+> ##### HAL_StatusTypeDef receive(uint8_t target, T &data, uint32_t timeout)
 > HAL_I2C_Master_Receive() の結果を返します  
 > ```c++
 > 例:
@@ -514,7 +588,7 @@ PinOut: I2Cn_SCL & I2Cn_SDA
 ```
 
 ### コンストラクタ
-> #### I2C_Slave(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00)
+> ##### I2C_Slave(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00)
 > ピンと自局アドレスを設定します  
 > 自局アドレスを省略することも可能です
 > ```c++
@@ -524,28 +598,28 @@ PinOut: I2Cn_SCL & I2Cn_SDA
 > ```
 
 ### 関数
-> #### void init()
+> ##### void init()
 > 自局アドレスを反映させ、再初期化します  
 > ```c++
 > 例:
 > slave.init();
 > ```
 
-> #### void init(uint8_t address)
+> ##### void init(uint8_t address)
 > 自局アドレスを上書きし、再初期化します  
 > ```c++
 > 例:
 > slave.init(0x01);
 > ```
 
-> #### void init(DIPSwitch builder)
+> ##### void init(DIPSwitch builder)
 > 自局アドレスをDIPSwitch::getAddress()を使用して上書きし、再初期化します  
 > ```c++
 > 例:
 > slave.init(dip);
 > ```
 
-> #### HAL_StatusTypeDef transmit(const T &data, uint32_t timeout)
+> ##### HAL_StatusTypeDef transmit(const T &data, uint32_t timeout)
 > HAL_I2C_Slave_Transmit() の結果を返します  
 > ```c++
 > 例:
@@ -554,7 +628,7 @@ PinOut: I2Cn_SCL & I2Cn_SDA
 > slave.transmit(0x35, 0x0F); // 変数ではなくリテラルも使用可能
 > ```
 
-> #### HAL_StatusTypeDef receive(T &data, uint32_t timeout)
+> ##### HAL_StatusTypeDef receive(T &data, uint32_t timeout)
 > HAL_I2C_Slave_Receive() の結果を返します  
 > ```c++
 > 例:
@@ -576,7 +650,7 @@ I2Cn
 ```
 
 ### コンストラクタ
-> #### I2C_Master_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, T &data)
+> ##### I2C_Master_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, T &data)
 > ピンと送信先アドレス・連携させる変数を設定します  
 > ```c++
 > 例:
@@ -585,28 +659,28 @@ I2Cn
 > ```
 
 ### 関数
-> #### void init()
+> ##### void init()
 > 再初期化します  
 > ```c++
 > 例:
 > master.init();
 > ```
 
-> #### HAL_StatusTypeDef startTransmit()
+> ##### HAL_StatusTypeDef startTransmit()
 > HAL_I2C_Master_Transmit_DMA() の結果を返します  
 > ```c++
 > 例:
 > master.startTransmit();
 > ```
 
-> #### HAL_StatusTypeDef startReceive()
+> ##### HAL_StatusTypeDef startReceive()
 > HAL_I2C_Master_Receive_DMA() の結果を返します  
 > ```c++
 > 例:
 > master.startReceive();
 > ```
 
-> #### void setTxCallback(std::function<void()> function)
+> ##### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
 > ```c++
 > 例:
@@ -615,7 +689,7 @@ I2Cn
 > });
 > ```
 
-> #### void setRxCallback(std::function<void()> function)
+> ##### void setRxCallback(std::function<void()> function)
 > 受信完了時の割り込み関数を設定します
 > ```c++
 > 例:
@@ -624,7 +698,7 @@ I2Cn
 > });
 > ```
 
-> #### void setErrorCallback(std::function<void()> function)
+> ##### void setErrorCallback(std::function<void()> function)
 > エラー取得時の割り込み関数を設定します
 > ```c++
 > 例:
@@ -645,7 +719,7 @@ I2Cn
 ```
 
 ### コンストラクタ
-> #### I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, T &data, uint8_t address = 0x00)
+> ##### I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, T &data, uint8_t address = 0x00)
 > ピンと自局アドレス・連携させた変数を設定します  
 > ```c++
 > 例:
@@ -654,42 +728,42 @@ I2Cn
 > ```
 
 ### 関数
-> #### void init()
+> ##### void init()
 > 自局アドレスを反映させ、再初期化します  
 > ```c++
 > 例:
 > slave.init();
 > ```
 
-> #### void init(uint8_t address)
+> ##### void init(uint8_t address)
 > 自局アドレスを上書きし、再初期化します  
 > ```c++
 > 例:
 > slave.init(0x01);
 > ```
 
-> #### void init(DIPSwitch builder)
+> ##### void init(DIPSwitch builder)
 > 自局アドレスを上書きし、再初期化します  
 > ```c++
 > 例:
 > slave.init(dip);
 > ```
 
-> #### HAL_StatusTypeDef startTransmit()
+> ##### HAL_StatusTypeDef startTransmit()
 > HAL_I2C_Slave_Transmit_DMA() の結果を返します  
 > ```c++
 > 例:
 > slave.startTransmit();
 > ```
 
-> #### HAL_StatusTypeDef startReceive()
+> ##### HAL_StatusTypeDef startReceive()
 > HAL_I2C_Slave_Receive_DMA() の結果を返します  
 > ```c++
 > 例:
 > slave.startReceive();
 > ```
 
-> #### void setTxCallback(std::function<void()> function)
+> ##### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
 > ```c++
 > 例:
@@ -698,7 +772,7 @@ I2Cn
 > });
 > ```
 
-> #### void setRxCallback(std::function<void()> function)
+> ##### void setRxCallback(std::function<void()> function)
 > 受信完了時の割り込み関数を設定します
 > ```c++
 > 例:
@@ -707,7 +781,7 @@ I2Cn
 > });
 > ```
 
-> #### void setErrorCallback(std::function<void()> function)
+> ##### void setErrorCallback(std::function<void()> function)
 > エラー取得時の割り込み関数を設定します
 > ```c++
 > 例:
@@ -727,7 +801,7 @@ NVIC Settings
 ```
 
 ### コンストラクタ
-> #### I2C_Master_IT(I2C_HandleTypeDef &hi2c)
+> ##### I2C_Master_IT(I2C_HandleTypeDef &hi2c)
 > ピンを設定します  
 > ```c++
 > 例:
@@ -735,14 +809,14 @@ NVIC Settings
 > ```
 
 ### 関数
-> #### void init()
+> ##### void init()
 > 再初期化します  
 > ```c++
 > 例:
 > master.init();
 > ```
 
-> #### HAL_StatusTypeDef transmit(uint8_t target, const T &data)
+> ##### HAL_StatusTypeDef transmit(uint8_t target, const T &data)
 > HAL_I2C_Master_Transmit_IT() の結果を返します  
 > ```c++
 > 例:
@@ -751,7 +825,7 @@ NVIC Settings
 > master.transmit(0x02, 0x35); // 変数ではなくリテラルも使用可能
 > ```
 
-> #### HAL_StatusTypeDef receive(uint8_t target, T &data)
+> ##### HAL_StatusTypeDef receive(uint8_t target, T &data)
 > HAL_I2C_Master_Receive_IT() の結果を返します  
 > ```c++
 > 例:
@@ -759,7 +833,7 @@ NVIC Settings
 > master.receive(0x02, data);
 > ```
 
-> #### void setTxCallback(std::function<void()> function)
+> ##### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
 > ```c++
 > 例:
@@ -768,7 +842,7 @@ NVIC Settings
 > });
 > ```
 
-> #### void setRxCallback(std::function<void()> function)
+> ##### void setRxCallback(std::function<void()> function)
 > 受信完了時の割り込み関数を設定します
 > ```c++
 > 例:
@@ -777,7 +851,7 @@ NVIC Settings
 > });
 > ```
 
-> #### void setErrorCallback(std::function<void()> function)
+> ##### void setErrorCallback(std::function<void()> function)
 > エラー取得時の割り込み関数を設定します
 > ```c++
 > 例:
@@ -797,7 +871,7 @@ NVIC Settings
 ```
 
 ### コンストラクタ
-> #### I2C_Slave_IT(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00)
+> ##### I2C_Slave_IT(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00)
 > ピンと自局アドレスを設定します  
 > ```c++
 > 例:
@@ -805,28 +879,28 @@ NVIC Settings
 > ```
 
 ### 関数
-> #### void init()
+> ##### void init()
 > 自局アドレスを反映させ、再初期化します  
 > ```c++
 > 例:
 > slave.init();
 > ```
 
-> #### void init(uint8_t address)
+> ##### void init(uint8_t address)
 > 自局アドレスを上書きし、再初期化します  
 > ```c++
 > 例:
 > slave.init(0x01);
 > ```
 
-> #### void init(DIPSwitch builder)
+> ##### void init(DIPSwitch builder)
 > 自局アドレスを上書きし、再初期化します  
 > ```c++
 > 例:
 > slave.init(dip);
 > ```
 
-> #### HAL_StatusTypeDef transmit(const T &data)
+> ##### HAL_StatusTypeDef transmit(const T &data)
 > HAL_I2C_Slave_Transmit_IT() の結果を返します  
 > ```c++
 > 例:
@@ -835,7 +909,7 @@ NVIC Settings
 > slave.transmit(0x35); // 変数ではなくリテラルも使用可能
 > ```
 
-> #### HAL_StatusTypeDef receive(T &data)
+> ##### HAL_StatusTypeDef receive(T &data)
 > HAL_I2C_Slave_Receive_IT() の結果を返します  
 > ```c++
 > 例:
@@ -843,7 +917,7 @@ NVIC Settings
 > slave.receive(data);
 > ```
 
-> #### void setTxCallback(std::function<void()> function)
+> ##### void setTxCallback(std::function<void()> function)
 > 送信完了時の割り込み関数を設定します  
 > ```c++
 > 例:
@@ -852,7 +926,7 @@ NVIC Settings
 > });
 > ```
 
-> #### void setRxCallback(std::function<void()> function)
+> ##### void setRxCallback(std::function<void()> function)
 > 受信完了時の割り込み関数を設定します
 > ```c++
 > 例:
@@ -861,7 +935,7 @@ NVIC Settings
 > });
 > ```
 
-> #### void setErrorCallback(std::function<void()> function)
+> ##### void setErrorCallback(std::function<void()> function)
 > エラー取得時の割り込み関数を設定します
 > ```c++
 > 例:
@@ -869,6 +943,10 @@ NVIC Settings
 >     logger.println("Error");
 > });
 > ```
+
+
+
+## HAL_Extension_tim.hpp
 
 ## class PWM
 ### CubeMX
@@ -886,7 +964,7 @@ TIMn
 ```
 
 ### コンストラクタ
-> #### PWM(TIM_HandleTypeDef &htim, uint32_t channel)
+> ##### PWM(TIM_HandleTypeDef &htim, uint32_t channel)
 > ピンを設定します  
 > ```c++
 > 例:
@@ -894,21 +972,21 @@ TIMn
 > ```
 
 ### 関数
-> #### void start()
+> ##### void start()
 > HAL_TIM_PWM_Start() を実行します  
 > ```c++
 > 例:
 > pwm.start();
 > ```
 
-> #### void stop()
+> ##### void stop()
 > HAL_TIM_PWM_Stop() を実行します  
 > ```c++
 > 例:
 > pwm.stop();
 > ```
 
-> #### bool setCompare(uint32_t compare)
+> ##### bool setCompare(uint32_t compare)
 > \_\_HAL_TIM_SET_COMPARE() を実行します  
 > compare が CounterPeriod より大きかった場合、設定がキャンセルされ、 false が返ります  
 > ```c++
@@ -916,7 +994,7 @@ TIMn
 > pwm.setCompare(100);
 > ```
 
-> #### uint32_t getCounterPeriod()
+> ##### uint32_t getCounterPeriod()
 > CounterPeriod を返します  
 > ```c++
 > 例:
@@ -928,14 +1006,14 @@ TIMn
 あらかじめ2つの [PWM](#class-pwm) を設定してください
 
 ### コンストラクタ
-> #### Motor(PWM positive, PWM negative)
+> ##### Motor(PWM positive, PWM negative)
 > 正転と逆転のPWMを設定します  
 > ```c++
 > 例:
 > Motor motor(posPwm, negPwm);
 > ```
 
-> #### Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg)
+> ##### Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg)
 > 正転と逆転のピンを設定します  
 > 内部的にはPWMクラスに変換されています  
 > ```c++
@@ -944,21 +1022,21 @@ TIMn
 > ```
 
 ### 関数
-> #### void start()
+> ##### void start()
 > PWM::start を実行します  
 > ```c++
 > 例:
 > motor.start();
 > ```
 
-> #### void stop()
+> ##### void stop()
 > PWM::stop を実行します  
 > ```c++
 > 例:
 > motor.stop();
 > ```
 
-> #### bool setSpeed(bool forward, uint32_t compare)
+> ##### bool setSpeed(bool forward, uint32_t compare)
 > 正転・逆転 と compare を送ります  
 > true が正転 / false が逆転 です  
 > PWM::setCompare() の結果を返します  
@@ -968,7 +1046,7 @@ TIMn
 > motor.setSpeed(false, 400);
 > ```
 
-> #### bool setSpeed(int64_t speed)
+> ##### bool setSpeed(int64_t speed)
 > 正の数は正転 / 負の数は逆転  
 > 絶対値が compare になります  
 > 内部的には setSpeed(bool, uint32_t) を実行しています  
@@ -992,7 +1070,7 @@ TIMn
 ```
 
 ### コンストラクタ
-> #### Encoder(TIM_HandleTypeDef &htim, uint32_t channel = TIM_CHANNEL_ALL)
+> ##### Encoder(TIM_HandleTypeDef &htim, uint32_t channel = TIM_CHANNEL_ALL)
 > ピンを設定します  
 > channel は何もなければ省略し  
 > 他のCHを別の目的で使用する時のみ記述してください
@@ -1003,40 +1081,65 @@ TIMn
 > ```
 
 ### 関数
-> #### void start()
+> ##### void start()
 > カウントを開始します  
 > ```c++
 > 例:
 > encoder.start();
 > ```
 
-> #### void stop()
+> ##### void stop()
 > カウントを停止します  
 > ```c++
 > 例:
 > encoder.stop();
 > ```
 
-> #### void update()
+> ##### void update()
 > カウントを更新します  
 > ```c++
 > 例:
 > encoder.update();
 > ```
 
-> #### int32_t getCount()
+> ##### int32_t getCount()
 > カウントを取得します  
 > ```c++
 > 例:
 > encoder.getCount();
 > ```
 
-> #### void resetCount()
+> ##### void resetCount()
 > カウントを停止します  
 > ```c++
 > 例:
 > encoder.resetCount();
 > ```
+
+## class TimerInterrupt
+### CubeMX
+```
+PinOut: TIMを有効にする
+```
+
+### コンストラクタ
+> ##### TimerInterrupt(TIM_HandleTypeDef &htim)
+> 使うタイマーを設定する
+
+### 関数
+> ##### bool start()
+> タイマーを動かします
+
+> ##### bool start(uint32_t prescaler, uint32_t counterPeriod)
+> prescaler と counterPeriod を再設定してスタートする
+
+> ##### void stop()
+> タイマーを止めます
+
+> ##### void setCallback(std::function<void()> function)
+> タイマ割り込みの処理を設定します
+
+## HAL_Extension_adc.hpp
 
 ## class ADC_DMA
 ### CubeMX
@@ -1062,7 +1165,7 @@ ADCn:
 [CONFIG_ADC_USE_HALF_CALLBACK](#config_adc_use_half_callback)
 
 ### コンストラクタ
-> #### ADC_DMA(ADC_HandleTypeDef &hadc, uint8_t numberOfConversions)
+> ##### ADC_DMA(ADC_HandleTypeDef &hadc, uint8_t numberOfConversions)
 > ピンとDMAを行う数を設定します  
 > ```c++
 > 例:
@@ -1070,21 +1173,21 @@ ADCn:
 > ```
 
 ### 関数
-> #### void start()
+> ##### void start()
 > ADCを開始します  
 > ```c++
 > 例:
 > adc.start();
 > ```
 
-> #### void stop()
+> ##### void stop()
 > ADCを終了します  
 > ```c++
 > 例:
 > adc.stop();
 > ```
 
-> #### uint32_t get(uint8_t index)
+> ##### uint32_t get(uint8_t index)
 > ADCバッファの値を返します  
 > index が numberOfConversions を超えている場合、  
 > バッファの範囲外なので std::out_of_range が発生します  
@@ -1093,7 +1196,7 @@ ADCn:
 > adc.get(0);
 > ```
 
-> #### void setCallback(std::function<void()> function)
+> ##### void setCallback(std::function<void()> function)
 > ADC完了時の割り込み関数を設定します
 > ```c++
 > 例:
@@ -1103,7 +1206,7 @@ ADCn:
 > ```
 
 ## wrapper
-wrapper.hpp と wrapper.cpp は STM32 を C++ で開発するために必要なファイルです  
+STM32 を C++ で開発するための準備です
 
 ### CubeMX
 ```
@@ -1113,6 +1216,39 @@ Project Manager
    → Generate peripheral initialization as a pair of '.c/.h' files per peripheral にチェック
      (チェックを付けることでファイル分けされ、wrapper.cpp で #include 出来るようになる)
 ```
+### wrapper.hpp
+```c++
+#ifndef WRAPPER_HPP_
+#define WRAPPER_HPP_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void init(void);
+void loop(void);
+
+#ifdef __cplusplus
+};
+#endif
+
+#endif /* WRAPPER_HPP_ */
+```
+
+### wrapper.cpp
+```c++
+void init(void){
+
+}
+```
+上記の関数に、無限ループ前に実行したい処理を記述する
+
+```c++
+void loop(void){
+
+}
+```
+上記の関数に、無限ループ内で実行したい処理を記述する
 
 ### main.c
 ```c
@@ -1135,24 +1271,3 @@ Project Manager
 ```
 以上の三箇所を書き足して main.c を保存
 
-### wrapper.cpp
-```c++
-/* HAL_Extension Configuration */
-
-/* HAL_Extension Configuration */
-```
-上記の部分に [コンフィグ](#コンフィグ) の define を記述する
-
-```c++
-void init(void){
-
-}
-```
-上記の関数に、無限ループ前に実行したい処理を記述する
-
-```c++
-void loop(void){
-
-}
-```
-上記の関数に、無限ループ内で実行したい処理を記述する
