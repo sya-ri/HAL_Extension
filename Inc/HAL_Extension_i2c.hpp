@@ -1,19 +1,16 @@
 #ifndef HAL_EXTENSION_I2C_HPP
 #define HAL_EXTENSION_I2C_HPP
-#ifdef __i2c_H
 
 #include "HAL_Extension_gpio.hpp"
-#include "HAL_Extension_util.hpp"
+#include "i2c.h"
 #include <map>
 #include <functional>
 
-namespace {
-    std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_master_tx_callback;
-    std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_master_rx_callback;
-    std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_slave_tx_callback;
-    std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_slave_rx_callback;
-    std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_error_callback;
-}
+extern std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_master_tx_callback;
+extern std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_master_rx_callback;
+extern std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_slave_tx_callback;
+extern std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_slave_rx_callback;
+extern std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_error_callback;
 
 template<class T>
 class I2C_Master {
@@ -255,35 +252,4 @@ public:
     }
 };
 
-void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c){
-    if(map_contains(__i2c_master_tx_callback, hi2c)){
-        __i2c_master_tx_callback[hi2c]();
-    }
-}
-
-void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c){
-    if(map_contains(__i2c_master_rx_callback, hi2c)){
-        __i2c_master_rx_callback[hi2c]();
-    }
-}
-
-void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c){
-    if(map_contains(__i2c_slave_tx_callback, hi2c)){
-        __i2c_slave_tx_callback[hi2c]();
-    }
-}
-
-void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c){
-    if(map_contains(__i2c_slave_rx_callback, hi2c)){
-        __i2c_slave_rx_callback[hi2c]();
-    }
-}
-
-void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c){
-    if(map_contains(__i2c_error_callback, hi2c)){
-        __i2c_error_callback[hi2c]();
-    }
-}
-
-#endif // __i2c_H
 #endif

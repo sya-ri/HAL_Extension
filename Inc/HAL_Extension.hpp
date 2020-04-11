@@ -1,5 +1,5 @@
 //
-// Hal_Extension 3.0.7
+// Hal_Extension 4.0
 //
 
 #ifndef HAL_EXTENSION_HPP
@@ -31,10 +31,24 @@
 
 #endif // __has_include
 
+#ifdef __gpio_H
 #include "HAL_Extension_gpio.hpp"
+#endif
+
+#ifdef __usart_H
 #include "HAL_Extension_usart.hpp"
+#endif
+
+#ifdef __i2c_H
 #include "HAL_Extension_i2c.hpp"
+#endif
+
+#ifdef __tim_H
 #include "HAL_Extension_tim.hpp"
+#endif
+
+#ifdef __adc_H
 #include "HAL_Extension_adc.hpp"
+#endif
 
 #endif //HAL_EXTENSION_HPP

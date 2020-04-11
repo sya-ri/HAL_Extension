@@ -1,17 +1,14 @@
 #ifndef HAL_EXTENSION_UART_HPP
 #define HAL_EXTENSION_UART_HPP
-#ifdef __usart_H
 
-#include "HAL_Extension_util.hpp"
+#include "usart.h"
 #include <map>
 #include <functional>
 #include <queue>
 
-namespace {
-    std::map<UART_HandleTypeDef *, std::function<void()>> __uart_tx_callback;
-    std::map<UART_HandleTypeDef *, std::function<void()>> __uart_rx_callback;
-    std::map<UART_HandleTypeDef *, std::function<void()>> __uart_error_callback;
-}
+extern std::map<UART_HandleTypeDef *, std::function<void()>> __uart_tx_callback;
+extern std::map<UART_HandleTypeDef *, std::function<void()>> __uart_rx_callback;
+extern std::map<UART_HandleTypeDef *, std::function<void()>> __uart_error_callback;
 
 template<class T>
 class UART {
@@ -115,28 +112,12 @@ private:
     UART_HandleTypeDef *huart;
     uint32_t timeout;
 public:
-    UART_Logger(){}
-
-    UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F): huart(&huart), timeout(timeout){
-
-    }
-
-    void print(std::string text){
-        HAL_UART_Transmit(huart, (uint8_t *) text.c_str(), text.size(), timeout);
-    }
-
-    void print(const char* text){
-        print(std::string(text));
-    }
-
-    void println(std::string text){
-        text.append("\r\n");
-        print(text);
-    }
-
-    void println(const char* text){
-        println(text);
-    }
+    UART_Logger();
+    UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F);
+    void print(std::string text);
+    void print(const char* text);
+    void println(std::string text);
+    void println(const char* text);
 };
 
 class UART_Logger_IT {
@@ -144,71 +125,14 @@ private:
     UART_HandleTypeDef *huart;
     std::queue<std::string> buffer;
     bool isBusy = false;
-
-    void checkBuffer(){
-        auto front = buffer.front();
-        buffer.pop();
-        HAL_UART_Transmit_IT(huart, (uint8_t *) front.c_str(), front.size());
-    }
+    void checkBuffer();
 public:
-    UART_Logger_IT(){}
-
-    UART_Logger_IT(UART_HandleTypeDef &huart): huart(&huart){
-        __uart_tx_callback[&huart] = [this]{
-            if (buffer.empty()) {
-                isBusy = false;
-            } else {
-                checkBuffer();
-            }
-        };
-    }
-
-    void print(std::string text){
-        buffer.push(text);
-        if(isBusy) return;
-        checkBuffer();
-        isBusy = true;
-    }
-
-    void print(const char* text){
-        print(std::string(text));
-    }
-
-    void println(std::string text){
-        text.append("\r\n");
-        print(text);
-    }
-
-    void println(const char* text){
-        println(std::string(text));
-    }
+    UART_Logger_IT();
+    UART_Logger_IT(UART_HandleTypeDef &huart);
+    void print(std::string text);
+    void print(const char* text);
+    void println(std::string text);
+    void println(const char* text);
 };
 
-#ifdef CONFIG_UART_USE_HALF_CALLBACK
-void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart){
-#else  // CONFIG_UART_USE_HALF_CALLBACK
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
-#endif // CONFIG_UART_USE_HALF_CALLBACK
-    if(map_contains(__uart_tx_callback, huart)){
-        __uart_tx_callback[huart]();
-    }
-}
-
-#ifdef CONFIG_UART_USE_HALF_CALLBACK
-void HAL_UART_RxHalfCpltCallback(UART_HandleTypeDef *huart){
-#else  // CONFIG_UART_USE_HALF_CALLBACK
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-#endif // CONFIG_UART_USE_HALF_CALLBACK
-    if(map_contains(__uart_rx_callback, huart)){
-        __uart_rx_callback[huart]();
-    }
-}
-
-void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
-    if(map_contains(__uart_error_callback, huart)){
-        __uart_error_callback[huart]();
-    }
-}
-
-#endif // __usart_H
 #endif
