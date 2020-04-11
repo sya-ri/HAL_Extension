@@ -1,24 +1,24 @@
 # HAL_Extension - 4.0
 
 ### 目次
-#### - [HAL_Extension\_util.hpp](#HAL_Extension_util.hpp)
+#### - [HAL_Extension\_util.hpp](#HAL_Extension_util)
 [#define](#define)
 
-#### - [HAL\_Extension\_gpio.hpp](#HAL_Extension_gpio.hpp)
+#### - [HAL\_Extension\_gpio.hpp](#HAL_Extension_gpio)
 [class GPIO](#class-gpio)  
 [class DIPSwitch](#class-dipswitch)  
 [class SevenSegment](#class-sevensegment)  
 [class FixedSevenSegment](#class-fixedsevensegment)  
 [class DynamicSevenSegment](#class-dynamicsevensegment)
 
-#### - [HAL\_Extension\_usart.hpp](#HAL_Extension_usart.hpp)
+#### - [HAL\_Extension\_usart.hpp](#HAL_Extension_usart)
 [class UART](#class-uart)  
 [class UART_DMA](#class-uart_dma)  
 [class UART_IT](#class-uart_it)  
 [class UART_Logger](#class-uart_logger)  
 [class UART_Logger_IT](#class-uart_logger_it)  
 
-#### - [HAL\_Extension\_i2c.hpp](#HAL_Extension_i2c.hpp)
+#### - [HAL\_Extension\_i2c.hpp](#HAL_Extension_i2c)
 [class I2C_Master](#class-i2c_master)  
 [class I2C_Slave](#class-i2c_slave)  
 [class I2C_Master_DMA](#class-i2c_master_dma)  
@@ -26,21 +26,21 @@
 [class I2C_Master_IT](#class-i2c_master_it)  
 [class I2C_Slave_IT](#class-i2c_slave_it)  
 
-#### - [HAL\_Extension\_tim.hpp](#HAL_Extension_tim.hpp)
+#### - [HAL\_Extension\_tim.hpp](#HAL_Extension_tim)
 [class PWM](#class-pwm)  
 [class Motor](#class-motor)  
 [class Encoder](#class-encoder)  
 
-#### - [HAL\_Extension\_adc.hpp](#HAL_Extension_adc.hpp)
+#### - [HAL\_Extension\_adc.hpp](#HAL_Extension_adc)
 [class ADC_DMA](#class-adc_dma)  
 
 #### - [wrapper.cpp / wrapper.hpp](#wrapper)
 
-## HAL_Extension.hpp
+## HAL_Extension
 自動でヘッダファイルをincludeしてくれます
 クラスや関数が干渉しないのであればこれをincludeしてください
 
-## HAL_Extension_util.hpp
+## HAL_Extension_util
 ### define
 #### 関数の短縮
 > ##### getTick()
@@ -71,7 +71,7 @@
 > ADCのコールバック関数をハーフに変更します  
 > 実行されない場合に定義してください
 
-## HAL_Extension_gpio.hpp
+## HAL_Extension_gpio
 ## class GPIO
 ### CubeMX
 ```
@@ -276,7 +276,7 @@ PinOut: GPIO_Output
 
 > ##### void stop()
 
-## HAL_Extension_usart.hpp
+## HAL_Extension_usart
 
 ## class UART
 #### template\<class T\>
@@ -536,7 +536,7 @@ USARTn
 > logger.println("HelloWorld");
 > ```
 
-## HAL_Extension_i2c.hpp
+## HAL_Extension_i2c
 
 ## class I2C_Master
 #### template\<class T\>
@@ -944,9 +944,7 @@ NVIC Settings
 > });
 > ```
 
-
-
-## HAL_Extension_tim.hpp
+## HAL_Extension_tim
 
 ## class PWM
 ### CubeMX
@@ -1139,7 +1137,7 @@ PinOut: TIMを有効にする
 > ##### void setCallback(std::function<void()> function)
 > タイマ割り込みの処理を設定します
 
-## HAL_Extension_adc.hpp
+## HAL_Extension_adc
 
 ## class ADC_DMA
 ### CubeMX
