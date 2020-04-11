@@ -20,6 +20,8 @@ class I2C_Master {
 private:
     I2C_HandleTypeDef* hi2c;
 public:
+    I2C_Master(){}
+
     I2C_Master(I2C_HandleTypeDef &hi2c): hi2c(&hi2c){
 
     }
@@ -44,6 +46,8 @@ private:
     I2C_HandleTypeDef* hi2c;
     uint8_t address;
 public:
+    I2C_Slave(){}
+
     I2C_Slave(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00): hi2c(&hi2c), address(address) {
 
     }
@@ -81,6 +85,8 @@ private:
     uint8_t target;
     T *data;
 public:
+    I2C_Master_DMA(){}
+
     I2C_Master_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, T &data): hi2c(&hi2c), target(target), data(&data){
 
     }
@@ -118,6 +124,8 @@ private:
     uint8_t address;
     T *data;
 public:
+    I2C_Slave_DMA(){}
+
     I2C_Slave_DMA(I2C_HandleTypeDef &hi2c, T &data, uint8_t address = 0x00): hi2c(&hi2c), data(&data), address(address) {
 
     }
@@ -165,6 +173,8 @@ class I2C_Master_IT {
 private:
     I2C_HandleTypeDef* hi2c;
 public:
+    I2C_Master_IT(){}
+
     I2C_Master_IT(I2C_HandleTypeDef &hi2c): hi2c(&hi2c){
 
     }
@@ -201,6 +211,8 @@ private:
     I2C_HandleTypeDef* hi2c;
     uint8_t address;
 public:
+    I2C_Slave_IT(){}
+
     I2C_Slave_IT(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00): hi2c(&hi2c), address(address) {
 
     }

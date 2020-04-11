@@ -16,6 +16,8 @@ private:
     uint32_t channel;
     uint32_t counterPeriod;
 public:
+    PWM(){}
+
     PWM(TIM_HandleTypeDef &htim, uint32_t channel): htim(htim), channel(channel){
         counterPeriod = htim.Init.Period;
     }
@@ -47,6 +49,8 @@ private:
     PWM positive;
     PWM negative;
 public:
+    Motor(){}
+
     Motor(PWM positive, PWM negative): positive(positive), negative(negative){
 
     }
@@ -89,6 +93,8 @@ private:
     uint16_t rawCount = 0;
     int32_t count = 0;
 public:
+    Encoder(){}
+
     Encoder(TIM_HandleTypeDef &htim, uint32_t channel = TIM_CHANNEL_ALL): htim(&htim), channel(channel){
 
     }
@@ -146,6 +152,8 @@ class TimerInterrupt {
 private:
     TIM_HandleTypeDef *htim;
 public:
+    TimerInterrupt(){}
+
     TimerInterrupt(TIM_HandleTypeDef &htim): htim(&htim){
 
     }

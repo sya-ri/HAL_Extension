@@ -13,9 +13,7 @@ private:
     GPIO_TypeDef* GPIOx;
     uint16_t GPIO_Pin;
 public:
-    GPIO(){
-
-    }
+    GPIO(){}
 
     GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin): GPIOx(GPIOx), GPIO_Pin(GPIO_Pin){
 
@@ -228,6 +226,8 @@ private:
 	bool allowSign;
 	bool isStop = true;
 public:
+	DynamicSevenSegment(){}
+
 	DynamicSevenSegment(SevenSegment sevenSegment, bool hex = false, bool zeroFill = false, bool allowSign = false): sevenSegment(sevenSegment), zeroFill(zeroFill), allowSign(allowSign){
 		system = hex? 16 : 10;
 	}

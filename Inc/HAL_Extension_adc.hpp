@@ -16,6 +16,8 @@ private:
     uint32_t *adcBuf;
     uint8_t numberOfConversions;
 public:
+    ADC_DMA(){}
+
     ADC_DMA(ADC_HandleTypeDef &hadc, uint8_t numberOfConversions): hadc(&hadc), numberOfConversions(numberOfConversions){
         adcBuf = new uint32_t[numberOfConversions];
     }

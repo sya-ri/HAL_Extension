@@ -18,6 +18,8 @@ class UART {
 private:
     UART_HandleTypeDef *huart;
 public:
+    UART(){}
+
     UART(UART_HandleTypeDef &huart): huart(&huart){
 
     }
@@ -36,6 +38,8 @@ class UART_IT {
 private:
     UART_HandleTypeDef *huart;
 public:
+    UART_IT(){}
+
     UART_IT(UART_HandleTypeDef &huart): huart(&huart){
 
     }
@@ -67,6 +71,8 @@ private:
     UART_HandleTypeDef *huart;
     T *data;
 public:
+    UART_DMA(){}
+
     UART_DMA(UART_HandleTypeDef &huart, T &data): huart(&huart), data(&data){
 
     }
@@ -109,6 +115,8 @@ private:
     UART_HandleTypeDef *huart;
     uint32_t timeout;
 public:
+    UART_Logger(){}
+
     UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F): huart(&huart), timeout(timeout){
 
     }
@@ -143,6 +151,8 @@ private:
         HAL_UART_Transmit_IT(huart, (uint8_t *) front.c_str(), front.size());
     }
 public:
+    UART_Logger_IT(){}
+
     UART_Logger_IT(UART_HandleTypeDef &huart): huart(&huart){
         __uart_tx_callback[&huart] = [this]{
             if (buffer.empty()) {
