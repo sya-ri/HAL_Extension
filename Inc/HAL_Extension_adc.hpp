@@ -25,11 +25,11 @@ public:
     }
 
     void start(){
-    	if(hadc.Init.ContinuousConvMode != ENABLE || hadc.Init.DMAContinuousRequests != ENABLE){
-    		HAL_ADC_DeInit(&hadc);
-    		hadc.Init.ContinuousConvMode = ENABLE;
-    		hadc.Init.DMAContinuousRequests = ENABLE;
-    		HAL_ADC_Init(&hadc);
+    	if(hadc->Init.ContinuousConvMode != ENABLE || hadc->Init.DMAContinuousRequests != ENABLE){
+    		HAL_ADC_DeInit(hadc);
+    		hadc->Init.ContinuousConvMode = ENABLE;
+    		hadc->Init.DMAContinuousRequests = ENABLE;
+    		HAL_ADC_Init(hadc);
     	}
         HAL_ADC_Start_DMA(hadc, adcBuf, numberOfConversions);
     }
@@ -59,7 +59,7 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
 #else  // CONFIG_ADC_USE_HALF_CALLBACK
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 #endif // CONFIG_ADC_USE_HALF_CALLBACK
-    if(__map_contains(__adc_callback, hadc)){
+    if(map_contains(__adc_callback, hadc)){
         __adc_callback[hadc]();
     }
 }
