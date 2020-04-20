@@ -22,6 +22,17 @@ namespace {
 		0b1110001, // 0xF
 		0b1000000  //  -
 	};
+
+	uint8_t getNumberOfDigit(float num){
+	    uint64_t numAsUInt = (uint64_t) ((num < 0)? -num : num);
+	    uint64_t compare = 10;
+	    uint8_t numberOfDigit = 1;
+	    while(!(numAsUInt < compare)){
+	        compare *= 10;
+	        numberOfDigit ++;
+	    }
+	    return numberOfDigit;
+	}
 }
 
 GPIO::GPIO(){}
@@ -241,7 +252,7 @@ void DynamicSevenSegment::updateFixedPoint(float num, uint8_t point){
 }
 
 void DynamicSevenSegment::updateFloatPoint(float num){
-	updateFixedPoint(num, (uint8_t) floorf(log10f(num) + 1));
+	updateFixedPoint(num, getNumberOfDigit(num));
 }
 
 void DynamicSevenSegment::next(){
