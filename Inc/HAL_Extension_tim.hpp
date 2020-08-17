@@ -9,7 +9,6 @@ class PWM {
 private:
     TIM_HandleTypeDef *htim;
     uint32_t channel;
-    uint32_t counterPeriod;
 public:
     PWM();
     PWM(TIM_HandleTypeDef &htim, uint32_t channel);

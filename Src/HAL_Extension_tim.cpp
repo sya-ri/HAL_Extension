@@ -5,7 +5,6 @@ std::map<TIM_HandleTypeDef *, std::function<void()>> __tim__period_elapsed_callb
 PWM::PWM(){}
 
 PWM::PWM(TIM_HandleTypeDef &htim, uint32_t channel): htim(&htim), channel(channel){
-	counterPeriod = htim.Init.Period;
 }
 
 void PWM::start(){
@@ -17,7 +16,7 @@ void PWM::stop(){
 }
 
 bool PWM::setCompare(uint32_t compare){
-	if(counterPeriod < compare){
+	if(getCounterPeriod() < compare){
 		return false;
 	} else {
 		__HAL_TIM_SET_COMPARE(htim, channel, compare);
@@ -26,7 +25,7 @@ bool PWM::setCompare(uint32_t compare){
 }
 
 uint32_t PWM::getCounterPeriod(){
-	return counterPeriod;
+	return htim->Init.Period;
 }
 
 Motor::Motor(){}
