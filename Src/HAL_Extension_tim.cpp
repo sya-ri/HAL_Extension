@@ -1,6 +1,8 @@
 #include "HAL_Extension_tim.hpp"
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 std::map<TIM_HandleTypeDef *, std::function<void()>> __tim__period_elapsed_callback;
+#endif // CONFIG_DISABLE_EX_CALLBACK
 
 PWM::PWM(){}
 
@@ -116,6 +118,7 @@ void Encoder::resetCount(){
 	count = 0;
 }
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 TimerInterrupt::TimerInterrupt(){}
 
 TimerInterrupt::TimerInterrupt(TIM_HandleTypeDef &htim): htim(&htim){
@@ -157,3 +160,4 @@ void HAL_TIM_PeriodElapsedHalfCpltCallback(TIM_HandleTypeDef *htim){
         __tim__period_elapsed_callback[htim]();
     }
 }
+#endif // CONFIG_DISABLE_EX_CALLBACK

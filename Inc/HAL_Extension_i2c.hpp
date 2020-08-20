@@ -6,11 +6,13 @@
 #include <map>
 #include <functional>
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 extern std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_master_tx_callback;
 extern std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_master_rx_callback;
 extern std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_slave_tx_callback;
 extern std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_slave_rx_callback;
 extern std::map<I2C_HandleTypeDef *, std::function<void()>> __i2c_error_callback;
+#endif // CONFIG_DISABLE_EX_CALLBACK
 
 template<class T>
 class I2C_Master {
@@ -101,6 +103,7 @@ public:
         return HAL_I2C_Master_Receive_DMA(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
     }
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setTxCallback(std::function<void()> function){
         __i2c_master_tx_callback[hi2c] = function;
     }
@@ -112,6 +115,7 @@ public:
     void setErrorCallback(std::function<void()> function){
         __i2c_error_callback[hi2c] = function;
     }
+#endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
 template<class T>
@@ -152,6 +156,7 @@ public:
         return HAL_I2C_Slave_Receive_DMA(hi2c, (uint8_t *) &data, sizeof(T));
     }
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setTxCallback(std::function<void()> function){
         __i2c_slave_tx_callback[hi2c] = function;
     }
@@ -163,6 +168,7 @@ public:
     void setErrorCallback(std::function<void()> function){
         __i2c_error_callback[hi2c] = function;
     }
+#endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
 template<class T>
@@ -189,6 +195,7 @@ public:
         return HAL_I2C_Master_Receive_IT(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
     }
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setTxCallback(std::function<void()> function){
         __i2c_slave_tx_callback[hi2c] = function;
     }
@@ -200,6 +207,7 @@ public:
     void setErrorCallback(std::function<void()> function){
         __i2c_error_callback[hi2c] = function;
     }
+#endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
 template<class T>
@@ -239,6 +247,7 @@ public:
         return HAL_I2C_Slave_Receive_IT(hi2c, (uint8_t *) &data, sizeof(T));
     }
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setTxCallback(std::function<void()> function){
         __i2c_slave_tx_callback[hi2c] = function;
     }
@@ -250,6 +259,7 @@ public:
     void setErrorCallback(std::function<void()> function){
         __i2c_error_callback[hi2c] = function;
     }
+#endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
 #endif

@@ -1,9 +1,11 @@
 #include "HAL_Extension_adc.hpp"
 #include "HAL_Extension_util.hpp"
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 namespace {
     std::map<ADC_HandleTypeDef *, std::function<void()>> __adc_callback;
 }
+#endif // CONFIG_DISABLE_EX_CALLBACK
 
 ADC_DMA::ADC_DMA(){}
 
@@ -31,6 +33,7 @@ uint32_t ADC_DMA::get(uint8_t index) {
     return adcBuf[index];
 }
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 void ADC_DMA::setCallback(std::function<void()> function){
     __adc_callback[hadc] = function;
 }
@@ -44,3 +47,4 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
         __adc_callback[hadc]();
     }
 }
+#endif // CONFIG_DISABLE_EX_CALLBACK

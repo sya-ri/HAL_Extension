@@ -6,9 +6,11 @@
 #include <functional>
 #include <queue>
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 extern std::map<UART_HandleTypeDef *, std::function<void()>> __uart_tx_callback;
 extern std::map<UART_HandleTypeDef *, std::function<void()>> __uart_rx_callback;
 extern std::map<UART_HandleTypeDef *, std::function<void()>> __uart_error_callback;
+#endif // CONFIG_DISABLE_EX_CALLBACK
 
 template<class T>
 class UART {
@@ -49,6 +51,7 @@ public:
         return HAL_UART_Receive_IT(huart, (uint8_t *) &data, sizeof(T));
     }
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setTxCallback(std::function<void()> function){
         __uart_tx_callback[huart] = function;
     }
@@ -60,6 +63,7 @@ public:
     void setErrorCallback(std::function<void()> function){
         __uart_error_callback[huart] = function;
     }
+#endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
 template<class T>
@@ -94,6 +98,7 @@ public:
         return HAL_UART_DMAStop(huart);
     }
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setTxCallback(std::function<void()> function){
         __uart_tx_callback[huart] = function;
     }
@@ -105,6 +110,7 @@ public:
     void setErrorCallback(std::function<void()> function){
         __uart_error_callback[huart] = function;
     }
+#endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
 class UART_Logger {
@@ -120,6 +126,7 @@ public:
     void println(const char* text);
 };
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 class UART_Logger_IT {
 private:
     UART_HandleTypeDef *huart;
@@ -134,5 +141,6 @@ public:
     void println(std::string text);
     void println(const char* text);
 };
+#endif // CONFIG_DISABLE_EX_CALLBACK
 
 #endif

@@ -18,7 +18,10 @@ public:
     void stop();
     uint8_t get8(uint8_t index);
     uint32_t get(uint8_t index);
+
+#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setCallback(std::function<void()> function);
+#endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
 #endif

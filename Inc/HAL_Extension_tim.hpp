@@ -50,6 +50,7 @@ public:
     void resetCount();
 };
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 class TimerInterrupt {
 private:
     TIM_HandleTypeDef *htim;
@@ -61,5 +62,6 @@ public:
     void stop();
     void setCallback(std::function<void()> function);
 };
+#endif // CONFIG_DISABLE_EX_CALLBACK
 
 #endif

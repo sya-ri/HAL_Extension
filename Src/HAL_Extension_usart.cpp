@@ -1,10 +1,11 @@
 #include "HAL_Extension_usart.hpp"
 #include "HAL_Extension_util.hpp"
 
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 std::map<UART_HandleTypeDef *, std::function<void()>> __uart_tx_callback;
 std::map<UART_HandleTypeDef *, std::function<void()>> __uart_rx_callback;
 std::map<UART_HandleTypeDef *, std::function<void()>> __uart_error_callback;
-
+#endif // CONFIG_DISABLE_EX_CALLBACK
 
 UART_Logger::UART_Logger(){}
 
@@ -29,7 +30,7 @@ void UART_Logger::println(const char* text){
     println(text);
 }
 
-
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 UART_Logger_IT::UART_Logger_IT(){}
 
 UART_Logger_IT::UART_Logger_IT(UART_HandleTypeDef &huart): huart(&huart){
@@ -93,3 +94,4 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
         __uart_error_callback[huart]();
     }
 }
+#endif // CONFIG_DISABLE_EX_CALLBACK
