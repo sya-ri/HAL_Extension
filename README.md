@@ -1147,6 +1147,7 @@ ADCn:
   → ADC_Settings
    → Continuous Conversion Mode を Enabled に設定
    → DMA Continuous Requests を Enabled に設定
+   → (ある場合) Overrun behaviour を Overrun data overwritten に設定
   → ADC_Regular_ConversionMode
    → Number Of Conversion を DMAする数に設定
     → Rank毎の設定
@@ -1163,8 +1164,12 @@ ADCn:
 [CONFIG_ADC_USE_HALF_CALLBACK](#config_adc_use_half_callback)
 
 ### コンストラクタ
-> ##### ADC_DMA(ADC_HandleTypeDef &hadc, uint8_t numberOfConversions)
-> ピンとDMAを行う数を設定します  
+> ##### ADC_DMA(ADC_HandleTypeDef &hadc, uint8_t adcBufLength)
+> ピンとバッファの大きさを設定します  
+>　※ `Overrun behaviour` を `Overrun data overwritten` にした場合  
+>    `Number Of Conversion` と同じ値にする
+> ※ 上記の設定がなかった場合は Sampling Time を考慮して十分大きなバッファを確保する
+>   オーバーランが発生すると処理が止まるので注意する
 > ```c++
 > 例:
 > ADC_DMA adc(hadc1, 2);
@@ -1187,8 +1192,6 @@ ADCn:
 
 > ##### uint32_t get(uint8_t index)
 > ADCバッファの値を返します  
-> index が numberOfConversions を超えている場合、  
-> バッファの範囲外なので std::out_of_range が発生します  
 > ```c++
 > 例:
 > adc.get(0);

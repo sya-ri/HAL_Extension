@@ -2,46 +2,37 @@
 #include "HAL_Extension_util.hpp"
 
 namespace {
-   std::map<ADC_HandleTypeDef *, std::function<void()>> __adc_callback;
+    std::map<ADC_HandleTypeDef *, std::function<void()>> __adc_callback;
 }
 
 ADC_DMA::ADC_DMA(){}
 
-ADC_DMA::ADC_DMA(ADC_HandleTypeDef &hadc, uint8_t numberOfConversions): hadc(&hadc), numberOfConversions(numberOfConversions){
-	adcBuf = new uint32_t[numberOfConversions];
+ADC_DMA::ADC_DMA(ADC_HandleTypeDef &hadc, uint32_t adcBufLength): hadc(&hadc), adcBufLength(adcBufLength){
+    adcBuf = new uint32_t[adcBufLength];
 }
 
 ADC_DMA::~ADC_DMA(){
-	delete[] adcBuf;
+    delete[] adcBuf;
 }
 
 void ADC_DMA::start(){
-	if(hadc->Init.ContinuousConvMode != ENABLE || hadc->Init.DMAContinuousRequests != ENABLE){
-		HAL_ADC_DeInit(hadc);
-		hadc->Init.ContinuousConvMode = ENABLE;
-		hadc->Init.DMAContinuousRequests = ENABLE;
-		HAL_ADC_Init(hadc);
-	}
-	HAL_ADC_Start_DMA(hadc, adcBuf, numberOfConversions);
+    HAL_ADC_Start_DMA(hadc, adcBuf, adcBufLength);
 }
 
 void ADC_DMA::stop(){
-	HAL_ADC_Stop_DMA(hadc);
+    HAL_ADC_Stop_DMA(hadc);
 }
 
 uint8_t ADC_DMA::get8(uint8_t index) {
-	return (uint8_t)(get(index) >> 4);
+    return (uint8_t)(get(index) >> 4);
 }
 
-uint16_t ADC_DMA::get(uint8_t index) {
-	if (index < numberOfConversions) {
-		return (uint16_t) adcBuf[index];
-	}
-	return UINT16_MAX;
+uint32_t ADC_DMA::get(uint8_t index) {
+    return adcBuf[index];
 }
 
 void ADC_DMA::setCallback(std::function<void()> function){
-	__adc_callback[hadc] = function;
+    __adc_callback[hadc] = function;
 }
 
 #ifdef CONFIG_ADC_USE_HALF_CALLBACK
