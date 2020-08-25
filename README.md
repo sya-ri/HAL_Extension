@@ -97,11 +97,18 @@ PinOut: GPIO_Input / GPIO_Output
 > pa5.read();
 > ```
 
-> ##### GPIO_PinState readBool()
+> ##### GPIO_PinState isSet()
 > read() の結果が GPIO_PIN_SET であれば true を返します 
 > ```c++
 > 例:
-> pa5.readBool();
+> pa5.isSet();
+> ```
+
+> ##### GPIO_PinState isReset()
+> read() の結果が GPIO_PIN_RESET であれば true を返します 
+> ```c++
+> 例:
+> pa5.isReset();
 > ```
 
 > ##### void write(GPIO_PinState PinState)

@@ -13,7 +13,8 @@ public:
     GPIO();
     GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
     GPIO_PinState read();
-    bool readBool();
+    bool isSet();
+    bool isReset();
     void write(GPIO_PinState PinState);
     void set();
     void reset();

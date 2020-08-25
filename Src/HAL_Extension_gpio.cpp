@@ -45,8 +45,12 @@ GPIO_PinState GPIO::read(){
 	return gpioRead(GPIOx, GPIO_Pin);
 }
 
-bool GPIO::readBool(){
+bool GPIO::isSet(){
 	return read() == GPIO_PIN_SET;
+}
+
+bool GPIO::isReset(){
+    return read() == GPIO_PIN_RESET;
 }
 
 void GPIO::write(GPIO_PinState PinState){
