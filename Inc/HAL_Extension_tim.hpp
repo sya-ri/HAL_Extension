@@ -1,3 +1,5 @@
+#ifdef HAL_TIM_MODULE_ENABLED
+
 #ifndef HAL_EXTENSION_TIM_HPP
 #define HAL_EXTENSION_TIM_HPP
 
@@ -65,3 +67,5 @@ public:
 #endif // CONFIG_DISABLE_EX_CALLBACK
 
 #endif
+
+#endif // HAL_TIM_MODULE_ENABLED

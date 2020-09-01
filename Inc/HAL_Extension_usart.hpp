@@ -1,3 +1,5 @@
+#if defined(HAL_UART_MODULE_ENABLED) || defined(HAL_USART_MODULE_ENABLED)
+
 #ifndef HAL_EXTENSION_UART_HPP
 #define HAL_EXTENSION_UART_HPP
 
@@ -144,3 +146,5 @@ public:
 #endif // CONFIG_DISABLE_EX_CALLBACK
 
 #endif
+
+#endif // defined(HAL_UART_MODULE_ENABLED) || defined(HAL_USART_MODULE_ENABLED)

@@ -1,3 +1,5 @@
+#ifdef HAL_GPIO_MODULE_ENABLED
+
 #ifndef HAL_EXTENSION_GPIO_HPP
 #define HAL_EXTENSION_GPIO_HPP
 
@@ -89,4 +91,6 @@ public:
 	void stop();
 };
 
-#endif
+#endif // HAL_EXTENSION_GPIO_HPP
+
+#endif // HAL_GPIO_MODULE_ENABLED

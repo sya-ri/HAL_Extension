@@ -1,3 +1,5 @@
+#ifdef HAL_ADC_MODULE_ENABLED
+
 #ifndef HAL_EXTENSION_ADC_HPP
 #define HAL_EXTENSION_ADC_HPP
 
@@ -24,4 +26,6 @@ public:
 #endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
-#endif
+#endif // HAL_EXTENSION_ADC_HPP
+
+#endif // HAL_ADC_MODULE_ENABLED

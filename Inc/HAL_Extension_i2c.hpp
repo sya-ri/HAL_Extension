@@ -1,3 +1,5 @@
+#ifdef HAL_I2C_MODULE_ENABLED
+
 #ifndef HAL_EXTENSION_I2C_HPP
 #define HAL_EXTENSION_I2C_HPP
 
@@ -263,3 +265,5 @@ public:
 };
 
 #endif
+
+#endif // HAL_I2C_MODULE_ENABLED
