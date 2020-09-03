@@ -1,8 +1,9 @@
-#ifdef HAL_TIM_MODULE_ENABLED
-
 #ifndef HAL_EXTENSION_TIM_HPP
 #define HAL_EXTENSION_TIM_HPP
 
+#ifndef CONFIG_DISABLE_MODULE_TIM
+
+#include "tim.h"
 #include "HAL_Extension_util.hpp"
 #include <map>
 #include <functional>
@@ -66,6 +67,6 @@ public:
 };
 #endif // CONFIG_DISABLE_EX_CALLBACK
 
-#endif
+#endif // CONFIG_DISABLE_MODULE_TIM
 
-#endif // HAL_TIM_MODULE_ENABLED
+#endif // HAL_EXTENSION_TIM_HPP

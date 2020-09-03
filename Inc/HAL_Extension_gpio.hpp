@@ -1,7 +1,7 @@
-#ifdef HAL_GPIO_MODULE_ENABLED
-
 #ifndef HAL_EXTENSION_GPIO_HPP
 #define HAL_EXTENSION_GPIO_HPP
+
+#ifndef CONFIG_DISABLE_MODULE_GPIO
 
 #include "gpio.h"
 #include <vector>
@@ -91,6 +91,6 @@ public:
 	void stop();
 };
 
-#endif // HAL_EXTENSION_GPIO_HPP
+#endif // CONFIG_DISABLE_MODULE_GPIO
 
-#endif // HAL_GPIO_MODULE_ENABLED
+#endif // HAL_EXTENSION_GPIO_HPP

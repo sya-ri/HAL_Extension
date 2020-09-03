@@ -1,7 +1,7 @@
-#if defined(HAL_UART_MODULE_ENABLED) || defined(HAL_USART_MODULE_ENABLED)
-
 #ifndef HAL_EXTENSION_UART_HPP
 #define HAL_EXTENSION_UART_HPP
+
+#ifndef CONFIG_DISABLE_MODULE_USART
 
 #include "usart.h"
 #include <map>
@@ -145,6 +145,6 @@ public:
 };
 #endif // CONFIG_DISABLE_EX_CALLBACK
 
-#endif
+#endif // CONFIG_DISABLE_MODULE_USART
 
-#endif // defined(HAL_UART_MODULE_ENABLED) || defined(HAL_USART_MODULE_ENABLED)
+#endif // HAL_EXTENSION_UART_HPP

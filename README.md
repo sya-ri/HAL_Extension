@@ -1,4 +1,4 @@
-# HAL_Extension - 4.0.1
+# HAL_Extension - 4.0.2
 
 ### 目次
 #### - [HAL_Extension\_util.hpp](#hal_extension_util)
@@ -73,6 +73,15 @@
 
 > ##### CONFIG_DISABLE_EX_CALLBACK
 > コールバック関数を自動で定義されたくない場合に定義してください
+
+> #### CONFIG_DISABLE_MODULE_GPIO
+> #### CONFIG_DISABLE_MODULE_USART
+> #### CONFIG_DISABLE_MODULE_I2C
+> #### CONFIG_DISABLE_MODULE_TIM
+> #### CONFIG_DISABLE_MODULE_ADC
+> モジュールを無効化したいときに定義してください
+> エラーが大量に出る場合に必要になることがあります
+
 
 ## HAL_Extension_gpio
 ## class GPIO

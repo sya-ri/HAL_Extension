@@ -1,3 +1,5 @@
+#ifndef CONFIG_DISABLE_MODULE_ADC
+
 #include "HAL_Extension_adc.hpp"
 #include "HAL_Extension_util.hpp"
 
@@ -48,3 +50,5 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
     }
 }
 #endif // CONFIG_DISABLE_EX_CALLBACK
+
+#endif // CONFIG_DISABLE_MODULE_ADC

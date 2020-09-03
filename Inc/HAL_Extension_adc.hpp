@@ -1,7 +1,7 @@
-#ifdef HAL_ADC_MODULE_ENABLED
-
 #ifndef HAL_EXTENSION_ADC_HPP
 #define HAL_EXTENSION_ADC_HPP
+
+#ifndef CONFIG_DISABLE_MODULE_ADC
 
 #include "adc.h"
 #include <map>
@@ -26,6 +26,6 @@ public:
 #endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
-#endif // HAL_EXTENSION_ADC_HPP
+#endif // CONFIG_DISABLE_MODULE_ADC
 
-#endif // HAL_ADC_MODULE_ENABLED
+#endif // HAL_EXTENSION_ADC_HPP

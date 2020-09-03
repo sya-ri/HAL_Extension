@@ -1,10 +1,10 @@
-#ifdef HAL_I2C_MODULE_ENABLED
-
 #ifndef HAL_EXTENSION_I2C_HPP
 #define HAL_EXTENSION_I2C_HPP
 
-#include "HAL_Extension_gpio.hpp"
+#ifndef CONFIG_DISABLE_MODULE_I2C
+
 #include "i2c.h"
+#include "HAL_Extension_gpio.hpp"
 #include <map>
 #include <functional>
 
@@ -264,6 +264,6 @@ public:
 #endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
-#endif
+#endif // CONFIG_DISABLE_MODULE_I2C
 
-#endif // HAL_I2C_MODULE_ENABLED
+#endif // HAL_EXTENSION_I2C_HPP

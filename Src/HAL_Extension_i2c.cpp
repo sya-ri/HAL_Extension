@@ -1,3 +1,5 @@
+#ifndef CONFIG_DISABLE_MODULE_I2C
+
 #include "HAL_Extension_i2c.hpp"
 #include "HAL_Extension_util.hpp"
 
@@ -38,3 +40,5 @@ void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c){
     }
 }
 #endif // CONFIG_DISABLE_EX_CALLBACK
+
+#endif // CONFIG_DISABLE_MODULE_I2C

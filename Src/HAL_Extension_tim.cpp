@@ -1,3 +1,5 @@
+#ifndef CONFIG_DISABLE_MODULE_TIM
+
 #include "HAL_Extension_tim.hpp"
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK
@@ -161,3 +163,5 @@ void HAL_TIM_PeriodElapsedHalfCpltCallback(TIM_HandleTypeDef *htim){
     }
 }
 #endif // CONFIG_DISABLE_EX_CALLBACK
+
+#endif // CONFIG_DISABLE_MODULE_TIM
