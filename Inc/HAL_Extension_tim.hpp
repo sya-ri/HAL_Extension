@@ -53,7 +53,6 @@ public:
     void resetCount();
 };
 
-#ifndef CONFIG_DISABLE_EX_CALLBACK
 class TimerInterrupt {
 private:
     TIM_HandleTypeDef *htim;
@@ -63,9 +62,12 @@ public:
     bool start(uint32_t prescaler, uint32_t counterPeriod);
     bool start();
     void stop();
+    void setCount(uint32_t count);
+    void resetCount();
+#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setCallback(std::function<void()> function);
-};
 #endif // CONFIG_DISABLE_EX_CALLBACK
+};
 
 #endif // CONFIG_DISABLE_MODULE_TIM
 

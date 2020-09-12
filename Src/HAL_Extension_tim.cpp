@@ -120,7 +120,6 @@ void Encoder::resetCount(){
 	count = 0;
 }
 
-#ifndef CONFIG_DISABLE_EX_CALLBACK
 TimerInterrupt::TimerInterrupt(){}
 
 TimerInterrupt::TimerInterrupt(TIM_HandleTypeDef &htim): htim(&htim){
@@ -140,7 +139,7 @@ bool TimerInterrupt::start(uint32_t prescaler, uint32_t counterPeriod){
 }
 
 bool TimerInterrupt::start(){
-	__HAL_TIM_SET_COUNTER(htim , 0);
+	resetCount();
 	HAL_TIM_Base_Start_IT(htim);
 	return true;
 }
@@ -149,6 +148,15 @@ void TimerInterrupt::stop(){
 	HAL_TIM_Base_Stop_IT(htim);
 }
 
+void TimerInterrupt::setCount(uint32_t count){
+	__HAL_TIM_SET_COUNTER(htim , count);
+}
+
+void TimerInterrupt::resetCount(){
+	setCount(0);
+}
+
+#ifndef CONFIG_DISABLE_EX_CALLBACK
 void TimerInterrupt::setCallback(std::function<void()> function){
 	__tim__period_elapsed_callback[htim] = function;
 }

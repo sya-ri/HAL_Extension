@@ -1,4 +1,4 @@
-# HAL_Extension - 4.0.2
+# HAL_Extension - 4.0.3
 
 ### 目次
 #### - [HAL_Extension\_util.hpp](#hal_extension_util)
@@ -30,6 +30,7 @@
 [class PWM](#class-pwm)  
 [class Motor](#class-motor)  
 [class Encoder](#class-encoder)  
+[class TimerInterrupt](#class-timerinterrupt)  
 
 #### - [HAL\_Extension\_adc.hpp](#hal_extension_adc)
 [class ADC_DMA](#class-adc_dma)  
@@ -1152,6 +1153,12 @@ PinOut: TIMを有効にする
 
 > ##### void stop()
 > タイマーを止めます
+
+> ##### void setCount(uint32_t count)
+> タイマーのカウントを設定します
+
+> ##### void resetCount()
+> タイマーのカウントを０にします
 
 > ##### void setCallback(std::function<void()> function)
 > タイマ割り込みの処理を設定します
