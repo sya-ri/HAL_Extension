@@ -1138,6 +1138,8 @@ TIMn
 ### CubeMX
 ```
 PinOut: TIMを有効にする
+NVIC Settings
+→ TIMn global interrupt の Enable にチェック
 ```
 
 ### コンストラクタ
