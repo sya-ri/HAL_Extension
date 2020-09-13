@@ -38,8 +38,7 @@
 #### - [wrapper.cpp / wrapper.hpp](#wrapper)
 
 ## HAL_Extension
-自動でヘッダファイルをincludeしてくれます
-クラスや関数が干渉しないのであればこれをincludeしてください
+全てのヘッダファイルをインクルードします
 
 ## HAL_Extension_util
 ### define
