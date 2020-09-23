@@ -34,7 +34,7 @@ void GPIO::reset(){
 }
 
 void GPIO::toggle(){
-    gpioToggle(GPIOx, GPIO_Pin);
+    HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);
 }
 
 #endif // CONFIG_DISABLE_MODULE_GPIO

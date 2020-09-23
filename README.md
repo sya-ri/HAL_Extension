@@ -50,9 +50,6 @@
 > ##### delay(\_\_ms)
 > **HAL_Delay(\_\_ms)**
 
-> ##### gpioToggle(GPIOx, GPIO_Pin)
-> **HAL_GPIO_TogglePin(GPIOx, GPIO_Pin)**
-
 #### 入力マクロ
 > ##### map_contains(Map, Key)
 > **(Map.find(Key) != Map.end())**
@@ -138,7 +135,7 @@ PinOut: GPIO_Input / GPIO_Output
 > ```
 
 > ##### void toggle()
-> gpioToggle() を実行します  
+> HAL_GPIO_TogglePin() を実行します  
 > ```c++
 > 例:
 > pa5.toggle();
