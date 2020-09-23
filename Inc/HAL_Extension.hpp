@@ -1,7 +1,3 @@
-//
-// HAL_Extension 4.0.3
-//
-
 #ifndef HAL_EXTENSION_HPP
 #define HAL_EXTENSION_HPP
 
