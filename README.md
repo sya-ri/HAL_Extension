@@ -558,6 +558,18 @@ USARTn
 
 ## HAL_Extension_i2c
 
+### 関数
+
+> ##### void setI2CMasterTxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function);
+
+> ##### void setI2CMasterRxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function);
+
+> ##### void setI2CSlaveTxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function);
+
+> ##### void setI2CSlaveRxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function);
+
+> ##### void setI2CErrorCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function);
+
 ## class I2C_Master
 #### template\<class T\>
 
