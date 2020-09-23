@@ -44,9 +44,6 @@
 ## HAL_Extension_util
 ### define
 #### 関数の短縮
-> ##### getTick()
-> **HAL_GetTick()**
-
 > ##### delay(\_\_ms)
 > **HAL_Delay(\_\_ms)**
 

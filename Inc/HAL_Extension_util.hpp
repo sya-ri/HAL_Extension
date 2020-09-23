@@ -3,7 +3,6 @@
 
 #include "main.h"
 
-#define getTick() HAL_GetTick()
 #define delay(__ms) HAL_Delay(__ms)
 #define map_contains(Map, Key) (Map.find(Key) != Map.end())
 
