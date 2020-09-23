@@ -1,6 +1,6 @@
 #ifndef CONFIG_DISABLE_MODULE_ADC
 
-#include "HAL_Extension_adc.hpp"
+#include "adc/HAL_Extension_adc_dma.hpp"
 #include "HAL_Extension_util.hpp"
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK

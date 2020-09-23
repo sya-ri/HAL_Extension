@@ -6,6 +6,6 @@
 #include "HAL_Extension_usart.hpp"
 #include "HAL_Extension_i2c.hpp"
 #include "HAL_Extension_tim.hpp"
-#include "HAL_Extension_adc.hpp"
+#include "adc/HAL_Extension_adc.hpp"
 
 #endif //HAL_EXTENSION_HPP
