@@ -2,7 +2,7 @@
 #define HAL_EXTENSION_HPP
 
 #include "HAL_Extension_util.hpp"
-#include "HAL_Extension_gpio.hpp"
+#include "gpio/HAL_Extension_gpio.hpp"
 #include "HAL_Extension_usart.hpp"
 #include "HAL_Extension_i2c.hpp"
 #include "HAL_Extension_tim.hpp"

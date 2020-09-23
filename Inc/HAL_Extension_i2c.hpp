@@ -4,7 +4,7 @@
 #ifndef CONFIG_DISABLE_MODULE_I2C
 
 #include "i2c.h"
-#include "HAL_Extension_gpio.hpp"
+#include "gpio/HAL_Extension_gpio.hpp"
 #include <map>
 #include <functional>
 
