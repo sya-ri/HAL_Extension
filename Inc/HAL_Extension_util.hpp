@@ -1,6 +1,11 @@
 #ifndef HAL_EXTENSION_UTIL_HPP
 #define HAL_EXTENSION_UTIL_HPP
 
-#define map_contains(Map, Key) (Map.find(Key) != Map.end())
+#include <map>
+
+template <class K, class V>
+constexpr bool map_contains(const std::map<K, V> &map, const K &key) {
+    return map.find(key) != map.end();
+}
 
 #endif

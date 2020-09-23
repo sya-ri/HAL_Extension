@@ -41,9 +41,10 @@
 クラスや関数が干渉しないのであればこれをincludeしてください
 
 ## HAL_Extension_util
-#### 入力マクロ
-> ##### map_contains(Map, Key)
-> **(Map.find(Key) != Map.end())**
+### 関数
+> ###### template <class K, class V>
+> ##### constexpr bool map_contains(const std::map<K, V> &map, const K &key)
+> map に key が存在するかを返します
 
 #### コンフィグ
 > ##### CONFIG_UART_USE_HALF_CALLBACK
