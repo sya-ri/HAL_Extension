@@ -1,3 +1,5 @@
+#ifndef CONFIG_DISABLE_MODULE_GPIO
+
 #include "gpio/HAL_Extension_gpio_fixed_seven_segment.hpp"
 
 FixedSevenSegment::FixedSevenSegment(bool flip): flip(flip) {
@@ -45,3 +47,5 @@ bool FixedSevenSegment::clear(){
 bool FixedSevenSegment::isAvailable(){
     return list.size() == 4;
 }
+
+#endif // CONFIG_DISABLE_MODULE_GPIO

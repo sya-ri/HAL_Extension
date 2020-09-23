@@ -1,3 +1,5 @@
+#ifndef CONFIG_DISABLE_MODULE_GPIO
+
 #include "gpio/HAL_Extension_gpio_dip_switch.hpp"
 
 DIPSwitch::DIPSwitch(bool flip): flip(flip) {
@@ -26,3 +28,5 @@ uint8_t DIPSwitch::getAddress(){
     }
     return flip? ~builder : builder;
 }
+
+#endif // CONFIG_DISABLE_MODULE_GPIO

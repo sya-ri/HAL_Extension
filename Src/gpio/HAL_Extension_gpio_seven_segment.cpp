@@ -1,3 +1,5 @@
+#ifndef CONFIG_DISABLE_MODULE_GPIO
+
 #include "gpio/HAL_Extension_gpio_seven_segment.hpp"
 #include <array>
 
@@ -76,3 +78,5 @@ bool SevenSegment::clear(){
 bool SevenSegment::isAvailable(){
     return list.size() == 7;
 }
+
+#endif // CONFIG_DISABLE_MODULE_GPIO

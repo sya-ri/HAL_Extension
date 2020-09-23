@@ -1,3 +1,5 @@
+#ifndef CONFIG_DISABLE_MODULE_GPIO
+
 #include "gpio/HAL_Extension_gpio_dynamic_seven_segment.hpp"
 
 namespace {
@@ -92,3 +94,5 @@ void DynamicSevenSegment::stop(){
     sevenSegment.clear();
     digitList[digitCursor].reset();
 }
+
+#endif // CONFIG_DISABLE_MODULE_GPIO
