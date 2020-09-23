@@ -2,7 +2,6 @@
 
 ### 目次
 #### - [HAL_Extension\_util.hpp](#hal_extension_util)
-[#define](#define)
 
 #### - [HAL\_Extension\_gpio.hpp](#hal_extension_gpio)
 [class GPIO](#class-gpio)  
@@ -42,11 +41,6 @@
 クラスや関数が干渉しないのであればこれをincludeしてください
 
 ## HAL_Extension_util
-### define
-#### 関数の短縮
-> ##### delay(\_\_ms)
-> **HAL_Delay(\_\_ms)**
-
 #### 入力マクロ
 > ##### map_contains(Map, Key)
 > **(Map.find(Key) != Map.end())**
