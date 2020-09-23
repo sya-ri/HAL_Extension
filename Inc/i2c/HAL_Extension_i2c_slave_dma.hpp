@@ -30,11 +30,11 @@ public:
         init();
     }
 
-#ifdef __gpio_H
+#ifndef CONFIG_DISABLE_MODULE_GPIO
     void init(DIPSwitch builder){
         init(builder.getAddress());
     }
-#endif // __gpio_H
+#endif // CONFIG_DISABLE_MODULE_GPIO
 
     HAL_StatusTypeDef startTransmit(){
         return HAL_I2C_Slave_Transmit_DMA(hi2c, (uint8_t *) &data, sizeof(T));
