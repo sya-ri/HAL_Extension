@@ -281,6 +281,14 @@ PinOut: GPIO_Output
 
 ## HAL_Extension_usart
 
+### 関数
+
+> ##### void setUARTTxCallback(UART_HandleTypeDef *huart, std::function<void()> function);
+
+> ##### void setUARTRxCallback(UART_HandleTypeDef *huart, std::function<void()> function);
+
+> ##### void setUARTErrorCallback(UART_HandleTypeDef *huart, std::function<void()> function);
+
 ## class UART
 #### template\<class T\>
 
@@ -960,6 +968,10 @@ NVIC Settings
 > ```
 
 ## HAL_Extension_tim
+
+### 関数
+
+> ##### void setTIMPeriodElapsedCallback(TIM_HandleTypeDef *htim, std::function<void()> function);
 
 ## class PWM
 ### CubeMX
