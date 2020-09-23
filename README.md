@@ -50,9 +50,6 @@
 > ##### delay(\_\_ms)
 > **HAL_Delay(\_\_ms)**
 
-> ##### gpioRead(GPIOx, GPIO_Pin)
-> **HAL_GPIO_ReadPin(GPIOx, GPIO_Pin)**
-
 > ##### gpioWrite(GPIOx, GPIO_Pin, PinState)
 > **HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState)**
 
@@ -101,7 +98,7 @@ PinOut: GPIO_Input / GPIO_Output
 
 ### 関数
 > ##### GPIO_PinState read()
-> gpioRead() の結果を返します  
+> HAL_GPIO_ReadPin() の結果を返します  
 > ```c++
 > 例:
 > pa5.read();

@@ -10,7 +10,7 @@ GPIO::GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin): GPIOx(GPIOx), GPIO_Pin(GPIO_
 }
 
 GPIO_PinState GPIO::read(){
-    return gpioRead(GPIOx, GPIO_Pin);
+    return HAL_GPIO_ReadPin(GPIOx, GPIO_Pin);
 }
 
 bool GPIO::isSet(){
