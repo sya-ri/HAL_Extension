@@ -5,7 +5,7 @@
 #include "gpio/HAL_Extension_gpio.hpp"
 #include "usart/HAL_Extension_usart.hpp"
 #include "i2c/HAL_Extension_i2c.hpp"
-#include "HAL_Extension_tim.hpp"
+#include "tim/HAL_Extension_tim.hpp"
 #include "adc/HAL_Extension_adc.hpp"
 
 #endif //HAL_EXTENSION_HPP
