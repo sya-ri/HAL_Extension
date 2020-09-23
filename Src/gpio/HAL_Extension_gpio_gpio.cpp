@@ -22,7 +22,7 @@ bool GPIO::isReset(){
 }
 
 void GPIO::write(GPIO_PinState PinState){
-    gpioWrite(GPIOx, GPIO_Pin, PinState);
+    HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState);
 }
 
 void GPIO::set(){

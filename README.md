@@ -50,9 +50,6 @@
 > ##### delay(\_\_ms)
 > **HAL_Delay(\_\_ms)**
 
-> ##### gpioWrite(GPIOx, GPIO_Pin, PinState)
-> **HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState)**
-
 > ##### gpioToggle(GPIOx, GPIO_Pin)
 > **HAL_GPIO_TogglePin(GPIOx, GPIO_Pin)**
 
@@ -119,7 +116,7 @@ PinOut: GPIO_Input / GPIO_Output
 > ```
 
 > ##### void write(GPIO_PinState PinState)
-> gpioWrite() を実行します  
+> HAL_GPIO_WritePin() を実行します  
 > ```c++
 > 例:
 > pa5.write(GPIO_PIN_SET);
