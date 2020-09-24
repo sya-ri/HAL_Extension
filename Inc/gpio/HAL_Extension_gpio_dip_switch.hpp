@@ -8,8 +8,8 @@
 
 class DIPSwitch {
 private:
+    const bool flip;
     std::vector<GPIO> list;
-    bool flip;
 public:
     DIPSwitch(bool flip = false);
     DIPSwitch& add(GPIO gpio) noexcept;
