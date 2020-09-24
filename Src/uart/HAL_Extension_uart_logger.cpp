@@ -1,6 +1,6 @@
-#ifndef CONFIG_DISABLE_MODULE_USART
+#ifndef CONFIG_DISABLE_MODULE_UART
 
-#include "usart/HAL_Extension_usart_uart_logger.hpp"
+#include "uart/HAL_Extension_uart_logger.hpp"
 
 UART_Logger::UART_Logger(){}
 
@@ -25,4 +25,4 @@ void UART_Logger::println(const char* text) const noexcept {
     println(text);
 }
 
-#endif // CONFIG_DISABLE_MODULE_USART
+#endif // CONFIG_DISABLE_MODULE_UART

@@ -1,7 +1,7 @@
-#ifndef HAL_EXTENSION_USART_UART_LOGGER_HPP
-#define HAL_EXTENSION_USART_UART_LOGGER_HPP
+#ifndef HAL_EXTENSION_UART_LOGGER_HPP
+#define HAL_EXTENSION_UART_LOGGER_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_USART
+#ifndef CONFIG_DISABLE_MODULE_UART
 
 #include "usart.h"
 #include <string>
@@ -19,6 +19,6 @@ public:
     void println(const char* text) const noexcept;
 };
 
-#endif // CONFIG_DISABLE_MODULE_USART
+#endif // CONFIG_DISABLE_MODULE_UART
 
-#endif // HAL_EXTENSION_USART_UART_LOGGER_HPP
+#endif // HAL_EXTENSION_UART_LOGGER_HPP

@@ -1,8 +1,8 @@
-#ifndef CONFIG_DISABLE_MODULE_USART
+#ifndef CONFIG_DISABLE_MODULE_UART
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK
 
-#include "usart/HAL_Extension_usart_callback.hpp"
+#include "uart/HAL_Extension_uart_callback.hpp"
 #include <map>
 #include "HAL_Extension_util.hpp"
 
@@ -51,4 +51,4 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
 }
 #endif // CONFIG_DISABLE_EX_CALLBACK
 
-#endif // CONFIG_DISABLE_MODULE_USART
+#endif // CONFIG_DISABLE_MODULE_UART

@@ -1,7 +1,7 @@
-#ifndef CONFIG_DISABLE_MODULE_USART
+#ifndef CONFIG_DISABLE_MODULE_UART
 
-#include "usart/HAL_Extension_usart_uart_logger_it.hpp"
-#include "usart/HAL_Extension_usart_callback.hpp"
+#include "uart/HAL_Extension_uart_logger_it.hpp"
+#include "uart/HAL_Extension_uart_callback.hpp"
 
 UART_Logger_IT::UART_Logger_IT(){}
 
@@ -50,4 +50,4 @@ void UART_Logger_IT::println(const char* text) noexcept {
     println(std::string(text));
 }
 
-#endif // CONFIG_DISABLE_MODULE_USART
+#endif // CONFIG_DISABLE_MODULE_UART

@@ -1,10 +1,10 @@
-#ifndef HAL_EXTENSION_USART_UART_DMA_HPP
-#define HAL_EXTENSION_USART_UART_DMA_HPP
+#ifndef HAL_EXTENSION_UART_DMA_HPP
+#define HAL_EXTENSION_UART_DMA_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_USART
+#ifndef CONFIG_DISABLE_MODULE_UART
 
 #include "usart.h"
-#include "HAL_Extension_usart_callback.hpp"
+#include "HAL_Extension_uart_callback.hpp"
 
 template<class T>
 class UART_DMA {
@@ -53,6 +53,6 @@ public:
 #endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
-#endif // CONFIG_DISABLE_MODULE_USART
+#endif // CONFIG_DISABLE_MODULE_UART
 
-#endif // HAL_EXTENSION_USART_UART_DMA_HPP
+#endif // HAL_EXTENSION_UART_DMA_HPP
