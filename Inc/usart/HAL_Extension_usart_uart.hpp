@@ -16,11 +16,11 @@ public:
 
     }
 
-    HAL_StatusTypeDef transmit(const T &data, uint32_t timeout){
+    HAL_StatusTypeDef transmit(const T &data, uint32_t timeout) const noexcept {
         return HAL_UART_Transmit(huart, (uint8_t *) &data, sizeof(T), timeout);
     }
 
-    HAL_StatusTypeDef receive(T &data, uint32_t timeout){
+    HAL_StatusTypeDef receive(T &data, uint32_t timeout) const noexcept {
         return HAL_UART_Receive(huart, (uint8_t *) &data, sizeof(T), timeout);
     }
 };
