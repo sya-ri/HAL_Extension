@@ -50,3 +50,5 @@
     - [set(int8_t, bool)](class/FixedSevenSegment.md#fixedsevensegmentsetint8_t-bool)
     - [clear()](class/FixedSevenSegment.md#fixedsevensegmentclear)
     - [isAvailable()](class/FixedSevenSegment.md#fixedsevensegmentisavailable)
+
+[<< 戻る](../../INDEX.md)
