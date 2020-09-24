@@ -8,7 +8,7 @@
 template<class T>
 class I2C_Master {
 private:
-    const I2C_HandleTypeDef* hi2c;
+    I2C_HandleTypeDef* hi2c;
 public:
     I2C_Master(){}
 
