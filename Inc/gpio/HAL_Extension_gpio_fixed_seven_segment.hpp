@@ -14,7 +14,7 @@ private:
     GPIO pointGpio;
 public:
     FixedSevenSegment(bool flip = false);
-    FixedSevenSegment& add(GPIO gpio) noexcept;
+    FixedSevenSegment& add(GPIO gpio) noexcept override;
     FixedSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept override;
     bool setLight(uint8_t lightData) const noexcept override;
     bool set(int8_t hex, bool point = false) const noexcept override;
