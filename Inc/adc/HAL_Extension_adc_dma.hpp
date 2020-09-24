@@ -4,7 +4,6 @@
 #ifndef CONFIG_DISABLE_MODULE_ADC
 
 #include "adc.h"
-#include <map>
 #include <functional>
 
 class ADC_DMA {
