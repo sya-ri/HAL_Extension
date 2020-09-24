@@ -28,7 +28,7 @@ public:
     void updateFixedPoint(float num, int8_t point) const noexcept;
     void updateFloatPoint(float num) const noexcept;
     void next() const noexcept;
-    void stop() const noexcept;
+    void clear() const noexcept;
 };
 
 #endif // CONFIG_DISABLE_MODULE_GPIO

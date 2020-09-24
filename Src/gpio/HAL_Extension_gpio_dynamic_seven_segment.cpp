@@ -99,7 +99,7 @@ void DynamicSevenSegment::next() const noexcept {
     digitList[digitCursor].set();
 }
 
-void DynamicSevenSegment::stop() const noexcept {
+void DynamicSevenSegment::clear() const noexcept {
     isStop = true;
     sevenSegment.clear();
     digitList[digitCursor].reset();
