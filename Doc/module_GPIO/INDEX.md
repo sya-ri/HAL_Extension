@@ -1,0 +1,52 @@
+# module GPIO
+
+## コンフィグ
+
+#### CONFIG_DISABLE_MODULE_GPIO
+> GPIO モジュールの無効化  
+> 定義することでコンパイルされなくなります
+
+## クラス
+- [GPIO](class/GPIO.md)
+  - [CubeMX](class/GPIO.md#cubemx)
+  - [コンストラクタ](class/GPIO.md#コンストラクタ)
+    - [GPIO(GPIO_TypeDef*, uint16_t)](class/GPIO.md#gpiogpio_typedef-uint16_t)
+  - [関数](class/GPIO.md#関数)
+    - [read()](class/GPIO.md#gpioread)
+    - [isSet()](class/GPIO.md#gpioisset)
+    - [isReset()](class/GPIO.md#gpioisreset)
+    - [write(GPIO_PinState)](class/GPIO.md#gpiowritegpio_pinstate)
+    - [set()](class/GPIO.md#gpioset)
+    - [reset()](class/GPIO.md#gpioreset)
+    - [toggle()](class/GPIO.md#gpiotoggle)
+- [DIPSwitch](class/DIPSwitch.md)
+  - [CubeMX](class/DIPSwitch.md#cubemx)
+  - [コンストラクタ](class/DIPSwitch.md#コンストラクタ)
+    - [DIPSwitch(bool)](class/DIPSwitch.md#dipswitchbool)
+  - [関数](class/DIPSwitch.md#関数)
+    - [add(GPIO)](class/DIPSwitch.md#dipswitchaddgpio)
+    - [add(GPIO_TypeDef*, uint16_t)](class/DIPSwitch.md#dipswitchaddgpio_typedef-uint16_t)
+    - [getSize()](class/DIPSwitch.md#dipswitchgetsize)
+    - [getAddress()](class/DIPSwitch.md#dipswitchgetaddress)
+- [SevenSegment](class/SevenSegment.md)
+  - [CubeMX](class/SevenSegment.md#cubemx)
+  - [コンストラクタ](class/SevenSegment.md#コンストラクタ)
+    - [SevenSegment(bool)](class/SevenSegment.md#sevensegmentbool)
+  - [関数](class/SevenSegment.md#関数)
+    - [add(GPIO)](class/SevenSegment.md#sevensegmentaddgpio)
+    - [add(GPIO_TypeDef*, uint16_t)](class/SevenSegment.md#sevensegmentaddgpio_typedef-uint16_t)
+    - [setLight(uint8_t)](class/SevenSegment.md#sevensegmentsetlightuint8_t)
+    - [set(uint8_t, bool)](class/SevenSegment.md#sevensegmentsetuint8_t-bool)
+    - [clear()](class/SevenSegment.md#sevensegmentclear)
+    - [isAvailable()](class/SevenSegment.md#sevensegmentisavailable)
+- [FixedSevenSegment](class/FixedSevenSegment.md)
+  - [CubeMX](class/FixedSevenSegment.md#CubeMX)
+  - [コンストラクタ](class/FixedSevenSegment.md#コンストラクタ)
+    - [FixedSevenSegment(bool)](class/FixedSevenSegment.md#fixedsevensegmentbool)
+  - [関数](class/FixedSevenSegment.md#関数)
+    - [add(GPIO)](class/FixedSevenSegment.md#fixedsevensegmentaddgpio)
+    - [add(GPIO_TypeDef*, uint16_t)](class/FixedSevenSegment.md#fixedsevensegmentaddgpio_typedef-uint16_t)
+    - [setLight(uint8_t)](class/FixedSevenSegment.md#fixedsevensegmentsetlightuint8_t)
+    - [set(int8_t, bool)](class/FixedSevenSegment.md#fixedsevensegmentsetint8_t-bool)
+    - [clear()](class/FixedSevenSegment.md#fixedsevensegmentclear)
+    - [isAvailable()](class/FixedSevenSegment.md#fixedsevensegmentisavailable)
