@@ -13,10 +13,10 @@ private:
 public:
     UART_Logger();
     UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F);
-    void print(std::string text);
-    void print(const char* text);
-    void println(std::string text);
-    void println(const char* text);
+    void print(std::string text) const noexcept;
+    void print(const char* text) const noexcept;
+    void println(std::string text) const noexcept;
+    void println(const char* text) const noexcept;
 };
 
 #endif // CONFIG_DISABLE_MODULE_USART
