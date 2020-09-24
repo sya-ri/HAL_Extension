@@ -23,11 +23,11 @@ public:
     }
 
     HAL_StatusTypeDef transmit(uint8_t target, const T &data) const noexcept {
-        return HAL_I2C_Master_Transmit_IT(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
+        return i2cMasterTransmit_IT(hi2c, target, data);
     }
 
     HAL_StatusTypeDef receive(uint8_t target, T &data) const noexcept {
-        return HAL_I2C_Master_Receive_IT(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
+        return i2cMasterReceive_IT(hi2c, target, data);
     }
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK

@@ -3,6 +3,7 @@
 
 #ifndef CONFIG_DISABLE_MODULE_I2C
 
+#include "HAL_Extension_i2c_function.hpp"
 #include "HAL_Extension_i2c_master.hpp"
 #include "HAL_Extension_i2c_master_it.hpp"
 #include "HAL_Extension_i2c_master_dma.hpp"

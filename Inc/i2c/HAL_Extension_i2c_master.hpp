@@ -4,6 +4,7 @@
 #ifndef CONFIG_DISABLE_MODULE_I2C
 
 #include "i2c.h"
+#include "HAL_Extension_i2c_function.hpp"
 
 template<class T>
 class I2C_Master {
@@ -22,11 +23,11 @@ public:
     }
 
     HAL_StatusTypeDef transmit(uint8_t target, const T &data, uint32_t timeout) const noexcept {
-        return HAL_I2C_Master_Transmit(hi2c, target << 1, (uint8_t *) &data, sizeof(T), timeout);
+        return i2cMasterTransmit(hi2c, target, data, timeout);
     }
 
     HAL_StatusTypeDef receive(uint8_t target, T &data, uint32_t timeout) const noexcept {
-        return HAL_I2C_Master_Receive(hi2c, target << 1, (uint8_t *) &data, sizeof(T), timeout);
+        return i2cMasterReceive(hi2c, target, data, timeout);
     }
 };
 
