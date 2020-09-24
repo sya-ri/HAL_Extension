@@ -15,22 +15,32 @@ namespace {
     }
 }
 
-DynamicSevenSegment::DynamicSevenSegment(){}
+DynamicSevenSegment::DynamicSevenSegment(): DynamicSevenSegment(SevenSegment(), false, false, false){}
 
-DynamicSevenSegment::DynamicSevenSegment(SevenSegment sevenSegment, bool hex, bool zeroFill, bool allowSign): sevenSegment(sevenSegment), zeroFill(zeroFill), allowSign(allowSign){
-    digitSystem = hex? 16 : 10;
+DynamicSevenSegment::DynamicSevenSegment(
+	const SevenSegment &sevenSegment,
+	bool hex,
+	bool zeroFill,
+	bool allowSign
+):
+	sevenSegment(sevenSegment),
+	digitSystem(hex? 16 : 10),
+	zeroFill(zeroFill),
+	allowSign(allowSign)
+{
+
 }
 
-DynamicSevenSegment& DynamicSevenSegment::add(GPIO gpio){
+DynamicSevenSegment& DynamicSevenSegment::add(GPIO gpio) noexcept {
     digitList.push_back(gpio);
     return *this;
 }
 
-DynamicSevenSegment& DynamicSevenSegment::add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
+DynamicSevenSegment& DynamicSevenSegment::add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept {
     return add(GPIO(GPIOx, GPIO_Pin));
 }
 
-void DynamicSevenSegment::update(int64_t num, uint8_t point){
+void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
     splitNum.clear();
     bool isMinus = num < 0;
     if(isMinus){
@@ -63,22 +73,22 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point){
     this->point = point;
 }
 
-void DynamicSevenSegment::update(int64_t num){
+void DynamicSevenSegment::update(int64_t num) const noexcept {
     update(num, UINT8_MAX);
 }
 
-void DynamicSevenSegment::updateFixedPoint(float num, uint8_t point){
+void DynamicSevenSegment::updateFixedPoint(float num, uint8_t point) const noexcept {
     for(uint8_t i = 0; i < point; i++){
         num *= 10;
     }
     update((int64_t) num, digitList.size() - point);
 }
 
-void DynamicSevenSegment::updateFloatPoint(float num){
+void DynamicSevenSegment::updateFloatPoint(float num) const noexcept {
     updateFixedPoint(num, getNumberOfDigit(num));
 }
 
-void DynamicSevenSegment::next(){
+void DynamicSevenSegment::next() const noexcept {
     if(isStop) return;
     digitList[digitCursor].reset();
     digitCursor ++;
@@ -89,7 +99,7 @@ void DynamicSevenSegment::next(){
     digitList[digitCursor].set();
 }
 
-void DynamicSevenSegment::stop(){
+void DynamicSevenSegment::stop() const noexcept {
     isStop = true;
     sevenSegment.clear();
     digitList[digitCursor].reset();

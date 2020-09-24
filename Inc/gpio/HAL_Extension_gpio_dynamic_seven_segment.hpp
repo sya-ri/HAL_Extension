@@ -8,26 +8,27 @@
 
 class DynamicSevenSegment {
 private:
-    SevenSegment sevenSegment;
+    const SevenSegment &sevenSegment;
+    const uint8_t digitSystem;
+    const bool zeroFill;
+    const bool allowSign;
     std::vector<GPIO> digitList;
-    uint8_t digitCursor = 0;
-    std::vector<int8_t> splitNum;
-    uint8_t digitSystem;
-    bool zeroFill;
-    bool allowSign;
-    bool isStop = true;
-    uint8_t point = 0;
-    void update(int64_t num, uint8_t point);
+    mutable uint8_t digitCursor = 0;
+    mutable std::vector<int8_t> splitNum;
+    mutable bool isStop = true;
+    mutable uint8_t point = 0;
+
+    void update(int64_t num, uint8_t point) const noexcept;
 public:
     DynamicSevenSegment();
-    DynamicSevenSegment(SevenSegment sevenSegment, bool hex = false, bool zeroFill = false, bool allowSign = false);
-    DynamicSevenSegment& add(GPIO gpio);
-    DynamicSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-    void update(int64_t num);
-    void updateFixedPoint(float num, uint8_t point);
-    void updateFloatPoint(float num);
-    void next();
-    void stop();
+    DynamicSevenSegment(const SevenSegment &sevenSegment, bool hex = false, bool zeroFill = false, bool allowSign = false);
+    DynamicSevenSegment& add(GPIO gpio) noexcept;
+    DynamicSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
+    void update(int64_t num) const noexcept;
+    void updateFixedPoint(float num, uint8_t point) const noexcept;
+    void updateFloatPoint(float num) const noexcept;
+    void next() const noexcept;
+    void stop() const noexcept;
 };
 
 #endif // CONFIG_DISABLE_MODULE_GPIO
