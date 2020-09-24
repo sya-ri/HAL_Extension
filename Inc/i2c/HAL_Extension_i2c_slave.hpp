@@ -17,28 +17,28 @@ public:
 
     }
 
-    void init(){
+    void init() noexcept {
         HAL_I2C_DeInit(hi2c);
         hi2c->Init.OwnAddress1 = address << 1;
         HAL_I2C_Init(hi2c);
     }
 
-    void init(const uint8_t address){
+    void init(const uint8_t address) noexcept {
         this->address = address;
         init();
     }
 
 #ifndef CONFIG_DISABLE_MODULE_GPIO
-    void init(DIPSwitch builder){
+    void init(DIPSwitch builder) noexcept {
         init(builder.getAddress());
     }
 #endif // CONFIG_DISABLE_MODULE_GPIO
 
-    HAL_StatusTypeDef transmit(const T &data, uint32_t timeout){
+    HAL_StatusTypeDef transmit(const T &data, uint32_t timeout) const noexcept {
         return HAL_I2C_Slave_Transmit(hi2c, (uint8_t *) &data, sizeof(T), timeout);
     }
 
-    HAL_StatusTypeDef receive(T &data, uint32_t timeout){
+    HAL_StatusTypeDef receive(T &data, uint32_t timeout) const noexcept {
         return HAL_I2C_Slave_Receive(hi2c, (uint8_t *) &data, sizeof(T), timeout);
     }
 };
