@@ -12,8 +12,8 @@
 - [GPIO](#module-gpio)
   - コンフィグ
   - クラス
-    - [GPIO](#gpio)
-    - [DIPSwitch](#dipswitch)
+    - [GPIO](#-gpio)
+    - [DIPSwitch](#-dipswitch)
 
 ## module Util
 
