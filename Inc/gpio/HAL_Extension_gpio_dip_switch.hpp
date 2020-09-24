@@ -12,10 +12,10 @@ private:
     bool flip;
 public:
     DIPSwitch(bool flip = false);
-    DIPSwitch& add(GPIO gpio);
-    DIPSwitch& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-    uint8_t getSize();
-    uint8_t getAddress();
+    DIPSwitch& add(GPIO gpio) noexcept;
+    DIPSwitch& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
+    uint8_t getSize() const noexcept;
+    uint8_t getAddress() const noexcept;
 };
 
 #endif // CONFIG_DISABLE_MODULE_GPIO

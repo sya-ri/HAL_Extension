@@ -6,22 +6,22 @@ DIPSwitch::DIPSwitch(bool flip): flip(flip) {
     list.reserve(7);
 }
 
-DIPSwitch& DIPSwitch::add(GPIO gpio){
+DIPSwitch& DIPSwitch::add(GPIO gpio) noexcept {
     if(getSize() < 7){
         list.push_back(gpio);
     }
     return *this;
 }
 
-DIPSwitch& DIPSwitch::add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
+DIPSwitch& DIPSwitch::add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept {
     return add(GPIO(GPIOx, GPIO_Pin));
 }
 
-uint8_t DIPSwitch::getSize(){
+uint8_t DIPSwitch::getSize() const noexcept {
     return list.size();
 }
 
-uint8_t DIPSwitch::getAddress(){
+uint8_t DIPSwitch::getAddress() const noexcept {
     uint8_t builder = 0;
     for(int i = 0; i < getSize(); i++){
         builder |= list[i].read() << i;
