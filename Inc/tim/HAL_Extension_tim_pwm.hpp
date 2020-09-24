@@ -15,6 +15,7 @@ public:
     void start() noexcept;
     void stop() noexcept;
     void setCompare(uint32_t compare) noexcept;
+    void setCompare(uint16_t numerator, uint16_t denominator) noexcept;
     uint32_t getCounterPeriod() const noexcept;
 };
 

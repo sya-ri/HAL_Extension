@@ -19,6 +19,11 @@ void PWM::setCompare(uint32_t compare) noexcept {
 	__HAL_TIM_SET_COMPARE(htim, channel, compare);
 }
 
+void PWM::setCompare(uint16_t numerator, uint16_t denominator) noexcept {
+    if(denominator < numerator) return;
+	setCompare(getCounterPeriod() * numerator / denominator);
+}
+
 uint32_t PWM::getCounterPeriod() const noexcept {
 	return htim->Init.Period;
 }

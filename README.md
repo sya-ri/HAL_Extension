@@ -1018,6 +1018,15 @@ TIMn
 > pwm.setCompare(100);
 > ```
 
+> ##### void setCompare(uint16_t numerator, uint16_t denominator)
+> numerator: 分子, denominator: 分母 とした デューティ比で setCompare(uint32_t) を実行します
+> 100% を超えている時は何もしません
+> ```c++
+> 例:
+> pwm.setCompare(97, 100); // デューティー比: 97%
+> pwm.setCompare(1, 2); // デューティー比: 50%
+> ```
+
 > ##### uint32_t getCounterPeriod()
 > CounterPeriod を返します  
 > ```c++
