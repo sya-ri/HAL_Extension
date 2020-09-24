@@ -19,41 +19,41 @@ public:
 
     }
 
-    void init(){
+    void init() noexcept {
         HAL_I2C_DeInit(hi2c);
         hi2c->Init.OwnAddress1 = address << 1;
         HAL_I2C_Init(hi2c);
     }
 
-    void init(uint8_t address){
+    void init(uint8_t address) noexcept {
         this->address = address;
         init();
     }
 
 #ifndef CONFIG_DISABLE_MODULE_GPIO
-    void init(DIPSwitch builder){
+    void init(DIPSwitch builder) noexcept {
         init(builder.getAddress());
     }
 #endif // CONFIG_DISABLE_MODULE_GPIO
 
-    HAL_StatusTypeDef startTransmit(){
+    HAL_StatusTypeDef startTransmit() noexcept {
         return HAL_I2C_Slave_Transmit_DMA(hi2c, (uint8_t *) &data, sizeof(T));
     }
 
-    HAL_StatusTypeDef startReceive(){
+    HAL_StatusTypeDef startReceive() noexcept {
         return HAL_I2C_Slave_Receive_DMA(hi2c, (uint8_t *) &data, sizeof(T));
     }
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK
-    void setTxCallback(std::function<void()> function){
+    void setTxCallback(std::function<void()> function) noexcept {
         setI2CSlaveTxCallback(hi2c, function);
     }
 
-    void setRxCallback(std::function<void()> function){
+    void setRxCallback(std::function<void()> function) noexcept {
         setI2CSlaveRxCallback(hi2c, function);
     }
 
-    void setErrorCallback(std::function<void()> function){
+    void setErrorCallback(std::function<void()> function) noexcept {
         setI2CErrorCallback(hi2c, function);
     }
 #endif // CONFIG_DISABLE_EX_CALLBACK
