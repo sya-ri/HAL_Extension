@@ -3,11 +3,11 @@
 #include "gpio/HAL_Extension_gpio_dip_switch.hpp"
 
 DIPSwitch::DIPSwitch(bool flip): flip(flip) {
-    list.reserve(7);
+    list.reserve(8);
 }
 
 DIPSwitch& DIPSwitch::add(GPIO gpio) noexcept {
-    if(getSize() < 7){
+    if(getSize() < 8){
         list.push_back(gpio);
     }
     return *this;
