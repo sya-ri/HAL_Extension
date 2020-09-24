@@ -4,7 +4,7 @@
 #ifndef CONFIG_DISABLE_MODULE_GPIO
 
 #include <vector>
-#include "HAL_Extension_gpio_gpio.hpp"
+#include "HAL_Extension_gpio.hpp"
 
 class DIPSwitch {
 private:

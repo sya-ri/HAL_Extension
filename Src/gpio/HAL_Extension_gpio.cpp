@@ -1,6 +1,6 @@
 #ifndef CONFIG_DISABLE_MODULE_GPIO
 
-#include "gpio/HAL_Extension_gpio_gpio.hpp"
+#include "gpio/HAL_Extension_gpio.hpp"
 #include "HAL_Extension_util.hpp"
 
 GPIO::GPIO(){}
