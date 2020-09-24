@@ -5,6 +5,8 @@
 
 #include "i2c.h"
 #include "HAL_Extension_i2c_callback.hpp"
+#include "HAL_Extension_i2c_function_slave_transmit.hpp"
+#include "HAL_Extension_i2c_function_slave_receive.hpp"
 
 template<class T>
 class I2C_Slave_DMA {
@@ -37,11 +39,11 @@ public:
 #endif // CONFIG_DISABLE_MODULE_GPIO
 
     HAL_StatusTypeDef startTransmit() noexcept {
-        return HAL_I2C_Slave_Transmit_DMA(hi2c, (uint8_t *) &data, sizeof(T));
+        return i2cSlaveTransmit_DMA(hi2c, data);
     }
 
     HAL_StatusTypeDef startReceive() noexcept {
-        return HAL_I2C_Slave_Receive_DMA(hi2c, (uint8_t *) &data, sizeof(T));
+        return i2cSlaveReceive_DMA(hi2c, data);
     }
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK

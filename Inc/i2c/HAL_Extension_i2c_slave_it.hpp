@@ -5,6 +5,8 @@
 
 #include "i2c.h"
 #include "HAL_Extension_i2c_callback.hpp"
+#include "HAL_Extension_i2c_function_slave_transmit.hpp"
+#include "HAL_Extension_i2c_function_slave_receive.hpp"
 
 template<class T>
 class I2C_Slave_IT {
@@ -36,11 +38,11 @@ public:
 #endif // CONFIG_DISABLE_MODULE_GPIO
 
     HAL_StatusTypeDef transmit(const T &data) const noexcept {
-        return HAL_I2C_Slave_Transmit_IT(hi2c, (uint8_t *) &data, sizeof(T));
+        return i2cSlaveTransmit_IT(hi2c, data);
     }
 
     HAL_StatusTypeDef receive(T &data) const noexcept {
-        return HAL_I2C_Slave_Receive_IT(hi2c, (uint8_t *) &data, sizeof(T));
+        return i2cSlaveReceive_IT(hi2c, data);
     }
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK

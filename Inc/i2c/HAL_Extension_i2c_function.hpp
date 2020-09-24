@@ -5,6 +5,8 @@
 
 #include "HAL_Extension_i2c_function_master_transmit.hpp"
 #include "HAL_Extension_i2c_function_master_receive.hpp"
+#include "HAL_Extension_i2c_function_slave_transmit.hpp"
+#include "HAL_Extension_i2c_function_slave_receive.hpp"
 
 #endif // CONFIG_DISABLE_MODULE_I2C
 

@@ -4,6 +4,8 @@
 #ifndef CONFIG_DISABLE_MODULE_I2C
 
 #include "i2c.h"
+#include "HAL_Extension_i2c_function_slave_transmit.hpp"
+#include "HAL_Extension_i2c_function_slave_receive.hpp"
 
 template<class T>
 class I2C_Slave {
@@ -35,11 +37,11 @@ public:
 #endif // CONFIG_DISABLE_MODULE_GPIO
 
     HAL_StatusTypeDef transmit(const T &data, uint32_t timeout) const noexcept {
-        return HAL_I2C_Slave_Transmit(hi2c, (uint8_t *) &data, sizeof(T), timeout);
+        return i2cSlaveTransmit(hi2c, data, timeout);
     }
 
     HAL_StatusTypeDef receive(T &data, uint32_t timeout) const noexcept {
-        return HAL_I2C_Slave_Receive(hi2c, (uint8_t *) &data, sizeof(T), timeout);
+        return i2cSlaveReceive(hi2c, data, timeout);
     }
 };
 
