@@ -20,7 +20,9 @@ PinOut: GPIO_Output
 ## コンストラクタ
 ##### FixedSevenSegment(bool)
 > ```c++
-> FixedSevenSegment(bool flip = false);
+> FixedSevenSegment(
+>     bool flip = false
+> );
 > ```
 > `flip` に応じて `GPIO_PIN_SET`, `GPIO_PIN_RESET` が逆になります  
 > 外部で７セグデコーダがついている場合に使ってください
@@ -33,7 +35,9 @@ PinOut: GPIO_Output
 ## 関数
 ##### FixedSevenSegment::add(GPIO)
 > ```c++
-> FixedSevenSegment& add(GPIO gpio) noexcept override;
+> FixedSevenSegment& add(
+>     GPIO gpio
+> ) noexcept override;
 > ```
 > セグメントのピンを追加します
 > 登録順は 0ビット → 1 → 2 → 3 → point
@@ -45,7 +49,10 @@ PinOut: GPIO_Output
 
 ##### FixedSevenSegment::add(GPIO_TypeDef*, uint16_t)
 > ```c++
-> FixedSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept override;
+> FixedSevenSegment& add(
+>     GPIO_TypeDef* GPIOx,
+>     uint16_t GPIO_Pin
+> ) noexcept override;
 > ```
 > `FixedSevenSegment::add(GPIO)` の結果を返します  
 > ```c++
@@ -56,7 +63,9 @@ PinOut: GPIO_Output
 
 ##### FixedSevenSegment::setLight(uint8_t)
 > ```c++
-> bool setLight(uint8_t lightData) const noexcept override;
+> bool setLight(
+>     uint8_t lightData
+> ) const noexcept override;
 > ```
 > 下位４ビットが数字。その上位ビットを小数点として点灯します
 > ```c++
@@ -66,7 +75,10 @@ PinOut: GPIO_Output
 
 ##### FixedSevenSegment::set(int8_t, bool)
 > ```c++
-> bool set(int8_t hex, bool point = false) const noexcept override;
+> bool set(
+>     int8_t hex,
+>     bool point = false
+> ) const noexcept override;
 > ```
 > `hex` の下位４ビットが数字。`point` を小数点として点灯します
 > ```c++

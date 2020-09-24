@@ -18,7 +18,9 @@ PinOut: GPIO_Input
 ## コンストラクタ
 ##### DIPSwitch(bool)
 > ```c++
-> DIPSwitch(bool flip = false);
+> DIPSwitch(
+>     bool flip = false
+> );
 > ```
 > `flip: true` で `DIPSwitch::getAddress()` で  
 > 全ビット反転された結果が出力されます
@@ -31,7 +33,9 @@ PinOut: GPIO_Input
 ## 関数
 ##### DIPSwitch::add(GPIO)
 > ```c++
-> DIPSwitch& add(GPIO gpio) noexcept;
+> DIPSwitch& add(
+>     GPIO gpio
+> ) noexcept;
 > ```
 > スイッチのピンを追加します  
 > 最大登録数は8つです  
@@ -43,7 +47,10 @@ PinOut: GPIO_Input
 
 ##### DIPSwitch::add(GPIO_TypeDef*, uint16_t)
 > ```c++
-> DIPSwitch& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
+> DIPSwitch& add(
+>     GPIO_TypeDef* GPIOx,
+>     uint16_t GPIO_Pin
+> ) noexcept;
 > ```
 > `DIPSwitch::add(GPIO)` の結果を返します  
 > ```c++

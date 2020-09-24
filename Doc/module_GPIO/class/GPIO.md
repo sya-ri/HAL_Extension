@@ -21,7 +21,10 @@ PinOut: GPIO_Input / GPIO_Output
 ## コンストラクタ
 ##### GPIO(GPIO_TypeDef*, uint16_t)
 > ```c++
-> GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
+> GPIO(
+>     GPIO_TypeDef* GPIOx,
+>     uint16_t GPIO_Pin
+> );
 > ```
 > Read / Write をするピンを設定します  
 > ```c++
@@ -62,7 +65,9 @@ PinOut: GPIO_Input / GPIO_Output
 
 ##### GPIO::write(GPIO_PinState)
 > ```c++
-> void write(GPIO_PinState PinState) const noexcept;
+> void write(
+>     GPIO_PinState PinState
+> ) const noexcept;
 > ```
 > `HAL_GPIO_WritePin()` を実行します  
 > ```c++

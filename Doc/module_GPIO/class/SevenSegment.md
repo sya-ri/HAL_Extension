@@ -20,7 +20,9 @@ PinOut: GPIO_Output
 ## コンストラクタ
 ##### SevenSegment(bool)
 > ```c++
-> SevenSegment(bool flip = false);
+> SevenSegment(
+>     bool flip = false
+> );
 > ```
 > `flip` に応じて `GPIO_PIN_SET`, `GPIO_PIN_RESET` が逆になります
 > ```c++
@@ -32,7 +34,9 @@ PinOut: GPIO_Output
 ## 関数
 ##### SevenSegment::add(GPIO)
 > ```c++
-> virtual SevenSegment& add(GPIO gpio) noexcept;
+> virtual SevenSegment& add(
+>     GPIO gpio
+> ) noexcept;
 > ```
 > セグメントのピンを追加します  
 > 登録順は a → b → ... f → g → point
@@ -44,7 +48,10 @@ PinOut: GPIO_Output
 
 ##### SevenSegment::add(GPIO_TypeDef*, uint16_t)
 > ```c++
-> virtual SevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
+> virtual SevenSegment& add(
+>     GPIO_TypeDef* GPIOx,
+>     uint16_t GPIO_Pin
+> ) noexcept;
 > ```
 > `SevenSegment::add(GPIO)` の結果を返します  
 > ```c++
@@ -55,7 +62,9 @@ PinOut: GPIO_Output
 
 ##### SevenSegment::setLight(uint8_t)
 > ```c++
-> virtual bool setLight(uint8_t lightData) const noexcept;
+> virtual bool setLight(
+>     uint8_t lightData
+> ) const noexcept;
 > ```
 > ビット単位で7セグの設定をします  
 > 各ビットに対応してセグメントが点灯します
@@ -66,7 +75,10 @@ PinOut: GPIO_Output
 
 ##### SevenSegment::set(uint8_t, bool)
 > ```c++
-> virtual bool set(int8_t hex, bool point = false) const noexcept;
+> virtual bool set(
+>     int8_t hex,
+>     bool point = false
+> ) const noexcept;
 > ```
 > 16進数で7セグの設定をします  
 > point を true にすると小数点が光ります
