@@ -16,7 +16,7 @@
 
 ## module Util
 
-### 関数
+### ○ 関数
 ###### map_contains(const std::map<K, V>&, const K&)
 > ```c++
 > template <class K, class V>
@@ -27,22 +27,22 @@
 
 ## module GPIO
 
-### コンフィグ
+### ○ コンフィグ
 > ```
 > CONFIG_DISABLE_MODULE_GPIO
 > ```
 > GPIO モジュールの無効化
 
-### クラス
+### ○ クラス
 
 #### GPIO
 
-##### CubeMX
+##### ● CubeMX
 ```yaml
 PinOut: GPIO_Input / GPIO_Output
 ```
 
-##### コンストラクタ
+##### ● コンストラクタ
 ###### GPIO(GPIO_TypeDef*, uint16_t)
 > ```c++
 > GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
@@ -53,7 +53,7 @@ PinOut: GPIO_Input / GPIO_Output
 > GPIO pa5(GPIOA, GPIO_PIN_5);
 > ```
 
-##### 関数
+##### ● 関数
 ###### GPIO::read()
 > ```c++
 > GPIO_PinState read() const noexcept;
