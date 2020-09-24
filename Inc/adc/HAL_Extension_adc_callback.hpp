@@ -8,7 +8,7 @@
 #include <functional>
 #include "adc.h"
 
-void setADCCallback(ADC_HandleTypeDef *hadc, std::function<void()> function);
+void setADCCallback(ADC_HandleTypeDef *hadc, std::function<void()> function) noexcept;
 
 #endif // CONFIG_DISABLE_EX_CALLBACK
 

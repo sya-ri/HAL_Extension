@@ -10,7 +10,7 @@ namespace {
     std::map<ADC_HandleTypeDef *, std::function<void()>> adc_callback;
 }
 
-void setADCCallback(ADC_HandleTypeDef *hadc, std::function<void()> function){
+void setADCCallback(ADC_HandleTypeDef *hadc, std::function<void()> function) noexcept {
     adc_callback[hadc] = function;
 }
 
