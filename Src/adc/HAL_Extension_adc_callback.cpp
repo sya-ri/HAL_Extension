@@ -3,6 +3,7 @@
 #ifndef CONFIG_DISABLE_EX_CALLBACK
 
 #include "adc/HAL_Extension_adc_callback.hpp"
+#include <map>
 #include "HAL_Extension_util.hpp"
 
 namespace {
