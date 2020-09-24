@@ -15,7 +15,7 @@ namespace {
     }
 }
 
-DynamicSevenSegment::DynamicSevenSegment(): DynamicSevenSegment(SevenSegment(), false, false, false){}
+DynamicSevenSegment::DynamicSevenSegment(): DynamicSevenSegment(SevenSegment()){}
 
 DynamicSevenSegment::DynamicSevenSegment(
 	const SevenSegment &sevenSegment,
