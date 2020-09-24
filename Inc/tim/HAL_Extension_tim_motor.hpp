@@ -16,7 +16,9 @@ public:
     void start();
     void stop();
     void setSpeed(bool forward, uint32_t compare);
+    void setSpeed(bool forward, uint16_t numerator, uint16_t denominator);
     void setSpeed(int64_t speed);
+    void setSpeed(int16_t numerator, int16_t denominator);
 };
 
 #endif // CONFIG_DISABLE_MODULE_TIM

@@ -1071,21 +1071,41 @@ TIMn
 
 > ##### void setSpeed(bool forward, uint32_t compare)
 > 正転・逆転 と compare を送ります  
-> true が正転 / false が逆転 です  
+> true が 正転 / false が 逆転 です  
 > ```c++
 > 例:
 > motor.setSpeed(true, 400);
 > motor.setSpeed(false, 400);
 > ```
 
+> ##### void setSpeed(bool forward, uint16_t numerator, uint16_t denominator)
+> 正転・逆転 と numerator: 分子, denominator: 分母 とした デューティ比 を送ります  
+> 100% を超えている時は何もしません  
+>true が 正転 / false が 逆転 です
+> ```c++
+> 例:
+> motor.setSpeed(false, 97, 100);
+> motor.setSpeed(true, 1, 2);
+> ```
+
 > ##### void setSpeed(int64_t speed)
-> 正の数は正転 / 負の数は逆転  
-> 絶対値が compare になります  
-> 処理が多くなるので上記の関数を直接使うことを推奨します  
+> 正の数は正転 / 負の数は逆転 として `setSpeed(bool, uint32_t)` を実行します  
+> 処理が多くなるので上記の関数を直接使うことを推奨します
 > ```c++
 > 例:
 > motor.setSpeed(400);
 > motor.setSpeed(-400);
+> ```
+
+> ##### void setSpeed(int16_t numerator, int16_t denominator)
+> 正の数は正転 / 負の数は逆転 として `setSpeed(bool, uint16_t, uint16_t)` を実行します  
+> 処理が多くなるので上記の関数を直接使うことを推奨します
+> ```c++
+> 例:
+> motor.setSpeed(-97, 100);
+> motor.setSpeed(97, -100);
+> motor.setSpeed(1, 2);
+> motor.setSpeed(-1, -2);
 > ```
 
 ## class Encoder
