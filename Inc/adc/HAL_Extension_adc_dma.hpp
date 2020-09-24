@@ -13,7 +13,7 @@ private:
     uint32_t adcBufLength;
 public:
     ADC_DMA();
-    ADC_DMA(ADC_HandleTypeDef &hadc, uint32_t numberOfConversions);
+    ADC_DMA(ADC_HandleTypeDef &hadc, uint32_t adcBufLength);
     ~ADC_DMA();
     void start();
     void stop();
