@@ -1,5 +1,15 @@
 # DIPSwitch
 
+## 目次
+- [CubeMX](#cubemx)
+- [コンストラクタ](#コンストラクタ)
+  - [DIPSwitch(bool)](#dipswitchbool)
+- [関数](#関数)
+  - [add(GPIO)](#dipswitchaddgpio)
+  - [add(GPIO_TypeDef*, uint16_t)](#dipswitchaddgpio_typedef-uint16_t)
+  - [getSize()](#dipswitchgetsize)
+  - [getAddress()](#dipswitchgetaddress)
+
 ## CubeMX
 ```yaml
 PinOut: GPIO_Input
