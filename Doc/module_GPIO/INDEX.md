@@ -2,7 +2,7 @@
 
 ## コンフィグ
 
-#### CONFIG_DISABLE_MODULE_GPIO
+> #### CONFIG_DISABLE_MODULE_GPIO
 > GPIO モジュールの無効化  
 > 定義することでコンパイルされなくなります
 
