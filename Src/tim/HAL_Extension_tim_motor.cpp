@@ -12,17 +12,17 @@ Motor::Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef 
 
 }
 
-void Motor::start(){
+void Motor::start() noexcept {
 	positive.start();
 	negative.start();
 }
 
-void Motor::stop(){
+void Motor::stop() noexcept {
 	positive.stop();
 	negative.stop();
 }
 
-void Motor::setSpeed(bool forward, uint32_t compare){
+void Motor::setSpeed(bool forward, uint32_t compare) noexcept {
 	if(forward){
 		positive.setCompare(compare);
 		negative.setCompare(0);
@@ -32,7 +32,7 @@ void Motor::setSpeed(bool forward, uint32_t compare){
 	}
 }
 
-void Motor::setSpeed(bool forward, uint16_t numerator, uint16_t denominator){
+void Motor::setSpeed(bool forward, uint16_t numerator, uint16_t denominator) noexcept {
 	if(forward){
 		positive.setCompare(numerator, denominator);
 		negative.setCompare(0);
@@ -42,12 +42,12 @@ void Motor::setSpeed(bool forward, uint16_t numerator, uint16_t denominator){
 	}
 }
 
-void Motor::setSpeed(int64_t speed){
+void Motor::setSpeed(int64_t speed) noexcept {
 	bool back = speed < 0;
 	setSpeed(!back, (uint32_t) (back? -speed : speed));
 }
 
-void Motor::setSpeed(int16_t numerator, int16_t denominator){
+void Motor::setSpeed(int16_t numerator, int16_t denominator) noexcept {
 	bool forward = true;
 	uint16_t abs_numerator;
 	if(numerator < 0){

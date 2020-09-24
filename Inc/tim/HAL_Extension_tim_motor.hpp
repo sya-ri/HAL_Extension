@@ -13,12 +13,12 @@ public:
     Motor();
     Motor(PWM positive, PWM negative);
     Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg);
-    void start();
-    void stop();
-    void setSpeed(bool forward, uint32_t compare);
-    void setSpeed(bool forward, uint16_t numerator, uint16_t denominator);
-    void setSpeed(int64_t speed);
-    void setSpeed(int16_t numerator, int16_t denominator);
+    void start() noexcept;
+    void stop() noexcept ;
+    void setSpeed(bool forward, uint32_t compare) noexcept;
+    void setSpeed(bool forward, uint16_t numerator, uint16_t denominator) noexcept;
+    void setSpeed(int64_t speed) noexcept;
+    void setSpeed(int16_t numerator, int16_t denominator) noexcept;
 };
 
 #endif // CONFIG_DISABLE_MODULE_TIM
