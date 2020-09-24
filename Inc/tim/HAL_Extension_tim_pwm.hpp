@@ -12,10 +12,10 @@ private:
 public:
     PWM();
     PWM(TIM_HandleTypeDef &htim, uint32_t channel);
-    void start();
-    void stop();
-    bool setCompare(uint32_t compare);
-    uint32_t getCounterPeriod();
+    void start() noexcept;
+    void stop() noexcept;
+    bool setCompare(uint32_t compare) noexcept;
+    uint32_t getCounterPeriod() const noexcept;
 };
 
 #endif // CONFIG_DISABLE_MODULE_TIM
