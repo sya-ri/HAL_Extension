@@ -5,6 +5,8 @@
 
 #include "i2c.h"
 #include "HAL_Extension_i2c_callback.hpp"
+#include "HAL_Extension_i2c_function_master_transmit.hpp"
+#include "HAL_Extension_i2c_function_master_receive.hpp"
 
 template<class T>
 class I2C_Master_IT {
