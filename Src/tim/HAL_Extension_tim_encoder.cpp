@@ -8,7 +8,7 @@ Encoder::Encoder(TIM_HandleTypeDef &htim, uint32_t channel): htim(&htim), channe
 
 }
 
-void Encoder::start(){
+void Encoder::start() noexcept {
 	int16_t lastCount = count;
 	if(!isStart){
 		HAL_TIM_Encoder_Start(htim, channel);
@@ -20,7 +20,7 @@ void Encoder::start(){
 	count = lastCount;
 }
 
-void Encoder::stop(){
+void Encoder::stop() noexcept {
 	update();
 	if(isStart){
 		HAL_TIM_Encoder_Stop(htim, channel);
@@ -30,7 +30,7 @@ void Encoder::stop(){
 	isStart = false;
 }
 
-void Encoder::update(){
+void Encoder::update() noexcept {
 	if(!isStart) return;
 	lastRawCount = rawCount;
 	if (__HAL_TIM_GET_FLAG(htim, TIM_FLAG_UPDATE)) {
@@ -47,11 +47,11 @@ void Encoder::update(){
 	}
 }
 
-int32_t Encoder::getCount(){
+int32_t Encoder::getCount() const noexcept {
 	return count;
 }
 
-void Encoder::resetCount(){
+void Encoder::resetCount() noexcept {
 	update();
 	count = 0;
 }

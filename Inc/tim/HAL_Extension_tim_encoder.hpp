@@ -16,11 +16,11 @@ private:
 public:
     Encoder();
     Encoder(TIM_HandleTypeDef &htim, uint32_t channel = TIM_CHANNEL_ALL);
-    void start();
-    void stop();
-    void update();
-    int32_t getCount();
-    void resetCount();
+    void start() noexcept;
+    void stop() noexcept;
+    void update() noexcept;
+    int32_t getCount() const noexcept;
+    void resetCount() noexcept;
 };
 
 #endif // CONFIG_DISABLE_MODULE_TIM
