@@ -17,3 +17,4 @@
     - [DIPSwitch](Doc/module_GPIO/class/DIPSwitch.md)
     - [SevenSegment](Doc/module_GPIO/class/SevenSegment.md)
     - [FixedSevenSegment](Doc/module_GPIO/class/FixedSevenSegment.md)
+    - [DynamicSevenSegment](Doc/module_GPIO/class/DynamicSevenSegment.md)
