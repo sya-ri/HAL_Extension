@@ -9,22 +9,18 @@ TimerInterrupt::TimerInterrupt(TIM_HandleTypeDef &htim): htim(&htim){
 
 }
 
-bool TimerInterrupt::start(uint32_t prescaler, uint32_t counterPeriod) noexcept {
-	if(0xFFFF < prescaler || 0xFFFF < counterPeriod){ // 0xFFFF == 65535
-		return false;
-	}
+void TimerInterrupt::start(uint16_t prescaler, uint16_t counterPeriod) noexcept {
 	stop();
 	HAL_TIM_Base_DeInit(htim);
 	htim->Init.Prescaler = prescaler;
 	htim->Init.Period = counterPeriod;
 	HAL_TIM_Base_Init(htim);
-	return start();
+	start();
 }
 
-bool TimerInterrupt::start() noexcept {
+void TimerInterrupt::start() noexcept {
 	resetCount();
 	HAL_TIM_Base_Start_IT(htim);
-	return true;
 }
 
 void TimerInterrupt::stop() noexcept {

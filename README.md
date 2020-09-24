@@ -1177,10 +1177,10 @@ NVIC Settings
 > 使うタイマーを設定する
 
 ### 関数
-> ##### bool start()
+> ##### void start()
 > タイマーを動かします
 
-> ##### bool start(uint32_t prescaler, uint32_t counterPeriod)
+> ##### void start(uint16_t prescaler, uint16_t counterPeriod)
 > prescaler と counterPeriod を再設定してスタートする
 
 > ##### void stop()
