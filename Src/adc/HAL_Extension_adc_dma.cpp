@@ -14,24 +14,24 @@ ADC_DMA::~ADC_DMA(){
     delete[] adcBuf;
 }
 
-void ADC_DMA::start(){
+void ADC_DMA::start() noexcept {
     HAL_ADC_Start_DMA(hadc, adcBuf, adcBufLength);
 }
 
-void ADC_DMA::stop(){
+void ADC_DMA::stop() noexcept {
     HAL_ADC_Stop_DMA(hadc);
 }
 
-uint8_t ADC_DMA::get8(uint8_t index) {
+uint8_t ADC_DMA::get8(uint8_t index) const noexcept {
     return (uint8_t)(get(index) >> 4);
 }
 
-uint32_t ADC_DMA::get(uint8_t index) {
+uint32_t ADC_DMA::get(uint8_t index) const noexcept {
     return adcBuf[index];
 }
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK
-void ADC_DMA::setCallback(std::function<void()> function){
+void ADC_DMA::setCallback(std::function<void()> function) noexcept {
     setADCCallback(hadc, function);
 }
 #endif // CONFIG_DISABLE_EX_CALLBACK
