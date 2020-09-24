@@ -6,7 +6,7 @@ FixedSevenSegment::FixedSevenSegment(bool flip): flip(flip) {
     list.reserve(4);
 }
 
-FixedSevenSegment& FixedSevenSegment::add(GPIO gpio) {
+FixedSevenSegment& FixedSevenSegment::add(GPIO gpio) noexcept {
     if(!isAvailable()){
         list.push_back(gpio);
     } else if(!enablePoint) {
@@ -16,15 +16,15 @@ FixedSevenSegment& FixedSevenSegment::add(GPIO gpio) {
     return *this;
 }
 
-FixedSevenSegment& FixedSevenSegment::add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
+FixedSevenSegment& FixedSevenSegment::add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept {
     return add(GPIO(GPIOx, GPIO_Pin));
 }
 
-bool FixedSevenSegment::setLight(uint8_t lightData){
+bool FixedSevenSegment::setLight(uint8_t lightData) const noexcept {
     return set(lightData & 0xF, lightData & 0x10);
 }
 
-bool FixedSevenSegment::set(int8_t hex, bool point){
+bool FixedSevenSegment::set(int8_t hex, bool point) const noexcept {
     if(isAvailable()){
         if(point && enablePoint){
             pointGpio.set();
@@ -40,11 +40,11 @@ bool FixedSevenSegment::set(int8_t hex, bool point){
     }
 }
 
-bool FixedSevenSegment::clear(){
+bool FixedSevenSegment::clear() const noexcept {
     return set(0);
 }
 
-bool FixedSevenSegment::isAvailable(){
+bool FixedSevenSegment::isAvailable() const noexcept {
     return list.size() == 4;
 }
 

@@ -14,12 +14,12 @@ private:
     GPIO pointGpio;
 public:
     FixedSevenSegment(bool flip = false);
-    FixedSevenSegment& add(GPIO gpio);
-    FixedSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) override;
-    bool setLight(uint8_t lightData) override;
-    bool set(int8_t hex, bool point = false) override;
-    bool clear() override;
-    bool isAvailable() override;
+    FixedSevenSegment& add(GPIO gpio) noexcept;
+    FixedSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept override;
+    bool setLight(uint8_t lightData) const noexcept override;
+    bool set(int8_t hex, bool point = false) const noexcept override;
+    bool clear() const noexcept override;
+    bool isAvailable() const noexcept override;
 };
 
 #endif // CONFIG_DISABLE_MODULE_GPIO

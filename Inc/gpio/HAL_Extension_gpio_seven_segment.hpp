@@ -14,12 +14,12 @@ private:
     GPIO pointGpio;
 public:
     SevenSegment(bool flip = false);
-    virtual SevenSegment& add(GPIO gpio);
-    virtual SevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-    virtual bool setLight(uint8_t lightData);
-    virtual bool set(int8_t hex, bool point = false);
-    virtual bool clear();
-    virtual bool isAvailable();
+    virtual SevenSegment& add(GPIO gpio) noexcept;
+    virtual SevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
+    virtual bool setLight(uint8_t lightData) const noexcept;
+    virtual bool set(int8_t hex, bool point = false) const noexcept;
+    virtual bool clear() const noexcept;
+    virtual bool isAvailable() const noexcept;
 };
 
 #endif // CONFIG_DISABLE_MODULE_GPIO

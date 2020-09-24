@@ -29,7 +29,7 @@ SevenSegment::SevenSegment(bool flip): flip(flip) {
     list.reserve(7);
 }
 
-SevenSegment& SevenSegment::add(GPIO gpio){
+SevenSegment& SevenSegment::add(GPIO gpio) noexcept {
     if(!isAvailable()){
         list.push_back(gpio);
     } else if(!enablePoint) {
@@ -39,11 +39,11 @@ SevenSegment& SevenSegment::add(GPIO gpio){
     return *this;
 }
 
-SevenSegment& SevenSegment::add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin){
+SevenSegment& SevenSegment::add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept {
     return add(GPIO(GPIOx, GPIO_Pin));
 }
 
-bool SevenSegment::setLight(uint8_t lightData){
+bool SevenSegment::setLight(uint8_t lightData) const noexcept {
     if(!isAvailable()) return false;
     uint8_t mask = 1;
     for(auto segment : list){
@@ -58,7 +58,7 @@ bool SevenSegment::setLight(uint8_t lightData){
     return true;
 }
 
-bool SevenSegment::set(int8_t hex, bool point){
+bool SevenSegment::set(int8_t hex, bool point) const noexcept {
     uint8_t lightData;
     if(hex < 0){
         lightData = lightDataTable[16];
@@ -71,11 +71,11 @@ bool SevenSegment::set(int8_t hex, bool point){
     return setLight(lightData);
 }
 
-bool SevenSegment::clear(){
+bool SevenSegment::clear() const noexcept {
     return setLight(0);
 }
 
-bool SevenSegment::isAvailable(){
+bool SevenSegment::isAvailable() const noexcept {
     return list.size() == 7;
 }
 
