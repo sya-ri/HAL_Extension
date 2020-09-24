@@ -11,6 +11,7 @@
     - [map_contains](#map_containsconst-stdmapk-v-const-k)
 - [GPIO](#module-gpio)
   - コンフィグ
+    - CONFIG_DISABLE_MODULE_GPIO
   - クラス
     - [GPIO](#-gpio)
     - [DIPSwitch](#-dipswitch)
@@ -32,7 +33,8 @@
 > ```
 > CONFIG_DISABLE_MODULE_GPIO
 > ```
-> GPIO モジュールの無効化
+> GPIO モジュールの無効化  
+> 定義することでコンパイルされなくなります
 
 ### ○ クラス
 
