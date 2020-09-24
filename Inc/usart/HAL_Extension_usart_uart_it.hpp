@@ -17,24 +17,24 @@ public:
 
     }
 
-    HAL_StatusTypeDef transmit(const T &data){
+    HAL_StatusTypeDef transmit(const T &data) const noexcept {
         return HAL_UART_Transmit_IT(huart, (uint8_t *) &data, sizeof(T));
     }
 
-    HAL_StatusTypeDef receive(T &data){
+    HAL_StatusTypeDef receive(T &data) const noexcept {
         return HAL_UART_Receive_IT(huart, (uint8_t *) &data, sizeof(T));
     }
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK
-    void setTxCallback(std::function<void()> function){
+    void setTxCallback(std::function<void()> function) noexcept {
         setUARTTxCallback(huart, function);
     }
 
-    void setRxCallback(std::function<void()> function){
+    void setRxCallback(std::function<void()> function) noexcept {
         setUARTRxCallback(huart, function);
     }
 
-    void setErrorCallback(std::function<void()> function){
+    void setErrorCallback(std::function<void()> function) noexcept {
         setErrorCallback(huart, function);
     }
 #endif // CONFIG_DISABLE_EX_CALLBACK
