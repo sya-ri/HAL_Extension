@@ -12,13 +12,13 @@ private:
 public:
     GPIO();
     GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-    GPIO_PinState read();
-    bool isSet();
-    bool isReset();
-    void write(GPIO_PinState PinState);
-    void set();
-    void reset();
-    void toggle();
+    GPIO_PinState read() const noexcept;
+    bool isSet() const noexcept;
+    bool isReset() const noexcept;
+    void write(GPIO_PinState PinState) const noexcept;
+    void set() const noexcept;
+    void reset() const noexcept;
+    void toggle() const noexcept;
 };
 
 #endif // CONFIG_DISABLE_MODULE_GPIO
