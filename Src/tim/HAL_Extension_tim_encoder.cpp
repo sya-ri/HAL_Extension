@@ -4,16 +4,16 @@
 
 Encoder::Encoder(){}
 
-Encoder::Encoder(TIM_HandleTypeDef &htim, uint32_t channel): htim(&htim), channel(channel){
+Encoder::Encoder(TIM_HandleTypeDef &htim): htim(&htim){
 
 }
 
 void Encoder::start() noexcept {
 	int16_t lastCount = count;
 	if(!isStart){
-		HAL_TIM_Encoder_Start(htim, channel);
+		HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
 	}
-	__HAL_TIM_CLEAR_FLAG(htim, channel);
+	__HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
 	__HAL_TIM_SET_COUNTER(htim , 0);
 	isStart = true;
 	update();
@@ -23,9 +23,9 @@ void Encoder::start() noexcept {
 void Encoder::stop() noexcept {
 	update();
 	if(isStart){
-		HAL_TIM_Encoder_Stop(htim, channel);
+		HAL_TIM_Encoder_Stop(htim, TIM_CHANNEL_ALL);
 	}
-	__HAL_TIM_CLEAR_FLAG(htim, channel);
+	__HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
 	__HAL_TIM_SET_COUNTER(htim , 0);
 	isStart = false;
 }

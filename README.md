@@ -1121,14 +1121,11 @@ TIMn
 ```
 
 ### コンストラクタ
-> ##### Encoder(TIM_HandleTypeDef &htim, uint32_t channel = TIM_CHANNEL_ALL)
+> ##### Encoder(TIM_HandleTypeDef &htim)
 > ピンを設定します  
-> channel は何もなければ省略し  
-> 他のCHを別の目的で使用する時のみ記述してください
 > ```c++
 > 例:
 > Encoder encoder(htim2);
-> Encoder encoder(htim2, TIM_CHANNEL_1|TIM_CHANNEL_2);
 > ```
 
 ### 関数

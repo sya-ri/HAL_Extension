@@ -8,14 +8,13 @@
 class Encoder {
 private:
     TIM_HandleTypeDef *htim;
-    uint32_t channel;
     bool isStart = false;
     uint16_t lastRawCount = 0;
     uint16_t rawCount = 0;
     int32_t count = 0;
 public:
     Encoder();
-    Encoder(TIM_HandleTypeDef &htim, uint32_t channel = TIM_CHANNEL_ALL);
+    Encoder(TIM_HandleTypeDef &htim);
     void start() noexcept;
     void stop() noexcept;
     void update() noexcept;
