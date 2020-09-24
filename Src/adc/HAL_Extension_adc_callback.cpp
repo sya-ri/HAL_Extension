@@ -14,11 +14,11 @@ void setADCCallback(ADC_HandleTypeDef *hadc, std::function<void()> function) noe
     adc_callback[hadc] = function;
 }
 
-#ifdef CONFIG_ADC_USE_HALF_CALLBACK
+#ifdef CONFIG_USE_HALF_CALLBACK_ADC
 void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
-#else  // CONFIG_ADC_USE_HALF_CALLBACK
+#else  // CONFIG_USE_HALF_CALLBACK_ADC
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
-#endif // CONFIG_ADC_USE_HALF_CALLBACK
+#endif // CONFIG_USE_HALF_CALLBACK_ADC
     if(map_contains(adc_callback, hadc)){
         adc_callback[hadc]();
     }

@@ -24,21 +24,21 @@ void setUARTErrorCallback(UART_HandleTypeDef *huart, std::function<void()> funct
     uart_error_callback[huart] = function;
 }
 
-#ifdef CONFIG_UART_USE_HALF_CALLBACK
+#ifdef CONFIG_USE_HALF_CALLBACK_UART
 void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart){
-#else  // CONFIG_UART_USE_HALF_CALLBACK
+#else  // CONFIG_USE_HALF_CALLBACK_UART
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
-#endif // CONFIG_UART_USE_HALF_CALLBACK
+#endif // CONFIG_USE_HALF_CALLBACK_UART
     if(map_contains(uart_tx_callback, huart)){
         uart_tx_callback[huart]();
     }
 }
 
-#ifdef CONFIG_UART_USE_HALF_CALLBACK
+#ifdef CONFIG_USE_HALF_CALLBACK_UART
 void HAL_UART_RxHalfCpltCallback(UART_HandleTypeDef *huart){
-#else  // CONFIG_UART_USE_HALF_CALLBACK
+#else  // CONFIG_USE_HALF_CALLBACK_UART
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-#endif // CONFIG_UART_USE_HALF_CALLBACK
+#endif // CONFIG_USE_HALF_CALLBACK_UART
     if(map_contains(uart_rx_callback, huart)){
         uart_rx_callback[huart]();
     }
