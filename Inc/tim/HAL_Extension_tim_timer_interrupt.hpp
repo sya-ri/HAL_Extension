@@ -12,13 +12,13 @@ private:
 public:
     TimerInterrupt();
     TimerInterrupt(TIM_HandleTypeDef &htim);
-    bool start(uint32_t prescaler, uint32_t counterPeriod);
-    bool start();
-    void stop();
-    void setCount(uint32_t count);
-    void resetCount();
+    bool start(uint32_t prescaler, uint32_t counterPeriod) noexcept;
+    bool start() noexcept;
+    void stop() noexcept;
+    void setCount(uint32_t count) noexcept;
+    void resetCount() noexcept;
 #ifndef CONFIG_DISABLE_EX_CALLBACK
-    void setCallback(std::function<void()> function);
+    void setCallback(std::function<void()> function) noexcept;
 #endif // CONFIG_DISABLE_EX_CALLBACK
 };
 

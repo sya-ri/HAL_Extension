@@ -3,13 +3,14 @@
 #ifndef CONFIG_DISABLE_EX_CALLBACK
 
 #include "tim/HAL_Extension_tim_callback.hpp"
+#include <map>
 #include "HAL_Extension_util.hpp"
 
 namespace {
     std::map<TIM_HandleTypeDef *, std::function<void()>> tim_period_elapsed_callback;
 }
 
-void setTIMPeriodElapsedCallback(TIM_HandleTypeDef *htim, std::function<void()> function){
+void setTIMPeriodElapsedCallback(TIM_HandleTypeDef *htim, std::function<void()> function) noexcept {
     tim_period_elapsed_callback[htim] = function;
 }
 
