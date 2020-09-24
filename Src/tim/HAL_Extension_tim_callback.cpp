@@ -3,6 +3,7 @@
 #ifndef CONFIG_DISABLE_EX_CALLBACK
 
 #include "tim/HAL_Extension_tim_callback.hpp"
+#include "HAL_Extension_util.hpp"
 
 namespace {
     std::map<TIM_HandleTypeDef *, std::function<void()>> tim_period_elapsed_callback;
@@ -17,8 +18,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 #else  // CONFIG_TIM_USE_HALF_CALLBACK
 void HAL_TIM_PeriodElapsedHalfCpltCallback(TIM_HandleTypeDef *htim){
 #endif // CONFIG_TIM_USE_HALF_CALLBACK
-    if(map_contains(__tim__period_elapsed_callback, htim)){
-        __tim__period_elapsed_callback[htim]();
+    if(map_contains(tim_period_elapsed_callback, htim)){
+        tim_period_elapsed_callback[htim]();
     }
 }
 
