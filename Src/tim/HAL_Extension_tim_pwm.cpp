@@ -15,13 +15,8 @@ void PWM::stop() noexcept {
 	HAL_TIM_PWM_Stop(htim, channel);
 }
 
-bool PWM::setCompare(uint32_t compare) noexcept {
-    if(getCounterPeriod() < compare){
-        return false;
-    } else {
-        __HAL_TIM_SET_COMPARE(htim, channel, compare);
-        return true;
-    }
+void PWM::setCompare(uint32_t compare) noexcept {
+	__HAL_TIM_SET_COMPARE(htim, channel, compare);
 }
 
 uint32_t PWM::getCounterPeriod() const noexcept {

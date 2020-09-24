@@ -14,7 +14,7 @@ public:
     PWM(TIM_HandleTypeDef &htim, uint32_t channel);
     void start() noexcept;
     void stop() noexcept;
-    bool setCompare(uint32_t compare) noexcept;
+    void setCompare(uint32_t compare) noexcept;
     uint32_t getCounterPeriod() const noexcept;
 };
 

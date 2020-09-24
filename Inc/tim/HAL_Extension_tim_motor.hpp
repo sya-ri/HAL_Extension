@@ -15,8 +15,8 @@ public:
     Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg);
     void start();
     void stop();
-    bool setSpeed(bool forward, uint32_t compare);
-    bool setSpeed(int64_t speed);
+    void setSpeed(bool forward, uint32_t compare);
+    void setSpeed(int64_t speed);
 };
 
 #endif // CONFIG_DISABLE_MODULE_TIM

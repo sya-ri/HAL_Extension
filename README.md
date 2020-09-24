@@ -1011,9 +1011,8 @@ TIMn
 > pwm.stop();
 > ```
 
-> ##### bool setCompare(uint32_t compare)
+> ##### void setCompare(uint32_t compare)
 > \_\_HAL_TIM_SET_COMPARE() を実行します  
-> compare が CounterPeriod より大きかった場合、設定がキャンセルされ、 false が返ります  
 > ```c++
 > 例:
 > pwm.setCompare(100);
@@ -1061,20 +1060,18 @@ TIMn
 > motor.stop();
 > ```
 
-> ##### bool setSpeed(bool forward, uint32_t compare)
+> ##### void setSpeed(bool forward, uint32_t compare)
 > 正転・逆転 と compare を送ります  
 > true が正転 / false が逆転 です  
-> PWM::setCompare() の結果を返します  
 > ```c++
 > 例:
 > motor.setSpeed(true, 400);
 > motor.setSpeed(false, 400);
 > ```
 
-> ##### bool setSpeed(int64_t speed)
+> ##### void setSpeed(int64_t speed)
 > 正の数は正転 / 負の数は逆転  
 > 絶対値が compare になります  
-> 内部的には setSpeed(bool, uint32_t) を実行しています  
 > 処理が多くなるので上記の関数を直接使うことを推奨します  
 > ```c++
 > 例:
