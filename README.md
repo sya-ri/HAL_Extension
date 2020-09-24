@@ -36,14 +36,14 @@
 
 ### ○ クラス
 
-#### GPIO
+#### ▷ GPIO
 
-##### ● CubeMX
+##### ・ CubeMX
 ```yaml
 PinOut: GPIO_Input / GPIO_Output
 ```
 
-##### ● コンストラクタ
+##### ・ コンストラクタ
 ###### GPIO(GPIO_TypeDef*, uint16_t)
 > ```c++
 > GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
@@ -54,7 +54,7 @@ PinOut: GPIO_Input / GPIO_Output
 > GPIO pa5(GPIOA, GPIO_PIN_5);
 > ```
 
-##### ● 関数
+##### ・ 関数
 ###### GPIO::read()
 > ```c++
 > GPIO_PinState read() const noexcept;
@@ -126,14 +126,14 @@ PinOut: GPIO_Input / GPIO_Output
 > pa5.toggle();
 > ```
 
-#### DIPSwitch
+#### ▷ DIPSwitch
 
-##### ● CubeMX
+##### ・ CubeMX
 ```yml
 PinOut: GPIO_Input
 ```
 
-##### ● コンストラクタ
+##### ・ コンストラクタ
 > ###### DIPSwitch(bool)
 > ```c++
 > DIPSwitch(bool flip = false);
