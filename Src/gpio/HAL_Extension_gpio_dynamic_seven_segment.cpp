@@ -74,10 +74,10 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
 }
 
 void DynamicSevenSegment::update(int64_t num) const noexcept {
-    update(num, UINT8_MAX);
+    update(num, -1);
 }
 
-void DynamicSevenSegment::updateFixedPoint(float num, uint8_t point) const noexcept {
+void DynamicSevenSegment::updateFixedPoint(float num, int8_t point) const noexcept {
     for(uint8_t i = 0; i < point; i++){
         num *= 10;
     }

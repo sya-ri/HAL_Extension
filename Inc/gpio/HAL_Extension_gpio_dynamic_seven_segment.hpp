@@ -25,7 +25,7 @@ public:
     DynamicSevenSegment& add(GPIO gpio) noexcept;
     DynamicSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
     void update(int64_t num) const noexcept;
-    void updateFixedPoint(float num, uint8_t point) const noexcept;
+    void updateFixedPoint(float num, int8_t point) const noexcept;
     void updateFloatPoint(float num) const noexcept;
     void next() const noexcept;
     void stop() const noexcept;
