@@ -547,6 +547,15 @@ USARTn
 > logger.println("HelloWorld");
 > ```
 
+> ##### void itTxCallback(UART_HandleTypeDef *huart)
+> 
+> ```c++
+> 例:
+> void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
+>     logger.itTxCallback(huart);
+> }
+> ```
+
 ## HAL_Extension_i2c
 
 ### 関数
