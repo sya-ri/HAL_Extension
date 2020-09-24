@@ -8,8 +8,8 @@
 
 class FixedSevenSegment: public SevenSegment {
 private:
+    const bool flip;
     std::vector<GPIO> list;
-    bool flip;
     bool enablePoint = false;
     GPIO pointGpio;
 public:
