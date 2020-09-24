@@ -8,19 +8,21 @@
 UART_Logger_IT::UART_Logger_IT(){}
 
 UART_Logger_IT::UART_Logger_IT(UART_HandleTypeDef &huart): huart(&huart){
-    setUARTTxCallback(&huart, [this]{
-        if (buffer.empty()) {
-            isBusy = false;
-        } else {
-            checkBuffer();
-        }
-    });
+    setUARTTxCallback(&huart, [this]{ itTxCallback(); });
 }
 
 void UART_Logger_IT::checkBuffer() noexcept {
     auto front = buffer.front();
     buffer.pop();
     HAL_UART_Transmit_IT(huart, (uint8_t *) front.c_str(), front.size());
+}
+
+void UART_Logger_IT::itTxCallback() noexcept {
+    if (buffer.empty()) {
+        isBusy = false;
+    } else {
+        checkBuffer();
+    }
 }
 
 void UART_Logger_IT::print(std::string text) noexcept {

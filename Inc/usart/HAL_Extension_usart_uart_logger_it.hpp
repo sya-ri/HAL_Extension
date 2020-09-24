@@ -15,6 +15,7 @@ private:
     std::queue<std::string> buffer;
     bool isBusy = false;
     void checkBuffer() noexcept;
+    void itTxCallback() noexcept;
 public:
     UART_Logger_IT();
     UART_Logger_IT(UART_HandleTypeDef &huart);
