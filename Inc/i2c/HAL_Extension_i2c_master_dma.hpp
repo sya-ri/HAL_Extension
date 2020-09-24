@@ -19,29 +19,29 @@ public:
 
     }
 
-    void init(){
+    void init() noexcept {
         HAL_I2C_DeInit(hi2c);
         HAL_I2C_Init(hi2c);
     }
 
-    HAL_StatusTypeDef startTransmit(){
+    HAL_StatusTypeDef startTransmit() noexcept {
         return HAL_I2C_Master_Transmit_DMA(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
     }
 
-    HAL_StatusTypeDef startReceive(){
+    HAL_StatusTypeDef startReceive() noexcept {
         return HAL_I2C_Master_Receive_DMA(hi2c, target << 1, (uint8_t *) &data, sizeof(T));
     }
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK
-    void setTxCallback(std::function<void()> function){
+    void setTxCallback(std::function<void()> function) noexcept {
         setI2CMasterTxCallback(hi2c, function);
     }
 
-    void setRxCallback(std::function<void()> function){
+    void setRxCallback(std::function<void()> function) noexcept {
         setI2CMasterRxCallback(hi2c, function);
     }
 
-    void setErrorCallback(std::function<void()> function){
+    void setErrorCallback(std::function<void()> function) noexcept {
         setI2CErrorCallback(hi2c, function);
     }
 #endif // CONFIG_DISABLE_EX_CALLBACK
