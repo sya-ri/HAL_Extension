@@ -18,36 +18,36 @@ public:
 
     }
 
-    HAL_StatusTypeDef startTransmit(){
+    HAL_StatusTypeDef startTransmit() noexcept {
         return HAL_UART_Transmit_DMA(huart, (uint8_t *) data, sizeof(T));
     }
 
-    HAL_StatusTypeDef startReceive(){
+    HAL_StatusTypeDef startReceive() noexcept {
         return HAL_UART_Receive_DMA(huart, (uint8_t *) data, sizeof(T));
     }
 
-    HAL_StatusTypeDef pause(){
+    HAL_StatusTypeDef pause() noexcept {
         return HAL_UART_DMAPause(huart);
     }
 
-    HAL_StatusTypeDef resume(){
+    HAL_StatusTypeDef resume() noexcept {
         return HAL_UART_DMAResume(huart);
     }
 
-    HAL_StatusTypeDef stop(){
+    HAL_StatusTypeDef stop() noexcept {
         return HAL_UART_DMAStop(huart);
     }
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK
-    void setTxCallback(std::function<void()> function){
+    void setTxCallback(std::function<void()> function) noexcept {
         setUARTTxCallback(huart, function);
     }
 
-    void setRxCallback(std::function<void()> function){
+    void setRxCallback(std::function<void()> function) noexcept {
         setUARTRxCallback(huart, function);
     }
 
-    void setErrorCallback(std::function<void()> function){
+    void setErrorCallback(std::function<void()> function) noexcept {
         setErrorCallback(huart, function);
     }
 #endif // CONFIG_DISABLE_EX_CALLBACK
