@@ -14,23 +14,23 @@ namespace {
     std::map<I2C_HandleTypeDef *, std::function<void()>> i2c_error_callback;
 }
 
-void setI2CMasterTxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function){
+void setI2CMasterTxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function) noexcept {
     i2c_master_tx_callback[hi2c] = function;
 }
 
-void setI2CMasterRxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function){
+void setI2CMasterRxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function) noexcept {
     i2c_master_rx_callback[hi2c] = function;
 }
 
-void setI2CSlaveTxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function){
+void setI2CSlaveTxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function) noexcept {
     i2c_slave_tx_callback[hi2c] = function;
 }
 
-void setI2CSlaveRxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function){
+void setI2CSlaveRxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function) noexcept {
     i2c_slave_rx_callback[hi2c] = function;
 }
 
-void setI2CErrorCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function){
+void setI2CErrorCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function) noexcept {
     i2c_error_callback[hi2c] = function;
 }
 
