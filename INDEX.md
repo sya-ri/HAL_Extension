@@ -18,3 +18,7 @@
     - [SevenSegment](Doc/module_GPIO/class/SevenSegment.md)
     - [FixedSevenSegment](Doc/module_GPIO/class/FixedSevenSegment.md)
     - [DynamicSevenSegment](Doc/module_GPIO/class/DynamicSevenSegment.md)
+- [UART](Doc/module_UART/INDEX.md)
+  - [コンフィグ](Doc/module_UART/INDEX.md#コンフィグ)
+    - [CONFIG_DISABLE_MODULE_UART](Doc/module_UART/INDEX.md#CONFIG_DISABLE_MODULE_UART)
+    - [CONFIG_USE_HALF_CALLBACK_UART](Doc/module_UART/INDEX.md#CONFIG_USE_HALF_CALLBACK_UART)
