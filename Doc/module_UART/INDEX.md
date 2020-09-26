@@ -16,8 +16,8 @@
 - [uartReceive](function.md#uartreceive)
 - [uartReceive_IT](function.md#uartreceive_it)
 - [uartReceive_DMA](function.md#uartreceive_dma)
-- [setUARTTxCallback](function.md#setuarttxcallbackuart_handletypedef--stdfunctionvoid)
-- [setUARTRxCallback](function.md#setuartrxcallbackuart_handletypedef--stdfunctionvoid)
-- [setErrorCallback](function.md#setuarterrorcallbackuart_handletypedef--stdfunctionvoid)
+- [setUARTTxCallback](function.md#setuarttxcallbackuart_handletypedef-stdfunctionvoid)
+- [setUARTRxCallback](function.md#setuartrxcallbackuart_handletypedef-stdfunctionvoid)
+- [setErrorCallback](function.md#setuarterrorcallbackuart_handletypedef-stdfunctionvoid)
 
 [<< 戻る](../../INDEX.md)

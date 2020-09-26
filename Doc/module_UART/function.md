@@ -7,9 +7,9 @@
 - [uartReceive](#uartreceive)
 - [uartReceive_IT](#uartreceive_it)
 - [uartReceive_DMA](#uartreceive_dma)
-- [setUARTTxCallback](#setuarttxcallbackuart_handletypedef--stdfunctionvoid)
-- [setUARTRxCallback](#setuartrxcallbackuart_handletypedef--stdfunctionvoid)
-- [setErrorCallback](#setuarterrorcallbackuart_handletypedef--stdfunctionvoid)
+- [setUARTTxCallback](#setuarttxcallbackuart_handletypedef-stdfunctionvoid)
+- [setUARTRxCallback](#setuartrxcallbackuart_handletypedef-stdfunctionvoid)
+- [setErrorCallback](#setuarterrorcallbackuart_handletypedef-stdfunctionvoid)
 
 ## 関数
 ##### uartTransmit
@@ -78,19 +78,19 @@
 > ```
 > `HAL_UART_Receive_DMA` を実行します
 
-##### setUARTTxCallback(UART_HandleTypeDef *, std::function<void()>)
+##### setUARTTxCallback(UART_HandleTypeDef*, std::function<void()>)
 > ```c++
 > void setUARTTxCallback(UART_HandleTypeDef *huart, std::function<void()> function);
 > ```
 > `HAL_UART_TxCpltCallback` や `HAL_UART_TxHalfCpltCallback` の処理を変更します
 
-##### setUARTRxCallback(UART_HandleTypeDef *, std::function<void()>)
+##### setUARTRxCallback(UART_HandleTypeDef*, std::function<void()>)
 > ```c++
 > void setUARTRxCallback(UART_HandleTypeDef *huart, std::function<void()> function);
 > ```
 > `HAL_UART_RxCpltCallback` や `HAL_UART_RxHalfCpltCallback` の処理を変更します
 
-##### setUARTErrorCallback(UART_HandleTypeDef *, std::function<void()>)
+##### setUARTErrorCallback(UART_HandleTypeDef*, std::function<void()>)
 > ```c++
 > void setUARTErrorCallback(UART_HandleTypeDef *huart, std::function<void()> function);
 > ```
