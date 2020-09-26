@@ -5,6 +5,8 @@
 
 #include "usart.h"
 #include "HAL_Extension_uart_callback.hpp"
+#include "HAL_Extension_uart_function_transmit.hpp"
+#include "HAL_Extension_uart_function_receive.hpp"
 
 template<class T>
 class UART_IT {
@@ -18,11 +20,11 @@ public:
     }
 
     HAL_StatusTypeDef transmit(const T &data) const noexcept {
-        return HAL_UART_Transmit_IT(huart, (uint8_t *) &data, sizeof(T));
+        return uartTransmit_IT(huart, data);
     }
 
     HAL_StatusTypeDef receive(T &data) const noexcept {
-        return HAL_UART_Receive_IT(huart, (uint8_t *) &data, sizeof(T));
+        return uartReceive_IT(huart, data);
     }
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK

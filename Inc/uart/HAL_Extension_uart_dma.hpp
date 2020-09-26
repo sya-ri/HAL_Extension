@@ -5,6 +5,8 @@
 
 #include "usart.h"
 #include "HAL_Extension_uart_callback.hpp"
+#include "HAL_Extension_uart_function_transmit.hpp"
+#include "HAL_Extension_uart_function_receive.hpp"
 
 template<class T>
 class UART_DMA {
@@ -19,11 +21,11 @@ public:
     }
 
     HAL_StatusTypeDef startTransmit() noexcept {
-        return HAL_UART_Transmit_DMA(huart, (uint8_t *) data, sizeof(T));
+        return uartTransmit_DMA(huart, data);
     }
 
     HAL_StatusTypeDef startReceive() noexcept {
-        return HAL_UART_Receive_DMA(huart, (uint8_t *) data, sizeof(T));
+        return uartReceive_DMA(huart, data);
     }
 
     HAL_StatusTypeDef pause() noexcept {

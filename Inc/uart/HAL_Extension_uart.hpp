@@ -4,6 +4,8 @@
 #ifndef CONFIG_DISABLE_MODULE_UART
 
 #include "usart.h"
+#include "HAL_Extension_uart_function_transmit.hpp"
+#include "HAL_Extension_uart_function_receive.hpp"
 
 template<class T>
 class UART {
@@ -17,11 +19,11 @@ public:
     }
 
     HAL_StatusTypeDef transmit(const T &data, uint32_t timeout) const noexcept {
-        return HAL_UART_Transmit(huart, (uint8_t *) &data, sizeof(T), timeout);
+        return uartTransmit(huart, data, timeout);
     }
 
     HAL_StatusTypeDef receive(T &data, uint32_t timeout) const noexcept {
-        return HAL_UART_Receive(huart, (uint8_t *) &data, sizeof(T), timeout);
+        return uartReceive(huart, data, timeout);
     }
 };
 
