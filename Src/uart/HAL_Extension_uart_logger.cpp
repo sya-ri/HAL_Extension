@@ -22,7 +22,7 @@ void UART_Logger::println(std::string text) const noexcept {
 }
 
 void UART_Logger::println(const char* text) const noexcept {
-    println(text);
+    println(std::string(text));
 }
 
 #endif // CONFIG_DISABLE_MODULE_UART
