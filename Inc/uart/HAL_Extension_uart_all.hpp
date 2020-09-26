@@ -3,6 +3,7 @@
 
 #ifndef CONFIG_DISABLE_MODULE_UART
 
+#include "HAL_Extension_uart_function.hpp"
 #include "HAL_Extension_uart.hpp"
 #include "HAL_Extension_uart_it.hpp"
 #include "HAL_Extension_uart_dma.hpp"
