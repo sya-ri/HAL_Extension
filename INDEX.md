@@ -38,3 +38,4 @@ namespace halex
     - [setErrorCallback](Doc/module_UART/function/INDEX.md#setuarterrorcallbackuart_handletypedef-stdfunctionvoid)
   - [クラス](Doc/module_UART/INDEX.md#クラス)
     - [UART](Doc/module_UART/class/UART.md)
+    - [UART_IT](Doc/module_UART/class/UART_IT.md)
