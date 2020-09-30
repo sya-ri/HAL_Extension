@@ -49,8 +49,8 @@ void Motor::setSpeed(bool forward, uint16_t numerator, uint16_t denominator) noe
 }
 
 void Motor::setSpeed(int64_t speed) noexcept {
-	bool back = speed < 0;
-	setSpeed(!back, (uint32_t) (back? -speed : speed));
+	bool forward = 0 < speed;
+	setSpeed(forward, (uint32_t) (forward? speed : -speed));
 }
 
 void Motor::setSpeed(int16_t numerator, int16_t denominator) noexcept {
