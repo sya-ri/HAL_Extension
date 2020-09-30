@@ -5,9 +5,9 @@
 
 namespace halex {
 
-GPIO::GPIO(){}
+GPIO::GPIO() {}
 
-GPIO::GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin): GPIOx(GPIOx), GPIO_Pin(GPIO_Pin){
+GPIO::GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin): GPIOx(GPIOx), GPIO_Pin(GPIO_Pin) {
 
 }
 

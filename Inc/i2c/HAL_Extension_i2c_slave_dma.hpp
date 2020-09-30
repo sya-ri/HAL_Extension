@@ -17,7 +17,7 @@ private:
     uint8_t address;
     T *data;
 public:
-    I2C_Slave_DMA(){}
+    I2C_Slave_DMA() {}
 
     I2C_Slave_DMA(I2C_HandleTypeDef *hi2c, T &data, uint8_t address = 0x00): hi2c(hi2c), data(&data), address(address) {
 

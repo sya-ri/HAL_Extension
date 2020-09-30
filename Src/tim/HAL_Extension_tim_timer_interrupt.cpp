@@ -5,13 +5,13 @@
 
 namespace halex {
 
-TimerInterrupt::TimerInterrupt(){}
+TimerInterrupt::TimerInterrupt() {}
 
-TimerInterrupt::TimerInterrupt(TIM_HandleTypeDef *htim): htim(htim){
+TimerInterrupt::TimerInterrupt(TIM_HandleTypeDef *htim): htim(htim) {
 
 }
 
-TimerInterrupt::TimerInterrupt(TIM_HandleTypeDef &htim): TimerInterrupt(&htim){
+TimerInterrupt::TimerInterrupt(TIM_HandleTypeDef &htim): TimerInterrupt(&htim) {
 
 }
 

@@ -32,7 +32,7 @@ SevenSegment::SevenSegment(bool flip): flip(flip) {
 }
 
 SevenSegment& SevenSegment::add(GPIO gpio) noexcept {
-    if(!isAvailable()){
+    if(!isAvailable()) {
         list.push_back(gpio);
     } else if(!enablePoint) {
         pointGpio = gpio;
@@ -48,12 +48,12 @@ SevenSegment& SevenSegment::add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept
 bool SevenSegment::setLight(uint8_t lightData) const noexcept {
     if(!isAvailable()) return false;
     uint8_t mask = 1;
-    for(auto segment : list){
+    for(auto segment : list) {
         uint8_t outData = lightData & mask;
         segment.write((GPIO_PinState) (flip? ~outData : outData));
         mask <<= 1;
     }
-    if(enablePoint){
+    if(enablePoint) {
         uint8_t outData = lightData & mask;
         pointGpio.write((GPIO_PinState) (flip? ~outData : outData));
     }
@@ -62,12 +62,12 @@ bool SevenSegment::setLight(uint8_t lightData) const noexcept {
 
 bool SevenSegment::set(int8_t hex, bool point) const noexcept {
     uint8_t lightData;
-    if(hex < 0){
+    if(hex < 0) {
         lightData = lightDataTable[16];
     } else {
         lightData = lightDataTable[hex & 0xF];
     }
-    if(point){
+    if(point) {
         lightData |= 1 << 7;
     }
     return setLight(lightData);

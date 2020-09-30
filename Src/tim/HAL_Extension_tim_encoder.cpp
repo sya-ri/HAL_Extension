@@ -4,19 +4,19 @@
 
 namespace halex {
 
-Encoder::Encoder(){}
+Encoder::Encoder() {}
 
-Encoder::Encoder(TIM_HandleTypeDef *htim): htim(htim){
+Encoder::Encoder(TIM_HandleTypeDef *htim): htim(htim) {
 
 }
 
-Encoder::Encoder(TIM_HandleTypeDef &htim): Encoder(&htim){
+Encoder::Encoder(TIM_HandleTypeDef &htim): Encoder(&htim) {
 
 }
 
 void Encoder::start() noexcept {
 	int16_t lastCount = count;
-	if(!isStart){
+	if(!isStart) {
 		HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
 	}
 	__HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
@@ -28,7 +28,7 @@ void Encoder::start() noexcept {
 
 void Encoder::stop() noexcept {
 	update();
-	if(isStart){
+	if(isStart) {
 		HAL_TIM_Encoder_Stop(htim, TIM_CHANNEL_ALL);
 	}
 	__HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);

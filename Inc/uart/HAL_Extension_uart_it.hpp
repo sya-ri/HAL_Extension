@@ -15,9 +15,9 @@ class UART_IT {
 private:
     UART_HandleTypeDef *huart;
 public:
-    UART_IT(){}
+    UART_IT() {}
 
-    UART_IT(UART_HandleTypeDef &huart): huart(&huart){
+    UART_IT(UART_HandleTypeDef &huart): huart(&huart) {
 
     }
 

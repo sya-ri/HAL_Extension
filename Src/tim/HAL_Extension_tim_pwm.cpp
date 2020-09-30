@@ -4,7 +4,7 @@
 
 namespace halex {
 
-PWM::PWM(){}
+PWM::PWM() {}
 
 PWM::PWM(TIM_HandleTypeDef *htim, uint32_t channel): htim(htim), channel(channel) {
 

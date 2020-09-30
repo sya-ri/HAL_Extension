@@ -15,7 +15,7 @@ class I2C_Master_IT {
 private:
     I2C_HandleTypeDef* hi2c;
 public:
-    I2C_Master_IT(){}
+    I2C_Master_IT() {}
 
     I2C_Master_IT(I2C_HandleTypeDef *hi2c): hi2c(hi2c) {
 

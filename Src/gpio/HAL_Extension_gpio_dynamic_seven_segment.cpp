@@ -5,11 +5,11 @@
 namespace halex {
 
 namespace {
-    uint8_t getNumberOfDigit(float num){
+    uint8_t getNumberOfDigit(float num) {
         uint64_t numAsUInt = (uint64_t) ((num < 0)? -num : num);
         uint64_t compare = 10;
         uint8_t numberOfDigit = 1;
-        while(!(numAsUInt < compare)){
+        while(!(numAsUInt < compare)) {
             compare *= 10;
             numberOfDigit ++;
         }
@@ -17,7 +17,7 @@ namespace {
     }
 }
 
-DynamicSevenSegment::DynamicSevenSegment(): DynamicSevenSegment(SevenSegment()){}
+DynamicSevenSegment::DynamicSevenSegment(): DynamicSevenSegment(SevenSegment()) {}
 
 DynamicSevenSegment::DynamicSevenSegment(
 	const SevenSegment &sevenSegment,
@@ -45,28 +45,28 @@ DynamicSevenSegment& DynamicSevenSegment::add(GPIO_TypeDef* GPIOx, uint16_t GPIO
 void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
     splitNum.clear();
     bool isMinus = num < 0;
-    if(isMinus){
+    if(isMinus) {
         num *= -1;
     }
     do {
         splitNum.push_back((int8_t)(num % digitSystem));
         num /= digitSystem;
     } while(0 < num);
-    if(zeroFill){
+    if(zeroFill) {
         int8_t fillNumber = digitList.size() - splitNum.size();
-        if(allowSign){
+        if(allowSign) {
             fillNumber --;
         }
-        while(0 < fillNumber){
+        while(0 < fillNumber) {
             splitNum.push_back(0);
             fillNumber --;
         }
     }
-    if(allowSign && isMinus){
+    if(allowSign && isMinus) {
         splitNum.push_back(-1);
     }
     uint8_t numSize = splitNum.size();
-    if(numSize != 0){
+    if(numSize != 0) {
         digitCursor = numSize - 1;
         isStop = false;
     } else {
@@ -80,7 +80,7 @@ void DynamicSevenSegment::update(int64_t num) const noexcept {
 }
 
 void DynamicSevenSegment::updateFixedPoint(float num, int8_t point) const noexcept {
-    for(uint8_t i = 0; i < point; i++){
+    for(uint8_t i = 0; i < point; i++) {
         num *= 10;
     }
     update((int64_t) num, digitList.size() - point);
@@ -94,7 +94,7 @@ void DynamicSevenSegment::next() const noexcept {
     if(isStop) return;
     digitList[digitCursor].reset();
     digitCursor ++;
-    if(splitNum.size() <= digitCursor || digitList.size() <= digitCursor){
+    if(splitNum.size() <= digitCursor || digitList.size() <= digitCursor) {
         digitCursor = 0;
     }
     sevenSegment.set(splitNum[digitCursor], digitCursor == point);

@@ -16,9 +16,9 @@ private:
     UART_HandleTypeDef *huart;
     T *data;
 public:
-    UART_DMA(){}
+    UART_DMA() {}
 
-    UART_DMA(UART_HandleTypeDef &huart, T &data): huart(&huart), data(&data){
+    UART_DMA(UART_HandleTypeDef &huart, T &data): huart(&huart), data(&data) {
 
     }
 

@@ -4,9 +4,9 @@
 
 namespace halex {
 
-Motor::Motor(): Motor(PWM(), PWM()){}
+Motor::Motor(): Motor(PWM(), PWM()) {}
 
-Motor::Motor(const PWM &positive, const PWM &negative): positive(positive), negative(negative){
+Motor::Motor(const PWM &positive, const PWM &negative): positive(positive), negative(negative) {
 
 }
 
@@ -29,7 +29,7 @@ void Motor::stop() noexcept {
 }
 
 void Motor::setSpeed(bool forward, uint32_t compare) noexcept {
-	if(forward){
+	if(forward) {
 		positive.setCompare(compare);
 		negative.setCompare(0);
 	} else {
@@ -39,7 +39,7 @@ void Motor::setSpeed(bool forward, uint32_t compare) noexcept {
 }
 
 void Motor::setSpeed(bool forward, uint16_t numerator, uint16_t denominator) noexcept {
-	if(forward){
+	if(forward) {
 		positive.setCompare(numerator, denominator);
 		negative.setCompare(0);
 	} else {
@@ -56,14 +56,14 @@ void Motor::setSpeed(int64_t speed) noexcept {
 void Motor::setSpeed(int16_t numerator, int16_t denominator) noexcept {
 	bool forward = true;
 	uint16_t abs_numerator;
-	if(numerator < 0){
+	if(numerator < 0) {
 		abs_numerator = (uint16_t) -numerator;
 		forward = !forward;
 	} else {
 		abs_numerator = (uint16_t) numerator;
 	}
 	uint16_t abs_denominator;
-	if(denominator < 0){
+	if(denominator < 0) {
 		abs_denominator = (uint16_t) -denominator;
 		forward = !forward;
 	} else {

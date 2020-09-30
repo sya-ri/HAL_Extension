@@ -6,15 +6,15 @@
 
 namespace halex {
 
-ADC_DMA::ADC_DMA(){}
+ADC_DMA::ADC_DMA() {}
 
-ADC_DMA::ADC_DMA(ADC_HandleTypeDef *hadc, uint32_t adcBufLength): hadc(hadc), adcBufLength(adcBufLength){
+ADC_DMA::ADC_DMA(ADC_HandleTypeDef *hadc, uint32_t adcBufLength): hadc(hadc), adcBufLength(adcBufLength) {
     adcBuf = new uint32_t[adcBufLength];
 }
 
-ADC_DMA::ADC_DMA(ADC_HandleTypeDef &hadc, uint32_t adcBufLength): ADC_DMA(&hadc, adcBufLength){}
+ADC_DMA::ADC_DMA(ADC_HandleTypeDef &hadc, uint32_t adcBufLength): ADC_DMA(&hadc, adcBufLength) {}
 
-ADC_DMA::~ADC_DMA(){
+ADC_DMA::~ADC_DMA() {
     delete[] adcBuf;
 }
 

@@ -17,7 +17,7 @@ private:
     uint8_t target;
     T *data;
 public:
-    I2C_Master_DMA(){}
+    I2C_Master_DMA() {}
 
     I2C_Master_DMA(I2C_HandleTypeDef *hi2c, uint8_t target, T &data): hi2c(hi2c), target(target), data(&data) {
 

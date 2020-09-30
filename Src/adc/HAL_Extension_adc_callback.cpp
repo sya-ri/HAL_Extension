@@ -23,11 +23,11 @@ void setADCCallback(ADC_HandleTypeDef &hadc, std::function<void()> function) noe
 } // namespace halex
 
 #ifdef CONFIG_USE_HALF_CALLBACK_ADC
-void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc){
+void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc) {
 #else  // CONFIG_USE_HALF_CALLBACK_ADC
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
 #endif // CONFIG_USE_HALF_CALLBACK_ADC
-    if(halex::map_contains(halex::adc_callback, hadc)){
+    if(halex::map_contains(halex::adc_callback, hadc)) {
     	halex::adc_callback[hadc]();
     }
 }

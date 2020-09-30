@@ -5,9 +5,9 @@
 
 namespace halex {
 
-UART_Logger_IT::UART_Logger_IT(){}
+UART_Logger_IT::UART_Logger_IT() {}
 
-UART_Logger_IT::UART_Logger_IT(UART_HandleTypeDef &huart): huart(&huart){
+UART_Logger_IT::UART_Logger_IT(UART_HandleTypeDef &huart): huart(&huart) {
 #ifndef CONFIG_DISABLE_EX_CALLBACK
     setUARTTxCallback(&huart, [this]{ itTxCallback(); });
 #endif

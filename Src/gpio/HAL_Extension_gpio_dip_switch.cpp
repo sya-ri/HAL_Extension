@@ -9,7 +9,7 @@ DIPSwitch::DIPSwitch(bool flip): flip(flip) {
 }
 
 DIPSwitch& DIPSwitch::add(GPIO gpio) noexcept {
-    if(getSize() < 8){
+    if(getSize() < 8) {
         list.push_back(gpio);
     }
     return *this;
@@ -25,7 +25,7 @@ uint8_t DIPSwitch::getSize() const noexcept {
 
 uint8_t DIPSwitch::getAddress() const noexcept {
     uint8_t builder = 0;
-    for(int i = 0; i < getSize(); i++){
+    for(int i = 0; i < getSize(); i++) {
         builder |= list[i].read() << i;
     }
     return flip? ~builder : builder;

@@ -9,7 +9,7 @@ FixedSevenSegment::FixedSevenSegment(bool flip): flip(flip) {
 }
 
 FixedSevenSegment& FixedSevenSegment::add(GPIO gpio) noexcept {
-    if(!isAvailable()){
+    if(!isAvailable()) {
         list.push_back(gpio);
     } else if(!enablePoint) {
         pointGpio = gpio;
@@ -27,11 +27,11 @@ bool FixedSevenSegment::setLight(uint8_t lightData) const noexcept {
 }
 
 bool FixedSevenSegment::set(int8_t hex, bool point) const noexcept {
-    if(isAvailable()){
-        if(point && enablePoint){
+    if(isAvailable()) {
+        if(point && enablePoint) {
             pointGpio.set();
         }
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 4; i++) {
             uint8_t outData = hex & 1;
             list[i].write((GPIO_PinState) (flip? ~outData : outData));
             hex >>= 1;
