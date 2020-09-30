@@ -36,3 +36,5 @@ namespace halex
     - [setUARTTxCallback](Doc/module_UART/function/INDEX.md#setuarttxcallbackuart_handletypedef-stdfunctionvoid)
     - [setUARTRxCallback](Doc/module_UART/function/INDEX.md#setuartrxcallbackuart_handletypedef-stdfunctionvoid)
     - [setErrorCallback](Doc/module_UART/function/INDEX.md#setuarterrorcallbackuart_handletypedef-stdfunctionvoid)
+  - [クラス](Doc/module_UART/INDEX.md#クラス)
+    - [UART](Doc/module_UART/class/UART.md)
