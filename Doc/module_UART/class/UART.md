@@ -4,8 +4,8 @@
 - [CubeMX](#cubemx)
 - [クラステンプレート](#クラステンプレート)
 - [コンストラクタ](#コンストラクタ)
-- [関数](#関数)
   - [UART(UART_HandleTypeDef)](#uartuart_handletypedef)
+- [関数](#関数)
   - [transmit(T, uint32_t)](#uarttransmitt-uint32_t)
   - [receive(T, uint32_t)](#uartreceivet-uint32_t)
 
