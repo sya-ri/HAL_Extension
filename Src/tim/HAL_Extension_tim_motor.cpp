@@ -4,9 +4,9 @@
 
 namespace halex {
 
-Motor::Motor(){}
+Motor::Motor(): Motor(PWM(), PWM()){}
 
-Motor::Motor(PWM positive, PWM negative): positive(positive), negative(negative){
+Motor::Motor(const PWM &positive, const PWM &negative): positive(positive), negative(negative){
 
 }
 

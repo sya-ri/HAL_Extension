@@ -15,10 +15,10 @@ public:
     PWM();
     PWM(TIM_HandleTypeDef *htim, uint32_t channel);
     PWM(TIM_HandleTypeDef &htim, uint32_t channel);
-    void start() noexcept;
-    void stop() noexcept;
-    void setCompare(uint32_t compare) noexcept;
-    void setCompare(uint16_t numerator, uint16_t denominator) noexcept;
+    void start() const noexcept;
+    void stop() const noexcept;
+    void setCompare(uint32_t compare) const noexcept;
+    void setCompare(uint16_t numerator, uint16_t denominator) const noexcept;
     uint32_t getCounterPeriod() const noexcept;
 };
 

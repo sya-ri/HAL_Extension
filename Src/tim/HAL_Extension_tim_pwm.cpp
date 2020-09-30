@@ -14,19 +14,19 @@ PWM::PWM(TIM_HandleTypeDef &htim, uint32_t channel): PWM(&htim, channel) {
 
 }
 
-void PWM::start() noexcept {
+void PWM::start() const noexcept {
 	HAL_TIM_PWM_Start(htim, channel);
 }
 
-void PWM::stop() noexcept {
+void PWM::stop() const noexcept {
 	HAL_TIM_PWM_Stop(htim, channel);
 }
 
-void PWM::setCompare(uint32_t compare) noexcept {
+void PWM::setCompare(uint32_t compare) const noexcept {
 	__HAL_TIM_SET_COMPARE(htim, channel, compare);
 }
 
-void PWM::setCompare(uint16_t numerator, uint16_t denominator) noexcept {
+void PWM::setCompare(uint16_t numerator, uint16_t denominator) const noexcept {
     if(denominator < numerator) return;
 	setCompare(getCounterPeriod() * numerator / denominator);
 }

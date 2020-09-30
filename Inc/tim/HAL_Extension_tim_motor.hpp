@@ -9,11 +9,11 @@ namespace halex {
 
 class Motor {
 private:
-    PWM positive;
-    PWM negative;
+    const PWM &positive;
+    const PWM &negative;
 public:
     Motor();
-    Motor(PWM positive, PWM negative);
+    Motor(const PWM &positive, const PWM &negative);
     Motor(TIM_HandleTypeDef *htimPos, uint32_t channelPos, TIM_HandleTypeDef *htimNeg, uint32_t channelNeg);
     Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg);
     void start() noexcept;
