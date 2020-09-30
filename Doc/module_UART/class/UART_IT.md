@@ -4,7 +4,7 @@
 - [CubeMX](#cubemx)
 - [クラステンプレート](#クラステンプレート)
 - [コンストラクタ](#コンストラクタ)
-  - [UART_IT(UART_HandleTypeDef)](#uartuart_handletypedef)
+  - [UART_IT(UART_HandleTypeDef)](#uart_ituart_handletypedef)
 - [関数](#関数)
   - [transmit(T)](#uarttransmitt)
   - [receive(T)](#uart_itreceivet)
