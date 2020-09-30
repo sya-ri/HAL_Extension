@@ -14,6 +14,7 @@ private:
     uint32_t timeout;
 public:
     UART_Logger();
+    UART_Logger(UART_HandleTypeDef *huart, uint32_t timeout = 0x0F);
     UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F);
     void print(std::string text) const noexcept;
     void print(const char* text) const noexcept;

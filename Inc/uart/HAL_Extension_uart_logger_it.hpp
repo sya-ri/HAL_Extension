@@ -21,6 +21,7 @@ private:
 #endif // CONFIG_DISABLE_EX_CALLBACK
 public:
     UART_Logger_IT();
+    UART_Logger_IT(UART_HandleTypeDef *huart);
     UART_Logger_IT(UART_HandleTypeDef &huart);
     void print(std::string text) noexcept;
     void print(const char* text) noexcept;

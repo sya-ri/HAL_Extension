@@ -17,7 +17,11 @@ private:
 public:
     UART_IT() {}
 
-    UART_IT(UART_HandleTypeDef &huart): huart(&huart) {
+    UART_IT(UART_HandleTypeDef *huart): huart(huart) {
+
+    }
+
+    UART_IT(UART_HandleTypeDef &huart): UART_IT(&huart) {
 
     }
 

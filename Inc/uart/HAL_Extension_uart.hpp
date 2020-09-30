@@ -16,7 +16,11 @@ private:
 public:
     UART() {}
 
-    UART(UART_HandleTypeDef &huart): huart(&huart) {
+    UART(UART_HandleTypeDef *huart): huart(huart) {
+
+    }
+
+    UART(UART_HandleTypeDef &huart): UART(&huart) {
 
     }
 

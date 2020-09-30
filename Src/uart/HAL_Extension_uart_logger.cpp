@@ -6,7 +6,11 @@ namespace halex {
 
 UART_Logger::UART_Logger() {}
 
-UART_Logger::UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout): huart(&huart), timeout(timeout) {
+UART_Logger::UART_Logger(UART_HandleTypeDef *huart, uint32_t timeout): huart(huart), timeout(timeout) {
+
+}
+
+UART_Logger::UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout): UART_Logger(&huart, timeout) {
 
 }
 
