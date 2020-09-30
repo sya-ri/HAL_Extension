@@ -7,6 +7,8 @@
 #include "HAL_Extension_uart_function_transmit.hpp"
 #include "HAL_Extension_uart_function_receive.hpp"
 
+namespace halex {
+
 template<class T>
 class UART {
 private:
@@ -26,6 +28,8 @@ public:
         return uartReceive(huart, data, timeout);
     }
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_UART
 

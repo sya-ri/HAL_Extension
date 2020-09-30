@@ -5,6 +5,8 @@
 
 #include "gpio.h"
 
+namespace halex {
+
 class GPIO {
 private:
     GPIO_TypeDef* GPIOx;
@@ -20,6 +22,8 @@ public:
     void reset() const noexcept;
     void toggle() const noexcept;
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_GPIO
 

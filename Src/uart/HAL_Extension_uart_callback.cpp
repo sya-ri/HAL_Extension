@@ -6,6 +6,8 @@
 #include <map>
 #include "HAL_Extension_util.hpp"
 
+namespace halex {
+
 namespace {
     std::map<UART_HandleTypeDef *, std::function<void()>> uart_tx_callback;
     std::map<UART_HandleTypeDef *, std::function<void()>> uart_rx_callback;
@@ -24,13 +26,15 @@ void setUARTErrorCallback(UART_HandleTypeDef *huart, std::function<void()> funct
     uart_error_callback[huart] = function;
 }
 
+} // namespace halex
+
 #ifdef CONFIG_USE_HALF_CALLBACK_UART
 void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart){
 #else  // CONFIG_USE_HALF_CALLBACK_UART
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
 #endif // CONFIG_USE_HALF_CALLBACK_UART
-    if(map_contains(uart_tx_callback, huart)){
-        uart_tx_callback[huart]();
+    if(halex::map_contains(halex::uart_tx_callback, huart)){
+    	halex::uart_tx_callback[huart]();
     }
 }
 
@@ -39,14 +43,14 @@ void HAL_UART_RxHalfCpltCallback(UART_HandleTypeDef *huart){
 #else  // CONFIG_USE_HALF_CALLBACK_UART
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 #endif // CONFIG_USE_HALF_CALLBACK_UART
-    if(map_contains(uart_rx_callback, huart)){
-        uart_rx_callback[huart]();
+    if(halex::map_contains(halex::uart_rx_callback, huart)){
+    	halex::uart_rx_callback[huart]();
     }
 }
 
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart){
-    if(map_contains(uart_error_callback, huart)){
-        uart_error_callback[huart]();
+    if(halex::map_contains(halex::uart_error_callback, huart)){
+    	halex::uart_error_callback[huart]();
     }
 }
 #endif // CONFIG_DISABLE_EX_CALLBACK

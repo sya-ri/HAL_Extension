@@ -2,6 +2,8 @@
 
 #include "uart/HAL_Extension_uart_logger.hpp"
 
+namespace halex {
+
 UART_Logger::UART_Logger(){}
 
 UART_Logger::UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout): huart(&huart), timeout(timeout){
@@ -24,5 +26,7 @@ void UART_Logger::println(std::string text) const noexcept {
 void UART_Logger::println(const char* text) const noexcept {
     println(std::string(text));
 }
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_UART

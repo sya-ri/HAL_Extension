@@ -3,6 +3,8 @@
 #include "tim/HAL_Extension_tim_timer_interrupt.hpp"
 #include "tim/HAL_Extension_tim_callback.hpp"
 
+namespace halex {
+
 TimerInterrupt::TimerInterrupt(){}
 
 TimerInterrupt::TimerInterrupt(TIM_HandleTypeDef &htim): htim(&htim){
@@ -40,5 +42,7 @@ void TimerInterrupt::setCallback(std::function<void()> function) noexcept {
     setTIMPeriodElapsedCallback(htim, function);
 }
 #endif // CONFIG_DISABLE_EX_CALLBACK
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_TIM

@@ -6,6 +6,8 @@
 #include "usart.h"
 #include <string>
 
+namespace halex {
+
 class UART_Logger {
 private:
     UART_HandleTypeDef *huart;
@@ -18,6 +20,8 @@ public:
     void println(std::string text) const noexcept;
     void println(const char* text) const noexcept;
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_UART
 

@@ -7,6 +7,8 @@
 #include "HAL_Extension_i2c_function_slave_transmit.hpp"
 #include "HAL_Extension_i2c_function_slave_receive.hpp"
 
+namespace halex {
+
 template<class T>
 class I2C_Slave {
 private:
@@ -44,6 +46,8 @@ public:
         return i2cSlaveReceive(hi2c, data, timeout);
     }
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_I2C
 

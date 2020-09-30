@@ -2,6 +2,8 @@
 
 #include "gpio/HAL_Extension_gpio_fixed_seven_segment.hpp"
 
+namespace halex {
+
 FixedSevenSegment::FixedSevenSegment(bool flip): flip(flip) {
     list.reserve(4);
 }
@@ -47,5 +49,7 @@ bool FixedSevenSegment::clear() const noexcept {
 bool FixedSevenSegment::isAvailable() const noexcept {
     return list.size() == 4;
 }
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_GPIO

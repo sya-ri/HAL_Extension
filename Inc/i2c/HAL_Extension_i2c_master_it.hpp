@@ -8,6 +8,8 @@
 #include "HAL_Extension_i2c_function_master_transmit.hpp"
 #include "HAL_Extension_i2c_function_master_receive.hpp"
 
+namespace halex {
+
 template<class T>
 class I2C_Master_IT {
 private:
@@ -46,6 +48,8 @@ public:
     }
 #endif // CONFIG_DISABLE_EX_CALLBACK
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_I2C
 

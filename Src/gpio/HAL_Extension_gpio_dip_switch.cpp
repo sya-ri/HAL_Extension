@@ -2,6 +2,8 @@
 
 #include "gpio/HAL_Extension_gpio_dip_switch.hpp"
 
+namespace halex {
+
 DIPSwitch::DIPSwitch(bool flip): flip(flip) {
     list.reserve(8);
 }
@@ -28,5 +30,7 @@ uint8_t DIPSwitch::getAddress() const noexcept {
     }
     return flip? ~builder : builder;
 }
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_GPIO

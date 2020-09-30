@@ -8,6 +8,8 @@
 #include "HAL_Extension_uart_function_transmit.hpp"
 #include "HAL_Extension_uart_function_receive.hpp"
 
+namespace halex {
+
 template<class T>
 class UART_IT {
 private:
@@ -41,6 +43,8 @@ public:
     }
 #endif // CONFIG_DISABLE_EX_CALLBACK
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_UART
 

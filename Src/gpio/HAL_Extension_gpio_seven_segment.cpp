@@ -3,6 +3,8 @@
 #include "gpio/HAL_Extension_gpio_seven_segment.hpp"
 #include <array>
 
+namespace halex {
+
 namespace {
     const std::array<const uint8_t, 17> lightDataTable = {
             0b0111111, // 0x0
@@ -78,5 +80,7 @@ bool SevenSegment::clear() const noexcept {
 bool SevenSegment::isAvailable() const noexcept {
     return list.size() == 7;
 }
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_GPIO

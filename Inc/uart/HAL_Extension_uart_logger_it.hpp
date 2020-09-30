@@ -7,6 +7,8 @@
 #include <string>
 #include <queue>
 
+namespace halex {
+
 class UART_Logger_IT {
 private:
     UART_HandleTypeDef *huart;
@@ -29,6 +31,8 @@ public:
     void itTxCallback(UART_HandleTypeDef *huart) noexcept;
 #endif // CONFIG_DISABLE_EX_CALLBACK
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_UART
 

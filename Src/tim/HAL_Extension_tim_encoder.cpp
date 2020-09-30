@@ -2,6 +2,8 @@
 
 #include "tim/HAL_Extension_tim_encoder.hpp"
 
+namespace halex {
+
 Encoder::Encoder(){}
 
 Encoder::Encoder(TIM_HandleTypeDef &htim): htim(&htim){
@@ -55,5 +57,7 @@ void Encoder::resetCount() noexcept {
 	update();
 	count = 0;
 }
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_TIM

@@ -4,6 +4,8 @@
 #include "adc/HAL_Extension_adc_callback.hpp"
 #include "HAL_Extension_util.hpp"
 
+namespace halex {
+
 ADC_DMA::ADC_DMA(){}
 
 ADC_DMA::ADC_DMA(ADC_HandleTypeDef &hadc, uint32_t adcBufLength): hadc(&hadc), adcBufLength(adcBufLength){
@@ -35,5 +37,7 @@ void ADC_DMA::setCallback(std::function<void()> function) noexcept {
     setADCCallback(hadc, function);
 }
 #endif // CONFIG_DISABLE_EX_CALLBACK
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_ADC

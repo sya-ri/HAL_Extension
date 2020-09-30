@@ -6,6 +6,8 @@
 #include <vector>
 #include "HAL_Extension_gpio.hpp"
 
+namespace halex {
+
 class SevenSegment {
 private:
     const bool flip;
@@ -21,6 +23,8 @@ public:
     virtual bool clear() const noexcept;
     virtual bool isAvailable() const noexcept;
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_GPIO
 

@@ -6,6 +6,8 @@
 #include <vector>
 #include "HAL_Extension_gpio.hpp"
 
+namespace halex {
+
 class DIPSwitch {
 private:
     const bool flip;
@@ -17,6 +19,8 @@ public:
     uint8_t getSize() const noexcept;
     uint8_t getAddress() const noexcept;
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_GPIO
 

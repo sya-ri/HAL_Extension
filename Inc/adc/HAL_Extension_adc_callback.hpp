@@ -8,7 +8,11 @@
 #include <functional>
 #include "adc.h"
 
+namespace halex {
+
 void setADCCallback(ADC_HandleTypeDef *hadc, std::function<void()> function) noexcept;
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_EX_CALLBACK
 

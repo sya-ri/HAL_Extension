@@ -3,6 +3,8 @@
 #include "uart/HAL_Extension_uart_logger_it.hpp"
 #include "uart/HAL_Extension_uart_callback.hpp"
 
+namespace halex {
+
 UART_Logger_IT::UART_Logger_IT(){}
 
 UART_Logger_IT::UART_Logger_IT(UART_HandleTypeDef &huart): huart(&huart){
@@ -49,5 +51,7 @@ void UART_Logger_IT::println(std::string text) noexcept {
 void UART_Logger_IT::println(const char* text) noexcept {
     println(std::string(text));
 }
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_UART

@@ -6,6 +6,8 @@
 #include <vector>
 #include "HAL_Extension_gpio_seven_segment.hpp"
 
+namespace halex {
+
 class DynamicSevenSegment {
 private:
     const SevenSegment &sevenSegment;
@@ -30,6 +32,8 @@ public:
     void next() const noexcept;
     void clear() const noexcept;
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_GPIO
 

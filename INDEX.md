@@ -4,6 +4,10 @@
 #include "HAL_Extension.hpp
 ```
 
+```c++
+namespace halex
+```
+
 ## 目次
 
 - [Util](Doc/module_Util/INDEX.md)

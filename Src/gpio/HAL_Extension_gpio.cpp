@@ -3,6 +3,8 @@
 #include "gpio/HAL_Extension_gpio.hpp"
 #include "HAL_Extension_util.hpp"
 
+namespace halex {
+
 GPIO::GPIO(){}
 
 GPIO::GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin): GPIOx(GPIOx), GPIO_Pin(GPIO_Pin){
@@ -36,5 +38,7 @@ void GPIO::reset() const noexcept {
 void GPIO::toggle() const noexcept {
     HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);
 }
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_GPIO

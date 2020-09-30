@@ -2,6 +2,8 @@
 
 #include "tim/HAL_Extension_tim_motor.hpp"
 
+namespace halex {
+
 Motor::Motor(){}
 
 Motor::Motor(PWM positive, PWM negative): positive(positive), negative(negative){
@@ -65,5 +67,7 @@ void Motor::setSpeed(int16_t numerator, int16_t denominator) noexcept {
 	}
 	setSpeed(forward, abs_numerator, abs_denominator);
 }
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_TIM

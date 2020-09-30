@@ -2,6 +2,8 @@
 
 #include "gpio/HAL_Extension_gpio_dynamic_seven_segment.hpp"
 
+namespace halex {
+
 namespace {
     uint8_t getNumberOfDigit(float num){
         uint64_t numAsUInt = (uint64_t) ((num < 0)? -num : num);
@@ -104,5 +106,7 @@ void DynamicSevenSegment::clear() const noexcept {
     sevenSegment.clear();
     digitList[digitCursor].reset();
 }
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_GPIO

@@ -6,6 +6,8 @@
 #include <map>
 #include "HAL_Extension_util.hpp"
 
+namespace halex {
+
 namespace {
     std::map<TIM_HandleTypeDef *, std::function<void()>> tim_period_elapsed_callback;
 }
@@ -14,13 +16,15 @@ void setTIMPeriodElapsedCallback(TIM_HandleTypeDef *htim, std::function<void()> 
     tim_period_elapsed_callback[htim] = function;
 }
 
+} // namespace halex
+
 #ifdef CONFIG_TIM_USE_HALF_CALLBACK
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 #else  // CONFIG_TIM_USE_HALF_CALLBACK
 void HAL_TIM_PeriodElapsedHalfCpltCallback(TIM_HandleTypeDef *htim){
 #endif // CONFIG_TIM_USE_HALF_CALLBACK
-    if(map_contains(tim_period_elapsed_callback, htim)){
-        tim_period_elapsed_callback[htim]();
+    if(halex::map_contains(halex::tim_period_elapsed_callback, htim)){
+    	halex::tim_period_elapsed_callback[htim]();
     }
 }
 

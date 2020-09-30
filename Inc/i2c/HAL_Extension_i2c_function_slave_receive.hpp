@@ -5,6 +5,8 @@
 
 #include "i2c.h"
 
+namespace halex {
+
 template <class T>
 HAL_StatusTypeDef i2cSlaveReceive(I2C_HandleTypeDef *hi2c, T &data, uint32_t timeout) noexcept {
     return HAL_I2C_Slave_Receive(hi2c, (uint8_t *) &data, sizeof(T), timeout);
@@ -34,6 +36,8 @@ template <class T>
 HAL_StatusTypeDef i2cSlaveReceive_DMA(I2C_HandleTypeDef &hi2c, T &data) noexcept {
     return i2cSlaveReceive_DMA(hi2c, data);
 }
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_I2C
 

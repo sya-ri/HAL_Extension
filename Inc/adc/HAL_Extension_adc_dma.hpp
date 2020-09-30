@@ -6,6 +6,8 @@
 #include "adc.h"
 #include <functional>
 
+namespace halex {
+
 class ADC_DMA {
 private:
     ADC_HandleTypeDef *hadc;
@@ -24,6 +26,8 @@ public:
     void setCallback(std::function<void()> function) noexcept;
 #endif // CONFIG_DISABLE_EX_CALLBACK
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_ADC
 

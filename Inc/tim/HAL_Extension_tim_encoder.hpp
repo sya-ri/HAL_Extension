@@ -5,6 +5,8 @@
 
 #include "tim.h"
 
+namespace halex {
+
 class Encoder {
 private:
     TIM_HandleTypeDef *htim;
@@ -21,6 +23,8 @@ public:
     int32_t getCount() const noexcept;
     void resetCount() noexcept;
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_TIM
 

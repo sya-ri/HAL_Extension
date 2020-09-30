@@ -6,6 +6,8 @@
 #include "tim.h"
 #include <functional>
 
+namespace halex {
+
 class TimerInterrupt {
 private:
     TIM_HandleTypeDef *htim;
@@ -21,6 +23,8 @@ public:
     void setCallback(std::function<void()> function) noexcept;
 #endif // CONFIG_DISABLE_EX_CALLBACK
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_TIM
 

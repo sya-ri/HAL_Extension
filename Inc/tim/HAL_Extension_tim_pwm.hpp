@@ -5,6 +5,8 @@
 
 #include "tim.h"
 
+namespace halex {
+
 class PWM {
 private:
     TIM_HandleTypeDef *htim;
@@ -18,6 +20,8 @@ public:
     void setCompare(uint16_t numerator, uint16_t denominator) noexcept;
     uint32_t getCounterPeriod() const noexcept;
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_TIM
 

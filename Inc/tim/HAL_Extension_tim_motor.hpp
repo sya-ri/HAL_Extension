@@ -5,6 +5,8 @@
 
 #include "HAL_Extension_tim_pwm.hpp"
 
+namespace halex {
+
 class Motor {
 private:
     PWM positive;
@@ -20,6 +22,8 @@ public:
     void setSpeed(int64_t speed) noexcept;
     void setSpeed(int16_t numerator, int16_t denominator) noexcept;
 };
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_TIM
 
