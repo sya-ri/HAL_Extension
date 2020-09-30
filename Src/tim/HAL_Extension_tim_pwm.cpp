@@ -6,7 +6,12 @@ namespace halex {
 
 PWM::PWM(){}
 
-PWM::PWM(TIM_HandleTypeDef &htim, uint32_t channel): htim(&htim), channel(channel){
+PWM::PWM(TIM_HandleTypeDef *htim, uint32_t channel): htim(htim), channel(channel) {
+
+}
+
+PWM::PWM(TIM_HandleTypeDef &htim, uint32_t channel): PWM(&htim, channel) {
+
 }
 
 void PWM::start() noexcept {

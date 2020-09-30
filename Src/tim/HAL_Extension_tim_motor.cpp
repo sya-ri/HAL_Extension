@@ -10,7 +10,11 @@ Motor::Motor(PWM positive, PWM negative): positive(positive), negative(negative)
 
 }
 
-Motor::Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg): positive(PWM(htimPos, channelPos)), negative(PWM(htimNeg, channelNeg)){
+Motor::Motor(TIM_HandleTypeDef *htimPos, uint32_t channelPos, TIM_HandleTypeDef *htimNeg, uint32_t channelNeg): Motor(PWM(htimPos, channelPos), PWM(htimNeg, channelNeg)) {
+
+}
+
+Motor::Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg): Motor(&htimPos, channelPos, &htimNeg, channelNeg) {
 
 }
 

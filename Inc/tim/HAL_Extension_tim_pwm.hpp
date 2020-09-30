@@ -13,6 +13,7 @@ private:
     uint32_t channel;
 public:
     PWM();
+    PWM(TIM_HandleTypeDef *htim, uint32_t channel);
     PWM(TIM_HandleTypeDef &htim, uint32_t channel);
     void start() noexcept;
     void stop() noexcept;

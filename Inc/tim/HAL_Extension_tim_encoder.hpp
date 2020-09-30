@@ -16,6 +16,7 @@ private:
     int32_t count = 0;
 public:
     Encoder();
+    Encoder(TIM_HandleTypeDef *htim);
     Encoder(TIM_HandleTypeDef &htim);
     void start() noexcept;
     void stop() noexcept;

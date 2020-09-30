@@ -6,7 +6,11 @@ namespace halex {
 
 Encoder::Encoder(){}
 
-Encoder::Encoder(TIM_HandleTypeDef &htim): htim(&htim){
+Encoder::Encoder(TIM_HandleTypeDef *htim): htim(htim){
+
+}
+
+Encoder::Encoder(TIM_HandleTypeDef &htim): Encoder(&htim){
 
 }
 

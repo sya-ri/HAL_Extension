@@ -11,6 +11,7 @@
 namespace halex {
 
 void setTIMPeriodElapsedCallback(TIM_HandleTypeDef *htim, std::function<void()> function) noexcept;
+void setTIMPeriodElapsedCallback(TIM_HandleTypeDef &htim, std::function<void()> function) noexcept;
 
 } // namespace halex
 

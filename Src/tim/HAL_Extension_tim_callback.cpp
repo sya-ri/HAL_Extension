@@ -16,6 +16,10 @@ void setTIMPeriodElapsedCallback(TIM_HandleTypeDef *htim, std::function<void()> 
     tim_period_elapsed_callback[htim] = function;
 }
 
+void setTIMPeriodElapsedCallback(TIM_HandleTypeDef &htim, std::function<void()> function) noexcept {
+    setTIMPeriodElapsedCallback(&htim, function);
+}
+
 } // namespace halex
 
 #ifdef CONFIG_TIM_USE_HALF_CALLBACK
