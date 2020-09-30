@@ -96,4 +96,4 @@
 > ```
 > `HAL_UART_ErrorCallback` の処理を変更します
 
-[<< 戻る](../../INDEX.md)
+[<< 戻る](../INDEX.md)
