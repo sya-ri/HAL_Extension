@@ -16,7 +16,11 @@ private:
 public:
     I2C_Master(){}
 
-    I2C_Master(I2C_HandleTypeDef &hi2c): hi2c(&hi2c){
+    I2C_Master(I2C_HandleTypeDef *hi2c): hi2c(hi2c) {
+
+    }
+
+    I2C_Master(I2C_HandleTypeDef &hi2c): I2C_Master(&hi2c) {
 
     }
 

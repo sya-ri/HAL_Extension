@@ -19,7 +19,11 @@ private:
 public:
     I2C_Master_DMA(){}
 
-    I2C_Master_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, T &data): hi2c(&hi2c), target(target), data(&data){
+    I2C_Master_DMA(I2C_HandleTypeDef *hi2c, uint8_t target, T &data): hi2c(hi2c), target(target), data(&data) {
+
+    }
+
+    I2C_Master_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, T &data): I2C_Master_DMA(&hi2c, target, data) {
 
     }
 

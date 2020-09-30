@@ -18,7 +18,11 @@ private:
 public:
     I2C_Slave_IT(){}
 
-    I2C_Slave_IT(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00): hi2c(&hi2c), address(address) {
+    I2C_Slave_IT(I2C_HandleTypeDef *hi2c, uint8_t address = 0x00): hi2c(hi2c), address(address) {
+
+    }
+
+    I2C_Slave_IT(I2C_HandleTypeDef &hi2c, uint8_t address = 0x00): I2C_Slave_IT(&hi2c, address) {
 
     }
 

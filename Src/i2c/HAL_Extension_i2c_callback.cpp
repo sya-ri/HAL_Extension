@@ -36,6 +36,26 @@ void setI2CErrorCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function
     i2c_error_callback[hi2c] = function;
 }
 
+void setI2CMasterTxCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function){
+    setI2CMasterTxCallback(&hi2c, function);
+}
+
+void setI2CMasterRxCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function){
+    setI2CMasterRxCallback(&hi2c, function);
+}
+
+void setI2CSlaveTxCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function){
+    setI2CSlaveTxCallback(&hi2c, function);
+}
+
+void setI2CSlaveRxCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function){
+    setI2CSlaveRxCallback(&hi2c, function);
+}
+
+void setI2CErrorCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function){
+    setI2CErrorCallback(&hi2c, function);
+}
+
 } // namespace halex
 
 void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c){
