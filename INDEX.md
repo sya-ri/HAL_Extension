@@ -39,3 +39,4 @@ namespace halex
   - [クラス](Doc/module_UART/INDEX.md#クラス)
     - [UART](Doc/module_UART/class/UART.md)
     - [UART_IT](Doc/module_UART/class/UART_IT.md)
+    - [UART_DMA](Doc/module_UART/class/UART_DMA.md)
