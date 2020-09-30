@@ -16,6 +16,10 @@ void setADCCallback(ADC_HandleTypeDef *hadc, std::function<void()> function) noe
     adc_callback[hadc] = function;
 }
 
+void setADCCallback(ADC_HandleTypeDef &hadc, std::function<void()> function) noexcept {
+    setADCCallback(&hadc, function);
+}
+
 } // namespace halex
 
 #ifdef CONFIG_USE_HALF_CALLBACK_ADC

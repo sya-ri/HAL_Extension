@@ -11,6 +11,7 @@
 namespace halex {
 
 void setADCCallback(ADC_HandleTypeDef *hadc, std::function<void()> function) noexcept;
+void setADCCallback(ADC_HandleTypeDef &hadc, std::function<void()> function) noexcept;
 
 } // namespace halex
 
