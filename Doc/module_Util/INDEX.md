@@ -2,7 +2,7 @@
 
 ## 目次
 
-- [関数](#map_containsconst-stdmapk-v-const-k)
+- [関数](#関数)
   - [map_contains](#map_containsconst-stdmapk-v-const-k)
 
 ## 関数
