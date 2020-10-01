@@ -91,7 +91,9 @@ PinOut: GPIO_Input / GPIO_Output
 
 ##### GPIO::setIf(bool)
 > ```c++
-> void setIf(bool condition) const noexcept;
+> void setIf(
+>     bool condition
+> ) const noexcept;
 > ```
 > `condition` が `true` の時に `set()`  
 > `false` の時に `reset()` を実行します  
@@ -112,7 +114,9 @@ PinOut: GPIO_Input / GPIO_Output
 
 ##### GPIO::resetIf(bool)
 > ```c++
-> void setIf(bool condition) const noexcept;
+> void resetIf(
+>     bool condition
+> ) const noexcept;
 > ```
 > `condition` が `true` の時に `reset()`  
 > `false` の時に `set()` を実行します  
