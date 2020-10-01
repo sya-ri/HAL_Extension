@@ -14,7 +14,7 @@ private:
     std::vector<GPIO> list;
 public:
     DIPSwitch(bool flip = false);
-    DIPSwitch& add(GPIO gpio) noexcept;
+    DIPSwitch& add(const GPIO &gpio) noexcept;
     DIPSwitch& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
     uint8_t getSize() const noexcept;
     uint8_t getAddress() const noexcept;

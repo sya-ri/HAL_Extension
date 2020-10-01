@@ -16,7 +16,7 @@ private:
     GPIO pointGpio;
 public:
     SevenSegment(bool flip = false);
-    virtual SevenSegment& add(GPIO gpio) noexcept;
+    virtual SevenSegment& add(const GPIO &gpio) noexcept;
     virtual SevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
     virtual bool setLight(uint8_t lightData) const noexcept;
     virtual bool set(int8_t hex, bool point = false) const noexcept;

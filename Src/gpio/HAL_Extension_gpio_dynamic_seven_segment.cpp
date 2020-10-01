@@ -33,7 +33,7 @@ DynamicSevenSegment::DynamicSevenSegment(
 
 }
 
-DynamicSevenSegment& DynamicSevenSegment::add(GPIO gpio) noexcept {
+DynamicSevenSegment& DynamicSevenSegment::add(const GPIO &gpio) noexcept {
     digitList.push_back(gpio);
     return *this;
 }

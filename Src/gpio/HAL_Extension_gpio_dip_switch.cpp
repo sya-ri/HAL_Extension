@@ -8,7 +8,7 @@ DIPSwitch::DIPSwitch(bool flip): flip(flip) {
     list.reserve(8);
 }
 
-DIPSwitch& DIPSwitch::add(GPIO gpio) noexcept {
+DIPSwitch& DIPSwitch::add(const GPIO &gpio) noexcept {
     if(getSize() < 8) {
         list.push_back(gpio);
     }

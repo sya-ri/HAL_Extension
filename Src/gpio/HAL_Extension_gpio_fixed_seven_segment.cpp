@@ -8,7 +8,7 @@ FixedSevenSegment::FixedSevenSegment(bool flip): flip(flip) {
     list.reserve(4);
 }
 
-FixedSevenSegment& FixedSevenSegment::add(GPIO gpio) noexcept {
+FixedSevenSegment& FixedSevenSegment::add(const GPIO &gpio) noexcept {
     if(!isAvailable()) {
         list.push_back(gpio);
     } else if(!enablePoint) {
