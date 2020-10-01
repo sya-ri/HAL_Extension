@@ -34,12 +34,17 @@ T: 送受信するデータ型
 ##### UART_IT(UART_HandleTypeDef)
 > ```c++
 > UART_IT(
+>     UART_HandleTypeDef *huart
+> );
+> 
+> UART_IT(
 >     UART_HandleTypeDef &huart
 > );
 > ```
 > ピンを設定します  
 > ```c++
 > // 例
+> UART_IT<uint16_t> uart(&huart2);
 > UART_IT<uint16_t> uart(huart2);
 > ```
 

@@ -38,6 +38,11 @@ T: 送受信するデータ型
 ##### UART_DMA(UART_HandleTypeDef, T)
 > ```c++
 > UART_DMA(
+>     UART_HandleTypeDef *huart,
+>     T &data
+> );
+> 
+> UART_DMA(
 >     UART_HandleTypeDef &huart,
 >     T &data
 > );
@@ -46,6 +51,7 @@ T: 送受信するデータ型
 > ```c++
 > // 例
 > uint16_t data;
+> UART_DMA<uint16_t> uart(&huart2, data);
 > UART_DMA<uint16_t> uart(huart2, data);
 > ```
 
