@@ -140,6 +140,7 @@ bool TimerInterrupt::start(uint32_t prescaler, uint32_t counterPeriod){
 
 bool TimerInterrupt::start(){
 	resetCount();
+	__HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
 	HAL_TIM_Base_Start_IT(htim);
 	return true;
 }
