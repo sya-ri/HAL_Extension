@@ -1,6 +1,7 @@
 #ifndef CONFIG_DISABLE_MODULE_GPIO
 
 #include "gpio/HAL_Extension_gpio.hpp"
+#include "gpio/HAL_Extension_gpio_function.hpp"
 #include "HAL_Extension_util.hpp"
 
 namespace halex {
@@ -12,7 +13,7 @@ GPIO::GPIO(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin): GPIOx(GPIOx), GPIO_Pin(GPIO_
 }
 
 GPIO_PinState GPIO::read() const noexcept {
-    return HAL_GPIO_ReadPin(GPIOx, GPIO_Pin);
+    return gpioRead(GPIOx, GPIO_Pin);
 }
 
 bool GPIO::isSet() const noexcept {
@@ -24,7 +25,7 @@ bool GPIO::isReset() const noexcept {
 }
 
 void GPIO::write(GPIO_PinState PinState) const noexcept {
-    HAL_GPIO_WritePin(GPIOx, GPIO_Pin, PinState);
+    gpioWrite(GPIOx, GPIO_Pin, PinState);
 }
 
 void GPIO::set() const noexcept {
@@ -36,7 +37,7 @@ void GPIO::reset() const noexcept {
 }
 
 void GPIO::toggle() const noexcept {
-    HAL_GPIO_TogglePin(GPIOx, GPIO_Pin);
+    gpioToggle(GPIOx, GPIO_Pin);
 }
 
 } // namespace halex

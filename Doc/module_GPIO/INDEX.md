@@ -6,6 +6,11 @@
 > GPIO モジュールの無効化  
 > 定義することでコンパイルされなくなります
 
+## 関数
+- [gpioRead](function/INDEX.md#gpioread)
+- [gpioWrite](function/INDEX.md#gpiowrite)
+- [gpioToggle](function/INDEX.md#gpiotoggle)
+
 ## クラス
 - [GPIO](class/GPIO.md)
   - [CubeMX](class/GPIO.md#cubemx)

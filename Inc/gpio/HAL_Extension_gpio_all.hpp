@@ -3,6 +3,7 @@
 
 #ifndef CONFIG_DISABLE_MODULE_GPIO
 
+#include "HAL_Extension_gpio_function.hpp"
 #include "HAL_Extension_gpio.hpp"
 #include "HAL_Extension_gpio_dip_switch.hpp"
 #include "HAL_Extension_gpio_seven_segment.hpp"
