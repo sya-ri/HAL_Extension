@@ -15,15 +15,12 @@ Encoder::Encoder(TIM_HandleTypeDef &htim): Encoder(&htim) {
 }
 
 void Encoder::start() noexcept {
-	int16_t lastCount = count;
 	if(!isStart) {
 		HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
 	}
+    __HAL_TIM_SET_COUNTER(htim , 0);
 	__HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
-	__HAL_TIM_SET_COUNTER(htim , 0);
 	isStart = true;
-	update();
-	count = lastCount;
 }
 
 void Encoder::stop() noexcept {
@@ -31,8 +28,8 @@ void Encoder::stop() noexcept {
 	if(isStart) {
 		HAL_TIM_Encoder_Stop(htim, TIM_CHANNEL_ALL);
 	}
+    __HAL_TIM_SET_COUNTER(htim , 0);
 	__HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
-	__HAL_TIM_SET_COUNTER(htim , 0);
 	isStart = false;
 }
 
