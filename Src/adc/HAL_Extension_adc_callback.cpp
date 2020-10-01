@@ -4,7 +4,7 @@
 
 #include "adc/HAL_Extension_adc_callback.hpp"
 #include <map>
-#include "HAL_Extension_util.hpp"
+#include "util/HAL_Extension_util_function.hpp"
 
 namespace halex {
 

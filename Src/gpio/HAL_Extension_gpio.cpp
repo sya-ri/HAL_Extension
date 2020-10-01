@@ -2,7 +2,7 @@
 
 #include "gpio/HAL_Extension_gpio.hpp"
 #include "gpio/HAL_Extension_gpio_function.hpp"
-#include "HAL_Extension_util.hpp"
+#include "util/HAL_Extension_util_function.hpp"
 
 namespace halex {
 

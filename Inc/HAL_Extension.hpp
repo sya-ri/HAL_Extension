@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_HPP
 #define HAL_EXTENSION_HPP
 
-#include "HAL_Extension_util.hpp"
+#include "util/HAL_Extension_util_all.hpp"
 #include "gpio/HAL_Extension_gpio_all.hpp"
 #include "uart/HAL_Extension_uart_all.hpp"
 #include "i2c/HAL_Extension_i2c_all.hpp"

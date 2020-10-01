@@ -1,5 +1,5 @@
-#ifndef HAL_EXTENSION_UTIL_HPP
-#define HAL_EXTENSION_UTIL_HPP
+#ifndef HAL_EXTENSION_UTIL_FUNCTION_HPP
+#define HAL_EXTENSION_UTIL_FUNCTION_HPP
 
 #include <map>
 
@@ -12,4 +12,4 @@ constexpr bool map_contains(const std::map<K, V> &map, const K &key) {
 
 } // namespace halex
 
-#endif
+#endif // HAL_EXTENSION_UTIL_FUNCTION_HPP

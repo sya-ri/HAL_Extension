@@ -2,7 +2,7 @@
 
 #include "adc/HAL_Extension_adc_dma.hpp"
 #include "adc/HAL_Extension_adc_callback.hpp"
-#include "HAL_Extension_util.hpp"
+#include "util/HAL_Extension_util_function.hpp"
 
 namespace halex {
 
