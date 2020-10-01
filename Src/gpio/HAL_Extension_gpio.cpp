@@ -32,8 +32,20 @@ void GPIO::set() const noexcept {
     write(GPIO_PIN_SET);
 }
 
+void GPIO::setIf(bool condition) const noexcept {
+    if (condition) {
+        set();
+    } else {
+        reset();
+    }
+}
+
 void GPIO::reset() const noexcept {
     write(GPIO_PIN_RESET);
+}
+
+void GPIO::resetIf(bool condition) const noexcept {
+    setIf(!condition);
 }
 
 void GPIO::toggle() const noexcept {

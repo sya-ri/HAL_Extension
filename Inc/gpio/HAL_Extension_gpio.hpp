@@ -19,7 +19,9 @@ public:
     bool isReset() const noexcept;
     void write(GPIO_PinState PinState) const noexcept;
     void set() const noexcept;
+    void setIf(bool condition) const noexcept;
     void reset() const noexcept;
+    void resetIf(bool condition) const noexcept;
     void toggle() const noexcept;
 };
 

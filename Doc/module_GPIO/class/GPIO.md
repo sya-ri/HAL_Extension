@@ -10,7 +10,9 @@
   - [isReset()](#gpioisreset)
   - [write(GPIO_PinState)](#gpiowritegpio_pinstate)
   - [set()](#gpioset)
+  - [setIf(bool)](#gpiosetifbool)
   - [reset()](#gpioreset)
+  - [resetIf(bool)](#gpioresetifbool)
   - [toggle()](#gpiotoggle)
 
 ## CubeMX
@@ -74,6 +76,7 @@ PinOut: GPIO_Input / GPIO_Output
 > // 例
 > pa5.write(GPIO_PIN_SET);
 > pa5.write(GPIO_PIN_RESET);
+> pa5.write(pc13.read());
 > ```
 
 ##### GPIO::set()
@@ -86,6 +89,17 @@ PinOut: GPIO_Input / GPIO_Output
 > pa5.set();
 > ```
 
+##### GPIO::setIf(bool)
+> ```c++
+> void setIf(bool condition) const noexcept;
+> ```
+> `condition` が `true` の時に `set()`  
+> `false` の時に `reset()` を実行します  
+> ```c++
+> // 例
+> pa5.setIf(pc13.isReset());
+> ```
+
 ##### GPIO::reset()
 > ```c++
 > void reset() const noexcept;
@@ -94,6 +108,17 @@ PinOut: GPIO_Input / GPIO_Output
 > ```c++
 > // 例
 > pa5.reset();
+> ```
+
+##### GPIO::resetIf(bool)
+> ```c++
+> void setIf(bool condition) const noexcept;
+> ```
+> `condition` が `true` の時に `reset()`  
+> `false` の時に `set()` を実行します  
+> ```c++
+> // 例
+> pa5.resetIf(pc13.isSet());
 > ```
 
 ##### GPIO::toggle()
