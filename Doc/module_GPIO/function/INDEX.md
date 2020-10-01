@@ -8,19 +8,19 @@
 ## 関数
 ##### gpioRead
 > ```c++
-> GPIO_PinState gpioRead(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
+> inline GPIO_PinState gpioRead(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
 > ```
 > `HAL_GPIO_ReadPin` を実行します
 
 ##### gpioWrite
 > ```c++
-> void gpioWrite(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState) noexcept;
+> inline void gpioWrite(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState) noexcept;
 > ```
 > `HAL_GPIO_WritePin` を実行します
 
 ##### gpioToggle
 > ```c++
-> void gpioToggle(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
+> inline void gpioToggle(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
 > ```
 > `HAL_GPIO_TogglePin` を実行します
 
