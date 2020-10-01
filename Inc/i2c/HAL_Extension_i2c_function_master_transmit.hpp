@@ -14,7 +14,7 @@ HAL_StatusTypeDef i2cMasterTransmit(I2C_HandleTypeDef *hi2c, uint8_t target, con
 
 template <class T>
 HAL_StatusTypeDef i2cMasterTransmit(I2C_HandleTypeDef &hi2c, uint8_t target, const T &data, uint32_t timeout) noexcept {
-    return i2cMasterTransmit(hi2c, target, data, timeout);
+    return i2cMasterTransmit(&hi2c, target, data, timeout);
 }
 
 template <class T>
@@ -24,7 +24,7 @@ HAL_StatusTypeDef i2cMasterTransmit_IT(I2C_HandleTypeDef *hi2c, uint8_t target, 
 
 template <class T>
 HAL_StatusTypeDef i2cMasterTransmit_IT(I2C_HandleTypeDef &hi2c, uint8_t target, const T &data) noexcept {
-    return i2cMasterTransmit_IT(hi2c, target, data);
+    return i2cMasterTransmit_IT(&hi2c, target, data);
 }
 
 template <class T>
@@ -34,7 +34,7 @@ HAL_StatusTypeDef i2cMasterTransmit_DMA(I2C_HandleTypeDef *hi2c, uint8_t target,
 
 template <class T>
 HAL_StatusTypeDef i2cMasterTransmit_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, const T &data) noexcept {
-    return i2cMasterTransmit_DMA(hi2c, target, data);
+    return i2cMasterTransmit_DMA(&hi2c, target, data);
 }
 
 } // namespace halex

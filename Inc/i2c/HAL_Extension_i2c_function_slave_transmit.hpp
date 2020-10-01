@@ -14,7 +14,7 @@ HAL_StatusTypeDef i2cSlaveTransmit(I2C_HandleTypeDef *hi2c, const T &data, uint3
 
 template <class T>
 HAL_StatusTypeDef i2cSlaveTransmit(I2C_HandleTypeDef &hi2c, const T &data, uint32_t timeout) noexcept {
-    return i2cSlaveTransmit(hi2c, data, timeout);
+    return i2cSlaveTransmit(&hi2c, data, timeout);
 }
 
 template <class T>
@@ -24,7 +24,7 @@ HAL_StatusTypeDef i2cSlaveTransmit_IT(I2C_HandleTypeDef *hi2c, const T &data) no
 
 template <class T>
 HAL_StatusTypeDef i2cSlaveTransmit_IT(I2C_HandleTypeDef &hi2c, const T &data) noexcept {
-    return i2cSlaveTransmit_IT(hi2c, data);
+    return i2cSlaveTransmit_IT(&hi2c, data);
 }
 
 template <class T>
@@ -34,7 +34,7 @@ HAL_StatusTypeDef i2cSlaveTransmit_DMA(I2C_HandleTypeDef *hi2c, const T &data) n
 
 template <class T>
 HAL_StatusTypeDef i2cSlaveTransmit_DMA(I2C_HandleTypeDef &hi2c, const T &data) noexcept {
-    return i2cSlaveTransmit_DMA(hi2c, data);
+    return i2cSlaveTransmit_DMA(&hi2c, data);
 }
 
 } // namespace halex
