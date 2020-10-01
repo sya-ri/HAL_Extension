@@ -40,3 +40,4 @@ namespace halex
     - [UART](Doc/module_UART/class/UART.md)
     - [UART_IT](Doc/module_UART/class/UART_IT.md)
     - [UART_DMA](Doc/module_UART/class/UART_DMA.md)
+    - [UART_Logger](Doc/module_UART/class/UART_Logger.md)
