@@ -26,6 +26,7 @@ void TimerInterrupt::start(uint16_t prescaler, uint16_t counterPeriod) noexcept 
 
 void TimerInterrupt::start() noexcept {
 	resetCount();
+    __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
 	HAL_TIM_Base_Start_IT(htim);
 }
 
