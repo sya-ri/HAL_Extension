@@ -6,11 +6,9 @@
 class TimerCounter {
 private:
     uint32_t startTime = 0;
-    uint32_t stopTime = 0;
 public:
     TimerCounter();
     void start() noexcept;
-    void stop() noexcept;
     uint32_t get() const noexcept;
 };
 

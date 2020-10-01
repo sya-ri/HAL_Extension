@@ -8,10 +8,6 @@ void TimerCounter::start() noexcept {
     startTime = HAL_GetTick();
 }
 
-void TimerCounter::stop() noexcept {
-    stopTime = HAL_GetTick();
-}
-
 uint32_t TimerCounter::get() const noexcept {
-    return stopTime - startTime;
+    return HAL_GetTick() - startTime;
 }
