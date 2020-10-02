@@ -1,7 +1,14 @@
 # module Util
 
 ## 関数
-- [map_contains](function/INDEX.md#map_containsconst-stdmapk-v-const-k)
+- [std::map](function/map.md)
+  - [map_contains](function/map.md#map_containsconst-stdmapk-v-const-k)
+- [math_angle](function/math_angle.md)
+
+## 列挙クラス
+- [AngleType](enum/AngleType.md)
+  - [定義](enum/AngleType.md#定義)
+  - [値](enum/AngleType.md#値)
 
 ## クラス
 - [TimerCounter](class/TimerCounter.md)

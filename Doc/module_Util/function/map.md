@@ -1,4 +1,4 @@
-# function Util
+# std::map
 
 ## 目次
 - [map_contains](#map_containsconst-stdmapk-v-const-k)
