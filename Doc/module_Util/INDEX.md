@@ -22,4 +22,4 @@
     - [start()](class/TimerCounter.md#timercounterstart)
     - [get()](class/TimerCounter.md#timercounterget)
 
-[<< 戻る](../../INDEX.md)
+[<< 戻る](../../README.md)
