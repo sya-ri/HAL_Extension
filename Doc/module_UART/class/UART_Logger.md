@@ -3,7 +3,7 @@
 ## 目次
 - [CubeMX](#cubemx)
 - [コンストラクタ](#コンストラクタ)
-  - [UART_Logger(UART_HandleTypeDef, uint32_t)](#uart_loggeruart_handletypedef-uint32_t)
+  - [UART_Logger(UART_HandleTypeDef, uint32_t)](#uart_loggeruart_loggeruart_handletypedef-uint32_t)
 - [関数](#関数)
   - [print(std::string)](#uart_loggerprintstdstring)
   - [print(const char*)](#uart_loggerprintconst-char)
@@ -17,7 +17,7 @@ Mode: Asynchronous
 ```
 
 ## コンストラクタ
-##### UART_Logger(UART_HandleTypeDef, uint32_t)
+##### UART_Logger::UART_Logger(UART_HandleTypeDef, uint32_t)
 > ```c++
 > UART_Logger(
 >     UART_HandleTypeDef *huart,

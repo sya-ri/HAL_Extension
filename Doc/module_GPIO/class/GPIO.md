@@ -3,7 +3,7 @@
 ## 目次
 - [CubeMX](#cubemx)
 - [コンストラクタ](#コンストラクタ)
-  - [GPIO(GPIO_TypeDef*, uint16_t)](#gpiogpio_typedef-uint16_t)
+  - [GPIO(GPIO_TypeDef*, uint16_t)](#gpiogpiogpio_typedef-uint16_t)
 - [関数](#関数)
   - [read()](#gpioread)
   - [isSet()](#gpioisset)
@@ -21,7 +21,7 @@ PinOut: GPIO_Input / GPIO_Output
 ```
 
 ## コンストラクタ
-##### GPIO(GPIO_TypeDef*, uint16_t)
+##### GPIO::GPIO(GPIO_TypeDef*, uint16_t)
 > ```c++
 > GPIO(
 >     GPIO_TypeDef* GPIOx,

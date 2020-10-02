@@ -3,7 +3,7 @@
 ## 目次
 - [CubeMX](#CubeMX)
 - [コンストラクタ](#コンストラクタ)
-  - [DynamicSevenSegment(SevenSegment, bool, bool, bool)](#dynamicsevensegmentsevensegment-bool-bool-bool)
+  - [DynamicSevenSegment(SevenSegment, bool, bool, bool)](#dynamicsevensegmentdynamicsevensegmentsevensegment-bool-bool-bool)
 - [関数](#関数)
   - [add(GPIO)](#dynamicsevensegmentaddgpio)
   - [add(GPIO_TypeDef*, uint16_t)](#dynamicsevensegmentaddgpio_typedef-uint16_t)
@@ -19,7 +19,7 @@ PinOut: GPIO_Output
 ```
 
 ## コンストラクタ
-##### DynamicSevenSegment(SevenSegment, bool, bool, bool)
+##### DynamicSevenSegment::DynamicSevenSegment(SevenSegment, bool, bool, bool)
 > ```c++
 > DynamicSevenSegment(
 >     const SevenSegment &sevenSegment,

@@ -3,7 +3,7 @@
 ## 目次
 - [CubeMX](#cubemx)
 - [コンストラクタ](#コンストラクタ)
-  - [DIPSwitch(bool)](#dipswitchbool)
+  - [DIPSwitch(bool)](#dipswitchdipswitchbool)
 - [関数](#関数)
   - [add(GPIO)](#dipswitchaddgpio)
   - [add(GPIO_TypeDef*, uint16_t)](#dipswitchaddgpio_typedef-uint16_t)
@@ -16,7 +16,7 @@ PinOut: GPIO_Input
 ```
 
 ## コンストラクタ
-##### DIPSwitch(bool)
+##### DIPSwitch::DIPSwitch(bool)
 > ```c++
 > DIPSwitch(
 >     bool flip = false

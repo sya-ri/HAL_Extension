@@ -4,7 +4,7 @@
 - [CubeMX](#cubemx)
 - [クラステンプレート](#クラステンプレート)
 - [コンストラクタ](#コンストラクタ)
-  - [UART_IT(UART_HandleTypeDef)](#uart_ituart_handletypedef)
+  - [UART_IT(UART_HandleTypeDef)](#uart_ituart_ituart_handletypedef)
 - [関数](#関数)
   - [transmit(T)](#uarttransmitt)
   - [receive(T)](#uart_itreceivet)
@@ -31,7 +31,7 @@ T: 送受信するデータ型
 
 ## コンストラクタ
 
-##### UART_IT(UART_HandleTypeDef)
+##### UART_IT::UART_IT(UART_HandleTypeDef)
 > ```c++
 > UART_IT(
 >     UART_HandleTypeDef *huart

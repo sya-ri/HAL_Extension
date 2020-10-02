@@ -3,7 +3,7 @@
 ## 目次
 - [CubeMX](#cubemx)
 - [コンストラクタ](#コンストラクタ)
-  - [SevenSegment(bool)](#sevensegmentbool)
+  - [SevenSegment(bool)](#sevensegmentsevensegmentbool)
 - [関数](#関数)
   - [add(GPIO)](#sevensegmentaddgpio)
   - [add(GPIO_TypeDef*, uint16_t)](#sevensegmentaddgpio_typedef-uint16_t)
@@ -18,7 +18,7 @@ PinOut: GPIO_Output
 ```
 
 ## コンストラクタ
-##### SevenSegment(bool)
+##### SevenSegment::SevenSegment(bool)
 > ```c++
 > SevenSegment(
 >     bool flip = false
