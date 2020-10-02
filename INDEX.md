@@ -11,8 +11,10 @@ namespace halex
 ## 目次
 
 - [Util](Doc/module_Util/INDEX.md)
+  - [クラス](Doc/module_Util/INDEX.md#クラス)
+    - [TimerCounter](Doc/module_Util/class/TimerCounter.md)
   - [関数](Doc/module_Util/INDEX.md#関数)
-    - [map_contains](Doc/module_Util/INDEX.md#map_containsconst-stdmapk-v-const-k)
+    - [map_contains](Doc/module_Util/function/INDEX.md#map_containsconst-stdmapk-v-const-k)
 - [GPIO](Doc/module_GPIO/INDEX.md)
   - [コンフィグ](Doc/module_GPIO/INDEX.md#コンフィグ)
     - [CONFIG_DISABLE_MODULE_GPIO](Doc/module_GPIO#CONFIG_DISABLE_MODULE_GPIO)

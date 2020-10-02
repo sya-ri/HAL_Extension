@@ -1,16 +1,14 @@
 # module Util
 
-## 目次
-
-- [関数](#関数)
-  - [map_contains](#map_containsconst-stdmapk-v-const-k)
-
 ## 関数
-##### map_contains(const std::map<K, V>&, const K&)
-> ```c++
-> template <class K, class V>
-> constexpr bool map_contains(const std::map<K, V> &map, const K &key)
-> ```
-> map に key が存在するかを返します
+- [map_contains](function/INDEX.md#map_containsconst-stdmapk-v-const-k)
+
+## クラス
+- [TimerCounter](class/TimerCounter.md)
+  - [コンストラクタ](class/TimerCounter.md#コンストラクタ)
+    - [TimerCounter()](class/TimerCounter.md#timercountertimercounter)
+  - [関数](class/TimerCounter.md#関数)
+    - [start()](class/TimerCounter.md#timercounterstart)
+    - [get()](class/TimerCounter.md#timercounterget)
 
 [<< 戻る](../../INDEX.md)
