@@ -2,6 +2,9 @@
 
 ## 目次
 - [deg2rad(float)](#deg2radfloat)
+- [rad2deg(float)](#rad2degfloat)
+- [angle2rad(float, AngleType)](#angle2radfloat-angletype)
+- [angle2deg(float, AngleType)](#angle2degfloat-angletype)
 
 ## 関数
 ##### deg2rad(float)
