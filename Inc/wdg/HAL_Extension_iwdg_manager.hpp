@@ -37,27 +37,27 @@ private:
 		Prescaler{256, IWDG_PRESCALER_256}
     };
 
-    const InitOption initOption;
-
-    constexpr InitOption getInitOption(
-        float timeOut,
-    	TimeUnit timeUnit
-   	) {
-    	InitOption initOption{};
-    	float min_reloadCount_error = std::numeric_limits<float>::max();
-    	for (uint8_t i = 0; i < (sizeof(prescalers) / sizeof(prescalers[0])); i++) {
-    		float reloadCount = timeOut* LSI_VALUE / (static_cast<float>(prescalers[i].value) * static_cast<uint32_t>(timeUnit));
-    		if (reloadCount < 1 || 4095 < reloadCount) continue;
-    		uint32_t reloadCount_u32 = static_cast<uint32_t>(reloadCount);
-    		float reloadCount_error = reloadCount - reloadCount_u32;
-    		if (reloadCount_error < min_reloadCount_error) {
-    			initOption.prescaler = prescalers[i];
-    			initOption.reloadCount = reloadCount_u32;
-    			min_reloadCount_error = reloadCount_error;
-    		}
-    	}
-    	return initOption;
+    static constexpr InitOption getInitOption(
+    	float timeOut,
+		TimeUnit timeUnit
+    ) {
+        InitOption initOption{};
+        float min_reloadCount_error = std::numeric_limits<float>::max();
+        for (uint8_t i = 0; i < (sizeof(prescalers) / sizeof(prescalers[0])); i++) {
+            float reloadCount = timeOut* LSI_VALUE / (static_cast<float>(prescalers[i].value) * static_cast<uint32_t>(timeUnit));
+            if (reloadCount < 1 || 4095 < reloadCount) continue;
+            uint32_t reloadCount_u32 = static_cast<uint32_t>(reloadCount);
+            float reloadCount_error = reloadCount - reloadCount_u32;
+            if (reloadCount_error < min_reloadCount_error) {
+                initOption.prescaler = prescalers[i];
+                initOption.reloadCount = reloadCount_u32;
+                min_reloadCount_error = reloadCount_error;
+            }
+        }
+        return initOption;
     }
+
+    const InitOption initOption;
 public:
     static constexpr float minTimeOut = 4 / static_cast<float>(LSI_VALUE);
     static constexpr float maxTimeOut = 256 * 4095 / static_cast<float>(LSI_VALUE);
