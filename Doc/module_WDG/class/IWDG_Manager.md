@@ -25,11 +25,25 @@ System Core:
 ```c++
 static constexpr float minTimeOut;
 ```
+最小のタイムアウト時間です   
+`LSI_VALUE` に依存します
+
+| LSI_RC | LSI_VALUE | minTimeOut | time  |
+|:------:|:---------:|:----------:|:-----:|
+| 32kHz  | 32000     | 0.000125   | 125us |
+| 40kHz  | 40000     | 0.0001     | 100us |
 
 ##### IWDG_Manager::maxTimeOut
 ```c++
 static constexpr float maxTimeOut;
 ```
+最大のタイムアウト時間です   
+`LSI_VALUE` に依存します  
+
+| LSI_RC | LSI_VALUE | minTimeOut | time    |
+|:------:|:---------:|:----------:|:-------:|
+| 32kHz  | 32000     | 32.76      | 32.76s  |
+| 40kHz  | 40000     | 26.208     | 26.208s |
 
 ## 列挙クラス
 ##### IWDG_Manager::TimeUnit
