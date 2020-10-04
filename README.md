@@ -52,6 +52,8 @@ namespace halex
     - [UART_Logger](Doc/module_UART/class/UART_Logger.md)
     - [UART_Logger_IT](Doc/module_UART/class/UART_Logger_IT.md)
 - [I2C](Doc/module_I2C/INDEX.md)
+  - [コンフィグ](Doc/module_I2C/INDEX.md#コンフィグ)
+    - [CONFIG_DISABLE_MODULE_I2C](Doc/module_I2C/INDEX.md#config_disable_module_i2c)
   - [関数](Doc/module_I2C/INDEX.md#関数)
     - [MasterTransmit](Doc/module_I2C/function/INDEX.md#mastertransmit)
       - [i2cMasterTransmit](Doc/module_I2C/function/INDEX.md#i2cmastertransmit)
