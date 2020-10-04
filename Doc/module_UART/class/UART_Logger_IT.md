@@ -17,7 +17,7 @@ PinOut: USARTn_TX / USARTn_RX
 Mode: Asynchronous
 USARTn:
   NVIC Settings:
-    USARTn global interrupt: Enable にチェック
+    USARTn global interrupt: Enable
 ```
 
 ## コンストラクタ
