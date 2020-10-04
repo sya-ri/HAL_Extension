@@ -26,7 +26,8 @@ USARTn:
 > UART_Logger_IT(
 >     UART_HandleTypeDef *huart
 > );
-> 
+> ```
+> ```c++
 > UART_Logger_IT(
 >     UART_HandleTypeDef &huart
 > );

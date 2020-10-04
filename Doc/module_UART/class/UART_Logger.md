@@ -23,7 +23,8 @@ Mode: Asynchronous
 >     UART_HandleTypeDef *huart,
 >     uint32_t timeout = 0x0F
 > );
-> 
+> ```
+> ```c++
 > UART_Logger(
 >     UART_HandleTypeDef &huart,
 >     uint32_t timeout = 0x0F

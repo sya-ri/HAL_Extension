@@ -21,7 +21,8 @@ T: 送受信するデータ型
 > I2C_Master_IT(
 >     I2C_HandleTypeDef *hi2c
 > );
-> 
+> ```
+> ```c++
 > I2C_Master_IT(
 >     I2C_HandleTypeDef &hi2c
 > );

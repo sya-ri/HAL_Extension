@@ -20,7 +20,8 @@ T: 送受信するデータ型
 >     I2C_HandleTypeDef *hi2c,
 >     uint8_t address = 0x00
 > );
-> 
+> ```
+> ```c++
 > I2C_Slave(
 >     I2C_HandleTypeDef &hi2c,
 >     uint8_t address = 0x00

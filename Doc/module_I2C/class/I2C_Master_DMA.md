@@ -26,7 +26,8 @@ T: 送受信するデータ型
 >     uint8_t target,
 >     T &data
 > );
-> 
+> ```
+> ```c++
 > I2C_Master_DMA(
 >     I2C_HandleTypeDef &hi2c,
 >     uint8_t target,

@@ -26,7 +26,8 @@ T: 送受信するデータ型
 >     T &data,
 >     uint8_t address = 0x00
 > );
-> 
+> ```
+> ```c++
 > I2C_Slave_DMA(
 >     I2C_HandleTypeDef &hi2c,
 >     T &data,

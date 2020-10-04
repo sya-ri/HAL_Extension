@@ -30,7 +30,8 @@ T: 送受信するデータ型
 > UART(
 >     UART_HandleTypeDef *huart
 > );
-> 
+> ```
+> ```c++
 > UART(
 >     UART_HandleTypeDef &huart
 > );
