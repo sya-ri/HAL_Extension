@@ -7,9 +7,10 @@
 > 定義することでコンパイルされなくなります
 
 ## 関数
-- [gpioRead](function/INDEX.md#gpioread)
-- [gpioWrite](function/INDEX.md#gpiowrite)
-- [gpioToggle](function/INDEX.md#gpiotoggle)
+- [GPIO](function/INDEX.md#gpio)
+  - [gpioRead](function/INDEX.md#gpioread)
+  - [gpioWrite](function/INDEX.md#gpiowrite)
+  - [gpioToggle](function/INDEX.md#gpiotoggle)
 
 ## クラス
 - [GPIO](class/GPIO.md)

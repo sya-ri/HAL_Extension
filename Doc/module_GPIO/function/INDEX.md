@@ -1,11 +1,15 @@
 # function GPIO
 
 ## 目次
-- [gpioRead](#gpioread)
-- [gpioWrite](#gpiowrite)
-- [gpioToggle](#gpiotoggle)
+- [GPIO](#gpio)
+  - [gpioRead](#gpioread)
+  - [gpioWrite](#gpiowrite)
+  - [gpioToggle](#gpiotoggle)
 
 ## 関数
+
+### GPIO
+
 ##### gpioRead
 > ```c++
 > inline GPIO_PinState gpioRead(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
