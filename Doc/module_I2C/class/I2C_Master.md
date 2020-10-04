@@ -1,5 +1,15 @@
 # I2C_Master
 
+## 目次
+- [CubeMX](#cubemx)
+- [クラステンプレート](#クラステンプレート)
+- [コンストラクタ](#コンストラクタ)
+  - [I2C_Master(I2C_HandleTypeDef)](#i2c_masteri2c_masteri2c_handletypedef)
+- [関数](#関数)
+  - [init()](#i2c_masterinit)
+  - [transmit(uint8_t, T, uint32_t)](#i2c_mastertransmituint8_t-t-uint32_t)
+  - [receive(uint8_t, T, uint32_t)](#i2c_masterreceiveuint8_t-t-uint32_t)
+
 ## CubeMX
 ```yaml
 PinOut: I2Cn_SCL & I2Cn_SDA

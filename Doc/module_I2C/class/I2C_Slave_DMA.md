@@ -1,5 +1,20 @@
 # I2C_Slave_DMA
 
+## 目次
+- [CubeMX](#cubemx)
+- [クラステンプレート](#クラステンプレート)
+- [コンストラクタ](#コンストラクタ)
+  - [I2C_Slave_DMA(I2C_HandleTypeDef, T, uint8_t)](#i2c_slave_dmai2c_slave_dmai2c_handletypedef-t-uint8_t)
+- [関数](#関数)
+  - [init()](#i2c_slave_dmainit)
+  - [init(uint8_t)](#i2c_slave_dmainituint8_t)
+  - [init(DIPSwitch)](#i2c_slave_dmainitdipswitch)
+  - [startTransmit()](#i2c_slave_dmastarttransmit)
+  - [startReceive()](#i2c_slave_dmastartreceive)
+  - [setTxCallback(std::function<void()>)](#i2c_slave_dmasettxcallbackstdfunctionvoid)
+  - [setRxCallback(std::function<void()>)](#i2c_slave_dmasetrxcallbackstdfunctionvoid)
+  - [setErrorCallback(std::function<void()>)](#i2c_slave_dmaseterrorcallbackstdfunctionvoid)
+
 ## CubeMX
 ```yaml
 PinOut: I2Cn_SCL & I2Cn_SDA

@@ -1,5 +1,18 @@
 # I2C_Master_DMA
 
+## 目次
+- [CubeMX](#cubemx)
+- [クラステンプレート](#クラステンプレート)
+- [コンストラクタ](#コンストラクタ)
+  - [I2C_Master_DMA(I2C_HandleTypeDef, uint8_t, T)](#i2c_master_dmai2c_master_dmai2c_handletypedef-uint8_t-t)
+- [関数](#関数)
+  - [init()](#i2c_master_dmainit)
+  - [startTransmit()](#i2c_master_dmastarttransmit)
+  - [startReceive()](#i2c_master_dmastartreceive)
+  - [setTxCallback(std::function<void()>)](#i2c_master_dmasettxcallbackstdfunctionvoid)
+  - [setRxCallback(std::function<void()>)](#i2c_master_dmasetrxcallbackstdfunctionvoid)
+  - [setErrorCallback(std::function<void()>)](#i2c_master_dmaseterrorcallbackstdfunctionvoid)
+  
 ## CubeMX
 ```yaml
 PinOut: I2Cn_SCL & I2Cn_SDA
