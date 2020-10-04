@@ -77,6 +77,13 @@ T: 送受信するデータ型
 > ```
 
 ##### UART_IT::setTxCallback(std::function<void()>)
+> ```c++
+> #ifndef CONFIG_DISABLE_EX_CALLBACK
+> void setTxCallback(
+>     std::function<void()> function
+> ) noexcept;
+> #endif // CONFIG_DISABLE_EX_CALLBACK
+> ```
 > 送信完了時の割り込み関数を設定します  
 > ```c++
 > // 例
@@ -86,6 +93,13 @@ T: 送受信するデータ型
 > ```
 
 ##### UART_IT::setRxCallback(std::function<void()>)
+> ```c++
+> #ifndef CONFIG_DISABLE_EX_CALLBACK
+> void setRxCallback(
+>     std::function<void()> function
+> ) noexcept;
+> #endif // CONFIG_DISABLE_EX_CALLBACK
+> ```
 > 受信完了時の割り込み関数を設定します  
 > ```c++
 > // 例
@@ -95,6 +109,13 @@ T: 送受信するデータ型
 > ```
 
 ##### UART_IT::setErrorCallback(std::function<void()>)
+> ```c++
+> #ifndef CONFIG_DISABLE_EX_CALLBACK
+> void setErrorCallback(
+>     std::function<void()> function
+> ) noexcept;
+> #endif // CONFIG_DISABLE_EX_CALLBACK
+> ```
 > エラー取得時の割り込み関数を設定します  
 > ```c++
 > // 例
