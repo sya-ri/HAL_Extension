@@ -47,6 +47,7 @@ namespace halex
     - [UART_IT](Doc/module_UART/class/UART_IT.md)
     - [UART_DMA](Doc/module_UART/class/UART_DMA.md)
     - [UART_Logger](Doc/module_UART/class/UART_Logger.md)
+    - [UART_Logger_IT](Doc/module_UART/class/UART_Logger_IT.md)
 - [WDG](Doc/module_WDG/INDEX.md)
   - [IWDG_Manager](Doc/module_WDG/class/IWDG_Manager.md)
     - [CubeMX](Doc/module_WDG/class/IWDG_Manager.md#cubemx)
