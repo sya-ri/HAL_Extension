@@ -19,9 +19,9 @@
   - [uartReceive_IT](function/INDEX.md#uartreceive_it)
   - [uartReceive_DMA](function/INDEX.md#uartreceive_dma)
 - [Callback](function/INDEX.md#callback)
-  - [setUARTTxCallback](function/INDEX.md#setuarttxcallbackuart_handletypedef-stdfunctionvoid)
-  - [setUARTRxCallback](function/INDEX.md#setuartrxcallbackuart_handletypedef-stdfunctionvoid)
-  - [setErrorCallback](function/INDEX.md#setuarterrorcallbackuart_handletypedef-stdfunctionvoid)
+  - [setUARTTxCallback](function/INDEX.md#setuarttxcallback)
+  - [setUARTRxCallback](function/INDEX.md#setuartrxcallback)
+  - [setErrorCallback](function/INDEX.md#setuarterrorcallback)
 
 ## クラス
 - [UART](class/UART.md)

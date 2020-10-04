@@ -26,6 +26,18 @@ void setUARTErrorCallback(UART_HandleTypeDef *huart, std::function<void()> funct
     uart_error_callback[huart] = function;
 }
 
+void setUARTTxCallback(UART_HandleTypeDef &huart, std::function<void()> function) {
+    setUARTTxCallback(&huart, function);
+}
+
+void setUARTRxCallback(UART_HandleTypeDef &huart, std::function<void()> function) {
+    setUARTRxCallback(&huart, function);
+}
+
+void setUARTErrorCallback(UART_HandleTypeDef &huart, std::function<void()> function) {
+    setUARTErrorCallback(&huart, function);
+}
+
 } // namespace halex
 
 #ifdef CONFIG_USE_HALF_CALLBACK_UART

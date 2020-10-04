@@ -12,6 +12,9 @@ namespace halex {
 void setUARTTxCallback(UART_HandleTypeDef *huart, std::function<void()> function);
 void setUARTRxCallback(UART_HandleTypeDef *huart, std::function<void()> function);
 void setUARTErrorCallback(UART_HandleTypeDef *huart, std::function<void()> function);
+void setUARTTxCallback(UART_HandleTypeDef &huart, std::function<void()> function);
+void setUARTRxCallback(UART_HandleTypeDef &huart, std::function<void()> function);
+void setUARTErrorCallback(UART_HandleTypeDef &huart, std::function<void()> function);
 #endif // CONFIG_DISABLE_EX_CALLBACK
 
 } // namespace halex
