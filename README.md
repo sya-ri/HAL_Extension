@@ -19,7 +19,7 @@ namespace halex
     - [map_contains](Doc/module_Util/function/map.md#map_containsconst-stdmapk-v-const-k)
 - [GPIO](Doc/module_GPIO/INDEX.md)
   - [コンフィグ](Doc/module_GPIO/INDEX.md#コンフィグ)
-    - [CONFIG_DISABLE_MODULE_GPIO](Doc/module_GPIO#CONFIG_DISABLE_MODULE_GPIO)
+    - [CONFIG_DISABLE_MODULE_GPIO](Doc/module_GPIO/INDEX.md#CONFIG_DISABLE_MODULE_GPIO)
   - [関数](Doc/module_GPIO/INDEX.md#関数)
     - [GPIO](Doc/module_GPIO/function/INDEX.md#gpio)
   - [クラス](Doc/module_GPIO/INDEX.md#クラス)
