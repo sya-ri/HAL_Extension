@@ -1,17 +1,23 @@
 # function UART
 
 ## 目次
-- [uartTransmit](#uarttransmit)
-- [uartTransmit_IT](#uarttransmit_it)
-- [uartTransmit_DMA](#uarttransmit_dma)
-- [uartReceive](#uartreceive)
-- [uartReceive_IT](#uartreceive_it)
-- [uartReceive_DMA](#uartreceive_dma)
-- [setUARTTxCallback](#setuarttxcallbackuart_handletypedef-stdfunctionvoid)
-- [setUARTRxCallback](#setuartrxcallbackuart_handletypedef-stdfunctionvoid)
-- [setErrorCallback](#setuarterrorcallbackuart_handletypedef-stdfunctionvoid)
+- [Transmit](#transmit)
+  - [uartTransmit](#uarttransmit)
+  - [uartTransmit_IT](#uarttransmit_it)
+  - [uartTransmit_DMA](#uarttransmit_dma)
+- [Receive](#receive)
+  - [uartReceive](#uartreceive)
+  - [uartReceive_IT](#uartreceive_it)
+  - [uartReceive_DMA](#uartreceive_dma)
+- [Callback](#callback)
+  - [setUARTTxCallback](#setuarttxcallbackuart_handletypedef-stdfunctionvoid)
+  - [setUARTRxCallback](#setuartrxcallbackuart_handletypedef-stdfunctionvoid)
+  - [setErrorCallback](#setuarterrorcallbackuart_handletypedef-stdfunctionvoid)
 
 ## 関数
+
+### Transmit
+
 ##### uartTransmit
 > ```c++
 > template <class T>
@@ -45,6 +51,8 @@
 > ```
 > `HAL_UART_Transmit_DMA` を実行します
 
+### Receive
+
 ##### uartReceive
 > ```c++
 > template <class T>
@@ -77,6 +85,8 @@
 > HAL_StatusTypeDef uartReceive_DMA(UART_HandleTypeDef &huart, T &data) noexcept;
 > ```
 > `HAL_UART_Receive_DMA` を実行します
+
+### Callback
 
 ##### setUARTTxCallback(UART_HandleTypeDef*, std::function<void()>)
 > ```c++

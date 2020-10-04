@@ -10,15 +10,18 @@
 > UARTのコールバック関数をハーフに変更します
 
 ## 関数
-- [uartTransmit](function/INDEX.md#uarttransmit)
-- [uartTransmit_IT](function/INDEX.md#uarttransmit_it)
-- [uartTransmit_DMA](function/INDEX.md#uarttransmit_dma)
-- [uartReceive](function/INDEX.md#uartreceive)
-- [uartReceive_IT](function/INDEX.md#uartreceive_it)
-- [uartReceive_DMA](function/INDEX.md#uartreceive_dma)
-- [setUARTTxCallback](function/INDEX.md#setuarttxcallbackuart_handletypedef-stdfunctionvoid)
-- [setUARTRxCallback](function/INDEX.md#setuartrxcallbackuart_handletypedef-stdfunctionvoid)
-- [setErrorCallback](function/INDEX.md#setuarterrorcallbackuart_handletypedef-stdfunctionvoid)
+- [Transmit](function/INDEX.md#transmit)
+  - [uartTransmit](function/INDEX.md#uarttransmit)
+  - [uartTransmit_IT](function/INDEX.md#uarttransmit_it)
+  - [uartTransmit_DMA](function/INDEX.md#uarttransmit_dma)
+- [Receive](function/INDEX.md#receive)
+  - [uartReceive](function/INDEX.md#uartreceive)
+  - [uartReceive_IT](function/INDEX.md#uartreceive_it)
+  - [uartReceive_DMA](function/INDEX.md#uartreceive_dma)
+- [Callback](function/INDEX.md#callback)
+  - [setUARTTxCallback](function/INDEX.md#setuarttxcallbackuart_handletypedef-stdfunctionvoid)
+  - [setUARTRxCallback](function/INDEX.md#setuartrxcallbackuart_handletypedef-stdfunctionvoid)
+  - [setErrorCallback](function/INDEX.md#setuarterrorcallbackuart_handletypedef-stdfunctionvoid)
 
 ## クラス
 - [UART](class/UART.md)
