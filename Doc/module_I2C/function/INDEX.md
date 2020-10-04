@@ -31,33 +31,59 @@
 ##### i2cMasterTransmit
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterTransmit(I2C_HandleTypeDef *hi2c, uint8_t target, const T &data, uint32_t timeout) noexcept;
+> inline HAL_StatusTypeDef i2cMasterTransmit(
+>     I2C_HandleTypeDef *hi2c,
+>     uint8_t target,
+>     const T &data,
+>     uint32_t timeout
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterTransmit(I2C_HandleTypeDef &hi2c, uint8_t target, const T &data, uint32_t timeout) noexcept;
+> inline HAL_StatusTypeDef i2cMasterTransmit(
+>     I2C_HandleTypeDef &hi2c,
+>     uint8_t target,
+>     const T &data,
+>     uint32_t timeout
+> ) noexcept;
 > ```
 > `HAL_I2C_Master_Transmit` を実行します
 
 ##### i2cMasterTransmit_IT
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterTransmit_IT(I2C_HandleTypeDef *hi2c, uint8_t target, const T &data) noexcept;
+> inline HAL_StatusTypeDef i2cMasterTransmit_IT(
+>     I2C_HandleTypeDef *hi2c,
+>     uint8_t target,
+>     const T &data
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterTransmit_IT(I2C_HandleTypeDef &hi2c, uint8_t target, const T &data) noexcept;
+> inline HAL_StatusTypeDef i2cMasterTransmit_IT(
+>     I2C_HandleTypeDef &hi2c,
+>     uint8_t target,
+>     const T &data
+> ) noexcept;
 > ```
 > `HAL_I2C_Master_Transmit_IT` を実行します
 
 ##### i2cMasterTransmit_DMA
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterTransmit_DMA(I2C_HandleTypeDef *hi2c, uint8_t target, const T &data) noexcept;
+> inline HAL_StatusTypeDef i2cMasterTransmit_DMA(
+>     I2C_HandleTypeDef *hi2c,
+>     uint8_t target,
+>     const T &data
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterTransmit_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, const T &data) noexcept;
+> inline HAL_StatusTypeDef i2cMasterTransmit_DMA(
+>     I2C_HandleTypeDef &hi2c,
+>     uint8_t target,
+>     const T &data
+> ) noexcept;
 > ```
 > `HAL_I2C_Master_Transmit_DMA` を実行します
 
@@ -66,33 +92,59 @@
 ##### i2cMasterReceive
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterReceive(I2C_HandleTypeDef *hi2c, uint8_t target, T &data, uint32_t timeout) noexcept;
+> inline HAL_StatusTypeDef i2cMasterReceive(
+>     I2C_HandleTypeDef *hi2c,
+>     uint8_t target,
+>     T &data,
+>     uint32_t timeout
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterReceive(I2C_HandleTypeDef &hi2c, uint8_t target, T &data, uint32_t timeout) noexcept;
+> inline HAL_StatusTypeDef i2cMasterReceive(
+>     I2C_HandleTypeDef &hi2c,
+>     uint8_t target,
+>     T &data,
+>     uint32_t timeout
+> ) noexcept;
 > ```
 > `HAL_I2C_Master_Receive` を実行します
 
 ##### i2cMasterReceive_IT
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterReceive_IT(I2C_HandleTypeDef *hi2c, uint8_t target, T &data) noexcept;
+> inline HAL_StatusTypeDef i2cMasterReceive_IT(
+>     I2C_HandleTypeDef *hi2c,
+>     uint8_t target,
+>     T &data
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterReceive_IT(I2C_HandleTypeDef &hi2c, uint8_t target, T &data) noexcept;
+> inline HAL_StatusTypeDef i2cMasterReceive_IT(
+>     I2C_HandleTypeDef &hi2c,
+>     uint8_t target,
+>     T &data
+> ) noexcept;
 > ```
 > `HAL_I2C_Master_Receive_IT` を実行します
 
 ##### i2cMasterReceive_DMA
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterReceive_DMA(I2C_HandleTypeDef *hi2c, uint8_t target, T &data) noexcept;
+> inline HAL_StatusTypeDef i2cMasterReceive_DMA(
+>     I2C_HandleTypeDef *hi2c,
+>     uint8_t target,
+>     T &data
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cMasterReceive_DMA(I2C_HandleTypeDef &hi2c, uint8_t target, T &data) noexcept;
+> inline HAL_StatusTypeDef i2cMasterReceive_DMA(
+>     I2C_HandleTypeDef &hi2c,
+>     uint8_t target,
+>     T &data
+> ) noexcept;
 > ```
 > `HAL_I2C_Master_Receive_DMA` を実行します
 
@@ -101,33 +153,53 @@
 ##### i2cSlaveTransmit
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveTransmit(I2C_HandleTypeDef *hi2c, const T &data, uint32_t timeout) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveTransmit(
+>     I2C_HandleTypeDef *hi2c,
+>     const T &data,
+>     uint32_t timeout
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveTransmit(I2C_HandleTypeDef &hi2c, const T &data, uint32_t timeout) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveTransmit(
+>     I2C_HandleTypeDef &hi2c,
+>     const T &data,
+>     uint32_t timeout
+> ) noexcept;
 > ```
 > `HAL_I2C_Slave_Transmit` を実行します
 
 ##### i2cSlaveTransmit_IT
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveTransmit_IT(I2C_HandleTypeDef *hi2c, const T &data) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveTransmit_IT(
+>     I2C_HandleTypeDef *hi2c,
+>     const T &data
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveTransmit_IT(I2C_HandleTypeDef &hi2c, const T &data) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveTransmit_IT(
+>     I2C_HandleTypeDef &hi2c,
+>     const T &data
+> ) noexcept;
 > ```
 > `HAL_I2C_Slave_Transmit_IT` を実行します
 
 ##### i2cSlaveTransmit_DMA
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveTransmit_DMA(I2C_HandleTypeDef *hi2c, const T &data) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveTransmit_DMA(
+>     I2C_HandleTypeDef *hi2c,
+>     const T &data
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveTransmit_DMA(I2C_HandleTypeDef &hi2c, const T &data) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveTransmit_DMA(
+>     I2C_HandleTypeDef &hi2c,
+>     const T &data
+> ) noexcept;
 > ```
 > `HAL_I2C_Slave_Transmit_DMA` を実行します
 
@@ -136,33 +208,53 @@
 ##### i2cSlaveReceive
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveReceive(I2C_HandleTypeDef *hi2c, T &data, uint32_t timeout) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveReceive(
+>     I2C_HandleTypeDef *hi2c,
+>     T &data,
+>     uint32_t timeout
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveReceive(I2C_HandleTypeDef &hi2c, T &data, uint32_t timeout) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveReceive(
+>     I2C_HandleTypeDef &hi2c,
+>     T &data,
+>     uint32_t timeout
+> ) noexcept;
 > ```
 > `HAL_I2C_Slave_Receive` を実行します
 
 ##### i2cSlaveReceive_IT
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveReceive_IT(I2C_HandleTypeDef *hi2c, T &data) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveReceive_IT(
+>     I2C_HandleTypeDef *hi2c,
+>     T &data
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveReceive_IT(I2C_HandleTypeDef &hi2c, T &data) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveReceive_IT(
+>     I2C_HandleTypeDef &hi2c,
+>     T &data
+> ) noexcept;
 > ```
 > `HAL_I2C_Slave_Receive_IT` を実行します
 
 ##### i2cSlaveReceive_DMA
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveReceive_DMA(I2C_HandleTypeDef *hi2c, T &data) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveReceive_DMA(
+>     I2C_HandleTypeDef *hi2c,
+>     T &data
+> ) noexcept;
 > ```
 > ```c++
 > template <class T>
-> inline HAL_StatusTypeDef i2cSlaveReceive_DMA(I2C_HandleTypeDef &hi2c, T &data) noexcept;
+> inline HAL_StatusTypeDef i2cSlaveReceive_DMA(
+>     I2C_HandleTypeDef &hi2c,
+>     T &data
+> ) noexcept;
 > ```
 > `HAL_I2C_Slave_Receive_DMA` を実行します
 
@@ -170,36 +262,76 @@
 
 ##### setI2CMasterTxCallback
 > ```c++
-> void setI2CMasterTxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function);
-> void setI2CMasterTxCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function);
+> void setI2CMasterTxCallback(
+>     I2C_HandleTypeDef *hi2c,
+>     std::function<void()> function
+> );
+> ```
+> ```c++
+> void setI2CMasterTxCallback(
+>     I2C_HandleTypeDef &hi2c,
+>     std::function<void()> function
+> );
 > ```
 > `HAL_I2C_MasterTxCpltCallback` の処理を変更します
 
 ##### setI2CMasterRxCallback
 > ```c++
-> void setI2CMasterRxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function);
-> void setI2CMasterRxCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function);
+> void setI2CMasterRxCallback(
+>     I2C_HandleTypeDef *hi2c,
+>     std::function<void()> function
+> );
+> ```
+> ```c++ 
+> void setI2CMasterRxCallback(
+>     I2C_HandleTypeDef &hi2c,
+>     std::function<void()> function
+> );
 > ```
 > `HAL_I2C_MasterRxCpltCallback` の処理を変更します
 
 ##### setI2CSlaveTxCallback
 > ```c++
-> void setI2CSlaveTxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function);
-> void setI2CSlaveTxCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function);
+> void setI2CSlaveTxCallback(
+>     I2C_HandleTypeDef *hi2c,
+>     std::function<void()> function
+> );
+> ```
+> ```c++
+> void setI2CSlaveTxCallback(
+>     I2C_HandleTypeDef &hi2c,
+>     std::function<void()> function
+> );
 > ```
 > `HAL_I2C_SlaveTxCpltCallback` の処理を変更します
 
 ##### setI2CSlaveRxCallback
 > ```c++
-> void setI2CSlaveRxCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function);
-> void setI2CSlaveRxCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function);
+> void setI2CSlaveRxCallback(
+>     I2C_HandleTypeDef *hi2c,
+>     std::function<void()> function
+> );
+> ```
+> ```c++
+> void setI2CSlaveRxCallback(
+>     I2C_HandleTypeDef &hi2c,
+>     std::function<void()> function
+> );
 > ```
 > `HAL_I2C_SlaveRxCpltCallback` の処理を変更します
 
 ##### setI2CErrorCallback
 > ```c++
-> void setI2CErrorCallback(I2C_HandleTypeDef *hi2c, std::function<void()> function);
-> void setI2CErrorCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function);
+> void setI2CErrorCallback(
+>     I2C_HandleTypeDef *hi2c,
+>     std::function<void()> function
+> );
+> ```
+> ```c++
+> void setI2CErrorCallback(
+>     I2C_HandleTypeDef &hi2c,
+>     std::function<void()> function
+> );
 > ```
 > `HAL_I2C_ErrorCallback` の処理を変更します
 
