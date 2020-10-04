@@ -22,6 +22,7 @@ public:
     void setSpeed(bool forward, uint16_t numerator, uint16_t denominator) noexcept;
     void setSpeed(int64_t speed) noexcept;
     void setSpeed(int16_t numerator, int16_t denominator) noexcept;
+    void setCompare(uint32_t comparePos, uint32_t compareNeg) noexcept;
 };
 
 } // namespace halex

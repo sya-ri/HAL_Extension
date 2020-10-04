@@ -30,11 +30,9 @@ void Motor::stop() noexcept {
 
 void Motor::setSpeed(bool forward, uint32_t compare) noexcept {
 	if(forward) {
-		positive.setCompare(compare);
-		negative.setCompare(0);
+	    setCompare(compare, 0);
 	} else {
-		positive.setCompare(0);
-		negative.setCompare(compare);
+	    setCompare(0, compare);
 	}
 }
 
@@ -70,6 +68,11 @@ void Motor::setSpeed(int16_t numerator, int16_t denominator) noexcept {
 		abs_denominator = (uint16_t) denominator;
 	}
 	setSpeed(forward, abs_numerator, abs_denominator);
+}
+
+void Motor::setCompare(uint32_t comparePos, uint32_t compareNeg) noexcept {
+    positive.setCompare(comparePos);
+    negative.setCompare(compareNeg);
 }
 
 } // namespace halex
