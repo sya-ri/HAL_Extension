@@ -15,8 +15,8 @@ public:
     TimerInterrupt();
     TimerInterrupt(TIM_HandleTypeDef *htim);
     TimerInterrupt(TIM_HandleTypeDef &htim);
-    void start(uint16_t prescaler, uint16_t counterPeriod) noexcept;
     void start() noexcept;
+    void start(uint16_t prescaler, uint16_t counterPeriod) noexcept;
     void stop() noexcept;
     void setCount(uint32_t count) noexcept;
     void resetCount() noexcept;

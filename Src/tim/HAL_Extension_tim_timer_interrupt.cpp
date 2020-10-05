@@ -15,6 +15,12 @@ TimerInterrupt::TimerInterrupt(TIM_HandleTypeDef &htim): TimerInterrupt(&htim) {
 
 }
 
+void TimerInterrupt::start() noexcept {
+    resetCount();
+    __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
+    HAL_TIM_Base_Start_IT(htim);
+}
+
 void TimerInterrupt::start(uint16_t prescaler, uint16_t counterPeriod) noexcept {
 	stop();
 	HAL_TIM_Base_DeInit(htim);
@@ -22,12 +28,6 @@ void TimerInterrupt::start(uint16_t prescaler, uint16_t counterPeriod) noexcept 
 	htim->Init.Period = counterPeriod;
 	HAL_TIM_Base_Init(htim);
 	start();
-}
-
-void TimerInterrupt::start() noexcept {
-	resetCount();
-    __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
-	HAL_TIM_Base_Start_IT(htim);
 }
 
 void TimerInterrupt::stop() noexcept {
