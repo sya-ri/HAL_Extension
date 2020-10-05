@@ -69,7 +69,7 @@ enum class TimeUnit: uint32_t;
 > `minTimeOut` ~ `maxTimeOut` でない場合、正常に動作しません
 > ```c++
 > // 例
-> IWDG_Manager iwdg(0.5, IWDG_Manager::TimeUnit::ms);
+> IWDG_Manager iwdg(0.5, IWDG_Manager::TimeUnit::s);
 > ```
 
 ## 関数
