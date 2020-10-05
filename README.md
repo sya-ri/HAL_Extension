@@ -67,6 +67,7 @@ namespace halex
   - [クラス](Doc/module_TIM/INDEX.md#クラス)
     - [PWM](Doc/module_TIM/class/PWM.md)
     - [Motor](Doc/module_TIM/class/Motor.md)
+    - [Encoder](Doc/module_TIM/class/Encoder.md)
 - [WDG](Doc/module_WDG/INDEX.md)
   - [クラス](Doc/module_WDG/INDEX.md#クラス)
     - [IWDG_Manager](Doc/module_WDG/class/IWDG_Manager.md)

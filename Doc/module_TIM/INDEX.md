@@ -31,6 +31,15 @@
     - [setSpeed(bool, uint16_t, uint16_t)](class/Motor.md#motorsetspeedbool-uint16_t-uint16_t)
     - [setSpeed(int64_t)](class/Motor.md#motorsetspeedint64_t)
     - [setSpeed(int16_t, int16_t)](class/Motor.md#motorsetspeedint16_t-int16_t)
+- [Encoder](class/Encoder.md)
+  - [コンストラクタ](class/Encoder.md#コンストラクタ)
+    - [Encoder(TIM_HandleTypeDef)](class/Encoder.md#encoderencodertim_handletypedef)
+  - [関数](class/Encoder.md#関数)
+    - [start()](class/Encoder.md#encoderstart)
+    - [stop()](class/Encoder.md#encoderstop)
+    - [update()](class/Encoder.md#encoderupdate)
+    - [getCount()](class/Encoder.md#encodergetcount)
+    - [resetCount()](class/Encoder.md#encoderresetcount)
 
 
 [<< 戻る](../../README.md)
