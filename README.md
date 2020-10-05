@@ -64,6 +64,8 @@ namespace halex
 - [TIM](Doc/module_TIM/INDEX.md)
   - [コンフィグ](Doc/module_TIM/INDEX.md#コンフィグ)
     - [CONFIG_DISABLE_MODULE_TIM](Doc/module_TIM/INDEX.md#config_disable_module_tim)
+  - [関数](Doc/module_TIM/INDEX.md#関数)
+    - [Callback](Doc/module_TIM/function/INDEX.md#callback)
   - [クラス](Doc/module_TIM/INDEX.md#クラス)
     - [PWM](Doc/module_TIM/class/PWM.md)
     - [Motor](Doc/module_TIM/class/Motor.md)
