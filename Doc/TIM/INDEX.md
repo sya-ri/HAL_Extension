@@ -1,4 +1,4 @@
-# module TIM
+# TIM
 
 ## コンフィグ
 > #### CONFIG_DISABLE_MODULE_TIM

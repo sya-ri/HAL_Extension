@@ -1,4 +1,4 @@
-# module General
+# General
 
 ## コンフィグ
 

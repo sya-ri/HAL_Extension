@@ -1,4 +1,4 @@
-# module GPIO
+# GPIO
 
 ## コンフィグ
 

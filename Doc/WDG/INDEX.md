@@ -1,4 +1,4 @@
-# module WDG
+# WDG
 
 ## クラス
 - [IWDG_Manager](class/IWDG_Manager.md)

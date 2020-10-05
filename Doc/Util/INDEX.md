@@ -1,4 +1,4 @@
-# module Util
+# Util
 
 ## 関数
 - [std::map](function/map.md)
