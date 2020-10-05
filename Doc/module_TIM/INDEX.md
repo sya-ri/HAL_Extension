@@ -40,6 +40,16 @@
     - [update()](class/Encoder.md#encoderupdate)
     - [getCount()](class/Encoder.md#encodergetcount)
     - [resetCount()](class/Encoder.md#encoderresetcount)
-
+- [TimerInterrupt](class/TimerInterrupt.md)
+  - [CubeMX](class/TimerInterrupt.md#cubemx)
+  - [コンストラクタ](class/TimerInterrupt.md#コンストラクタ)
+    - [TimerInterrupt(TIM_HandleTypeDef)](class/TimerInterrupt.md#timerinterrupttimerinterrupttim_handletypedef)
+  - [関数](class/TimerInterrupt.md#関数)
+    - [start()](class/TimerInterrupt.md#timerinterruptstart)
+    - [start(uint16_t, uint16_t)](class/TimerInterrupt.md#timerinterruptstartuint16_t-uint16_t)
+    - [stop()](class/TimerInterrupt.md#timerinterruptstop)
+    - [setCount(uint32_t)](class/TimerInterrupt.md#timerinterruptsetcountuint32_t)
+    - [resetCount()](class/TimerInterrupt.md#timerinterruptresetcount)
+    - [setCallback(std::function<void()>)](class/TimerInterrupt.md#timerinterruptsetcallbackstdfunctionvoid)
 
 [<< 戻る](../../README.md)
