@@ -64,6 +64,8 @@ namespace halex
 - [TIM](Doc/module_TIM/INDEX.md)
   - [コンフィグ](Doc/module_TIM/INDEX.md#コンフィグ)
     - [CONFIG_DISABLE_MODULE_TIM](Doc/module_TIM/INDEX.md#config_disable_module_tim)
+  - [クラス](Doc/module_TIM/INDEX.md#クラス)
+    - [PWM](Doc/module_TIM/class/PWM.md)
 - [WDG](Doc/module_WDG/INDEX.md)
   - [クラス](Doc/module_WDG/INDEX.md#クラス)
     - [IWDG_Manager](Doc/module_WDG/class/IWDG_Manager.md)
