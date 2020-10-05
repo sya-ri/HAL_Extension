@@ -80,5 +80,7 @@ namespace halex
   - [クラス](Doc/ADC/INDEX.md#クラス)
     - [ADC_DMA](Doc/ADC/class/ADC_DMA.md)
 - [WDG](Doc/WDG/INDEX.md)
+  - [コンフィグ](Doc/WDG/INDEX.md#コンフィグ)
+    - [CONFIG_DISABLE_MODULE_WDG](Doc/WDG/INDEX.md#config_disable_module_wdg)
   - [クラス](Doc/WDG/INDEX.md#クラス)
     - [IWDG_Manager](Doc/WDG/class/IWDG_Manager.md)
