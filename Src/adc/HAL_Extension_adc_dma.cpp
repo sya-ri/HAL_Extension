@@ -26,12 +26,12 @@ void ADC_DMA::stop() noexcept {
     HAL_ADC_Stop_DMA(hadc);
 }
 
-uint8_t ADC_DMA::get8(uint8_t index) const noexcept {
-    return (uint8_t)(get(index) >> 4);
-}
-
 uint32_t ADC_DMA::get(uint8_t index) const noexcept {
     return adcBuf[index];
+}
+
+uint8_t ADC_DMA::get8(uint8_t index) const noexcept {
+    return (uint8_t)(get(index) >> 4);
 }
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK

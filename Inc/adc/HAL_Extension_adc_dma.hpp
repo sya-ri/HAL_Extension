@@ -20,8 +20,8 @@ public:
     ~ADC_DMA();
     void start() noexcept;
     void stop() noexcept;
-    uint8_t get8(uint8_t index) const noexcept;
     uint32_t get(uint8_t index) const noexcept;
+    uint8_t get8(uint8_t index) const noexcept;
 
 #ifndef CONFIG_DISABLE_EX_CALLBACK
     void setCallback(std::function<void()> function) noexcept;
