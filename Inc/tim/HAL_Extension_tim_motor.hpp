@@ -17,12 +17,12 @@ public:
     Motor(TIM_HandleTypeDef *htimPos, uint32_t channelPos, TIM_HandleTypeDef *htimNeg, uint32_t channelNeg);
     Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef &htimNeg, uint32_t channelNeg);
     void start() noexcept;
-    void stop() noexcept ;
+    void stop() noexcept;
+    void setCompare(uint32_t comparePos, uint32_t compareNeg) noexcept;
     void setSpeed(bool forward, uint32_t compare) noexcept;
     void setSpeed(bool forward, uint16_t numerator, uint16_t denominator) noexcept;
     void setSpeed(int64_t speed) noexcept;
     void setSpeed(int16_t numerator, int16_t denominator) noexcept;
-    void setCompare(uint32_t comparePos, uint32_t compareNeg) noexcept;
 };
 
 } // namespace halex
