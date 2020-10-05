@@ -75,6 +75,8 @@ namespace halex
   - [コンフィグ](Doc/ADC/INDEX.md#コンフィグ)
     - [CONFIG_DISABLE_MODULE_ADC](Doc/ADC/INDEX.md#config_disable_module_adc)
     - [CONFIG_USE_HALF_CALLBACK_ADC](Doc/ADC/INDEX.md#config_use_half_callback_adc)
+  - [関数](Doc/ADC/INDEX.md#関数)
+    - [setADCCallback](Doc/ADC/function/INDEX.md#setadccallback)
   - [クラス](Doc/ADC/INDEX.md#クラス)
     - [ADC_DMA](Doc/ADC/class/ADC_DMA.md)
 - [WDG](Doc/WDG/INDEX.md)

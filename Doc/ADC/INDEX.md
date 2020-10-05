@@ -9,6 +9,9 @@
 ##### CONFIG_USE_HALF_CALLBACK_ADC
 > ADCのコールバック関数をハーフに変更します
 
+## 関数
+- [setADCCallback](function/INDEX.md#setadccallback)
+
 ## クラス
 - [ADC_DMA](class/ADC_DMA.md)
   - [CubeMX](class/ADC_DMA.md#cubemx)
