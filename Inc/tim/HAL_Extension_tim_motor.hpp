@@ -9,8 +9,8 @@ namespace halex {
 
 class Motor {
 private:
-    const PWM &positive;
-    const PWM &negative;
+    const PWM positive;
+    const PWM negative;
 public:
     Motor();
     Motor(const PWM &positive, const PWM &negative);
