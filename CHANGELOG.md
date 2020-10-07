@@ -1,5 +1,9 @@
 # 変更履歴
 
+## v3.0.3
+- `GPIO::readBool` の処理を変更  
+`gpioRead` を `GPIO::read` に変更
+
 ## v3.0.2
 - `ADC_DMA::get` の処理を変更  
 例外を投げるのではなく `UINT16_MAX` を返すように変更
