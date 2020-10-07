@@ -1,5 +1,8 @@
 # 変更履歴
 
+## v5.2.0
+- モジュール `WDG` を `IWDG` に変更
+
 ## v5.1.0
 - クラス `TimerCounter` を `StopWatch` に変更
 
