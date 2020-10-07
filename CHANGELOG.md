@@ -1,5 +1,10 @@
 # 変更履歴
 
+## v2.3.2
+- クラスを追加
+  - UART_Logger_IT
+- 引数に `const` を追加
+
 ## v2.3.1
 - ファイル名を変更  
 `Hal_Extension.hpp` → `HAL_Extension.hpp`
