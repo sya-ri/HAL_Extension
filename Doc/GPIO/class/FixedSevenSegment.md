@@ -3,7 +3,7 @@
 ## 目次
 - [CubeMX](#CubeMX)
 - [コンストラクタ](#コンストラクタ)
-  - [FixedSevenSegment(bool)](#fixedsevensegmentfixedsevensegmentsevensegmentbool)
+  - [FixedSevenSegment(bool)](#fixedsevensegmentfixedsevensegmentbool)
 - [関数](#関数)
   - [add(GPIO)](#fixedsevensegmentaddgpio)
   - [add(GPIO_TypeDef*, uint16_t)](#fixedsevensegmentaddgpio_typedef-uint16_t)

@@ -50,7 +50,7 @@
 - [FixedSevenSegment](class/FixedSevenSegment.md)
   - [CubeMX](class/FixedSevenSegment.md#CubeMX)
   - [コンストラクタ](class/FixedSevenSegment.md#コンストラクタ)
-    - [FixedSevenSegment(bool)](class/FixedSevenSegment.md#fixedsevensegmentfixedsevensegmentsevensegmentbool)
+    - [FixedSevenSegment(bool)](class/FixedSevenSegment.md#fixedsevensegmentfixedsevensegmentbool)
   - [関数](class/FixedSevenSegment.md#関数)
     - [add(GPIO)](class/FixedSevenSegment.md#fixedsevensegmentaddgpio)
     - [add(GPIO_TypeDef*, uint16_t)](class/FixedSevenSegment.md#fixedsevensegmentaddgpio_typedef-uint16_t)

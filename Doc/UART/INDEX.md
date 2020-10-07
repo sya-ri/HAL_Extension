@@ -36,7 +36,7 @@
   - [CubeMX](class/UART_IT.md#cubemx)
   - [クラステンプレート](class/UART_IT.md#クラステンプレート)
   - [コンストラクタ](class/UART_IT.md#コンストラクタ)
-    - [UART_IT(UART_HandleTypeDef)](class/UART_IT.md#uartuartuart_handletypedef)
+    - [UART_IT(UART_HandleTypeDef)](class/UART_IT.md#uart_ituart_ituart_handletypedef)
   - [関数](class/UART_IT.md#関数)
     - [transmit(T)](class/UART_IT.md#uarttransmitt)
     - [receive(T)](class/UART_IT.md#uart_itreceivet)
