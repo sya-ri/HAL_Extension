@@ -1,5 +1,12 @@
 # 変更履歴
 
+## v2.3.3
+- クラスを追加
+  - SevenSegment
+- クラス GPIO に関数を追加
+  - readBool
+- static 定義を無名名前空間に変更
+
 ## v2.3.2
 - クラスを追加
   - UART_Logger_IT
