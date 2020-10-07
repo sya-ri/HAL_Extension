@@ -27,7 +27,7 @@ void UART_Logger_IT::checkBuffer() noexcept {
 void UART_Logger_IT::itTxCallback() noexcept {
 #else
 void UART_Logger_IT::itTxCallback(UART_HandleTypeDef *huart) noexcept {
-	if(this->huart != huart) return;
+    if(this->huart != huart) return;
 #endif // CONFIG_DISABLE_EX_CALLBACK
     if (buffer.empty()) {
         isBusy = false;

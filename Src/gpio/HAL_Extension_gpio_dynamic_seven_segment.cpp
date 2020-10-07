@@ -20,15 +20,15 @@ namespace {
 DynamicSevenSegment::DynamicSevenSegment(): DynamicSevenSegment(SevenSegment()) {}
 
 DynamicSevenSegment::DynamicSevenSegment(
-	const SevenSegment &sevenSegment,
-	bool hex,
-	bool zeroFill,
-	bool allowSign
+    const SevenSegment &sevenSegment,
+    bool hex,
+    bool zeroFill,
+    bool allowSign
 ):
-	sevenSegment(sevenSegment),
-	digitSystem(hex? 16 : 10),
-	zeroFill(zeroFill),
-	allowSign(allowSign)
+    sevenSegment(sevenSegment),
+    digitSystem(hex? 16 : 10),
+    zeroFill(zeroFill),
+    allowSign(allowSign)
 {
 
 }

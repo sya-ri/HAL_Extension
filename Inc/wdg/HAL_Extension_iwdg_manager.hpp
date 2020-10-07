@@ -24,23 +24,23 @@ private:
     };
 
     struct InitOption {
-    	Prescaler prescaler;
+        Prescaler prescaler;
         uint32_t reloadCount;
     };
 
     static constexpr std::array<Prescaler, 7> prescalers = {
-    	Prescaler{4, IWDG_PRESCALER_4},
-		Prescaler{8, IWDG_PRESCALER_8},
-		Prescaler{16, IWDG_PRESCALER_16},
-		Prescaler{32, IWDG_PRESCALER_32},
-		Prescaler{64, IWDG_PRESCALER_64},
-		Prescaler{128, IWDG_PRESCALER_128},
-		Prescaler{256, IWDG_PRESCALER_256}
+        Prescaler{4, IWDG_PRESCALER_4},
+        Prescaler{8, IWDG_PRESCALER_8},
+        Prescaler{16, IWDG_PRESCALER_16},
+        Prescaler{32, IWDG_PRESCALER_32},
+        Prescaler{64, IWDG_PRESCALER_64},
+        Prescaler{128, IWDG_PRESCALER_128},
+        Prescaler{256, IWDG_PRESCALER_256}
     };
 
     static constexpr InitOption getInitOption(
-    	float timeOut,
-		TimeUnit timeUnit
+        float timeOut,
+        TimeUnit timeUnit
     ) {
         InitOption initOption{};
         float min_reloadCount_error = std::numeric_limits<float>::max();
@@ -64,10 +64,10 @@ public:
     static constexpr float maxTimeOut = 256 * 4095 / static_cast<float>(LSI_VALUE);
 
     constexpr IWDG_Manager(
-    	float timeOut,
-		TimeUnit timeUnit
-	):
-		initOption(getInitOption(timeOut, timeUnit))
+        float timeOut,
+        TimeUnit timeUnit
+    ):
+        initOption(getInitOption(timeOut, timeUnit))
     {
 
     }
@@ -77,17 +77,17 @@ public:
     }
 
     constexpr void init() {
-    	if (available()) {
-    		hiwdg.Init.Prescaler = initOption.prescaler.export_constant;
-    		hiwdg.Init.Reload = initOption.reloadCount;
-    		HAL_IWDG_Init(&hiwdg);
-    	}
+        if (available()) {
+            hiwdg.Init.Prescaler = initOption.prescaler.export_constant;
+            hiwdg.Init.Reload = initOption.reloadCount;
+            HAL_IWDG_Init(&hiwdg);
+        }
     }
 
     constexpr void refresh() {
-    	if (available()) {
-    		HAL_IWDG_Refresh(&hiwdg);
-    	}
+        if (available()) {
+            HAL_IWDG_Refresh(&hiwdg);
+        }
     }
 };
 

@@ -60,31 +60,31 @@ void setI2CErrorCallback(I2C_HandleTypeDef &hi2c, std::function<void()> function
 
 void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c) {
     if(halex::map_contains(halex::i2c_master_tx_callback, hi2c)) {
-    	halex::i2c_master_tx_callback[hi2c]();
+        halex::i2c_master_tx_callback[hi2c]();
     }
 }
 
 void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c) {
     if(halex::map_contains(halex::i2c_master_rx_callback, hi2c)) {
-    	halex::i2c_master_rx_callback[hi2c]();
+        halex::i2c_master_rx_callback[hi2c]();
     }
 }
 
 void HAL_I2C_SlaveTxCpltCallback(I2C_HandleTypeDef *hi2c) {
     if(halex::map_contains(halex::i2c_slave_tx_callback, hi2c)) {
-    	halex::i2c_slave_tx_callback[hi2c]();
+        halex::i2c_slave_tx_callback[hi2c]();
     }
 }
 
 void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *hi2c) {
     if(halex::map_contains(halex::i2c_slave_rx_callback, hi2c)) {
-    	halex::i2c_slave_rx_callback[hi2c]();
+        halex::i2c_slave_rx_callback[hi2c]();
     }
 }
 
 void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c) {
     if(halex::map_contains(halex::i2c_error_callback, hi2c)) {
-    	halex::i2c_error_callback[hi2c]();
+        halex::i2c_error_callback[hi2c]();
     }
 }
 #endif // CONFIG_DISABLE_EX_CALLBACK

@@ -19,13 +19,13 @@ Motor::Motor(TIM_HandleTypeDef &htimPos, uint32_t channelPos, TIM_HandleTypeDef 
 }
 
 void Motor::start() noexcept {
-	positive.start();
-	negative.start();
+    positive.start();
+    negative.start();
 }
 
 void Motor::stop() noexcept {
-	positive.stop();
-	negative.stop();
+    positive.stop();
+    negative.stop();
 }
 
 void Motor::setCompare(uint32_t comparePos, uint32_t compareNeg) noexcept {
@@ -34,45 +34,45 @@ void Motor::setCompare(uint32_t comparePos, uint32_t compareNeg) noexcept {
 }
 
 void Motor::setSpeed(bool forward, uint32_t compare) noexcept {
-	if(forward) {
-	    setCompare(compare, 0);
-	} else {
-	    setCompare(0, compare);
-	}
+    if(forward) {
+        setCompare(compare, 0);
+    } else {
+        setCompare(0, compare);
+    }
 }
 
 void Motor::setSpeed(bool forward, uint16_t numerator, uint16_t denominator) noexcept {
-	if(forward) {
-		positive.setCompare(numerator, denominator);
-		negative.setCompare(0);
-	} else {
-		positive.setCompare(0);
-		negative.setCompare(numerator, denominator);
-	}
+    if(forward) {
+        positive.setCompare(numerator, denominator);
+        negative.setCompare(0);
+    } else {
+        positive.setCompare(0);
+        negative.setCompare(numerator, denominator);
+    }
 }
 
 void Motor::setSpeed(int64_t speed) noexcept {
-	bool forward = 0 < speed;
-	setSpeed(forward, (uint32_t) (forward? speed : -speed));
+    bool forward = 0 < speed;
+    setSpeed(forward, (uint32_t) (forward? speed : -speed));
 }
 
 void Motor::setSpeed(int16_t numerator, int16_t denominator) noexcept {
-	bool forward = true;
-	uint16_t abs_numerator;
-	if(numerator < 0) {
-		abs_numerator = (uint16_t) -numerator;
-		forward = !forward;
-	} else {
-		abs_numerator = (uint16_t) numerator;
-	}
-	uint16_t abs_denominator;
-	if(denominator < 0) {
-		abs_denominator = (uint16_t) -denominator;
-		forward = !forward;
-	} else {
-		abs_denominator = (uint16_t) denominator;
-	}
-	setSpeed(forward, abs_numerator, abs_denominator);
+    bool forward = true;
+    uint16_t abs_numerator;
+    if(numerator < 0) {
+        abs_numerator = (uint16_t) -numerator;
+        forward = !forward;
+    } else {
+        abs_numerator = (uint16_t) numerator;
+    }
+    uint16_t abs_denominator;
+    if(denominator < 0) {
+        abs_denominator = (uint16_t) -denominator;
+        forward = !forward;
+    } else {
+        abs_denominator = (uint16_t) denominator;
+    }
+    setSpeed(forward, abs_numerator, abs_denominator);
 }
 
 } // namespace halex

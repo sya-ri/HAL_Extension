@@ -46,7 +46,7 @@ void HAL_UART_TxHalfCpltCallback(UART_HandleTypeDef *huart) {
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 #endif // CONFIG_USE_HALF_CALLBACK_UART
     if(halex::map_contains(halex::uart_tx_callback, huart)) {
-    	halex::uart_tx_callback[huart]();
+        halex::uart_tx_callback[huart]();
     }
 }
 
@@ -56,13 +56,13 @@ void HAL_UART_RxHalfCpltCallback(UART_HandleTypeDef *huart) {
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 #endif // CONFIG_USE_HALF_CALLBACK_UART
     if(halex::map_contains(halex::uart_rx_callback, huart)) {
-    	halex::uart_rx_callback[huart]();
+        halex::uart_rx_callback[huart]();
     }
 }
 
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
     if(halex::map_contains(halex::uart_error_callback, huart)) {
-    	halex::uart_error_callback[huart]();
+        halex::uart_error_callback[huart]();
     }
 }
 #endif // CONFIG_DISABLE_EX_CALLBACK
