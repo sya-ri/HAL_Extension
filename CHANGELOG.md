@@ -1,5 +1,12 @@
 # 変更履歴
 
+## v4.0.3
+- 割り込み関数を無効化していても `TimerInterrupt` を使えるように変更
+- `TimerInterrupt::init` 直後にタイマー割り込みが発生するバグの修正
+- `TimerInterrupt` に関数を追加
+  - `setCount`
+  - `resetCount`
+
 ## v4.0.2
 - モジュールの有効化コンフィグを無効化コンフィグに変更
 
