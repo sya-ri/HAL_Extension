@@ -1,8 +1,8 @@
-# WDG
+# IWDG
 
 ## コンフィグ
 
-> #### CONFIG_DISABLE_MODULE_WDG
+> #### CONFIG_DISABLE_MODULE_IWDG
 > WDG モジュールの無効化  
 > 定義することでコンパイルされなくなります
 
