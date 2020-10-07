@@ -1,5 +1,9 @@
 # 変更履歴
 
+## v2.3.1
+- ファイル名を変更  
+`Hal_Extension.hpp` → `HAL_Extension.hpp`
+
 ## v2.3
 - クラスを追加
   - UART_IT
