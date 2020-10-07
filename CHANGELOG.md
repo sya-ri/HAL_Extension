@@ -1,5 +1,8 @@
 # 変更履歴
 
+## v5.1.0
+- クラス `TimerCounter` を `StopWatch` に変更
+
 ## v5.0.2
 - `IWDG_Manager` で誤差を減らすように変更
 
