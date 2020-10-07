@@ -1,5 +1,9 @@
 # 変更履歴
 
+## v3.0.5
+- `FixedSevenSegment` のコンストラクタを変更
+  - `flip` を追加
+
 ## v3.0.4
 - `SevenSegment` の関数を仮想化
 
