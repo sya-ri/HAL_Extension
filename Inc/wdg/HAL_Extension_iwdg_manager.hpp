@@ -63,6 +63,7 @@ private:
             float reloadCount = timeOut * LSI_VALUE / (static_cast<float>(prescalers[i].value) * static_cast<uint32_t>(timeUnit));
             uint32_t reloadCount_u32 = static_cast<uint32_t>(reloadCount);
             updateInitOption(initOption, prescalers[i], reloadCount, reloadCount_u32, min_reloadCount_error);
+            updateInitOption(initOption, prescalers[i], reloadCount, reloadCount_u32 + 1, min_reloadCount_error);
         }
         return initOption;
     }
