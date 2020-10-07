@@ -1,5 +1,12 @@
 # 変更履歴
 
+## v2.3
+- クラスを追加
+  - UART_IT
+  - I2C_Master_IT
+  - I2C_Slave_IT
+  - Encoder
+
 ## v2.2
 - I2C_Slave_DMA を変更  
 送受信に使う変数をコンストラクタで渡すように変更
