@@ -19,7 +19,7 @@ namespace halex
   - [列挙クラス](Doc/Util/INDEX.md#列挙クラス)
     - [AngleType](Doc/Util/enum/AngleType.md)
   - [クラス](Doc/Util/INDEX.md#クラス)
-    - [TimerCounter](Doc/Util/class/TimerCounter.md)
+    - [StopWatch](Doc/Util/class/StopWatch.md)
 - [GPIO](Doc/GPIO/INDEX.md)
   - [コンフィグ](Doc/GPIO/INDEX.md#コンフィグ)
     - [CONFIG_DISABLE_MODULE_GPIO](Doc/GPIO/INDEX.md#CONFIG_DISABLE_MODULE_GPIO)

@@ -1,16 +1,16 @@
-#include "util/HAL_Extension_util_timer_counter.hpp"
+#include "util/HAL_Extension_util_stop_watch.hpp"
 
 namespace halex {
 
-TimerCounter::TimerCounter() {
+StopWatch::StopWatch() {
 
 }
 
-void TimerCounter::start() noexcept {
+void StopWatch::start() noexcept {
     startTime = HAL_GetTick();
 }
 
-uint32_t TimerCounter::get() const noexcept {
+uint32_t StopWatch::get() const noexcept {
     return HAL_GetTick() - startTime;
 }
 

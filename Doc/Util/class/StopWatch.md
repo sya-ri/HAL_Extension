@@ -1,27 +1,27 @@
-# TimerCounter
+# StopWatch
 
 ## 目次
 - [コンストラクタ](#コンストラクタ)
-  - [TimerCounter()](#timercountertimercounter)
+  - [StopWatch()](#stopwatchstopwatch)
 - [関数](#関数)
-  - [start()](#timercounterstart)
-  - [get()](#timercounterget)
+  - [start()](#stopwatchstart)
+  - [get()](#stopwatchget)
 
 ## コンストラクタ
-##### TimerCounter::TimerCounter()
+##### StopWatch::StopWatch()
 > ```c++
-> TimerCounter();
+> StopWatch();
 > ```
 
 ## 関数
 
-##### TimerCounter::start()
+##### StopWatch::start()
 > ```c++
 > void start() noexcept;
 > ```
 > 開始時間を更新します
 
-##### TimerCounter::get()
+##### StopWatch::get()
 > ```c++
 > uint32_t get() const noexcept;
 > ```

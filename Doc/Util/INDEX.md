@@ -15,11 +15,11 @@
   - [値](enum/AngleType.md#値)
 
 ## クラス
-- [TimerCounter](class/TimerCounter.md)
-  - [コンストラクタ](class/TimerCounter.md#コンストラクタ)
-    - [TimerCounter()](class/TimerCounter.md#timercountertimercounter)
-  - [関数](class/TimerCounter.md#関数)
-    - [start()](class/TimerCounter.md#timercounterstart)
-    - [get()](class/TimerCounter.md#timercounterget)
+- [StopWatch](class/StopWatch.md)
+  - [コンストラクタ](class/StopWatch.md#コンストラクタ)
+    - [StopWatch()](class/StopWatch.md#stopwatchstopwatch)
+  - [関数](class/StopWatch.md#関数)
+    - [start()](class/StopWatch.md#stopwatchstart)
+    - [get()](class/StopWatch.md#stopwatchget)
 
 [<< 戻る](../../README.md)
