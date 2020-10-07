@@ -1,5 +1,17 @@
 # 変更履歴
 
+## v4.0.1
+- モジュールの有効化コンフィグを追加
+- 割り込み関数の自動定義を無効化するコンフィグを追加
+- `GPIO::readBool` を削除
+- `GPIO::isSet` `GPIO::isReset` を追加
+- `ADC_DMA` の内部処理を変更  
+  - `init` で一部の設定を `ENABLE` にする処理を削除
+  - `get` の範囲外アクセスを許容するように変更
+- `DynamicSevenSegment` の内部処理を変更  
+桁数取得を `floorf` から `getNumberOfDigit` に変更
+- `PWM` が出力されないバグを修正
+
 ## v4.0.0
 - `Src/*.cpp` を追加
 - 全てのクラスに空コンストラクタを追加
