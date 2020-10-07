@@ -1,5 +1,12 @@
 # 変更履歴
 
+## v2.3.4
+- `HAL_Extension.hpp` を `Inc` に移動
+- `UART_Logger` の内部処理を変更  
+`UART::transmit` を `HAL_UART_Transmit` に変更
+- `UART_Logger_IT` の内部処理を変更  
+`UART_IT::transmit` を `HAL_UART_Transmit_IT` に変更
+
 ## v2.3.3
 - クラスを追加
   - `SevenSegment`
