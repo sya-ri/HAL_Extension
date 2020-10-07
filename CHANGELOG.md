@@ -1,5 +1,8 @@
 # 変更履歴
 
+## v3.0.4
+- `SevenSegment` の関数を仮想化
+
 ## v3.0.3
 - `GPIO::readBool` の処理を変更  
 `gpioRead` を `GPIO::read` に変更
