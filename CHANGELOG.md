@@ -1,5 +1,14 @@
 # 変更履歴
 
+## v3.0.0
+- モジュール毎にファイル分け
+  - `_util`
+  - `_gpio`
+  - `_usart`
+  - `_i2c`
+  - `_tim`
+  - `_adc`
+
 ## v2.3.4
 - `HAL_Extension.hpp` を `Inc` に移動
 - `UART_Logger` の内部処理を変更  
