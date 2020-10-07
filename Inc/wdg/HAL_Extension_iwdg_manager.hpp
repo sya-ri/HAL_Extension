@@ -38,22 +38,6 @@ private:
 		Prescaler{256, IWDG_PRESCALER_256}
     };
 
-    static constexpr void updateInitOption(
-            InitOption &initOption,
-            const Prescaler &prescaler,
-            float reloadCount,
-            float &min_reloadCount_error
-    ) {
-        uint32_t reloadCount_u32 = std::round(reloadCount);
-        if (reloadCount_u32 < 1 || 4095 < reloadCount_u32) return;
-        float reloadCount_error = reloadCount - reloadCount_u32;
-        if (reloadCount_error < min_reloadCount_error) {
-            initOption.prescaler = prescaler;
-            initOption.reloadCount = reloadCount_u32;
-            min_reloadCount_error = reloadCount_error;
-        }
-    }
-
     static constexpr InitOption getInitOption(
     	float timeOut,
 		TimeUnit timeUnit
@@ -62,7 +46,14 @@ private:
         float min_reloadCount_error = std::numeric_limits<float>::max();
         for (uint8_t i = 0; i < (sizeof(prescalers) / sizeof(prescalers[0])); i++) {
             float reloadCount = timeOut * LSI_VALUE / (static_cast<float>(prescalers[i].value) * static_cast<uint32_t>(timeUnit));
-            updateInitOption(initOption, prescalers[i], reloadCount, min_reloadCount_error);
+            uint32_t reloadCount_u32 = std::round(reloadCount);
+            if (reloadCount_u32 < 1 || 4095 < reloadCount_u32) continue;
+            float reloadCount_error = reloadCount - reloadCount_u32;
+            if (reloadCount_error < min_reloadCount_error) {
+                initOption.prescaler = prescalers[i];
+                initOption.reloadCount = reloadCount_u32;
+                min_reloadCount_error = reloadCount_error;
+            }
         }
         return initOption;
     }
