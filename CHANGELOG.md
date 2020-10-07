@@ -1,5 +1,25 @@
 # 変更履歴
 
+## v5.0.0
+- 全クラスをファイル分け
+- 関数に `const` や `noexcept` を追加
+- 名前空間 `halex` を追加
+- クラスを追加
+  - `TimerCounter`
+  - `IWDG_Manager`
+- 列挙クラス `AngleType` を追加
+- `math_angle` 系関数を追加
+  - `deg2rad`
+  - `rad2deg`
+  - `angle2rad`
+  - `angle2deg`
+- 割り込み処理変更関数を追加
+  - `setXXXCallback`
+- 送受信関数を追加
+  - `XXXtransmit`
+  - `XXXreceive`
+- リファレンスの構造を変更
+
 ## v4.0.3
 - 割り込み関数を無効化していても `TimerInterrupt` を使えるように変更
 - `TimerInterrupt::init` 直後にタイマー割り込みが発生するバグの修正
