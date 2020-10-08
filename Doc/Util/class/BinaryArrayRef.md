@@ -2,7 +2,7 @@
 
 ## 目次
 - [コンストラクタ](#コンストラクタ)
-  - [BinaryArrayRef()](#binaryarrayrefbinaryarrayref)
+  - [BinaryArrayRef(std::array<uint8_t, ARRAY_SIZE>)](#binaryarrayrefbinaryarrayrefstdarrayuint8_t-array_size)
 - [関数](#関数)
   - [set(uint8_t)](#binaryarrayrefsetuint8_t)
   - [reset(uint8_t)](#binaryarrayrefresetuint8_t)
@@ -10,7 +10,7 @@
   - [read(uint8_t)](#binaryarrayrefreaduint8_t)
 
 ## コンストラクタ
-##### BinaryArrayRef::BinaryArrayRef()
+##### BinaryArrayRef::BinaryArrayRef(std::array<uint8_t, ARRAY_SIZE>)
 > ```c++
 > BinaryArrayRef(
 >     std::array<uint8_t, ARRAY_SIZE> &array      

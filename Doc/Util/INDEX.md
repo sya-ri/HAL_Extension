@@ -32,7 +32,7 @@
     - [get()](class/BinaryArray.md#binaryarrayget)
 - [BinaryArrayRef](class/BinaryArrayRef.md)
   - [コンストラクタ](class/BinaryArrayRef.md#コンストラクタ)
-    - [BinaryArrayRef()](class/BinaryArrayRef.md#binaryarrayrefbinaryarrayref)
+    - [BinaryArrayRef(std::array<uint8_t, ARRAY_SIZE>)](class/BinaryArrayRef.md#binaryarrayrefbinaryarrayrefstdarrayuint8_t-array_size)
   - [関数](class/BinaryArrayRef.md#関数)
     - [set(uint8_t)](class/BinaryArrayRef.md#binaryarrayrefsetuint8_t)
     - [reset(uint8_t)](class/BinaryArrayRef.md#binaryarrayrefresetuint8_t)
