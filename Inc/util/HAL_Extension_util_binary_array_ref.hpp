@@ -31,7 +31,7 @@ public:
         }
     }
 
-    bool read(uint8_t index) const noexcept {
+    bool read(uint8_t index) noexcept {
         return array[index / 8] & (1 << (index % 8));
     }
 };

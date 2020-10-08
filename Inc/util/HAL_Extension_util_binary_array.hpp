@@ -28,7 +28,7 @@ public:
         BinaryArrayRef<ARRAY_SIZE>(array).write(index, state);
     }
 
-    bool read(uint8_t index) const noexcept {
+    bool read(uint8_t index) noexcept {
         return BinaryArrayRef<ARRAY_SIZE>(array).read(index);
     }
 

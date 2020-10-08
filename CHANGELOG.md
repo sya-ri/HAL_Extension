@@ -1,5 +1,8 @@
 # 変更履歴
 
+## v5.3.2
+- `BinaryArray`, `BinaryArrayRef` のエラーを修正
+
 ## v5.3.1
 - クラス `BinaryArray` の内部仕様を変更
   - `BinaryArrayRef` のインスタンスを動的に生成するように変更  

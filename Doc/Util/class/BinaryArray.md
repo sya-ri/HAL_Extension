@@ -78,7 +78,7 @@ ARRAY_SIZE: ビット配列の要素数
 > ```c++
 > bool read(
 >     uint8_t index
-> ) const noexcept;
+> ) noexcept;
 > ```
 > 指定したビットが `1` であれば `true`  
 > `0` であれば `false` を返します
