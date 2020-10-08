@@ -1,6 +1,7 @@
 # BinaryArrayRef
 
 ## 目次
+- [クラステンプレート](#クラステンプレート)
 - [コンストラクタ](#コンストラクタ)
   - [BinaryArrayRef(std::array<uint8_t, ARRAY_SIZE>)](#binaryarrayrefbinaryarrayrefstdarrayuint8_t-array_size)
 - [関数](#関数)
@@ -8,6 +9,14 @@
   - [reset(uint8_t)](#binaryarrayrefresetuint8_t)
   - [write(uint8_t, bool)](#binaryarrayrefwriteuint8_t-bool)
   - [read(uint8_t)](#binaryarrayrefreaduint8_t)
+
+## クラステンプレート
+```c++
+template <std::size_t ARRAY_SIZE>
+```
+```yaml
+ARRAY_SIZE: ビット配列の要素数
+```
 
 ## コンストラクタ
 ##### BinaryArrayRef::BinaryArrayRef(std::array<uint8_t, ARRAY_SIZE>)

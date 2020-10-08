@@ -1,6 +1,7 @@
 # BinaryArray
 
 ## 目次
+- [クラステンプレート](#クラステンプレート)
 - [コンストラクタ](#コンストラクタ)
   - [BinaryArray()](#binaryarraybinaryarray)
 - [関数](#関数)
@@ -9,6 +10,14 @@
   - [write(uint8_t, bool)](#binaryarraywriteuint8_t-bool)
   - [read(uint8_t)](#binaryarrayreaduint8_t)
   - [get()](#binaryarrayget)
+
+## クラステンプレート
+```c++
+template <std::size_t ARRAY_SIZE>
+```
+```yaml
+ARRAY_SIZE: ビット配列の要素数
+```
 
 ## コンストラクタ
 ##### BinaryArray::BinaryArray()
