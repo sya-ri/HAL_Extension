@@ -25,7 +25,14 @@ ARRAY_SIZE: ビット配列の要素数
 >     std::array<uint8_t, ARRAY_SIZE> &array      
 > );
 > ```
-> 参照先の配列を自動で変更します
+> 参照先の配列を自動で変更します  
+> 最下位ビットは `0`  
+> 最上位ビットは `ARRAY_SIZE * 8 - 1`
+> ```c++
+> // 例
+> BinaryArrayRef<1> binaryArray(array);
+> ```
+
 
 ## 関数
 
@@ -36,6 +43,10 @@ ARRAY_SIZE: ビット配列の要素数
 > ) noexcept;
 > ```
 > 指定したビットを `1` にします
+> ```c++
+> // 例
+> binaryArray.set(0);
+> ```
 
 ##### BinaryArrayRef::reset(uint8_t)
 > ```c++
@@ -44,6 +55,10 @@ ARRAY_SIZE: ビット配列の要素数
 > ) noexcept;
 > ```
 > 指定したビットを `0` にします
+> ```c++
+> // 例
+> binaryArray.reset(0);
+> ```
 
 ##### BinaryArrayRef::write(uint8_t, bool)
 > ```c++
@@ -55,6 +70,11 @@ ARRAY_SIZE: ビット配列の要素数
 > 指定したビットを任意の値に変更します  
 > `state` が `true` のとき `1`  
 > `state` が `false` のとき `0`
+> ```c++
+> // 例
+> binaryArray.write(0, true);
+> binaryArray.write(0, false);
+> ```
 
 ##### BinaryArrayRef::read(uint8_t)
 > ```c++
@@ -64,5 +84,11 @@ ARRAY_SIZE: ビット配列の要素数
 > ```
 > 指定したビットが `1` であれば `true`  
 > `0` であれば `false` を返します
+> ```c++
+> // 例
+> if (binaryArray.read(0)) {
+> 
+> }
+> ```
 
 [<< 戻る](../INDEX.md)
