@@ -20,6 +20,8 @@ namespace halex
     - [AngleType](Doc/Util/enum/AngleType.md)
   - [クラス](Doc/Util/INDEX.md#クラス)
     - [StopWatch](Doc/Util/class/StopWatch.md)
+    - [BinaryArray](Doc/Util/class/BinaryArray.md)
+    - [BinaryArrayRef](Doc/Util/class/BinaryArrayRef.md)
 - [GPIO](Doc/GPIO/INDEX.md)
   - [コンフィグ](Doc/GPIO/INDEX.md#コンフィグ)
     - [CONFIG_DISABLE_MODULE_GPIO](Doc/GPIO/INDEX.md#CONFIG_DISABLE_MODULE_GPIO)
