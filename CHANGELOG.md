@@ -1,5 +1,10 @@
 # 変更履歴
 
+## v5.3.0
+- クラスを追加
+  - `BinaryArray`
+  - `BinaryArrayRef`
+
 ## v5.2.0
 - モジュール `WDG` を `IWDG` に変更
 
