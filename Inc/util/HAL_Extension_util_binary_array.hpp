@@ -11,26 +11,25 @@ template <std::size_t ARRAY_SIZE>
 class BinaryArray{
 private:
     std::array<uint8_t, ARRAY_SIZE> array{};
-    BinaryArrayRef<ARRAY_SIZE> internalBinaryArray{array};
 public:
     BinaryArray() {
 
     }
 
     void set(uint8_t index) noexcept {
-        internalBinaryArray.set(index);
+        BinaryArrayRef<ARRAY_SIZE>(array).set(index);
     }
 
     void reset(uint8_t index) noexcept {
-        internalBinaryArray.reset(index);
+        BinaryArrayRef<ARRAY_SIZE>(array).reset(index);
     }
 
     void write(uint8_t index, bool state) noexcept {
-        internalBinaryArray.write(index, state);
+        BinaryArrayRef<ARRAY_SIZE>(array).write(index, state);
     }
 
     bool read(uint8_t index) const noexcept {
-        return internalBinaryArray.read(index);
+        return BinaryArrayRef<ARRAY_SIZE>(array).read(index);
     }
 
     const std::array<uint8_t, ARRAY_SIZE> get() const noexcept {
