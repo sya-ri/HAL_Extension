@@ -68,6 +68,6 @@ ARRAY_SIZE: ビット配列の要素数
 > ```c++
 > const std::array<uint8_t, ARRAY_SIZE> get() const noexcept;
 > ```
-> ビットを格納している配列を返します
+> 内部で定義しているビット配列をコピーします
 
 [<< 戻る](../INDEX.md)
