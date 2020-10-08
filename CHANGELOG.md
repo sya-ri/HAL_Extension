@@ -1,5 +1,10 @@
 # 変更履歴
 
+## v5.3.1
+- クラス `BinaryArray` の内部仕様を変更
+  - `BinaryArrayRef` のインスタンスを動的に生成するように変更  
+  - `BinaryArray<N>` と `std::array<uint8_t, N>)` のサイズが等しくなるように変更
+
 ## v5.3.0
 - クラスを追加
   - `BinaryArray`
