@@ -1,5 +1,8 @@
 # 変更履歴
 
+## v5.4.0
+- 関数 `Encoder::setCount` を追加
+
 ## v5.3.2
 - `BinaryArray`, `BinaryArrayRef` のエラーを修正
 
