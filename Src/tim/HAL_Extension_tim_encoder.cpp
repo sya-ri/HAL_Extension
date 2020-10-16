@@ -54,9 +54,13 @@ int32_t Encoder::getCount() const noexcept {
     return count;
 }
 
-void Encoder::resetCount() noexcept {
+void Encoder::setCount(int32_t count) noexcept {
     update();
-    count = 0;
+    this->count = count;
+}
+
+void Encoder::resetCount() noexcept {
+    setCount(0);
 }
 
 } // namespace halex

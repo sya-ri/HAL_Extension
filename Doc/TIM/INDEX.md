@@ -41,6 +41,7 @@
     - [stop()](class/Encoder.md#encoderstop)
     - [update()](class/Encoder.md#encoderupdate)
     - [getCount()](class/Encoder.md#encodergetcount)
+    - [setCount(int32_t)](class/Encoder.md#encodersetcountint32_t)
     - [resetCount()](class/Encoder.md#encoderresetcount)
 - [TimerInterrupt](class/TimerInterrupt.md)
   - [CubeMX](class/TimerInterrupt.md#cubemx)

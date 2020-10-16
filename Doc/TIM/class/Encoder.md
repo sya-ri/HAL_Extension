@@ -8,6 +8,7 @@
   - [stop()](#encoderstop)
   - [update()](#encoderupdate)
   - [getCount()](#encodergetcount)
+  - [setCount(int32_t)](#encodersetcountint32_t)
   - [resetCount()](#encoderresetcount)
 
 ## CubeMX
@@ -80,11 +81,23 @@ TIMn:
 > encoder.getCount();
 > ```
 
+##### Encoder::setCount(int32_t)
+> ```c++
+> void setCount(
+>     int32_t count
+> ) noexcept;
+> ```
+> カウントを任意の値に変更します  
+> ```c++
+> // 例
+> encoder.resetCount();
+> ```
+
 ##### Encoder::resetCount()
 > ```c++
 > void resetCount() noexcept;
 > ```
-> カウントを停止します  
+> カウントを 0 に変更します
 > ```c++
 > // 例
 > encoder.resetCount();

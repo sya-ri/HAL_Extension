@@ -22,6 +22,7 @@ public:
     void stop() noexcept;
     void update() noexcept;
     int32_t getCount() const noexcept;
+    void setCount(int32_t count) noexcept;
     void resetCount() noexcept;
 };
 
