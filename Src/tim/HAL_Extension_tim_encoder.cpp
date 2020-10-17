@@ -15,11 +15,11 @@ Encoder::Encoder(TIM_HandleTypeDef &htim): Encoder(&htim) {
 }
 
 void Encoder::start() noexcept {
+    __HAL_TIM_SET_COUNTER(htim , 0);
+    __HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
     if(!isStart) {
         HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
     }
-    __HAL_TIM_SET_COUNTER(htim , 0);
-    __HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
     isStart = true;
 }
 
