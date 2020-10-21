@@ -16,7 +16,7 @@ Encoder::Encoder(TIM_HandleTypeDef &htim): Encoder(&htim) {
 
 void Encoder::start() noexcept {
     __HAL_TIM_SET_COUNTER(htim , 0);
-    __HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
+    __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
     if(!isStart) {
         HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
         isStart = true;
@@ -30,7 +30,7 @@ void Encoder::stop() noexcept {
         isStart = false;
     }
     __HAL_TIM_SET_COUNTER(htim , 0);
-    __HAL_TIM_CLEAR_FLAG(htim, TIM_CHANNEL_ALL);
+    __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
 }
 
 void Encoder::update() noexcept {
