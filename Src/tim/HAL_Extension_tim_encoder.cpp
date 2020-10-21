@@ -37,7 +37,7 @@ void Encoder::update() noexcept {
     lastRawCount = rawCount;
     if (__HAL_TIM_GET_FLAG(htim, TIM_FLAG_UPDATE)) {
         rawCount = __HAL_TIM_GET_COUNTER(htim);
-        if (rawCount > lastRawCount) {
+        if (__HAL_TIM_IS_TIM_COUNTING_DOWN(htim)) {
             count += (rawCount - __HAL_TIM_GET_AUTORELOAD(htim)) - lastRawCount;
         } else {
             count += rawCount - (lastRawCount - __HAL_TIM_GET_AUTORELOAD(htim));
