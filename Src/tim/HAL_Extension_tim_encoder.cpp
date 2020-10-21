@@ -38,12 +38,12 @@ void Encoder::update() noexcept {
     rawCount = __HAL_TIM_GET_COUNTER(htim);
     count += rawCount - lastRawCount;
     if (__HAL_TIM_GET_FLAG(htim, TIM_FLAG_UPDATE)) {
+        __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
         if (__HAL_TIM_IS_TIM_COUNTING_DOWN(htim)) {
             count -= __HAL_TIM_GET_AUTORELOAD(htim);
         } else {
             count += __HAL_TIM_GET_AUTORELOAD(htim);
         }
-        __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
     }
 }
 
