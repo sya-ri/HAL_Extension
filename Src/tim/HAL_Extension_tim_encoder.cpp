@@ -24,7 +24,6 @@ void Encoder::start() noexcept {
 }
 
 void Encoder::stop() noexcept {
-    update();
     if(isStart) {
         HAL_TIM_Encoder_Stop(htim, TIM_CHANNEL_ALL);
         isStart = false;
@@ -55,7 +54,7 @@ int32_t Encoder::getCount() const noexcept {
 }
 
 void Encoder::setCount(int32_t count) noexcept {
-    update();
+    __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
     this->count = count;
 }
 
