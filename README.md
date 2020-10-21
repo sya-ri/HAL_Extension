@@ -1,4 +1,4 @@
-# HAL_Extension - 5.4.0
+# HAL_Extension - 5.4.1
 
 ```c++
 #include "HAL_Extension.hpp
