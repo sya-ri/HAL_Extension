@@ -60,21 +60,18 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
     if(allowSign && isMinus) {
         splitNum.push_back(-1);
     }
-    uint8_t numSize = splitNum.size();
-    if(numSize != 0) {
-        digitCursor = 0;
-        isStop = false;
-    } else {
-        isStop = true;
-    }
+    digitCursor = 0;
+    isStop = false;
     this->point = point;
 }
 
 void DynamicSevenSegment::updateError() const noexcept {
     splitNum.clear();
-    for(const auto& d : digitList) {
+    uint8_t digitListSize = digitList.size();
+    for(uint8_t i = 0; i < digitListSize; i++) {
         splitNum.push_back(-1);
     }
+    digitCursor = 0;
     isStop = false;
     point = -1;
 }
@@ -118,14 +115,9 @@ void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
         return;
     }
     updateZeroFill();
-    uint8_t numSize = splitNum.size();
-    if(numSize != 0) {
-        digitCursor = 0;
-        isStop = false;
-    } else {
-        isStop = true;
-    }
-    point = 0;
+    digitCursor = 0;
+    isStop = false;
+    point = -1;
 }
 
 void DynamicSevenSegment::next() const noexcept {
