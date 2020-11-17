@@ -83,7 +83,7 @@ void DynamicSevenSegment::updateFixedPoint(float num, int8_t point) const noexce
     for(uint8_t i = 0; i < point; i++) {
         num *= 10;
     }
-    update((int64_t) num, digitList.size() - point);
+    update((int64_t) num, point);
 }
 
 void DynamicSevenSegment::updateFloatPoint(float num) const noexcept {
