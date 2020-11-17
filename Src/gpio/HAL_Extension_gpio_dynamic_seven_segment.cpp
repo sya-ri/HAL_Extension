@@ -21,13 +21,11 @@ DynamicSevenSegment::DynamicSevenSegment(): DynamicSevenSegment(SevenSegment()) 
 
 DynamicSevenSegment::DynamicSevenSegment(
     const SevenSegment &sevenSegment,
-    bool hex,
     bool zeroFill,
     bool allowSign,
     bool overflowError
 ):
     sevenSegment(sevenSegment),
-    digitSystem(hex? 16 : 10),
     zeroFill(zeroFill),
     allowSign(allowSign),
     overflowError(overflowError)
@@ -51,23 +49,14 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
         num *= -1;
     }
     do {
-        splitNum.push_back((int8_t)(num % digitSystem));
-        num /= digitSystem;
+        splitNum.push_back((int8_t)(num % 10));
+        num /= 10;
     } while(0 < num);
     if(digitList.size() < splitNum.size()) {
         updateError();
         return;
     }
-    if(zeroFill) {
-        int8_t fillNumber = digitList.size() - splitNum.size();
-        if(allowSign) {
-            fillNumber --;
-        }
-        while(0 < fillNumber) {
-            splitNum.push_back(0);
-            fillNumber --;
-        }
-    }
+    updateZeroFill();
     if(allowSign && isMinus) {
         splitNum.push_back(-1);
     }
@@ -90,6 +79,19 @@ void DynamicSevenSegment::updateError() const noexcept {
     point = -1;
 }
 
+void DynamicSevenSegment::updateZeroFill() const noexcept {
+    if(zeroFill) {
+        int8_t fillNumber = digitList.size() - splitNum.size();
+        if(allowSign) {
+            fillNumber --;
+        }
+        while(0 < fillNumber) {
+            splitNum.push_back(0);
+            fillNumber --;
+        }
+    }
+}
+
 void DynamicSevenSegment::update(int64_t num) const noexcept {
     update(num, -1);
 }
@@ -103,6 +105,27 @@ void DynamicSevenSegment::updateFixedPoint(float num, int8_t point) const noexce
 
 void DynamicSevenSegment::updateFloatPoint(float num) const noexcept {
     updateFixedPoint(num, getNumberOfDigit(num));
+}
+
+void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
+    splitNum.clear();
+    do {
+        splitNum.push_back((int8_t)(num % 0x10));
+        num /= 0x10;
+    } while(0 < num);
+    if(digitList.size() < splitNum.size()) {
+        updateError();
+        return;
+    }
+    updateZeroFill();
+    uint8_t numSize = splitNum.size();
+    if(numSize != 0) {
+        digitCursor = 0;
+        isStop = false;
+    } else {
+        isStop = true;
+    }
+    point = 0;
 }
 
 void DynamicSevenSegment::next() const noexcept {

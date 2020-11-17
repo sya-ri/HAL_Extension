@@ -11,7 +11,6 @@ namespace halex {
 class DynamicSevenSegment {
 private:
     const SevenSegment &sevenSegment;
-    const uint8_t digitSystem;
     const bool zeroFill;
     const bool allowSign;
     const bool overflowError;
@@ -23,14 +22,16 @@ private:
 
     void update(int64_t num, uint8_t point) const noexcept;
     void updateError() const noexcept;
+    void updateZeroFill() const noexcept;
 public:
     DynamicSevenSegment();
-    DynamicSevenSegment(const SevenSegment &sevenSegment, bool hex = false, bool zeroFill = false, bool allowSign = false, bool overflowError = true);
+    DynamicSevenSegment(const SevenSegment &sevenSegment, bool zeroFill = false, bool allowSign = false, bool overflowError = true);
     DynamicSevenSegment& add(const GPIO &gpio) noexcept;
     DynamicSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
     void update(int64_t num) const noexcept;
     void updateFixedPoint(float num, int8_t point) const noexcept;
     void updateFloatPoint(float num) const noexcept;
+    void updateHex(uint64_t num) const noexcept;
     void next() const noexcept;
     void clear() const noexcept;
 };
