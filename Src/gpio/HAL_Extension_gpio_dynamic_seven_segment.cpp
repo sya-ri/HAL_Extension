@@ -20,15 +20,9 @@ namespace {
 DynamicSevenSegment::DynamicSevenSegment(): DynamicSevenSegment(SevenSegment()) {}
 
 DynamicSevenSegment::DynamicSevenSegment(
-    const SevenSegment &sevenSegment,
-    bool zeroFill,
-    bool allowSign,
-    bool overflowError
+    const SevenSegment &sevenSegment
 ):
-    sevenSegment(sevenSegment),
-    zeroFill(zeroFill),
-    allowSign(allowSign),
-    overflowError(overflowError)
+    sevenSegment(sevenSegment)
 {
 
 }
@@ -40,6 +34,21 @@ DynamicSevenSegment& DynamicSevenSegment::add(const GPIO &gpio) noexcept {
 
 DynamicSevenSegment& DynamicSevenSegment::add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept {
     return add(GPIO(GPIOx, GPIO_Pin));
+}
+
+DynamicSevenSegment& DynamicSevenSegment::setZeroFill(bool enable) noexcept {
+    zeroFill = enable;
+    return *this;
+}
+
+DynamicSevenSegment& DynamicSevenSegment::setAllowSign(bool enable) noexcept {
+    allowSign = enable;
+    return *this;
+}
+
+DynamicSevenSegment& DynamicSevenSegment::setOverflowError(bool enable) noexcept {
+    overflowError = enable;
+    return *this;
 }
 
 void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {

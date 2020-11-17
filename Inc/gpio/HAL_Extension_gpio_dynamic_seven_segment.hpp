@@ -11,9 +11,9 @@ namespace halex {
 class DynamicSevenSegment {
 private:
     const SevenSegment &sevenSegment;
-    const bool zeroFill;
-    const bool allowSign;
-    const bool overflowError;
+    bool zeroFill = true;
+    bool allowSign = true;
+    bool overflowError = true;
     std::vector<GPIO> digitList;
     mutable uint8_t digitCursor = 0;
     mutable std::vector<int8_t> splitNum;
@@ -25,9 +25,12 @@ private:
     void updateZeroFill() const noexcept;
 public:
     DynamicSevenSegment();
-    DynamicSevenSegment(const SevenSegment &sevenSegment, bool zeroFill = false, bool allowSign = false, bool overflowError = true);
+    DynamicSevenSegment(const SevenSegment &sevenSegment);
     DynamicSevenSegment& add(const GPIO &gpio) noexcept;
     DynamicSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
+    DynamicSevenSegment& setZeroFill(bool enable) noexcept;
+    DynamicSevenSegment& setAllowSign(bool enable) noexcept;
+    DynamicSevenSegment& setOverflowError(bool enable) noexcept;
     void update(int64_t num) const noexcept;
     void updateFixedPoint(float num, int8_t point) const noexcept;
     void updateFloatPoint(float num) const noexcept;
