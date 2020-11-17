@@ -67,7 +67,7 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
     }
     uint8_t numSize = splitNum.size();
     if(numSize != 0) {
-        digitCursor = numSize - 1;
+        digitCursor = 0;
         isStop = false;
     } else {
         isStop = true;
