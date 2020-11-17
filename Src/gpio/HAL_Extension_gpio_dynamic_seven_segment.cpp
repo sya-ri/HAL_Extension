@@ -23,12 +23,14 @@ DynamicSevenSegment::DynamicSevenSegment(
     const SevenSegment &sevenSegment,
     bool hex,
     bool zeroFill,
-    bool allowSign
+    bool allowSign,
+    bool overflowError
 ):
     sevenSegment(sevenSegment),
     digitSystem(hex? 16 : 10),
     zeroFill(zeroFill),
-    allowSign(allowSign)
+    allowSign(allowSign),
+    overflowError(overflowError)
 {
 
 }
@@ -52,6 +54,10 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
         splitNum.push_back((int8_t)(num % digitSystem));
         num /= digitSystem;
     } while(0 < num);
+    if(digitList.size() < splitNum.size()) {
+        updateError();
+        return;
+    }
     if(zeroFill) {
         int8_t fillNumber = digitList.size() - splitNum.size();
         if(allowSign) {
@@ -73,6 +79,15 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
         isStop = true;
     }
     this->point = point;
+}
+
+void DynamicSevenSegment::updateError() const noexcept {
+    splitNum.clear();
+    for(const auto& d : digitList) {
+        splitNum.push_back(-1);
+    }
+    isStop = false;
+    point = -1;
 }
 
 void DynamicSevenSegment::update(int64_t num) const noexcept {

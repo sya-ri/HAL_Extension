@@ -14,6 +14,7 @@ private:
     const uint8_t digitSystem;
     const bool zeroFill;
     const bool allowSign;
+    const bool overflowError;
     std::vector<GPIO> digitList;
     mutable uint8_t digitCursor = 0;
     mutable std::vector<int8_t> splitNum;
@@ -21,9 +22,10 @@ private:
     mutable uint8_t point = 0;
 
     void update(int64_t num, uint8_t point) const noexcept;
+    void updateError() const noexcept;
 public:
     DynamicSevenSegment();
-    DynamicSevenSegment(const SevenSegment &sevenSegment, bool hex = false, bool zeroFill = false, bool allowSign = false);
+    DynamicSevenSegment(const SevenSegment &sevenSegment, bool hex = false, bool zeroFill = false, bool allowSign = false, bool overflowError = true);
     DynamicSevenSegment& add(const GPIO &gpio) noexcept;
     DynamicSevenSegment& add(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept;
     void update(int64_t num) const noexcept;
