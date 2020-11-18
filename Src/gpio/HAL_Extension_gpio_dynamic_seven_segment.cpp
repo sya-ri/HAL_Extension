@@ -5,11 +5,10 @@
 namespace halex {
 
 namespace {
-    uint8_t getNumberOfDigit(float num) {
-        uint64_t numAsUInt = (uint64_t) ((num < 0)? -num : num);
+    uint8_t getNumberOfDigit(uint64_t num) {
         uint64_t compare = 10;
         uint8_t numberOfDigit = 1;
-        while(!(numAsUInt < compare)) {
+        while(!(num < compare)) {
             compare *= 10;
             numberOfDigit ++;
         }
@@ -109,8 +108,9 @@ void DynamicSevenSegment::updateFixedPoint(float num, int8_t point) const noexce
 
 void DynamicSevenSegment::updateFloatPoint(float num) const noexcept {
     int8_t digitListSize = digitList.size();
-    if(allowSign && (num < 0)) digitListSize --;
-    int8_t point = digitListSize - getNumberOfDigit(num);
+    bool isMinus = num < 0;
+    if(allowSign && isMinus) digitListSize --;
+    int8_t point = digitListSize - getNumberOfDigit(isMinus? -num : num);
     updateFixedPoint(num, point);
 }
 
