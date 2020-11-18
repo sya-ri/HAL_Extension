@@ -10,19 +10,23 @@ namespace halex {
 
 class DynamicSevenSegment {
 private:
+    struct Digit {
+        GPIO select;
+        mutable int8_t display;
+    };
+
     const SevenSegment &sevenSegment;
     bool zeroFill = true;
     bool allowSign = true;
     bool overflowError = true;
-    std::vector<GPIO> digitList;
+    std::vector<Digit> digitList;
     mutable uint8_t digitCursor = 0;
-    mutable std::vector<int8_t> splitNum;
     mutable bool isStop = true;
     mutable uint8_t point = 0;
 
     void update(int64_t num, uint8_t point) const noexcept;
     void updateError() const noexcept;
-    void updateZeroFill() const noexcept;
+    void updateZeroFill(uint8_t from, uint8_t until) const noexcept;
 public:
     DynamicSevenSegment();
     DynamicSevenSegment(const SevenSegment &sevenSegment);

@@ -28,7 +28,7 @@ DynamicSevenSegment::DynamicSevenSegment(
 }
 
 DynamicSevenSegment& DynamicSevenSegment::add(const GPIO &gpio) noexcept {
-    digitList.push_back(gpio);
+    digitList.push_back({gpio, -1});
     return *this;
 }
 
@@ -52,22 +52,26 @@ DynamicSevenSegment& DynamicSevenSegment::setOverflowError(bool enable) noexcept
 }
 
 void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
-    splitNum.clear();
     bool isMinus = num < 0;
     if(isMinus) {
         num *= -1;
     }
+    uint8_t digitListSize = digitList.size();
+    uint8_t i = 0;
     do {
-        splitNum.push_back((int8_t)(num % 10));
+        if(digitListSize <= i) {
+            updateError();
+            return;
+        }
+        digitList[i].display = (int8_t)(num % 10);
         num /= 10;
+        i++;
     } while(0 < num);
-    if(digitList.size() < splitNum.size()) {
-        updateError();
-        return;
-    }
-    updateZeroFill();
     if(allowSign && isMinus) {
-        splitNum.push_back(-1);
+        digitList.end()->display = -1;
+        updateZeroFill(i, digitListSize - 1);
+    } else {
+        updateZeroFill(i, digitListSize);
     }
     digitCursor = 0;
     isStop = false;
@@ -75,25 +79,18 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
 }
 
 void DynamicSevenSegment::updateError() const noexcept {
-    splitNum.clear();
-    uint8_t digitListSize = digitList.size();
-    for(uint8_t i = 0; i < digitListSize; i++) {
-        splitNum.push_back(-1);
+    for(auto& d : digitList) {
+        d.display = -1;
     }
     digitCursor = 0;
     isStop = false;
     point = -1;
 }
 
-void DynamicSevenSegment::updateZeroFill() const noexcept {
+void DynamicSevenSegment::updateZeroFill(uint8_t from, uint8_t until) const noexcept {
     if(zeroFill) {
-        int8_t fillNumber = digitList.size() - splitNum.size();
-        if(allowSign) {
-            fillNumber --;
-        }
-        while(0 < fillNumber) {
-            splitNum.push_back(0);
-            fillNumber --;
+        for(uint8_t i = from; i < until; i++){
+            digitList[i].display = 0;
         }
     }
 }
@@ -114,16 +111,18 @@ void DynamicSevenSegment::updateFloatPoint(float num) const noexcept {
 }
 
 void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
-    splitNum.clear();
+    uint8_t digitListSize = digitList.size();
+    uint8_t i = 0;
     do {
-        splitNum.push_back((int8_t)(num % 0x10));
+        if(digitListSize <= i) {
+            updateError();
+            return;
+        }
+        digitList[i].display = (int8_t)(num % 0x10);
         num /= 0x10;
+        i++;
     } while(0 < num);
-    if(digitList.size() < splitNum.size()) {
-        updateError();
-        return;
-    }
-    updateZeroFill();
+    updateZeroFill(i, digitListSize);
     digitCursor = 0;
     isStop = false;
     point = -1;
@@ -131,19 +130,19 @@ void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
 
 void DynamicSevenSegment::next() const noexcept {
     if(isStop) return;
-    digitList[digitCursor].reset();
+    digitList[digitCursor].select.reset();
     digitCursor ++;
-    if(splitNum.size() <= digitCursor || digitList.size() <= digitCursor) {
+    if(digitList.size() <= digitCursor) {
         digitCursor = 0;
     }
-    sevenSegment.set(splitNum[digitCursor], digitCursor == point);
-    digitList[digitCursor].set();
+    sevenSegment.set(digitList[digitCursor].display, digitCursor == point);
+    digitList[digitCursor].select.set();
 }
 
 void DynamicSevenSegment::clear() const noexcept {
     isStop = true;
     sevenSegment.clear();
-    digitList[digitCursor].reset();
+    digitList[digitCursor].select.reset();
 }
 
 } // namespace halex
