@@ -73,7 +73,7 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
             updateError();
             return;
         }
-        digitList[i].display = -1;
+        digitList[zeroFill? (digitListSize - 1) : i].display = -1;
     }
     digitCursor = 0;
     isStop = false;
