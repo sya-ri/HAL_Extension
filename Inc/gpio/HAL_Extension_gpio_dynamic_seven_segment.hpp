@@ -13,6 +13,8 @@ private:
     struct Digit {
         GPIO select;
         mutable int8_t display;
+
+        static constexpr int8_t unused_display = -127;
     };
 
     const SevenSegment &sevenSegment;
@@ -26,7 +28,7 @@ private:
 
     void update(int64_t num, uint8_t point) const noexcept;
     void updateError() const noexcept;
-    void updateZeroFill(uint8_t from, uint8_t until) const noexcept;
+    void fill(uint8_t from, uint8_t until) const noexcept;
 public:
     DynamicSevenSegment();
     DynamicSevenSegment(const SevenSegment &sevenSegment);

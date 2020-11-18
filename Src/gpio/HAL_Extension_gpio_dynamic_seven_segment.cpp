@@ -67,11 +67,13 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
         num /= 10;
         i++;
     } while(0 < num);
+    fill(i, digitListSize);
     if(allowSign && isMinus) {
-        digitList.end()->display = -1;
-        updateZeroFill(i, digitListSize - 1);
-    } else {
-        updateZeroFill(i, digitListSize);
+        if(digitListSize <= i) {
+            updateError();
+            return;
+        }
+        digitList[i].display = -1;
     }
     digitCursor = 0;
     isStop = false;
@@ -87,11 +89,10 @@ void DynamicSevenSegment::updateError() const noexcept {
     point = -1;
 }
 
-void DynamicSevenSegment::updateZeroFill(uint8_t from, uint8_t until) const noexcept {
-    if(zeroFill) {
-        for(uint8_t i = from; i < until; i++){
-            digitList[i].display = 0;
-        }
+void DynamicSevenSegment::fill(uint8_t from, uint8_t until) const noexcept {
+    int8_t fill = zeroFill? 0 : Digit::unused_display;
+    for(uint8_t i = from; i < until; i++){
+        digitList[i].display = fill;
     }
 }
 
@@ -122,7 +123,7 @@ void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
         num /= 0x10;
         i++;
     } while(0 < num);
-    updateZeroFill(i, digitListSize);
+    fill(i, digitListSize);
     digitCursor = 0;
     isStop = false;
     point = -1;
@@ -135,8 +136,10 @@ void DynamicSevenSegment::next() const noexcept {
     if(digitList.size() <= digitCursor) {
         digitCursor = 0;
     }
-    sevenSegment.set(digitList[digitCursor].display, digitCursor == point);
-    digitList[digitCursor].select.set();
+    if(digitList[digitCursor].display != Digit::unused_display) {
+        sevenSegment.set(digitList[digitCursor].display, digitCursor == point);
+        digitList[digitCursor].select.set();
+    }
 }
 
 void DynamicSevenSegment::clear() const noexcept {
