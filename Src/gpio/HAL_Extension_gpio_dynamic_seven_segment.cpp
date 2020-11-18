@@ -50,7 +50,7 @@ DynamicSevenSegment& DynamicSevenSegment::setOverflowError(bool enable) noexcept
     return *this;
 }
 
-void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
+void DynamicSevenSegment::update(int64_t num, int8_t point) const noexcept {
     bool isMinus = num < 0;
     if(isMinus) {
         num *= -1;
@@ -65,7 +65,7 @@ void DynamicSevenSegment::update(int64_t num, uint8_t point) const noexcept {
         digitList[i].display = (int8_t)(num % 10);
         num /= 10;
         i++;
-    } while(0 < num);
+    } while(0 < num || i <= point);
     fill(i, digitListSize);
     if(allowSign && isMinus) {
         if(digitListSize <= i) {
