@@ -108,7 +108,10 @@ void DynamicSevenSegment::updateFixedPoint(float num, int8_t point) const noexce
 }
 
 void DynamicSevenSegment::updateFloatPoint(float num) const noexcept {
-    updateFixedPoint(num, getNumberOfDigit(num));
+    int8_t digitListSize = digitList.size();
+    if(allowSign && (num < 0)) digitListSize --;
+    int8_t point = digitListSize - getNumberOfDigit(num);
+    updateFixedPoint(num, point);
 }
 
 void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
