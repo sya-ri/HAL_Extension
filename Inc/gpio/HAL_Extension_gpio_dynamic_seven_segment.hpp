@@ -40,6 +40,7 @@ public:
     void update(int64_t num) const noexcept;
     void updateFixedPoint(float num, int8_t point) const noexcept;
     void updateFloatPoint(float num) const noexcept;
+    void updateExp(float num) const noexcept;
     void updateHex(uint64_t num) const noexcept;
     void next() const noexcept;
     void clear() const noexcept;

@@ -114,6 +114,60 @@ void DynamicSevenSegment::updateFloatPoint(float num) const noexcept {
     updateFixedPoint(num, point);
 }
 
+void DynamicSevenSegment::updateExp(float num) const noexcept {
+    int8_t exponent = 0;
+    bool isMinusNum = num < 0;
+    if(isMinusNum) num *= -1;
+    if(num == 0.0F) {
+        updateFloatPoint(0);
+        return;
+    }
+    while(num < 1) {
+        exponent --;
+        num *= 10.0F;
+    }
+    while(10 <= num) {
+        exponent ++;
+        num /= 10.0F;
+    }
+    bool isMinusExponent = exponent < 0;
+    uint8_t numberOfExponent = getNumberOfDigit(isMinusExponent? -exponent : exponent);
+    if(isMinusExponent) {
+        numberOfExponent ++;
+        exponent *= -1;
+    }
+    int8_t digitListSize = digitList.size();
+    int8_t numberOfMantissa = digitListSize - numberOfExponent - 1;
+    if(isMinusNum) numberOfMantissa --;
+    if(numberOfMantissa < 0) {
+        updateError();
+        return;
+    }
+    uint8_t i = 0;
+    do {
+        digitList[i].display = (int8_t)(exponent % 10);
+        exponent /= 10;
+        i++;
+    } while(0 < exponent);
+    if(isMinusExponent) {
+        digitList[i].display = -1;
+        i++;
+    }
+    digitList[i].display = 0xE;
+    uint8_t mostDigitMantissa = digitListSize - 1;
+    if(isMinusNum) {
+        digitList[mostDigitMantissa].display = -1;
+        mostDigitMantissa --;
+    }
+    point = mostDigitMantissa;
+    for(uint8_t j = mostDigitMantissa; i < j; j--) {
+        digitList[j].display = (int8_t)((uint64_t)(num) % 10);
+        num *= 10;
+    }
+    digitCursor = 0;
+    isStop = false;
+}
+
 void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
     uint8_t digitListSize = digitList.size();
     uint8_t i = 0;
