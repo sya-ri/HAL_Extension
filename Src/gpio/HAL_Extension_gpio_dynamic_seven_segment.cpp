@@ -108,13 +108,10 @@ void DynamicSevenSegment::updateFloatPoint(float num) const noexcept {
 }
 
 void DynamicSevenSegment::updateExp(float num) const noexcept {
-    int8_t exponent = 0;
+    if(num == 0.0F) return updateFloatPoint(0);
     bool isMinusNum = num < 0;
     if(isMinusNum) num *= -1;
-    if(num == 0.0F) {
-        updateFloatPoint(0);
-        return;
-    }
+    int8_t exponent = 0;
     while(num < 1) {
         exponent --;
         num *= 10.0F;
@@ -133,12 +130,11 @@ void DynamicSevenSegment::updateExp(float num) const noexcept {
     int8_t numberOfMantissa = digitListSize - numberOfExponent - 1;
     if(isMinusNum) numberOfMantissa --;
     if(numberOfMantissa < 0) return updateError();
-    uint8_t i = 0;
-    do {
+    uint8_t i;
+    for(i = 0; i < numberOfExponent; i++){
         digitList[i].display = (int8_t)(exponent % 10);
         exponent /= 10;
-        i++;
-    } while(0 < exponent);
+    }
     if(isMinusExponent) {
         digitList[i].display = -1;
         i++;
