@@ -58,20 +58,14 @@ void DynamicSevenSegment::update(int64_t num, int8_t point) const noexcept {
     uint8_t digitListSize = digitList.size();
     uint8_t i = 0;
     do {
-        if(digitListSize <= i) {
-            updateError();
-            return;
-        }
+        if(digitListSize <= i) return updateError();
         digitList[i].display = (int8_t)(num % 10);
         num /= 10;
         i++;
     } while(0 < num || i <= point);
     fillZeroOrEmpty(i, digitListSize);
     if(allowSign && isMinus) {
-        if(digitListSize <= i) {
-            updateError();
-            return;
-        }
+        if(digitListSize <= i) return updateError();
         digitList[zeroFill? (digitListSize - 1) : i].display = -1;
     }
     digitCursor = 0;
@@ -139,10 +133,7 @@ void DynamicSevenSegment::updateExp(float num) const noexcept {
     int8_t digitListSize = digitList.size();
     int8_t numberOfMantissa = digitListSize - numberOfExponent - 1;
     if(isMinusNum) numberOfMantissa --;
-    if(numberOfMantissa < 0) {
-        updateError();
-        return;
-    }
+    if(numberOfMantissa < 0) return updateError();
     uint8_t i = 0;
     do {
         digitList[i].display = (int8_t)(exponent % 10);
