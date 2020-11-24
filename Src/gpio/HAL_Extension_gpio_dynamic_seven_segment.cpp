@@ -163,13 +163,11 @@ void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
     uint8_t digitListSize = digitList.size();
     uint8_t numberOfDigit = getNumberOfDigit(num, 0x10);
     if(digitListSize < numberOfDigit) return updateError();
-    uint8_t i = 0;
-    do {
+    for(uint8_t i = 0; i < numberOfDigit; i++){
         digitList[i].display = (int8_t)(num % 0x10);
         num /= 0x10;
-        i++;
-    } while(0 < num);
-    fillZeroOrEmpty(i, digitListSize);
+    }
+    fillZeroOrEmpty(numberOfDigit, digitListSize);
     start(-1);
 }
 
