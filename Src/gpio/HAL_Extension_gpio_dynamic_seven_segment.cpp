@@ -50,6 +50,12 @@ DynamicSevenSegment& DynamicSevenSegment::setOverflowError(bool enable) noexcept
     return *this;
 }
 
+void DynamicSevenSegment::start(int8_t point) const noexcept {
+    digitCursor = 0;
+    isStop = false;
+    this->point = point;
+}
+
 void DynamicSevenSegment::update(int64_t num, int8_t point) const noexcept {
     bool isMinus = num < 0;
     if(isMinus) {
@@ -68,18 +74,14 @@ void DynamicSevenSegment::update(int64_t num, int8_t point) const noexcept {
         if(digitListSize <= i) return updateError();
         digitList[zeroFill? (digitListSize - 1) : i].display = -1;
     }
-    digitCursor = 0;
-    isStop = false;
-    this->point = point;
+    start(point);
 }
 
 void DynamicSevenSegment::updateError() const noexcept {
     for(auto& d : digitList) {
         d.display = -1;
     }
-    digitCursor = 0;
-    isStop = false;
-    point = -1;
+    start(-1);
 }
 
 void DynamicSevenSegment::fillZeroOrEmpty(uint8_t from, uint8_t until) const noexcept {
@@ -150,13 +152,11 @@ void DynamicSevenSegment::updateExp(float num) const noexcept {
         digitList[mostDigitMantissa].display = -1;
         mostDigitMantissa --;
     }
-    point = mostDigitMantissa;
     for(uint8_t j = mostDigitMantissa; i < j; j--) {
         digitList[j].display = (int8_t)((uint64_t)(num) % 10);
         num *= 10;
     }
-    digitCursor = 0;
-    isStop = false;
+    start(mostDigitMantissa);
 }
 
 void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
@@ -170,9 +170,7 @@ void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
         i++;
     } while(0 < num);
     fillZeroOrEmpty(i, digitListSize);
-    digitCursor = 0;
-    isStop = false;
-    point = -1;
+    start(-1);
 }
 
 void DynamicSevenSegment::next() const noexcept {
