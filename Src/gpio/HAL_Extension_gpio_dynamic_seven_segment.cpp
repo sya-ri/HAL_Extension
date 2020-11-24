@@ -62,10 +62,7 @@ void DynamicSevenSegment::update(int64_t num, int8_t point) const noexcept {
     uint8_t digitListSize = digitList.size();
     uint8_t numberOfDigit = getNumberOfDigit(num, 10);
     if(digitListSize < numberOfDigit) return updateError();
-    for(uint8_t i = 0; i < numberOfDigit; i++){
-        digitList[i].display = (int8_t)(num % 10);
-        num /= 10;
-    }
+    fillInt(0, numberOfDigit, num, 10);
     fillZeroOrEmpty(numberOfDigit, digitListSize);
     if(allowSign && isMinus) {
         if(digitListSize == numberOfDigit) return updateError();
@@ -79,6 +76,13 @@ void DynamicSevenSegment::updateError() const noexcept {
         d.display = -1;
     }
     start(-1);
+}
+
+void DynamicSevenSegment::fillInt(uint8_t from, uint8_t until, uint64_t num, int8_t base) const noexcept {
+    for(uint8_t i = from; i < until; i++){
+        digitList[i].display = (int8_t)(num % base);
+        num /= base;
+    }
 }
 
 void DynamicSevenSegment::fillZeroOrEmpty(uint8_t from, uint8_t until) const noexcept {
@@ -130,11 +134,8 @@ void DynamicSevenSegment::updateExp(float num) const noexcept {
     int8_t numberOfMantissa = digitListSize - numberOfExponent - 1;
     if(isMinusNum) numberOfMantissa --;
     if(numberOfMantissa < 0) return updateError();
-    uint8_t i;
-    for(i = 0; i < numberOfExponent; i++){
-        digitList[i].display = (int8_t)(exponent % 10);
-        exponent /= 10;
-    }
+    fillInt(0, numberOfExponent, exponent, 10);
+    uint8_t i = numberOfExponent;
     if(isMinusExponent) {
         digitList[i].display = -1;
         i++;
@@ -156,10 +157,7 @@ void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
     uint8_t digitListSize = digitList.size();
     uint8_t numberOfDigit = getNumberOfDigit(num, 0x10);
     if(digitListSize < numberOfDigit) return updateError();
-    for(uint8_t i = 0; i < numberOfDigit; i++){
-        digitList[i].display = (int8_t)(num % 0x10);
-        num /= 0x10;
-    }
+    fillInt(0, numberOfDigit, num, 0x10);
     fillZeroOrEmpty(numberOfDigit, digitListSize);
     start(-1);
 }
