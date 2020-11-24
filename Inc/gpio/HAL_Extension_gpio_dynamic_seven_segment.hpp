@@ -28,7 +28,7 @@ private:
 
     void update(int64_t num, int8_t point) const noexcept;
     void updateError() const noexcept;
-    void fill(uint8_t from, uint8_t until) const noexcept;
+    void fillZeroOrEmpty(uint8_t from, uint8_t until) const noexcept;
 public:
     DynamicSevenSegment();
     DynamicSevenSegment(const SevenSegment &sevenSegment);

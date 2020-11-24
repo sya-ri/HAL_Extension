@@ -66,7 +66,7 @@ void DynamicSevenSegment::update(int64_t num, int8_t point) const noexcept {
         num /= 10;
         i++;
     } while(0 < num || i <= point);
-    fill(i, digitListSize);
+    fillZeroOrEmpty(i, digitListSize);
     if(allowSign && isMinus) {
         if(digitListSize <= i) {
             updateError();
@@ -88,7 +88,7 @@ void DynamicSevenSegment::updateError() const noexcept {
     point = -1;
 }
 
-void DynamicSevenSegment::fill(uint8_t from, uint8_t until) const noexcept {
+void DynamicSevenSegment::fillZeroOrEmpty(uint8_t from, uint8_t until) const noexcept {
     int8_t fill = zeroFill? 0 : Digit::unused_display;
     for(uint8_t i = from; i < until; i++){
         digitList[i].display = fill;
@@ -178,7 +178,7 @@ void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
         num /= 0x10;
         i++;
     } while(0 < num);
-    fill(i, digitListSize);
+    fillZeroOrEmpty(i, digitListSize);
     digitCursor = 0;
     isStop = false;
     point = -1;
