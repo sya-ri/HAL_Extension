@@ -5,11 +5,11 @@
 namespace halex {
 
 namespace {
-    uint8_t getNumberOfDigit(uint64_t num) {
-        uint64_t compare = 10;
+    uint8_t getNumberOfDigit(uint64_t num, uint64_t base) {
+        uint64_t compare = base;
         uint8_t numberOfDigit = 1;
         while(!(num < compare)) {
-            compare *= 10;
+            compare *= base;
             numberOfDigit ++;
         }
         return numberOfDigit;
@@ -110,7 +110,7 @@ void DynamicSevenSegment::updateFloatPoint(float num) const noexcept {
     int8_t digitListSize = digitList.size();
     bool isMinus = num < 0;
     if(allowSign && isMinus) digitListSize --;
-    int8_t point = digitListSize - getNumberOfDigit(isMinus? -num : num);
+    int8_t point = digitListSize - getNumberOfDigit(isMinus? -num : num, 10);
     updateFixedPoint(num, point);
 }
 
@@ -131,7 +131,7 @@ void DynamicSevenSegment::updateExp(float num) const noexcept {
         num /= 10.0F;
     }
     bool isMinusExponent = exponent < 0;
-    uint8_t numberOfExponent = getNumberOfDigit(isMinusExponent? -exponent : exponent);
+    uint8_t numberOfExponent = getNumberOfDigit(isMinusExponent? -exponent : exponent, 10);
     if(isMinusExponent) {
         numberOfExponent ++;
         exponent *= -1;
@@ -170,12 +170,10 @@ void DynamicSevenSegment::updateExp(float num) const noexcept {
 
 void DynamicSevenSegment::updateHex(uint64_t num) const noexcept {
     uint8_t digitListSize = digitList.size();
+    uint8_t numberOfDigit = getNumberOfDigit(num, 0x10);
+    if(digitListSize < numberOfDigit) return updateError();
     uint8_t i = 0;
     do {
-        if(digitListSize <= i) {
-            updateError();
-            return;
-        }
         digitList[i].display = (int8_t)(num % 0x10);
         num /= 0x10;
         i++;
