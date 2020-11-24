@@ -58,21 +58,18 @@ void DynamicSevenSegment::start(int8_t point) const noexcept {
 
 void DynamicSevenSegment::update(int64_t num, int8_t point) const noexcept {
     bool isMinus = num < 0;
-    if(isMinus) {
-        num *= -1;
-    }
+    if(isMinus) num *= -1;
     uint8_t digitListSize = digitList.size();
-    uint8_t i = 0;
-    do {
-        if(digitListSize <= i) return updateError();
+    uint8_t numberOfDigit = getNumberOfDigit(num, 10);
+    if(digitListSize < numberOfDigit) return updateError();
+    for(uint8_t i = 0; i < numberOfDigit; i++){
         digitList[i].display = (int8_t)(num % 10);
         num /= 10;
-        i++;
-    } while(0 < num || i <= point);
-    fillZeroOrEmpty(i, digitListSize);
+    }
+    fillZeroOrEmpty(numberOfDigit, digitListSize);
     if(allowSign && isMinus) {
-        if(digitListSize <= i) return updateError();
-        digitList[zeroFill? (digitListSize - 1) : i].display = -1;
+        if(digitListSize == numberOfDigit) return updateError();
+        digitList[zeroFill? (digitListSize - 1) : numberOfDigit].display = -1;
     }
     start(point);
 }
