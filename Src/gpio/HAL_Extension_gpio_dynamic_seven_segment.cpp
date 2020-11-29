@@ -142,7 +142,7 @@ void DynamicSevenSegment::updateExp(float num) const noexcept {
     }
     digitList[i].display = 0xE;
     uint8_t mostDigitMantissa = digitListSize - 1;
-    if(isMinusNum) {
+    if(allowSign && isMinusNum) {
         digitList[mostDigitMantissa].display = -1;
         mostDigitMantissa --;
     }
