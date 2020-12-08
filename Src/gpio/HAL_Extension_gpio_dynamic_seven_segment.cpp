@@ -8,7 +8,7 @@ namespace {
     uint8_t getNumberOfDigit(uint64_t num, uint64_t base) {
         uint64_t compare = base;
         uint8_t numberOfDigit = 1;
-        while(!(num < compare)) {
+        while(compare <= num) {
             compare *= base;
             numberOfDigit ++;
         }
