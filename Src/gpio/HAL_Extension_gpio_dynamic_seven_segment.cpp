@@ -64,6 +64,7 @@ void DynamicSevenSegment::update(int64_t num, int8_t point) const noexcept {
     if(digitListSize < numberOfDigit) return updateError();
     fillInt(0, numberOfDigit, num, 10);
     fillZeroOrEmpty(numberOfDigit, digitListSize);
+    fillAll(numberOfDigit, point + 1, 0);
     if(allowSign && isMinus) {
         if(digitListSize == numberOfDigit) return updateError();
         digitList[zeroFill? (digitListSize - 1) : numberOfDigit].display = -1;
@@ -85,11 +86,14 @@ void DynamicSevenSegment::fillInt(uint8_t from, uint8_t until, uint64_t num, int
     }
 }
 
-void DynamicSevenSegment::fillZeroOrEmpty(uint8_t from, uint8_t until) const noexcept {
-    int8_t fill = zeroFill? 0 : Digit::unused_display;
+void DynamicSevenSegment::fillAll(uint8_t from, uint8_t until, int8_t value) const noexcept {
     for(uint8_t i = from; i < until; i++){
-        digitList[i].display = fill;
+        digitList[i].display = value;
     }
+}
+
+void DynamicSevenSegment::fillZeroOrEmpty(uint8_t from, uint8_t until) const noexcept {
+    fillAll(from, until, zeroFill? 0 : Digit::unused_display);
 }
 
 void DynamicSevenSegment::update(int64_t num) const noexcept {
