@@ -3,6 +3,7 @@
 
 #ifndef CONFIG_DISABLE_MODULE_TIM
 
+#include "HAL_Extension_tim_callback.hpp"
 #include "HAL_Extension_tim_pwm.hpp"
 #include "HAL_Extension_tim_motor.hpp"
 #include "HAL_Extension_tim_encoder.hpp"
