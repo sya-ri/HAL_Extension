@@ -84,5 +84,6 @@ namespace halex
 - [IWDG](Doc/IWDG/INDEX.md)
   - [コンフィグ](Doc/IWDG/INDEX.md#コンフィグ)
     - [CONFIG_DISABLE_MODULE_IWDG](Doc/IWDG/INDEX.md#config_disable_module_iwdg)
+    - [CONFIG_DISABLE_IWDG_CONSTEXPR](Doc/IWDG/INDEX.md#config_disable_iwdg_constexpr)
   - [クラス](Doc/IWDG/INDEX.md#クラス)
     - [IWDG_Manager](Doc/IWDG/class/IWDG_Manager.md)
