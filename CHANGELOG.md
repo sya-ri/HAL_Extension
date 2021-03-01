@@ -1,5 +1,10 @@
 # 変更履歴
 
+## v5.4.2
+- `DynamicSevenSegment` の挙動の安定化をした  
+  [既知のバグ](https://github.com/sya-ri/HAL_Extension/issues/14) が存在するので注意する
+- インクルードされていないヘッダーファイルを修正
+
 ## v5.4.1
 - クラス `Encoder` の内部処理を修正
   - 冗長なコードを修正
