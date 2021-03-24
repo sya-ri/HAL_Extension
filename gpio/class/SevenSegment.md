@@ -107,4 +107,4 @@ PinOut: GPIO_Output
 > sevenSegment.isAvailable();
 > ```
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

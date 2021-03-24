@@ -10,7 +10,7 @@
 > ADCのコールバック関数をハーフに変更します
 
 ## 関数
-- [setADCCallback](function/INDEX.md#setadccallback)
+- [setADCCallback](function/README.md#setadccallback)
 
 ## クラス
 - [ADC_DMA](class/ADC_DMA.md)
@@ -24,4 +24,4 @@
     - [get8(uint8_t)](class/ADC_DMA.md#adc_dmaget8uint8_t)
     - [setCallback(std::function<void()>)](class/ADC_DMA.md#adc_dmasetcallbackstdfunctionvoid)
 
-[<< 戻る](../../README.md)
+[<< 戻る](../README.md)

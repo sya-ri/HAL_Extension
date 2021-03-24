@@ -23,4 +23,4 @@
 > ```
 > `HAL_TIM_PeriodElapsedCallback` や `HAL_TIM_PeriodElapsedHalfCpltCallback` の処理を変更します
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

@@ -10,18 +10,18 @@
 > UARTのコールバック関数をハーフに変更します
 
 ## 関数
-- [Transmit](function/INDEX.md#transmit)
-  - [uartTransmit](function/INDEX.md#uarttransmit)
-  - [uartTransmit_IT](function/INDEX.md#uarttransmit_it)
-  - [uartTransmit_DMA](function/INDEX.md#uarttransmit_dma)
-- [Receive](function/INDEX.md#receive)
-  - [uartReceive](function/INDEX.md#uartreceive)
-  - [uartReceive_IT](function/INDEX.md#uartreceive_it)
-  - [uartReceive_DMA](function/INDEX.md#uartreceive_dma)
-- [Callback](function/INDEX.md#callback)
-  - [setUARTTxCallback](function/INDEX.md#setuarttxcallback)
-  - [setUARTRxCallback](function/INDEX.md#setuartrxcallback)
-  - [setErrorCallback](function/INDEX.md#setuarterrorcallback)
+- [Transmit](function/README.md#transmit)
+  - [uartTransmit](function/README.md#uarttransmit)
+  - [uartTransmit_IT](function/README.md#uarttransmit_it)
+  - [uartTransmit_DMA](function/README.md#uarttransmit_dma)
+- [Receive](function/README.md#receive)
+  - [uartReceive](function/README.md#uartreceive)
+  - [uartReceive_IT](function/README.md#uartreceive_it)
+  - [uartReceive_DMA](function/README.md#uartreceive_dma)
+- [Callback](function/README.md#callback)
+  - [setUARTTxCallback](function/README.md#setuarttxcallback)
+  - [setUARTRxCallback](function/README.md#setuartrxcallback)
+  - [setErrorCallback](function/README.md#setuarterrorcallback)
 
 ## クラス
 - [UART](class/UART.md)
@@ -77,4 +77,4 @@
     - [println(const char*)](class/UART_Logger_IT.md#uart_logger_itprintlnconst-char)
     - [itTxCallback(UART_HandleTypeDef*)](class/UART_Logger_IT.md#uart_logger_itittxcallbackuart_handletypedef)
 
-[<< 戻る](../../README.md)
+[<< 戻る](../README.md)

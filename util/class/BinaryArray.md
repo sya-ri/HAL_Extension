@@ -99,4 +99,4 @@ ARRAY_SIZE: ビット配列の要素数
 > binaryArray.get();
 > ```
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

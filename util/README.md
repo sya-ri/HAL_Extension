@@ -41,4 +41,4 @@
     - [write(uint8_t, bool)](class/BinaryArrayRef.md#binaryarrayrefwriteuint8_t-bool)
     - [read(uint8_t)](class/BinaryArrayRef.md#binaryarrayrefreaduint8_t)
 
-[<< 戻る](../../README.md)
+[<< 戻る](../README.md)

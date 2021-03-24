@@ -103,4 +103,4 @@ TIMn:
 > encoder.resetCount();
 > ```
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

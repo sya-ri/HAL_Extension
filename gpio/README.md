@@ -7,10 +7,10 @@
 > 定義することでコンパイルされなくなります
 
 ## 関数
-- [GPIO](function/INDEX.md#gpio)
-  - [gpioRead](function/INDEX.md#gpioread)
-  - [gpioWrite](function/INDEX.md#gpiowrite)
-  - [gpioToggle](function/INDEX.md#gpiotoggle)
+- [GPIO](function/README.md#gpio)
+  - [gpioRead](function/README.md#gpioread)
+  - [gpioWrite](function/README.md#gpiowrite)
+  - [gpioToggle](function/README.md#gpiotoggle)
 
 ## クラス
 - [GPIO](class/GPIO.md)
@@ -71,4 +71,4 @@
     - [next()](class/DynamicSevenSegment.md#dynamicsevensegmentnext)
     - [clear()](class/DynamicSevenSegment.md#dynamicsevensegmentclear)
 
-[<< 戻る](../../README.md)
+[<< 戻る](../README.md)

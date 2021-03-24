@@ -116,4 +116,4 @@ T: 送受信するデータ型
 > slave.receive(data, 0x0F);
 > ```
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

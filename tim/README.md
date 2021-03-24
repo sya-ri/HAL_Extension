@@ -6,8 +6,8 @@
 > 定義することでコンパイルされなくなります
 
 ## 関数
-- [Callback](function/INDEX.md#callback)
-  - [setTIMPeriodElapsedCallback](function/INDEX.md#settimperiodelapsedcallback)
+- [Callback](function/README.md#callback)
+  - [setTIMPeriodElapsedCallback](function/README.md#settimperiodelapsedcallback)
 
 ## クラス
 - [PWM](class/PWM.md)
@@ -55,4 +55,4 @@
     - [resetCount()](class/TimerInterrupt.md#timerinterruptresetcount)
     - [setCallback(std::function<void()>)](class/TimerInterrupt.md#timerinterruptsetcallbackstdfunctionvoid)
 
-[<< 戻る](../../README.md)
+[<< 戻る](../README.md)

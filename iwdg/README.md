@@ -24,4 +24,4 @@
     - [init()](class/IWDG_Manager.md#iwdg_managerinit)
     - [refresh()](class/IWDG_Manager.md#iwdg_managerrefresh)
 
-[<< 戻る](../../README.md)
+[<< 戻る](../README.md)

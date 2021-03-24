@@ -19,4 +19,4 @@
 > ```
 > `HAL_ADC_ConvCpltCallback` や `HAL_ADC_ConvHalfCpltCallback` の処理を変更します
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

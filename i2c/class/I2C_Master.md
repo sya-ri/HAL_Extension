@@ -84,4 +84,4 @@ T: 送受信するデータ型
 > master.receive(0x02, data, 0x0F);
 > ```
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

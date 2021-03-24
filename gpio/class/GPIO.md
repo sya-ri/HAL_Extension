@@ -135,4 +135,4 @@ PinOut: GPIO_Input / GPIO_Output
 > pa5.toggle();
 > ```
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

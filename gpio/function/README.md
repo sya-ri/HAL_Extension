@@ -38,4 +38,4 @@
 > ```
 > `HAL_GPIO_TogglePin` を実行します
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

@@ -40,4 +40,4 @@
 > uint32_t elapsed_time = stopWatch.get();
 > ```
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

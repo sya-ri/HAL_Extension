@@ -79,4 +79,4 @@ PinOut: GPIO_Input
 > uint8_t address = dip.getAddress();
 > ```
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

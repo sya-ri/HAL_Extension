@@ -335,4 +335,4 @@
 > ```
 > `HAL_I2C_ErrorCallback` の処理を変更します
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

@@ -104,4 +104,4 @@ TIMn:
 > uint32_t counterPeriod = pwm.getCounterPeriod();
 > ```
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)

@@ -153,4 +153,4 @@
 > motor.setSpeed(-1, -2);
 > ```
 
-[<< 戻る](../INDEX.md)
+[<< 戻る](../README.md)
