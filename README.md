@@ -8,6 +8,11 @@
 namespace halex
 ```
 
+```yaml
+SourcePath: HAL_Extension/ # フォルダ直下
+IncludePath: HAL_Extension/ # フォルダ直下
+```
+
 ## 目次
 - [General](general/INDEX.md)
   - [コンフィグ](general/INDEX.md#コンフィグ)
