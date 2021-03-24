@@ -2,6 +2,7 @@
 
 ## v6.0.0
 - Src, Inc, Doc を直下に置く様にした
+- ファイル名を短くした
 
 ## v5.4.2
 - `DynamicSevenSegment` の挙動の安定化をした  
