@@ -1,6 +1,7 @@
 #ifndef CONFIG_DISABLE_MODULE_TIM
 
 #include "tim/encoder.hpp"
+#include <cmath>
 
 namespace halex {
 
@@ -39,11 +40,8 @@ void Encoder::update() noexcept {
     count += rawCount - lastRawCount;
     if (__HAL_TIM_GET_FLAG(htim, TIM_FLAG_UPDATE)) {
         __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
-        if (__HAL_TIM_IS_TIM_COUNTING_DOWN(htim)) {
-            count -= __HAL_TIM_GET_AUTORELOAD(htim);
-        } else {
-            count += __HAL_TIM_GET_AUTORELOAD(htim);
-        }
+        // FLAGが立った時、counter period の倍数を今回値から引いて、修正する
+        count -= __HAL_TIM_GET_AUTORELOAD(htim) * std::round((float)(rawCount - lastRawCount)/__HAL_TIM_GET_AUTORELOAD(htim));
     }
 }
 
