@@ -40,8 +40,11 @@ void Encoder::update() noexcept {
     count += rawCount - lastRawCount;
     if (__HAL_TIM_GET_FLAG(htim, TIM_FLAG_UPDATE)) {
         __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
-        // FLAGが立った時、counter period の倍数を今回値から引いて、修正する
-        count -= __HAL_TIM_GET_AUTORELOAD(htim) * std::round((float)(rawCount - lastRawCount)/__HAL_TIM_GET_AUTORELOAD(htim));
+        if ((int32_t)(rawCount - lastRawCount) < (int32_t) - __HAL_TIM_GET_AUTORELOAD(htim) / 2) {
+            count += __HAL_TIM_GET_AUTORELOAD(htim);
+        } else if ((int32_t)(rawCount - lastRawCount) > (int32_t) + __HAL_TIM_GET_AUTORELOAD(htim) / 2) {
+            count -= __HAL_TIM_GET_AUTORELOAD(htim);
+        }
     }
 }
 
