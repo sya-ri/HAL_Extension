@@ -27,7 +27,6 @@ private:
     std::array<uint32_t, 4> filterId = {0};
     std::array<uint32_t, 2> filterMask;
 
-    std::array<uint8_t, 2> bitShift;
 public:
     Can(CAN_HandleTypeDef *hcan);
     CAN_StatusType init();

@@ -178,6 +178,7 @@ CAN_ClassSettingStatus Can::setOneTypePathIdGroup(uint32_t idType, uint32_t minI
         return CAN_ClassSettingStatus::ALL_ID_PATH;
     }
 
+    std::array<uint8_t, 2> bitShift;
     if(idType == CAN_ID_STD){
         bitShift[0] = 21;
     }else if(idType == CAN_ID_EXT){
