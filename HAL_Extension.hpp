@@ -5,6 +5,7 @@
 #include "gpio/all.hpp"
 #include "uart/all.hpp"
 #include "i2c/all.hpp"
+#include "can/all.hpp"
 #include "tim/all.hpp"
 #include "adc/all.hpp"
 #include "iwdg/iwdg_manager.hpp"
