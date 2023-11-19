@@ -9,10 +9,10 @@ Can::Can(CAN_HandleTypeDef *hcan): hcan(hcan) {
 }
 
 CAN_StatusType Can::init(){
-	if(HAL_CAN_Init(hcan) != HAL_OK){
-		return CAN_StatusType::CAN_Fail_Init;
-	}
-	return static_cast<CAN_StatusType>(HAL_CAN_Start(hcan));
+   if(HAL_CAN_Init(hcan) != HAL_OK){
+      return CAN_StatusType::CAN_Fail_Init;
+   }
+   return static_cast<CAN_StatusType>(HAL_CAN_Start(hcan));
 }
 
 void Can::setFilterActivationState(uint32_t state){
@@ -227,7 +227,7 @@ bool Can::isMailBoxPending(uint32_t txMailbox){
 
 CAN_StatusType Can::transmit(uint8_t dataLength, uint8_t txData[]){
     txHeader.DLC = dataLength;
-	return static_cast<CAN_StatusType>(HAL_CAN_AddTxMessage(hcan, &txHeader, txData, &usedTxMailbox));
+   return static_cast<CAN_StatusType>(HAL_CAN_AddTxMessage(hcan, &txHeader, txData, &usedTxMailbox));
 }
 
 uint32_t Can::getUsedTxMailbox(){
@@ -235,10 +235,10 @@ uint32_t Can::getUsedTxMailbox(){
 }
 
 CAN_StatusType Can::receive(uint32_t rxFifo, uint8_t rxData[]){
-	if(HAL_CAN_GetRxFifoFillLevel(hcan, rxFifo) == 0){
-		return CAN_StatusType::CAN_Rx_FIFO_Empty;
-	}
-	return static_cast<CAN_StatusType>(HAL_CAN_GetRxMessage(hcan, rxFifo, &rxHeader, rxData));
+   if(HAL_CAN_GetRxFifoFillLevel(hcan, rxFifo) == 0){
+      return CAN_StatusType::CAN_Rx_FIFO_Empty;
+   }
+   return static_cast<CAN_StatusType>(HAL_CAN_GetRxMessage(hcan, rxFifo, &rxHeader, rxData));
 }
 
 uint32_t Can::getRxIdType(){
@@ -267,7 +267,7 @@ CAN_StatusType Can::abortTransmit(uint32_t txMailBox){
 }
 
 HAL_CAN_StateTypeDef Can::getState(){
-	return hcan->State;
+   return hcan->State;
 }
 
 uint32_t Can::getFilterId(uint8_t idNum){
