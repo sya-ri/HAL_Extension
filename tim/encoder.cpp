@@ -40,9 +40,9 @@ void Encoder::update() noexcept {
     count += rawCount - lastRawCount;
     if (__HAL_TIM_GET_FLAG(htim, TIM_FLAG_UPDATE)) {
         __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
-        if ((int32_t)(rawCount - lastRawCount) < (int32_t) - __HAL_TIM_GET_AUTORELOAD(htim) / 2) {
+        if (((int32_t) (lastRawCount - rawCount)) > ((int32_t) (__HAL_TIM_GET_AUTORELOAD(htim) / 2))) { // overflow
             count += __HAL_TIM_GET_AUTORELOAD(htim);
-        } else if ((int32_t)(rawCount - lastRawCount) > (int32_t) + __HAL_TIM_GET_AUTORELOAD(htim) / 2) {
+        } else if (((int32_t) (rawCount - lastRawCount)) > ((int32_t) (__HAL_TIM_GET_AUTORELOAD(htim) / 2))) { // underflow
             count -= __HAL_TIM_GET_AUTORELOAD(htim);
         }
     }
