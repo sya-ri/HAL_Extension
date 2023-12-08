@@ -28,11 +28,7 @@ private:
         uint32_t reloadCount;
     };
 
-#ifndef CONFIG_DISABLE_IWDG_CONSTEXPR
     static constexpr std::array<Prescaler, 7> prescalers = {
-#else
-    std::array<Prescaler, 7> prescalers = {
-#endif
         Prescaler{4, IWDG_PRESCALER_4},
         Prescaler{8, IWDG_PRESCALER_8},
         Prescaler{16, IWDG_PRESCALER_16},
@@ -42,11 +38,7 @@ private:
         Prescaler{256, IWDG_PRESCALER_256}
     };
 
-#ifndef CONFIG_DISABLE_IWDG_CONSTEXPR
     static constexpr InitOption getInitOption(
-#else
-    InitOption getInitOption(
-#endif
         float timeOut,
         TimeUnit timeUnit
     ) {
@@ -71,11 +63,7 @@ public:
     static constexpr float minTimeOut = 4 / static_cast<float>(LSI_VALUE);
     static constexpr float maxTimeOut = 256 * 4095 / static_cast<float>(LSI_VALUE);
 
-#ifndef CONFIG_DISABLE_IWDG_CONSTEXPR
     constexpr IWDG_Manager(
-#else
-    IWDG_Manager(
-#endif
         float timeOut,
         TimeUnit timeUnit
     ):
@@ -84,19 +72,11 @@ public:
 
     }
 
-#ifndef CONFIG_DISABLE_IWDG_CONSTEXPR
     constexpr bool available() {
-#else
-    bool available() {
-#endif
         return initOption.prescaler.value != 0;
     }
 
-#ifndef CONFIG_DISABLE_IWDG_CONSTEXPR
     constexpr void init() {
-#else
-    void init() {
-#endif
         if (available()) {
             hiwdg.Init.Prescaler = initOption.prescaler.export_constant;
             hiwdg.Init.Reload = initOption.reloadCount;
@@ -104,11 +84,7 @@ public:
         }
     }
 
-#ifndef CONFIG_DISABLE_IWDG_CONSTEXPR
     constexpr void refresh() {
-#else
-    void refresh() {
-#endif
         if (available()) {
             HAL_IWDG_Refresh(&hiwdg);
         }

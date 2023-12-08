@@ -89,6 +89,5 @@ IncludePath: HAL_Extension/ # フォルダ直下
 - [IWDG](iwdg/README.md)
   - [コンフィグ](iwdg/README.md#コンフィグ)
     - [CONFIG_DISABLE_MODULE_IWDG](iwdg/README.md#config_disable_module_iwdg)
-    - [CONFIG_DISABLE_IWDG_CONSTEXPR](iwdg/README.md#config_disable_iwdg_constexpr)
   - [クラス](iwdg/README.md#クラス)
     - [IWDG_Manager](iwdg/class/IWDG_Manager.md)
