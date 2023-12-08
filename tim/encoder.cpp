@@ -1,7 +1,6 @@
 #ifndef CONFIG_DISABLE_MODULE_TIM
 
 #include "tim/encoder.hpp"
-#include <cmath>
 
 namespace halex {
 
