@@ -103,11 +103,9 @@ ADCn:
 
 ##### ADC_DMA::setCallback(std::function<void()>)
 > ```c++
-> #ifndef CONFIG_DISABLE_EX_CALLBACK
 > void setCallback(
 >     std::function<void()> function
 > ) noexcept;
-> #endif // CONFIG_DISABLE_EX_CALLBACK
 > ```
 > ADC完了時の割り込み関数を設定します
 > ```c++

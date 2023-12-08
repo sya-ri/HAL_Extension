@@ -52,7 +52,6 @@ public:
         return i2cSlaveReceive_DMA(hi2c, data);
     }
 
-#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setTxCallback(std::function<void()> function) noexcept {
         setI2CSlaveTxCallback(hi2c, function);
     }
@@ -64,7 +63,6 @@ public:
     void setErrorCallback(std::function<void()> function) noexcept {
         setI2CErrorCallback(hi2c, function);
     }
-#endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
 } // namespace halex

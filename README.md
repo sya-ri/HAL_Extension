@@ -14,9 +14,6 @@ IncludePath: HAL_Extension/ # フォルダ直下
 ```
 
 ## 目次
-- [General](general/README.md)
-  - [コンフィグ](general/README.md#コンフィグ)
-    - [CONFIG_DISABLE_EX_CALLBACK](general/README.md#config_disable_ex_callback)
 - [Util](util/README.md)
   - [関数](util/README.md#関数)
     - [std::map](util/function/map.md)
@@ -41,7 +38,6 @@ IncludePath: HAL_Extension/ # フォルダ直下
 - [UART](uart/README.md)
   - [コンフィグ](uart/README.md#コンフィグ)
     - [CONFIG_DISABLE_MODULE_UART](uart/README.md#CONFIG_DISABLE_MODULE_UART)
-    - [CONFIG_USE_HALF_CALLBACK_UART](uart/README.md#CONFIG_USE_HALF_CALLBACK_UART)
   - [関数](uart/README.md#関数)
     - [Transmit](uart/function/README.md#transmit)
     - [Receive](uart/function/README.md#receive)
@@ -81,7 +77,6 @@ IncludePath: HAL_Extension/ # フォルダ直下
 - [ADC](adc/README.md)
   - [コンフィグ](adc/README.md#コンフィグ)
     - [CONFIG_DISABLE_MODULE_ADC](adc/README.md#config_disable_module_adc)
-    - [CONFIG_USE_HALF_CALLBACK_ADC](adc/README.md#config_use_half_callback_adc)
   - [関数](adc/README.md#関数)
     - [setADCCallback](adc/function/README.md#setadccallback)
   - [クラス](adc/README.md#クラス)

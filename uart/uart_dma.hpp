@@ -46,7 +46,6 @@ public:
         return HAL_UART_DMAStop(huart);
     }
 
-#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setTxCallback(std::function<void()> function) noexcept {
         setUARTTxCallback(huart, function);
     }
@@ -58,7 +57,6 @@ public:
     void setErrorCallback(std::function<void()> function) noexcept {
         setErrorCallback(huart, function);
     }
-#endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
 } // namespace halex

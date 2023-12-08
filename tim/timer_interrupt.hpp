@@ -20,9 +20,7 @@ public:
     void stop() noexcept;
     void setCount(uint32_t count) noexcept;
     void resetCount() noexcept;
-#ifndef CONFIG_DISABLE_EX_CALLBACK
     void setCallback(std::function<void()> function) noexcept;
-#endif // CONFIG_DISABLE_EX_CALLBACK
 };
 
 } // namespace halex
