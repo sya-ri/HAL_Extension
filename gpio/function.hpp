@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_GPIO_FUNCTION_HPP
 #define HAL_EXTENSION_GPIO_FUNCTION_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_GPIO
+#if __has_include("gpio.h")
 
 #include "gpio.h"
 
@@ -21,6 +21,6 @@ inline void gpioToggle(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin) noexcept {
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_GPIO
+#endif // __has_include
 
 #endif // HAL_EXTENSION_GPIO_FUNCTION_HPP

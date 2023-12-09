@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_TIM_MOTOR_HPP
 #define HAL_EXTENSION_TIM_MOTOR_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_TIM
+#if __has_include("tim.h")
 
 #include "pwm.hpp"
 
@@ -27,6 +27,6 @@ public:
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_TIM
+#endif // __has_include
 
 #endif // HAL_EXTENSION_TIM_MOTOR_HPP

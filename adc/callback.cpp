@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_ADC
-
 #include "adc/callback.hpp"
 #include <map>
 #include "util/function.hpp"
@@ -29,5 +27,3 @@ void runADCCallback(ADC_HandleTypeDef &hadc) noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_ADC

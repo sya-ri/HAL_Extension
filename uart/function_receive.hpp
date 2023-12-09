@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_UART_FUNCTION_RECEIVE_HPP
 #define HAL_EXTENSION_UART_FUNCTION_RECEIVE_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_UART
+#if __has_include("usart.h")
 
 #include "usart.h"
 
@@ -39,6 +39,6 @@ HAL_StatusTypeDef uartReceive_DMA(UART_HandleTypeDef &huart, T &data) noexcept {
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_UART
+#endif // __has_include
 
 #endif // HAL_EXTENSION_UART_FUNCTION_RECEIVE_HPP

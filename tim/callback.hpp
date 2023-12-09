@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_TIM_HPP
 #define HAL_EXTENSION_TIM_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_TIM
+#if __has_include("tim.h")
 
 #include <functional>
 #include "tim.h"
@@ -15,6 +15,6 @@ void runTIMPeriodElapsedCallback(TIM_HandleTypeDef &htim) noexcept;
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_TIM
+#endif // __has_include
 
 #endif // HAL_EXTENSION_TIM_HPP

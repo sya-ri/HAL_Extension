@@ -1,11 +1,5 @@
 # I2C
 
-## コンフィグ
-
-> #### CONFIG_DISABLE_MODULE_I2C
-> I2C モジュールの無効化  
-> 定義することでコンパイルされなくなります
-
 ## 関数
 - [MasterTransmit](function/README.md#mastertransmit)
   - [i2cMasterTransmit](function/README.md#i2cmastertransmit)
@@ -69,7 +63,6 @@
   - [関数](class/I2C_Slave.md#関数)
     - [init()](class/I2C_Slave.md#i2c_slaveinit)
     - [init(uint8_t)](class/I2C_Slave.md#i2c_slaveinituint8_t)
-    - [init(DIPSwitch)](class/I2C_Slave.md#i2c_slaveinitdipswitch)
     - [transmit(T, uint32_t)](class/I2C_Slave.md#i2c_slavetransmitt-uint32_t)
     - [receive(T, uint32_t)](class/I2C_Slave.md#i2c_slavereceivet-uint32_t)
 - [I2C_Slave_IT](class/I2C_Slave_IT.md)
@@ -80,7 +73,6 @@
   - [関数](class/I2C_Slave_IT.md#関数)
     - [init()](class/I2C_Slave_IT.md#i2c_slave_itinit)
     - [init(uint8_t)](class/I2C_Slave_IT.md#i2c_slave_itinituint8_t)
-    - [init(DIPSwitch)](class/I2C_Slave_IT.md#i2c_slave_itinitdipswitch)
     - [transmit(T)](class/I2C_Slave_IT.md#i2c_slave_ittransmitt)
     - [receive(T)](class/I2C_Slave_IT.md#i2c_slave_itreceivet)
     - [setTxCallback(std::function<void()>)](class/I2C_Slave_IT.md#i2c_slave_itsettxcallbackstdfunctionvoid)
@@ -94,7 +86,6 @@
   - [関数](class/I2C_Slave_DMA.md#関数)
     - [init()](class/I2C_Slave_DMA.md#i2c_slave_dmainit)
     - [init(uint8_t)](class/I2C_Slave_DMA.md#i2c_slave_dmainituint8_t)
-    - [init(DIPSwitch)](class/I2C_Slave_DMA.md#i2c_slave_dmainitdipswitch)
     - [startTransmit()](class/I2C_Slave_DMA.md#i2c_slave_dmastarttransmit)
     - [startReceive()](class/I2C_Slave_DMA.md#i2c_slave_dmastartreceive)
     - [setTxCallback(std::function<void()>)](class/I2C_Slave_DMA.md#i2c_slave_dmasettxcallbackstdfunctionvoid)

@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_GPIO
-
 #include "gpio/fixed_seven_segment.hpp"
 
 namespace halex {
@@ -51,5 +49,3 @@ bool FixedSevenSegment::isAvailable() const noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_GPIO

@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_GPIO
-
 #include "gpio/gpio.hpp"
 #include "gpio/function.hpp"
 #include "util/function.hpp"
@@ -53,5 +51,3 @@ void GPIO::toggle() const noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_GPIO

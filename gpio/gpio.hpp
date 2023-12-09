@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_GPIO_HPP
 #define HAL_EXTENSION_GPIO_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_GPIO
+#if __has_include("gpio.h")
 
 #include "gpio.h"
 
@@ -27,6 +27,6 @@ public:
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_GPIO
+#endif // __has_include
 
 #endif // HAL_EXTENSION_GPIO_HPP

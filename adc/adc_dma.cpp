@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_ADC
-
 #include "adc/adc_dma.hpp"
 #include "adc/callback.hpp"
 #include "util/function.hpp"
@@ -39,5 +37,3 @@ void ADC_DMA::setCallback(std::function<void()> function) noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_ADC

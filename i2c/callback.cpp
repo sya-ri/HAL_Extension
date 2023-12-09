@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_I2C
-
 #include "i2c/callback.hpp"
 #include <map>
 #include "util/function.hpp"
@@ -105,5 +103,3 @@ void runI2CErrorCallback(I2C_HandleTypeDef &hi2c) noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_I2C

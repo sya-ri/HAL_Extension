@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_TIM
-
 #include "tim/callback.hpp"
 #include <map>
 #include "util/function.hpp"
@@ -29,5 +27,3 @@ void runTIMPeriodElapsedCallback(TIM_HandleTypeDef &htim) noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_TIM
