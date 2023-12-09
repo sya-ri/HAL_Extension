@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_UART
-
 #include "uart/callback.hpp"
 #include <map>
 #include "util/function.hpp"
@@ -67,5 +65,3 @@ void runUARTErrorCallback(UART_HandleTypeDef &huart) {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_UART

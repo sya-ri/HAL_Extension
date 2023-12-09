@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_UART
-
 #include "uart/uart_logger_it.hpp"
 #include "uart/callback.hpp"
 
@@ -50,5 +48,3 @@ void UART_Logger_IT::println(const char* text) noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_UART

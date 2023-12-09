@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_I2C_FUNCTION_SLAVE_RECEIVE_HPP
 #define HAL_EXTENSION_I2C_FUNCTION_SLAVE_RECEIVE_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_I2C
+#if __has_include("i2c.h")
 
 #include "i2c.h"
 
@@ -39,6 +39,6 @@ inline HAL_StatusTypeDef i2cSlaveReceive_DMA(I2C_HandleTypeDef &hi2c, T &data) n
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_I2C
+#endif // __has_include
 
 #endif // HAL_EXTENSION_I2C_FUNCTION_SLAVE_RECEIVE_HPP

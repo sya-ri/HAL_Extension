@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_UART_FUNCTION_TRANSMIT_HPP
 #define HAL_EXTENSION_UART_FUNCTION_TRANSMIT_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_UART
+#if __has_include("usart.h")
 
 #include "usart.h"
 
@@ -39,6 +39,6 @@ HAL_StatusTypeDef uartTransmit_DMA(UART_HandleTypeDef &huart, const T &data) noe
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_UART
+#endif // __has_include
 
 #endif // HAL_EXTENSION_UART_FUNCTION_TRANSMIT_HPP

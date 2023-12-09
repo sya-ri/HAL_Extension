@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_GPIO
-
 #include "gpio/dynamic_seven_segment.hpp"
 
 namespace halex {
@@ -186,5 +184,3 @@ void DynamicSevenSegment::clear() const noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_GPIO

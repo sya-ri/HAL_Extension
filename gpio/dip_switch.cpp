@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_GPIO
-
 #include "gpio/dip_switch.hpp"
 
 namespace halex {
@@ -32,5 +30,3 @@ uint8_t DIPSwitch::getAddress() const noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_GPIO

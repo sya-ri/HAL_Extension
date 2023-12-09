@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_UART_LOGGER_HPP
 #define HAL_EXTENSION_UART_LOGGER_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_UART
+#if __has_include("usart.h")
 
 #include "usart.h"
 #include <string>
@@ -24,6 +24,6 @@ public:
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_UART
+#endif // __has_include
 
 #endif // HAL_EXTENSION_UART_LOGGER_HPP

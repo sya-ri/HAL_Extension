@@ -1,14 +1,5 @@
 # IWDG
 
-## コンフィグ
-
-> #### CONFIG_DISABLE_MODULE_IWDG
-> WDG モジュールの無効化  
-> 定義することでコンパイルされなくなります
-
-> #### CONFIG_DISABLE_IWDG_CONSTEXPR
-> 定義することでコンパイル時に計算を行わなくなります
-
 ## クラス
 - [IWDG_Manager](class/IWDG_Manager.md)
   - [CubeMX](class/IWDG_Manager.md#cubemx)

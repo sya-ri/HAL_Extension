@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_TIM
-
 #include "tim/motor.hpp"
 
 namespace halex {
@@ -76,5 +74,3 @@ void Motor::setSpeed(int16_t numerator, int16_t denominator) noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_TIM

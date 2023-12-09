@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_ADC_CALLBACK_HPP
 #define HAL_EXTENSION_ADC_CALLBACK_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_ADC
+#if __has_include("adc.h")
 
 #include <functional>
 #include "adc.h"
@@ -15,6 +15,6 @@ void runADCCallback(ADC_HandleTypeDef &hadc) noexcept;
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_ADC
+#endif // __has_include
 
 #endif // HAL_EXTENSION_ADC_CALLBACK_HPP

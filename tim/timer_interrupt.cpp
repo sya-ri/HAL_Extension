@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_TIM
-
 #include "tim/timer_interrupt.hpp"
 #include "tim/callback.hpp"
 
@@ -47,5 +45,3 @@ void TimerInterrupt::setCallback(std::function<void()> function) noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_TIM

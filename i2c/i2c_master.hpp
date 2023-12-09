@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_I2C_MASTER_HPP
 #define HAL_EXTENSION_I2C_MASTER_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_I2C
+#if __has_include("i2c.h")
 
 #include "i2c.h"
 #include "function_master_transmit.hpp"
@@ -40,6 +40,6 @@ public:
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_I2C
+#endif // __has_include
 
 #endif // HAL_EXTENSION_I2C_MASTER_HPP

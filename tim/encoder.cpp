@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_TIM
-
 #include "tim/encoder.hpp"
 
 namespace halex {
@@ -61,5 +59,3 @@ void Encoder::resetCount() noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_TIM

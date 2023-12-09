@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_UART_HPP
 #define HAL_EXTENSION_UART_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_UART
+#if __has_include("usart.h")
 
 #include "usart.h"
 #include "function_transmit.hpp"
@@ -35,6 +35,6 @@ public:
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_UART
+#endif // __has_include
 
 #endif // HAL_EXTENSION_UART_HPP

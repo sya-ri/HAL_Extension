@@ -1,11 +1,5 @@
 # ADC
 
-## コンフィグ
-
-##### CONFIG_DISABLE_MODULE_ADC
-> ADC モジュールの無効化  
-> 定義することでコンパイルされなくなります
-
 ## 関数
 - [setADCCallback](function/README.md#setadccallback)
 

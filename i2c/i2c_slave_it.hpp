@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_I2C_SLAVE_IT_HPP
 #define HAL_EXTENSION_I2C_SLAVE_IT_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_I2C
+#if __has_include("i2c.h")
 
 #include "i2c.h"
 #include "callback.hpp"
@@ -37,12 +37,6 @@ public:
         init();
     }
 
-#ifndef CONFIG_DISABLE_MODULE_GPIO
-    void init(DIPSwitch builder) noexcept {
-        init(builder.getAddress());
-    }
-#endif // CONFIG_DISABLE_MODULE_GPIO
-
     HAL_StatusTypeDef transmit(const T &data) const noexcept {
         return i2cSlaveTransmit_IT(hi2c, data);
     }
@@ -66,6 +60,6 @@ public:
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_I2C
+#endif // __has_include
 
 #endif // HAL_EXTENSION_I2C_SLAVE_IT_HPP
