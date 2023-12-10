@@ -46,6 +46,8 @@ public:
     // any one
     void setIdFilter(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4);
     void setIdFilter(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2);
+    void setIdMaskFilter(uint32_t id1, uint32_t mask1, uint32_t id2, uint32_t mask2);
+    void setIdMaskFilter(IdentifierType type, uint32_t id, uint32_t mask);
     void setIdRangeFilter(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2);
     void setIdRangeFilter(IdentifierType type, uint32_t minId, uint32_t maxId);
     void disableFilter();

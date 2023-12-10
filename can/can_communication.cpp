@@ -76,32 +76,39 @@ void CAN_Communication::setIdFilter(IdentifierType type1, uint32_t id1, Identifi
     filterConfig.FilterMaskIdLow = filterMask;
 }
 
-void CAN_Communication::setIdRangeFilter(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2) {
+void CAN_Communication::setIdMaskFilter(uint32_t id1, uint32_t mask1, uint32_t id2, uint32_t mask2) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 
-    uint32_t mask21bit = 0b111111111111111111111;
-    filterConfig.FilterIdHigh = minId1 << 5;
-    filterConfig.FilterIdLow = minId2 << 5;
-    filterConfig.FilterMaskIdHigh = ((~(minId1 ^ maxId1)) & mask21bit) << 5;
-    filterConfig.FilterMaskIdLow = ((~(minId2 ^ maxId2)) & mask21bit) << 5;
+    filterConfig.FilterIdHigh = id1 << 5;
+    filterConfig.FilterIdLow = id2 << 5;
+    filterConfig.FilterMaskIdHigh = mask1 << 5;
+    filterConfig.FilterMaskIdLow = mask2 << 5;
 }
 
-void CAN_Communication::setIdRangeFilter(IdentifierType type, uint32_t minId, uint32_t maxId) {
+void CAN_Communication::setIdMaskFilter(IdentifierType type, uint32_t id, uint32_t mask) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 
-    uint32_t mask21bit = 0b111111111111111111111;
-    uint32_t bitShift = type == IdentifierType::Standard ? 21 : 3;
-    uint32_t filterId = minId << bitShift;
-    uint32_t filterMask = ((~(minId ^ maxId)) & mask21bit) << bitShift;
+    uint32_t filterId = type == IdentifierType::Standard ? id << 21 : (id << 3) | 0x4;
+    uint32_t filterMask = type == IdentifierType::Standard ? mask << 21 : (mask << 3) | 0x4;
 
     filterConfig.FilterIdHigh = filterId >> 16;
     filterConfig.FilterIdLow = filterId;
     filterConfig.FilterMaskIdHigh = filterMask >> 16;
     filterConfig.FilterMaskIdLow = filterMask;
+}
+
+void CAN_Communication::setIdRangeFilter(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2) {
+    uint32_t mask21bit = 0b111111111111111111111;
+    setIdMaskFilter(minId1, (~(minId1 ^ maxId1)) & mask21bit, minId2, (~(minId2 ^ maxId2)) & mask21bit);
+}
+
+void CAN_Communication::setIdRangeFilter(IdentifierType type, uint32_t minId, uint32_t maxId) {
+    uint32_t mask21bit = 0b111111111111111111111;
+    setIdMaskFilter(type, minId, (~(minId ^ maxId)) & mask21bit);
 }
 
 void CAN_Communication::disableFilter() {
