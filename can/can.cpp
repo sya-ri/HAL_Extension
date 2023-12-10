@@ -8,11 +8,12 @@ Can::Can(CAN_HandleTypeDef *hcan) : hcan(hcan) {
 
 }
 
-CAN_StatusType Can::setup() {
-    if (HAL_CAN_Init(hcan) != HAL_OK) {
-        return CAN_StatusType::CAN_Fail_Init;
+HAL_StatusTypeDef Can::setup() {
+    HAL_StatusTypeDef init = HAL_CAN_Init(hcan);
+    if (init != HAL_OK) {
+        return init;
     }
-    return static_cast<CAN_StatusType>(HAL_CAN_Start(hcan));
+    return HAL_CAN_Start(hcan);
 }
 
 void Can::disableFilter() {
@@ -109,8 +110,8 @@ CAN_ClassSettingStatus Can::setOneTypePathIdGroup(IdentifierType type, uint32_t 
     return CAN_ClassSettingStatus::NON_ERROR;
 }
 
-CAN_StatusType Can::setFilterConfig() {
-    return static_cast<CAN_StatusType>(HAL_CAN_ConfigFilter(hcan, &filterConfig));
+HAL_StatusTypeDef Can::setFilterConfig() {
+    return HAL_CAN_ConfigFilter(hcan, &filterConfig);
 }
 
 void Can::setId(uint32_t id) {
@@ -138,20 +139,20 @@ bool Can::isMailBoxPending(uint32_t txMailbox) {
     return false;
 }
 
-CAN_StatusType Can::transmit(uint8_t dataLength, uint8_t txData[]) {
+HAL_StatusTypeDef Can::transmit(uint8_t dataLength, uint8_t txData[]) {
     txHeader.DLC = dataLength;
-    return static_cast<CAN_StatusType>(HAL_CAN_AddTxMessage(hcan, &txHeader, txData, &usedTxMailbox));
+    return HAL_CAN_AddTxMessage(hcan, &txHeader, txData, &usedTxMailbox);
 }
 
 uint32_t Can::getUsedTxMailbox() {
     return usedTxMailbox;
 }
 
-CAN_StatusType Can::receive(uint32_t rxFifo, uint8_t rxData[]) {
+HAL_StatusTypeDef Can::receive(uint32_t rxFifo, uint8_t rxData[]) {
     if (HAL_CAN_GetRxFifoFillLevel(hcan, rxFifo) == 0) {
-        return CAN_StatusType::CAN_Rx_FIFO_Empty;
+        return HAL_StatusTypeDef::HAL_OK;
     }
-    return static_cast<CAN_StatusType>(HAL_CAN_GetRxMessage(hcan, rxFifo, &rxHeader, rxData));
+    return HAL_CAN_GetRxMessage(hcan, rxFifo, &rxHeader, rxData);
 }
 
 uint32_t Can::getRxIdType() {
@@ -161,10 +162,8 @@ uint32_t Can::getRxIdType() {
 uint32_t Can::getRxId() {
     if (rxHeader.IDE == CAN_ID_STD) {
         return rxHeader.StdId;
-    } else if (rxHeader.IDE == CAN_ID_EXT) {
-        return rxHeader.ExtId;
     } else {
-        return static_cast<uint32_t>(CAN_StatusType::HAL_ERROR);
+        return rxHeader.ExtId;
     }
 }
 

@@ -6,7 +6,6 @@
 #include "main.h"
 #include "can.h"
 #include <array>
-#include "can_status_type.hpp"
 #include "can_class_setting_status.hpp"
 
 namespace halex {
@@ -33,7 +32,7 @@ public:
 
     Can(CAN_HandleTypeDef *hcan);
 
-    CAN_StatusType setup();
+    HAL_StatusTypeDef setup();
     void disableFilter();
     void setFilterBank(uint32_t CAN2_filterBankNumber);
     void setStoreRxFifo(uint32_t rxFifo);
@@ -46,17 +45,17 @@ public:
     CAN_ClassSettingStatus setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2);
     CAN_ClassSettingStatus setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId);
 
-    CAN_StatusType setFilterConfig();
+    HAL_StatusTypeDef setFilterConfig();
 
     void setId(uint32_t id);
     void setId(IdentifierType type, uint32_t id);
     void setDataFrame(uint32_t dataFrameType);
 
     bool isMailBoxPending(uint32_t txMailbox);
-     CAN_StatusType transmit(uint8_t dataLength, uint8_t txData[]);
+    HAL_StatusTypeDef transmit(uint8_t dataLength, uint8_t txData[]);
     uint32_t getUsedTxMailbox();
 
-    CAN_StatusType receive(uint32_t rxFifo, uint8_t rxData[]);
+    HAL_StatusTypeDef receive(uint32_t rxFifo, uint8_t rxData[]);
     uint32_t getRxIdType();
     uint32_t getRxId();
     uint32_t getRxDataLength();
