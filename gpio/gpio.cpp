@@ -1,3 +1,5 @@
+#if __has_include("gpio.h")
+
 #include "gpio/gpio.hpp"
 #include "gpio/function.hpp"
 #include "util/function.hpp"
@@ -51,3 +53,5 @@ void GPIO::toggle() const noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

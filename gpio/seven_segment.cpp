@@ -1,3 +1,5 @@
+#if __has_include("gpio.h")
+
 #include "gpio/seven_segment.hpp"
 #include <array>
 
@@ -80,3 +82,5 @@ bool SevenSegment::isAvailable() const noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

@@ -1,3 +1,5 @@
+#if __has_include("tim.h")
+
 #include "tim/timer_interrupt.hpp"
 #include "tim/callback.hpp"
 
@@ -45,3 +47,5 @@ void TimerInterrupt::setCallback(std::function<void()> function) noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

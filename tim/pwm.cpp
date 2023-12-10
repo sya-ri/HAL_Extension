@@ -1,3 +1,5 @@
+#if __has_include("tim.h")
+
 #include "tim/pwm.hpp"
 
 namespace halex {
@@ -34,3 +36,5 @@ uint32_t PWM::getCounterPeriod() const noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

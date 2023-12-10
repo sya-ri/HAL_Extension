@@ -1,3 +1,5 @@
+#if __has_include("tim.h")
+
 #include "tim/callback.hpp"
 #include <map>
 #include "util/function.hpp"
@@ -27,3 +29,5 @@ void runTIMPeriodElapsedCallback(TIM_HandleTypeDef &htim) noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

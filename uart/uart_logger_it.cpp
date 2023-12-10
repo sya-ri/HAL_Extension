@@ -1,3 +1,5 @@
+#if __has_include("usart.h")
+
 #include "uart/uart_logger_it.hpp"
 #include "uart/callback.hpp"
 
@@ -10,7 +12,7 @@ UART_Logger_IT::UART_Logger_IT(UART_HandleTypeDef *huart): huart(huart) {
 }
 
 UART_Logger_IT::UART_Logger_IT(UART_HandleTypeDef &huart): UART_Logger_IT(&huart) {
-d
+
 }
 
 void UART_Logger_IT::checkBuffer() noexcept {
@@ -48,3 +50,5 @@ void UART_Logger_IT::println(const char* text) noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

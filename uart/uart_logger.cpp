@@ -1,3 +1,5 @@
+#if __has_include("usart.h")
+
 #include "uart/uart_logger.hpp"
 
 namespace halex {
@@ -30,3 +32,5 @@ void UART_Logger::println(const char* text) const noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

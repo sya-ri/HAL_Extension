@@ -1,3 +1,5 @@
+#if __has_include("gpio.h")
+
 #include "gpio/dynamic_seven_segment.hpp"
 
 namespace halex {
@@ -184,3 +186,5 @@ void DynamicSevenSegment::clear() const noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include
