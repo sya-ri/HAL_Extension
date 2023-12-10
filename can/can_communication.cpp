@@ -12,25 +12,43 @@ CAN_Communication::CAN_Communication(CAN_HandleTypeDef &hcan) : CAN_Communicatio
 
 }
 
-HAL_StatusTypeDef CAN_Communication::setup() {
-    HAL_StatusTypeDef init = HAL_CAN_Init(hcan);
-    if (init != HAL_OK) {
-        return init;
-    }
+HAL_StatusTypeDef CAN_Communication::init() {
+    HAL_CAN_DeInit(hcan);
+    return HAL_CAN_Init(hcan);
+}
+
+HAL_StatusTypeDef CAN_Communication::start() {
     return HAL_CAN_Start(hcan);
 }
 
-void CAN_Communication::disableFilter() {
-    filterConfig.FilterActivation = CAN_FILTER_DISABLE;
+void CAN_Communication::setId(uint32_t id) {
+    setId(IdentifierType::Standard, id);
 }
 
-void CAN_Communication::setFilterBank(uint32_t CAN2_filterBankNumber) {
-    filterConfig.FilterBank = 0;
-    filterConfig.SlaveStartFilterBank = CAN2_filterBankNumber;
+void CAN_Communication::setId(IdentifierType type, uint32_t id) {
+    txHeader.IDE = static_cast<uint32_t>(type);
+
+    if (type == IdentifierType::Standard) {
+        txHeader.StdId = id;
+    } else {
+        txHeader.ExtId = id;
+    }
 }
 
-void CAN_Communication::setStoreRxFifo(uint32_t rxFifo) {
-    filterConfig.FilterFIFOAssignment = rxFifo;
+void CAN_Communication::setRemoteTransmissionRequest(RemoteTransmissionRequest value) {
+    txHeader.RTR = static_cast<uint32_t>(value);
+}
+
+void CAN_Communication::setFilterFIFOAssignment(uint32_t value) {
+    filterConfig.FilterFIFOAssignment = value;
+}
+
+void CAN_Communication::setFilterBank(uint32_t value) {
+    filterConfig.FilterBank = value;
+}
+
+void CAN_Communication::setSlaveStartFilterBank(uint32_t value) {
+    filterConfig.SlaveStartFilterBank = value;
 }
 
 void CAN_Communication::setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4) {
@@ -86,35 +104,28 @@ void CAN_Communication::setOneTypePathIdGroup(IdentifierType type, uint32_t minI
     filterConfig.FilterMaskIdLow = filterMask;
 }
 
+void CAN_Communication::disableFilter() {
+    filterConfig.FilterActivation = CAN_FILTER_DISABLE;
+}
+
 HAL_StatusTypeDef CAN_Communication::applyFilterConfig() {
     return HAL_CAN_ConfigFilter(hcan, &filterConfig);
-}
-
-void CAN_Communication::setId(uint32_t id) {
-    setId(IdentifierType::Standard, id);
-}
-
-void CAN_Communication::setId(IdentifierType type, uint32_t id) {
-    txHeader.IDE = static_cast<uint32_t>(type);
-
-    if (type == IdentifierType::Standard) {
-        txHeader.StdId = id;
-    } else {
-        txHeader.ExtId = id;
-    }
-}
-
-void CAN_Communication::setDataFrame(uint32_t dataFrameType) {
-    txHeader.RTR = dataFrameType;
-}
-
-bool CAN_Communication::isTxMessagePending(uint32_t txMailbox) {
-    return HAL_CAN_IsTxMessagePending(hcan, txMailbox) != 0;
 }
 
 HAL_StatusTypeDef CAN_Communication::transmit(uint8_t dataLength, uint8_t txData[]) {
     txHeader.DLC = dataLength;
     return HAL_CAN_AddTxMessage(hcan, &txHeader, txData, &usedTxMailbox);
+}
+
+HAL_StatusTypeDef CAN_Communication::abortTransmit(uint32_t txMailBox) {
+    if (isMailBoxPending(txMailBox)) {
+        return HAL_CAN_AbortTxRequest(hcan, txMailBox);
+    }
+    return HAL_StatusTypeDef::HAL_OK;
+}
+
+bool CAN_Communication::isTxMessagePending(uint32_t txMailbox) {
+    return HAL_CAN_IsTxMessagePending(hcan, txMailbox) != 0;
 }
 
 uint32_t CAN_Communication::getUsedTxMailbox() {
@@ -142,13 +153,6 @@ uint32_t CAN_Communication::getRxId() {
 
 uint32_t CAN_Communication::getRxDataLength() {
     return rxHeader.DLC;
-}
-
-HAL_StatusTypeDef CAN_Communication::abortTransmit(uint32_t txMailBox) {
-    if (isMailBoxPending(txMailBox)) {
-        return HAL_CAN_AbortTxRequest(hcan, txMailBox);
-    }
-    return HAL_StatusTypeDef::HAL_OK;
 }
 
 HAL_CAN_StateTypeDef CAN_Communication::getState() {
