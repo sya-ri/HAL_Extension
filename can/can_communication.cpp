@@ -1,14 +1,14 @@
 #if __has_include("can.h")
 
-#include "can.hpp"
+#include "can_communication.hpp"
 
 namespace halex {
 
-Can::Can(CAN_HandleTypeDef *hcan) : hcan(hcan) {
+CAN_Communication::CAN_Communication(CAN_HandleTypeDef *hcan) : hcan(hcan) {
 
 }
 
-HAL_StatusTypeDef Can::setup() {
+HAL_StatusTypeDef CAN_Communication::setup() {
     HAL_StatusTypeDef init = HAL_CAN_Init(hcan);
     if (init != HAL_OK) {
         return init;
@@ -16,20 +16,20 @@ HAL_StatusTypeDef Can::setup() {
     return HAL_CAN_Start(hcan);
 }
 
-void Can::disableFilter() {
+void CAN_Communication::disableFilter() {
     filterConfig.FilterActivation = CAN_FILTER_DISABLE;
 }
 
-void Can::setFilterBank(uint32_t CAN2_filterBankNumber) {
+void CAN_Communication::setFilterBank(uint32_t CAN2_filterBankNumber) {
     filterConfig.FilterBank = 0;
     filterConfig.SlaveStartFilterBank = CAN2_filterBankNumber;
 }
 
-void Can::setStoreRxFifo(uint32_t rxFifo) {
+void CAN_Communication::setStoreRxFifo(uint32_t rxFifo) {
     filterConfig.FilterFIFOAssignment = rxFifo;
 }
 
-void Can::setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4) {
+void CAN_Communication::setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
     filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
@@ -40,7 +40,7 @@ void Can::setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t i
     filterConfig.FilterMaskIdLow = id4 << 5;
 }
 
-void Can::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2) {
+void CAN_Communication::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
@@ -52,7 +52,7 @@ void Can::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1, uint32_t minId
     filterConfig.FilterMaskIdLow = ((~(minId2 ^ maxId2)) & mask21bit) << 5;
 }
 
-void Can::setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2) {
+void CAN_Communication::setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
@@ -76,7 +76,7 @@ void Can::setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType ty
     filterConfig.FilterMaskIdLow = filterId[1];
 }
 
-void Can::setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId) {
+void CAN_Communication::setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
@@ -102,15 +102,15 @@ void Can::setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t ma
     filterConfig.FilterMaskIdLow = filterMask[0];
 }
 
-HAL_StatusTypeDef Can::setFilterConfig() {
+HAL_StatusTypeDef CAN_Communication::setFilterConfig() {
     return HAL_CAN_ConfigFilter(hcan, &filterConfig);
 }
 
-void Can::setId(uint32_t id) {
+void CAN_Communication::setId(uint32_t id) {
     setId(IdentifierType::Standard, id);
 }
 
-void Can::setId(IdentifierType type, uint32_t id) {
+void CAN_Communication::setId(IdentifierType type, uint32_t id) {
     txHeader.IDE = static_cast<uint32_t>(type);
 
     if (type == IdentifierType::Standard) {
@@ -120,38 +120,38 @@ void Can::setId(IdentifierType type, uint32_t id) {
     }
 }
 
-void Can::setDataFrame(uint32_t dataFrameType) {
+void CAN_Communication::setDataFrame(uint32_t dataFrameType) {
     txHeader.RTR = dataFrameType;
 }
 
-bool Can::isMailBoxPending(uint32_t txMailbox) {
+bool CAN_Communication::isMailBoxPending(uint32_t txMailbox) {
     if (HAL_CAN_IsTxMessagePending(hcan, txMailbox) != 0) {
         return true;
     }
     return false;
 }
 
-HAL_StatusTypeDef Can::transmit(uint8_t dataLength, uint8_t txData[]) {
+HAL_StatusTypeDef CAN_Communication::transmit(uint8_t dataLength, uint8_t txData[]) {
     txHeader.DLC = dataLength;
     return HAL_CAN_AddTxMessage(hcan, &txHeader, txData, &usedTxMailbox);
 }
 
-uint32_t Can::getUsedTxMailbox() {
+uint32_t CAN_Communication::getUsedTxMailbox() {
     return usedTxMailbox;
 }
 
-HAL_StatusTypeDef Can::receive(uint32_t rxFifo, uint8_t rxData[]) {
+HAL_StatusTypeDef CAN_Communication::receive(uint32_t rxFifo, uint8_t rxData[]) {
     if (HAL_CAN_GetRxFifoFillLevel(hcan, rxFifo) == 0) {
         return HAL_StatusTypeDef::HAL_OK;
     }
     return HAL_CAN_GetRxMessage(hcan, rxFifo, &rxHeader, rxData);
 }
 
-uint32_t Can::getRxIdType() {
+uint32_t CAN_Communication::getRxIdType() {
     return rxHeader.IDE;
 }
 
-uint32_t Can::getRxId() {
+uint32_t CAN_Communication::getRxId() {
     if (rxHeader.IDE == CAN_ID_STD) {
         return rxHeader.StdId;
     } else {
@@ -159,26 +159,26 @@ uint32_t Can::getRxId() {
     }
 }
 
-uint32_t Can::getRxDataLength() {
+uint32_t CAN_Communication::getRxDataLength() {
     return rxHeader.DLC;
 }
 
-HAL_StatusTypeDef Can::abortTransmit(uint32_t txMailBox) {
+HAL_StatusTypeDef CAN_Communication::abortTransmit(uint32_t txMailBox) {
     if (HAL_CAN_IsTxMessagePending(hcan, txMailBox) != 1) {
         return HAL_StatusTypeDef::HAL_OK;
     }
     return HAL_CAN_AbortTxRequest(hcan, txMailBox);
 }
 
-HAL_CAN_StateTypeDef Can::getState() {
+HAL_CAN_StateTypeDef CAN_Communication::getState() {
     return hcan->State;
 }
 
-uint32_t Can::getFilterId(uint8_t idNum) {
+uint32_t CAN_Communication::getFilterId(uint8_t idNum) {
     return filterId[idNum];
 }
 
-uint32_t Can::getMaskId(uint8_t maskNum) {
+uint32_t CAN_Communication::getMaskId(uint8_t maskNum) {
     return filterMask[maskNum];
 }
 

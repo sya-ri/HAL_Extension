@@ -1,5 +1,5 @@
-#ifndef HAL_EXTENSION_CAN_HPP
-#define HAL_EXTENSION_CAN_HPP
+#ifndef HAL_EXTENSION_CAN_COMMUNICATION_HPP
+#define HAL_EXTENSION_CAN_COMMUNICATION_HPP
 
 #if __has_include("can.h")
 
@@ -8,7 +8,7 @@
 
 namespace halex {
 
-class Can {
+class CAN_Communication {
 private:
     CAN_HandleTypeDef *hcan;
 
@@ -28,7 +28,7 @@ public:
         Extended = CAN_ID_EXT
     };
 
-    Can(CAN_HandleTypeDef *hcan);
+    CAN_Communication(CAN_HandleTypeDef *hcan);
 
     HAL_StatusTypeDef setup();
     void disableFilter();
@@ -69,4 +69,4 @@ public:
 
 #endif // __has_include
 
-#endif // HAL_EXTENSION_CAN_HPP
+#endif // HAL_EXTENSION_CAN_COMMUNICATION_HPP
