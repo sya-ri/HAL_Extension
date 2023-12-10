@@ -118,7 +118,7 @@ HAL_StatusTypeDef CAN_Communication::transmit(uint8_t dataLength, uint8_t txData
 }
 
 HAL_StatusTypeDef CAN_Communication::abortTransmit(uint32_t txMailBox) {
-    if (isMailBoxPending(txMailBox)) {
+    if (isTxMessagePending(txMailBox)) {
         return HAL_CAN_AbortTxRequest(hcan, txMailBox);
     }
     return HAL_StatusTypeDef::HAL_OK;
