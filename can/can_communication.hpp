@@ -18,10 +18,6 @@ private:
     CAN_TxHeaderTypeDef txHeader;
 
     uint32_t usedTxMailbox;
-
-    std::array<uint32_t, 4> filterId = {0};
-    std::array<uint32_t, 2> filterMask;
-
 public:
     enum class IdentifierType : uint32_t {
         Standard = CAN_ID_STD,
@@ -62,8 +58,6 @@ public:
     HAL_StatusTypeDef abortTransmit(uint32_t txMailBox);
 
     HAL_CAN_StateTypeDef getState();
-    uint32_t getFilterId(uint8_t idNum);
-    uint32_t getMaskId(uint8_t maskNum);
 };
 
 } // namespace halex

@@ -75,25 +75,15 @@ void CAN_Communication::setOneTypePathIdGroup(IdentifierType type, uint32_t minI
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 
-    std::array<uint8_t, 2> bitShift;
-    if (type == IdentifierType::Standard) {
-        bitShift[0] = 21;
-    } else {
-        bitShift[0] = 3;
-    }
+    uint32_t mask21bit = 0b111111111111111111111;
+    uint32_t bitShift = type == IdentifierType::Standard ? 21 : 3;
+    uint32_t filterId = minId << bitShift;
+    uint32_t filterMask = ((~(minId ^ maxId)) & mask21bit) << bitShift;
 
-    filterId[0] = minId << bitShift[0];
-
-    minId <<= 21;
-    maxId <<= 21;
-    filterMask[0] = ((~(minId ^ maxId)) >> 21);
-    filterMask[0] <<= bitShift[0];
-
-    filterConfig.FilterIdHigh = filterId[0] >> 16;
-    filterConfig.FilterIdLow = filterId[0];
-
-    filterConfig.FilterMaskIdHigh = filterMask[0] >> 16;
-    filterConfig.FilterMaskIdLow = filterMask[0];
+    filterConfig.FilterIdHigh = filterId >> 16;
+    filterConfig.FilterIdLow = filterId;
+    filterConfig.FilterMaskIdHigh = filterMask >> 16;
+    filterConfig.FilterMaskIdLow = filterMask;
 }
 
 HAL_StatusTypeDef CAN_Communication::setFilterConfig() {
@@ -166,14 +156,6 @@ HAL_StatusTypeDef CAN_Communication::abortTransmit(uint32_t txMailBox) {
 
 HAL_CAN_StateTypeDef CAN_Communication::getState() {
     return hcan->State;
-}
-
-uint32_t CAN_Communication::getFilterId(uint8_t idNum) {
-    return filterId[idNum];
-}
-
-uint32_t CAN_Communication::getMaskId(uint8_t maskNum) {
-    return filterMask[maskNum];
 }
 
 } // namespace halex
