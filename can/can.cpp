@@ -53,19 +53,19 @@ CAN_ClassSettingStatus Can::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxI
     return CAN_ClassSettingStatus::NON_ERROR;
 }
 
-CAN_ClassSettingStatus Can::setTwoTypePathId(uint32_t idType1, uint32_t id1, uint32_t idType2, uint32_t id2) {
+CAN_ClassSettingStatus Can::setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2) {
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 
-    if (idType1 == CAN_ID_STD) {
+    if (type1 == IdentifierType::Standard) {
         filterId[0] = id1 << 21;
-    } else if (idType1 == CAN_ID_EXT) {
+    } else {
         filterId[0] = (id1 << 3) | 0x4;
     }
 
-    if (idType2 == CAN_ID_STD) {
+    if (type2 == IdentifierType::Standard) {
         filterId[1] = id2 << 21;
-    } else if (idType2 == CAN_ID_EXT) {
+    } else {
         filterId[1] = (id2 << 3) | 0x4;
     }
 
@@ -78,14 +78,14 @@ CAN_ClassSettingStatus Can::setTwoTypePathId(uint32_t idType1, uint32_t id1, uin
     return CAN_ClassSettingStatus::NON_ERROR;
 }
 
-CAN_ClassSettingStatus Can::setOneTypePathIdGroup(uint32_t idType, uint32_t minId, uint32_t maxId) {
+CAN_ClassSettingStatus Can::setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId) {
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 
     std::array<uint8_t, 2> bitShift;
-    if (idType == CAN_ID_STD) {
+    if (type == IdentifierType::Standard) {
         bitShift[0] = 21;
-    } else if (idType == CAN_ID_EXT) {
+    } else {
         bitShift[0] = 3;
     }
 
@@ -109,12 +109,16 @@ CAN_StatusType Can::setFilterConfig() {
     return static_cast<CAN_StatusType>(HAL_CAN_ConfigFilter(hcan, &filterConfig));
 }
 
-void Can::setId(uint32_t idType, uint32_t id) {
-    txHeader.IDE = idType;
+void Can::setId(uint32_t id) {
+    setId(IdentifierType::Standard, id);
+}
 
-    if (txHeader.IDE == CAN_ID_STD) {
+void Can::setId(IdentifierType type, uint32_t id) {
+    txHeader.IDE = static_cast<uint32_t>(type);
+
+    if (type == IdentifierType::Standard) {
         txHeader.StdId = id;
-    } else if (txHeader.IDE == CAN_ID_EXT) {
+    } else {
         txHeader.ExtId = id;
     }
 }

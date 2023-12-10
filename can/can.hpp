@@ -26,6 +26,11 @@ private:
     std::array<uint32_t, 2> filterMask;
 
 public:
+    enum class IdentifierType : uint32_t {
+        Standard = CAN_ID_STD,
+        Extended = CAN_ID_EXT
+    };
+
     Can(CAN_HandleTypeDef *hcan);
     CAN_StatusType setup();
 
@@ -38,12 +43,13 @@ public:
     CAN_ClassSettingStatus setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2);
 
     // standard id and extend id
-    CAN_ClassSettingStatus setTwoTypePathId(uint32_t idType1, uint32_t id1, uint32_t idType2, uint32_t id2);
-    CAN_ClassSettingStatus setOneTypePathIdGroup(uint32_t idType, uint32_t minId, uint32_t maxId);
+    CAN_ClassSettingStatus setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2);
+    CAN_ClassSettingStatus setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId);
 
     CAN_StatusType setFilterConfig();
 
-    void setId(uint32_t idType, uint32_t id);
+    void setId(uint32_t id);
+    void setId(IdentifierType type, uint32_t id);
     void setDataFrame(uint32_t dataFrameType);
 
     bool isMailBoxPending(uint32_t txMailbox);
