@@ -1,7 +1,5 @@
 #ifndef CONFIG_DISABLE_MODULE_ADC
 
-#ifndef CONFIG_DISABLE_EX_CALLBACK
-
 #include "adc/callback.hpp"
 #include <map>
 #include "util/function.hpp"
@@ -20,18 +18,16 @@ void setADCCallback(ADC_HandleTypeDef &hadc, std::function<void()> function) noe
     setADCCallback(&hadc, function);
 }
 
-} // namespace halex
-
-#ifdef CONFIG_USE_HALF_CALLBACK_ADC
-void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc) {
-#else  // CONFIG_USE_HALF_CALLBACK_ADC
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) {
-#endif // CONFIG_USE_HALF_CALLBACK_ADC
+void runADCCallback(ADC_HandleTypeDef *hadc) noexcept {
     if(halex::map_contains(halex::adc_callback, hadc)) {
         halex::adc_callback[hadc]();
     }
 }
 
-#endif // CONFIG_DISABLE_EX_CALLBACK
+void runADCCallback(ADC_HandleTypeDef &hadc) noexcept {
+    runADCCallback(&hadc);
+}
+
+} // namespace halex
 
 #endif // CONFIG_DISABLE_MODULE_ADC

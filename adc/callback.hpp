@@ -3,8 +3,6 @@
 
 #ifndef CONFIG_DISABLE_MODULE_ADC
 
-#ifndef CONFIG_DISABLE_EX_CALLBACK
-
 #include <functional>
 #include "adc.h"
 
@@ -12,10 +10,10 @@ namespace halex {
 
 void setADCCallback(ADC_HandleTypeDef *hadc, std::function<void()> function) noexcept;
 void setADCCallback(ADC_HandleTypeDef &hadc, std::function<void()> function) noexcept;
+void runADCCallback(ADC_HandleTypeDef *hadc) noexcept;
+void runADCCallback(ADC_HandleTypeDef &hadc) noexcept;
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_EX_CALLBACK
 
 #endif // CONFIG_DISABLE_MODULE_ADC
 

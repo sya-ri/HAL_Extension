@@ -173,4 +173,43 @@
 > ```
 > `HAL_UART_ErrorCallback` の処理を変更します
 
+##### runUARTTxCallback
+> ```c++
+> void runUARTTxCallback(
+>     UART_HandleTypeDef *huart
+> );
+> ```
+> ```c++
+> void runUARTTxCallback(
+>     UART_HandleTypeDef &huart
+> );
+> ```
+> `HAL_UART_TxCpltCallback` や `HAL_UART_TxHalfCpltCallback` の中で呼び出すことで設定されているコールバックの処理を実行できます
+
+##### runUARTRxCallback
+> ```c++
+> void runUARTRxCallback(
+>     UART_HandleTypeDef *huart
+> );
+> ```
+> ```c++
+> void runUARTRxCallback(
+>     UART_HandleTypeDef &huart
+> );
+> ```
+> `HAL_UART_RxCpltCallback` や `HAL_UART_RxHalfCpltCallback` の中で呼び出すことで設定されているコールバックの処理を実行できます
+
+##### runUARTErrorCallback
+> ```c++
+> void runUARTErrorCallback(
+>     UART_HandleTypeDef *huart
+> );
+> ```
+> ```c++
+> void runUARTErrorCallback(
+>     UART_HandleTypeDef &huart
+> );
+> ```
+> `HAL_UART_ErrorCallback` の中で呼び出すことで設定されているコールバックの処理を実行できます
+
 [<< 戻る](../README.md)

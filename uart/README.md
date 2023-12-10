@@ -6,9 +6,6 @@
 > UART モジュールの無効化  
 > 定義することでコンパイルされなくなります
 
-> ##### CONFIG_USE_HALF_CALLBACK_UART
-> UARTのコールバック関数をハーフに変更します
-
 ## 関数
 - [Transmit](function/README.md#transmit)
   - [uartTransmit](function/README.md#uarttransmit)

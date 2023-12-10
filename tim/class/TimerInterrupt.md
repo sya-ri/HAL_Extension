@@ -90,11 +90,9 @@ NVIC Settings:
 
 ##### TimerInterrupt::setCallback(std::function<void()>)
 > ```c++
-> #ifndef CONFIG_DISABLE_EX_CALLBACK
 > void setCallback(
 >     std::function<void()> function
 > ) noexcept;
-> #endif // CONFIG_DISABLE_EX_CALLBACK
 > ```
 > タイマ割り込みの処理を設定します
 > ```c++

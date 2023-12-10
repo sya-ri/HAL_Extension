@@ -42,11 +42,9 @@ void TimerInterrupt::resetCount() noexcept {
     setCount(0);
 }
 
-#ifndef CONFIG_DISABLE_EX_CALLBACK
 void TimerInterrupt::setCallback(std::function<void()> function) noexcept {
     setTIMPeriodElapsedCallback(htim, function);
 }
-#endif // CONFIG_DISABLE_EX_CALLBACK
 
 } // namespace halex
 

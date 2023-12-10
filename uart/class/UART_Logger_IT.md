@@ -75,18 +75,4 @@ USARTn:
 > logger.println("HelloWorld");
 > ```
 
-##### UART_Logger_IT::itTxCallback(UART_HandleTypeDef*)
-> ```c++
-> #ifdef CONFIG_DISABLE_EX_CALLBACK
->     void itTxCallback(UART_HandleTypeDef *huart) noexcept;
-> #endif // CONFIG_DISABLE_EX_CALLBACK
-> ```
-> `CONFIG_DISABLE_EX_CALLBACK` を定義した時のみ定義されます
-> ```c++
-> // 例
-> void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
->     logger.itTxCallback(huart);
-> }
-> ```
-
 [<< 戻る](../README.md)

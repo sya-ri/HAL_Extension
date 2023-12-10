@@ -6,9 +6,6 @@
 > ADC モジュールの無効化  
 > 定義することでコンパイルされなくなります
 
-##### CONFIG_USE_HALF_CALLBACK_ADC
-> ADCのコールバック関数をハーフに変更します
-
 ## 関数
 - [setADCCallback](function/README.md#setadccallback)
 
