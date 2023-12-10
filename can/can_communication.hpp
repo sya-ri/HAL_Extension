@@ -29,6 +29,7 @@ public:
     };
 
     CAN_Communication(CAN_HandleTypeDef *hcan);
+    CAN_Communication(CAN_HandleTypeDef &hcan);
 
     HAL_StatusTypeDef setup();
     void disableFilter();

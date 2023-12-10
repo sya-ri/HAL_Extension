@@ -8,6 +8,10 @@ CAN_Communication::CAN_Communication(CAN_HandleTypeDef *hcan) : hcan(hcan) {
 
 }
 
+CAN_Communication::CAN_Communication(CAN_HandleTypeDef &hcan) : CAN_Communication(&hcan) {
+
+}
+
 HAL_StatusTypeDef CAN_Communication::setup() {
     HAL_StatusTypeDef init = HAL_CAN_Init(hcan);
     if (init != HAL_OK) {
