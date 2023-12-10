@@ -1,3 +1,5 @@
+#if __has_include("i2c.h")
+
 #include "i2c/callback.hpp"
 #include <map>
 #include "util/function.hpp"
@@ -103,3 +105,5 @@ void runI2CErrorCallback(I2C_HandleTypeDef &hi2c) noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

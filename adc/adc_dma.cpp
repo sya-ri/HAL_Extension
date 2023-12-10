@@ -1,3 +1,5 @@
+#if __has_include("adc.h")
+
 #include "adc/adc_dma.hpp"
 #include "adc/callback.hpp"
 #include "util/function.hpp"
@@ -37,3 +39,5 @@ void ADC_DMA::setCallback(std::function<void()> function) noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

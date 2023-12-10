@@ -1,3 +1,5 @@
+#if __has_include("tim.h")
+
 #include "tim/encoder.hpp"
 
 namespace halex {
@@ -56,3 +58,5 @@ void Encoder::resetCount() noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

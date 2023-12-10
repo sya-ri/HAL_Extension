@@ -1,3 +1,5 @@
+#if __has_include("gpio.h")
+
 #include "gpio/dip_switch.hpp"
 
 namespace halex {
@@ -30,3 +32,5 @@ uint8_t DIPSwitch::getAddress() const noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

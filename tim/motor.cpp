@@ -1,3 +1,5 @@
+#if __has_include("tim.h")
+
 #include "tim/motor.hpp"
 
 namespace halex {
@@ -74,3 +76,5 @@ void Motor::setSpeed(int16_t numerator, int16_t denominator) noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include

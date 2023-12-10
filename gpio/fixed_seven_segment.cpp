@@ -1,3 +1,5 @@
+#if __has_include("gpio.h")
+
 #include "gpio/fixed_seven_segment.hpp"
 
 namespace halex {
@@ -49,3 +51,5 @@ bool FixedSevenSegment::isAvailable() const noexcept {
 }
 
 } // namespace halex
+
+#endif // __has_include
