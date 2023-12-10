@@ -40,7 +40,7 @@ public:
     void setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2);
     void setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId);
 
-    HAL_StatusTypeDef setFilterConfig();
+    HAL_StatusTypeDef applyFilterConfig();
 
     void setId(uint32_t id);
     void setId(IdentifierType type, uint32_t id);

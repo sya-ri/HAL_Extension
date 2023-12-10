@@ -86,7 +86,7 @@ void CAN_Communication::setOneTypePathIdGroup(IdentifierType type, uint32_t minI
     filterConfig.FilterMaskIdLow = filterMask;
 }
 
-HAL_StatusTypeDef CAN_Communication::setFilterConfig() {
+HAL_StatusTypeDef CAN_Communication::applyFilterConfig() {
     return HAL_CAN_ConfigFilter(hcan, &filterConfig);
 }
 
