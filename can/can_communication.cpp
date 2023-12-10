@@ -51,6 +51,18 @@ void CAN_Communication::setSlaveStartFilterBank(uint32_t value) {
     filterConfig.SlaveStartFilterBank = value;
 }
 
+void CAN_Communication::setIdFilter(uint32_t id1) {
+    setIdFilter(id1, id1);
+}
+
+void CAN_Communication::setIdFilter(uint32_t id1, uint32_t id2) {
+    setIdFilter(id1, id2, id2);
+}
+
+void CAN_Communication::setIdFilter(uint32_t id1, uint32_t id2, uint32_t id3) {
+    setIdFilter(id1, id2, id3, id3);
+}
+
 void CAN_Communication::setIdFilter(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
@@ -60,6 +72,10 @@ void CAN_Communication::setIdFilter(uint32_t id1, uint32_t id2, uint32_t id3, ui
     filterConfig.FilterIdLow = id2 << 5;
     filterConfig.FilterMaskIdHigh = id3 << 5;
     filterConfig.FilterMaskIdLow = id4 << 5;
+}
+
+void CAN_Communication::setIdFilter(IdentifierType type1, uint32_t id1) {
+    setIdFilter(type1, id1, type1, id1);
 }
 
 void CAN_Communication::setIdFilter(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2) {
@@ -74,6 +90,10 @@ void CAN_Communication::setIdFilter(IdentifierType type1, uint32_t id1, Identifi
     filterConfig.FilterIdLow = filterId;
     filterConfig.FilterMaskIdHigh = filterMask >> 16;
     filterConfig.FilterMaskIdLow = filterMask;
+}
+
+void CAN_Communication::setIdMaskFilter(uint32_t id1, uint32_t mask1) {
+    setIdMaskFilter(id1, mask1, id1, mask1);
 }
 
 void CAN_Communication::setIdMaskFilter(uint32_t id1, uint32_t mask1, uint32_t id2, uint32_t mask2) {
@@ -99,6 +119,10 @@ void CAN_Communication::setIdMaskFilter(IdentifierType type, uint32_t id, uint32
     filterConfig.FilterIdLow = filterId;
     filterConfig.FilterMaskIdHigh = filterMask >> 16;
     filterConfig.FilterMaskIdLow = filterMask;
+}
+
+void CAN_Communication::setIdRangeFilter(uint32_t minId1, uint32_t maxId1) {
+    setIdRangeFilter(minId1, maxId1, minId1, maxId1);
 }
 
 void CAN_Communication::setIdRangeFilter(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2) {
