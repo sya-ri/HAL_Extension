@@ -5,7 +5,6 @@
 
 #include "can.h"
 #include <array>
-#include "can_class_setting_status.hpp"
 
 namespace halex {
 
@@ -37,12 +36,12 @@ public:
     void setStoreRxFifo(uint32_t rxFifo);
 
     // standard id only
-    CAN_ClassSettingStatus setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4);
-    CAN_ClassSettingStatus setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2);
+    void setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4);
+    void setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2);
 
     // standard id and extend id
-    CAN_ClassSettingStatus setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2);
-    CAN_ClassSettingStatus setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId);
+    void setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2);
+    void setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId);
 
     HAL_StatusTypeDef setFilterConfig();
 
