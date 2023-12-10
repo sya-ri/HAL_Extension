@@ -58,7 +58,7 @@ public:
     uint32_t getRxId();
     uint32_t getRxDataLength();
 
-    CAN_StatusType abortTransmit(uint32_t txMailBox);
+    HAL_StatusTypeDef abortTransmit(uint32_t txMailBox);
 
     HAL_CAN_StateTypeDef getState();
     uint32_t getFilterId(uint8_t idNum);

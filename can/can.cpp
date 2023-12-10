@@ -231,11 +231,11 @@ uint32_t Can::getRxDataLength() {
     return rxHeader.DLC;
 }
 
-CAN_StatusType Can::abortTransmit(uint32_t txMailBox) {
+HAL_StatusTypeDef Can::abortTransmit(uint32_t txMailBox) {
     if (HAL_CAN_IsTxMessagePending(hcan, txMailBox) != 1) {
-        return CAN_StatusType::CAN_Tx_Not_Pending;
+        return HAL_StatusTypeDef::HAL_OK;
     }
-    return static_cast<CAN_StatusType>(HAL_CAN_AbortTxRequest(hcan, txMailBox));
+    return HAL_CAN_AbortTxRequest(hcan, txMailBox);
 }
 
 HAL_CAN_StateTypeDef Can::getState() {
