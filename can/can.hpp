@@ -3,7 +3,6 @@
 
 #if __has_include("can.h")
 
-#include "main.h"
 #include "can.h"
 #include <array>
 #include "can_class_setting_status.hpp"
