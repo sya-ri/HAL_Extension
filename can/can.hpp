@@ -29,7 +29,7 @@ private:
 
 public:
     Can(CAN_HandleTypeDef *hcan);
-    CAN_StatusType init();
+    CAN_StatusType setup();
 
     void setFilterActivationState(uint32_t state);
     void setFilterMode(CAN_FilterMode filterMode);

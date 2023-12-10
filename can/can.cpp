@@ -8,7 +8,7 @@ Can::Can(CAN_HandleTypeDef *hcan) : hcan(hcan) {
 
 }
 
-CAN_StatusType Can::init() {
+CAN_StatusType Can::setup() {
     if (HAL_CAN_Init(hcan) != HAL_OK) {
         return CAN_StatusType::CAN_Fail_Init;
     }
