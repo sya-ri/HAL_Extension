@@ -51,7 +51,7 @@ void CAN_Communication::setSlaveStartFilterBank(uint32_t value) {
     filterConfig.SlaveStartFilterBank = value;
 }
 
-void CAN_Communication::setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4) {
+void CAN_Communication::setIdFilter(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
     filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
@@ -62,19 +62,7 @@ void CAN_Communication::setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t i
     filterConfig.FilterMaskIdLow = id4 << 5;
 }
 
-void CAN_Communication::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2) {
-    filterConfig.FilterActivation = CAN_FILTER_ENABLE;
-    filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
-    filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
-
-    uint32_t mask21bit = 0b111111111111111111111;
-    filterConfig.FilterIdHigh = minId1 << 5;
-    filterConfig.FilterIdLow = minId2 << 5;
-    filterConfig.FilterMaskIdHigh = ((~(minId1 ^ maxId1)) & mask21bit) << 5;
-    filterConfig.FilterMaskIdLow = ((~(minId2 ^ maxId2)) & mask21bit) << 5;
-}
-
-void CAN_Communication::setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2) {
+void CAN_Communication::setIdFilter(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
@@ -88,7 +76,19 @@ void CAN_Communication::setTwoTypePathId(IdentifierType type1, uint32_t id1, Ide
     filterConfig.FilterMaskIdLow = filterMask;
 }
 
-void CAN_Communication::setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId) {
+void CAN_Communication::setIdMaskFilter(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2) {
+    filterConfig.FilterActivation = CAN_FILTER_ENABLE;
+    filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+    filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
+
+    uint32_t mask21bit = 0b111111111111111111111;
+    filterConfig.FilterIdHigh = minId1 << 5;
+    filterConfig.FilterIdLow = minId2 << 5;
+    filterConfig.FilterMaskIdHigh = ((~(minId1 ^ maxId1)) & mask21bit) << 5;
+    filterConfig.FilterMaskIdLow = ((~(minId2 ^ maxId2)) & mask21bit) << 5;
+}
+
+void CAN_Communication::setIdMaskFilter(IdentifierType type, uint32_t minId, uint32_t maxId) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;

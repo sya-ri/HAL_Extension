@@ -42,11 +42,14 @@ public:
     void setFilterFIFOAssignment(uint32_t value);
     void setFilterBank(uint32_t value);
     void setSlaveStartFilterBank(uint32_t value);
-    void setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4);
-    void setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2);
-    void setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2);
-    void setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId);
+
+    // any one
+    void setIdFilter(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4);
+    void setIdFilter(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2);
+    void setIdMaskFilter(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2);
+    void setIdMaskFilter(IdentifierType type, uint32_t minId, uint32_t maxId);
     void disableFilter();
+
     HAL_StatusTypeDef applyFilterConfig();
 
     // Transmit
