@@ -61,23 +61,13 @@ void CAN_Communication::setTwoTypePathId(IdentifierType type1, uint32_t id1, Ide
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 
-    if (type1 == IdentifierType::Standard) {
-        filterId[0] = id1 << 21;
-    } else {
-        filterId[0] = (id1 << 3) | 0x4;
-    }
+    uint32_t filterId = type1 == IdentifierType::Standard ? id1 << 21 : (id1 << 3) | 0x4;
+    uint32_t filterMask = type2 == IdentifierType::Standard ? id2 << 21 : (id2 << 3) | 0x4;
 
-    if (type2 == IdentifierType::Standard) {
-        filterId[1] = id2 << 21;
-    } else {
-        filterId[1] = (id2 << 3) | 0x4;
-    }
-
-    filterConfig.FilterIdHigh = filterId[0] >> 16;
-    filterConfig.FilterIdLow = filterId[0];
-
-    filterConfig.FilterMaskIdHigh = filterId[1] >> 16;
-    filterConfig.FilterMaskIdLow = filterId[1];
+    filterConfig.FilterIdHigh = filterId >> 16;
+    filterConfig.FilterIdLow = filterId;
+    filterConfig.FilterMaskIdHigh = filterMask >> 16;
+    filterConfig.FilterMaskIdLow = filterMask;
 }
 
 void CAN_Communication::setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId) {
