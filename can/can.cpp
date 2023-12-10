@@ -40,25 +40,15 @@ CAN_ClassSettingStatus Can::setFourTypePathId(uint32_t id1, uint32_t id2, uint32
     return CAN_ClassSettingStatus::NON_ERROR;
 }
 
-CAN_ClassSettingStatus Can::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1,　uint32_t minId2, uint32_t maxId2) {
+CAN_ClassSettingStatus Can::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2) {
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 
-    filterId[0] = minId1;
-    minId1 <<= 21;
-    maxId1 <<= 21;
-    filterMask[0] = ((~(minId1 ^ maxId1)) >> 21);
-
-    filterId[1] = minId2;
-    minId2 <<= 21;
-    maxId2 <<= 21;
-    filterMask[1] = ((~(minId2 ^ maxId2)) >> 21);
-
-    filterConfig.FilterIdHigh = filterId[0] << 5;
-    filterConfig.FilterIdLow = filterId[1] << 5;
-
-    filterConfig.FilterMaskIdHigh = filterMask[0] << 5;
-    filterConfig.FilterMaskIdLow = filterMask[1] << 5;
+    uint32_t mask21bit = 0b111111111111111111111;
+    filterConfig.FilterIdHigh = minId1 << 5;
+    filterConfig.FilterIdLow = minId2 << 5;
+    filterConfig.FilterMaskIdHigh = ((~(minId1 ^ maxId1)) & mask21bit) << 5;
+    filterConfig.FilterMaskIdLow = ((~(minId2 ^ maxId2)) & mask21bit) << 5;
 
     return CAN_ClassSettingStatus::NON_ERROR;
 }
