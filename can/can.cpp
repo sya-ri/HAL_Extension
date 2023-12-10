@@ -32,15 +32,10 @@ CAN_ClassSettingStatus Can::setFourTypePathId(uint32_t id1, uint32_t id2, uint32
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
     filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 
-    filterId[0] = id1;
-    filterId[1] = id2;
-    filterId[2] = id3;
-    filterId[3] = id4;
-
-    filterConfig.FilterIdHigh = filterId[0] << 5;
-    filterConfig.FilterIdLow = filterId[1] << 5;
-    filterConfig.FilterMaskIdHigh = filterId[2] << 5;
-    filterConfig.FilterMaskIdLow = filterId[3] << 5;
+    filterConfig.FilterIdHigh = id1 << 5;
+    filterConfig.FilterIdLow = id2 << 5;
+    filterConfig.FilterMaskIdHigh = id3 << 5;
+    filterConfig.FilterMaskIdLow = id4 << 5;
 
     return CAN_ClassSettingStatus::NON_ERROR;
 }
