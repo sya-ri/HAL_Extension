@@ -46,7 +46,7 @@ public:
     void setId(IdentifierType type, uint32_t id);
     void setDataFrame(uint32_t dataFrameType);
 
-    bool isMailBoxPending(uint32_t txMailbox);
+    bool isTxMessagePending(uint32_t txMailbox);
     HAL_StatusTypeDef transmit(uint8_t dataLength, uint8_t txData[]);
     uint32_t getUsedTxMailbox();
 

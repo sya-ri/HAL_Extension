@@ -108,11 +108,8 @@ void CAN_Communication::setDataFrame(uint32_t dataFrameType) {
     txHeader.RTR = dataFrameType;
 }
 
-bool CAN_Communication::isMailBoxPending(uint32_t txMailbox) {
-    if (HAL_CAN_IsTxMessagePending(hcan, txMailbox) != 0) {
-        return true;
-    }
-    return false;
+bool CAN_Communication::isTxMessagePending(uint32_t txMailbox) {
+    return HAL_CAN_IsTxMessagePending(hcan, txMailbox) != 0;
 }
 
 HAL_StatusTypeDef CAN_Communication::transmit(uint8_t dataLength, uint8_t txData[]) {
@@ -148,10 +145,10 @@ uint32_t CAN_Communication::getRxDataLength() {
 }
 
 HAL_StatusTypeDef CAN_Communication::abortTransmit(uint32_t txMailBox) {
-    if (HAL_CAN_IsTxMessagePending(hcan, txMailBox) != 1) {
-        return HAL_StatusTypeDef::HAL_OK;
+    if (isMailBoxPending(txMailBox)) {
+        return HAL_CAN_AbortTxRequest(hcan, txMailBox);
     }
-    return HAL_CAN_AbortTxRequest(hcan, txMailBox);
+    return HAL_StatusTypeDef::HAL_OK;
 }
 
 HAL_CAN_StateTypeDef CAN_Communication::getState() {
