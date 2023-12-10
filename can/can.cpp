@@ -45,9 +45,7 @@ CAN_ClassSettingStatus Can::setFourTypePathId(uint32_t id1, uint32_t id2, uint32
     return CAN_ClassSettingStatus::NON_ERROR;
 }
 
-CAN_ClassSettingStatus Can::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1,
-
-uint32_t minId2, uint32_t maxId2) {
+CAN_ClassSettingStatus Can::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1,　uint32_t minId2, uint32_t maxId2) {
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 
