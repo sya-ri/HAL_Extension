@@ -19,42 +19,6 @@ void Can::setFilterActivationState(uint32_t state) {
     filterConfig.FilterActivation = state;
 }
 
-void Can::setFilterMode(CAN_FilterMode filterMode) {
-    this->filterMode = filterMode;
-
-    switch (this->filterMode) {
-        case CAN_FilterMode::PATH_ONE_TYPE_STD_OR_EXT_ID_GROUP:
-            filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
-            filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
-            break;
-
-        case CAN_FilterMode::PATH_TWO_TYPE_STD_OR_EXT_ID:
-            filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
-            filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
-            break;
-
-        case CAN_FilterMode::PATH_TWO_TYPE_STD_ID_GROUP:
-            filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
-            filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
-            break;
-
-        case CAN_FilterMode::PATH_FOUR_TYPE_STD_ID:
-
-            filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
-            filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
-            break;
-
-        case CAN_FilterMode::PATH_ALL_ID:
-            filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
-            filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
-            filterConfig.FilterIdHigh = 0x0000;
-            filterConfig.FilterIdLow = 0x0000;
-            filterConfig.FilterMaskIdHigh = 0x0000;
-            filterConfig.FilterMaskIdLow = 0x0000;
-            break;
-    }
-}
-
 void Can::setFilterBank(uint32_t CAN2_filterBankNumber) {
     filterConfig.FilterBank = 0;
     filterConfig.SlaveStartFilterBank = CAN2_filterBankNumber;
@@ -65,13 +29,8 @@ void Can::setStoreRxFifo(uint32_t rxFifo) {
 }
 
 CAN_ClassSettingStatus Can::setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4) {
-    if ((filterMode != CAN_FilterMode::PATH_ALL_ID) && (filterMode != CAN_FilterMode::PATH_FOUR_TYPE_STD_ID)) {
-
-        return CAN_ClassSettingStatus::WRONG_SET_PATH_ID_FUNCTION_USED;
-    } else if (filterMode == CAN_FilterMode::PATH_ALL_ID) {
-
-        return CAN_ClassSettingStatus::ALL_ID_PATH;
-    }
+    filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
+    filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 
     filterId[0] = id1;
     filterId[1] = id2;
@@ -89,11 +48,8 @@ CAN_ClassSettingStatus Can::setFourTypePathId(uint32_t id1, uint32_t id2, uint32
 CAN_ClassSettingStatus Can::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1,
 
 uint32_t minId2, uint32_t maxId2) {
-    if ((filterMode != CAN_FilterMode::PATH_ALL_ID) && (filterMode != CAN_FilterMode::PATH_TWO_TYPE_STD_ID_GROUP)) {
-        return CAN_ClassSettingStatus::WRONG_SET_PATH_ID_FUNCTION_USED;
-    } else if (filterMode == CAN_FilterMode::PATH_ALL_ID) {
-        return CAN_ClassSettingStatus::ALL_ID_PATH;
-    }
+    filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+    filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 
     filterId[0] = minId1;
     minId1 <<= 21;
@@ -115,11 +71,8 @@ uint32_t minId2, uint32_t maxId2) {
 }
 
 CAN_ClassSettingStatus Can::setTwoTypePathId(uint32_t idType1, uint32_t id1, uint32_t idType2, uint32_t id2) {
-    if ((filterMode != CAN_FilterMode::PATH_ALL_ID) && (filterMode != CAN_FilterMode::PATH_TWO_TYPE_STD_OR_EXT_ID)) {
-        return CAN_ClassSettingStatus::WRONG_SET_PATH_ID_FUNCTION_USED;
-    } else if (filterMode == CAN_FilterMode::PATH_ALL_ID) {
-        return CAN_ClassSettingStatus::ALL_ID_PATH;
-    }
+    filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
+    filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 
     if (idType1 == CAN_ID_STD) {
         filterId[0] = id1 << 21;
@@ -143,11 +96,8 @@ CAN_ClassSettingStatus Can::setTwoTypePathId(uint32_t idType1, uint32_t id1, uin
 }
 
 CAN_ClassSettingStatus Can::setOneTypePathIdGroup(uint32_t idType, uint32_t minId, uint32_t maxId) {
-    if ((filterMode != CAN_FilterMode::PATH_ALL_ID) && (filterMode != CAN_FilterMode::PATH_ONE_TYPE_STD_OR_EXT_ID_GROUP)) {
-        return CAN_ClassSettingStatus::WRONG_SET_PATH_ID_FUNCTION_USED;
-    } else if (filterMode == CAN_FilterMode::PATH_ALL_ID) {
-        return CAN_ClassSettingStatus::ALL_ID_PATH;
-    }
+    filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+    filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 
     std::array<uint8_t, 2> bitShift;
     if (idType == CAN_ID_STD) {

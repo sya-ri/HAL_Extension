@@ -7,7 +7,6 @@
 #include "can.h"
 #include <array>
 #include "can_status_type.hpp"
-#include "can_filter_mode.hpp"
 #include "can_class_setting_status.hpp"
 
 namespace halex {
@@ -16,7 +15,6 @@ class Can {
 private:
     CAN_HandleTypeDef *hcan;
 
-    CAN_FilterMode filterMode;
     CAN_FilterTypeDef filterConfig;
 
     CAN_RxHeaderTypeDef rxHeader;
@@ -32,7 +30,6 @@ public:
     CAN_StatusType setup();
 
     void setFilterActivationState(uint32_t state);
-    void setFilterMode(CAN_FilterMode filterMode);
     void setFilterBank(uint32_t CAN2_filterBankNumber);
     void setStoreRxFifo(uint32_t rxFifo);
 
