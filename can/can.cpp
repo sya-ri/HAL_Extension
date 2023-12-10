@@ -15,8 +15,8 @@ CAN_StatusType Can::setup() {
     return static_cast<CAN_StatusType>(HAL_CAN_Start(hcan));
 }
 
-void Can::setFilterActivationState(uint32_t state) {
-    filterConfig.FilterActivation = state;
+void Can::disableFilter() {
+    filterConfig.FilterActivation = CAN_FILTER_DISABLE;
 }
 
 void Can::setFilterBank(uint32_t CAN2_filterBankNumber) {
@@ -29,6 +29,7 @@ void Can::setStoreRxFifo(uint32_t rxFifo) {
 }
 
 CAN_ClassSettingStatus Can::setFourTypePathId(uint32_t id1, uint32_t id2, uint32_t id3, uint32_t id4) {
+    filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
     filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 
@@ -41,6 +42,7 @@ CAN_ClassSettingStatus Can::setFourTypePathId(uint32_t id1, uint32_t id2, uint32
 }
 
 CAN_ClassSettingStatus Can::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxId1, uint32_t minId2, uint32_t maxId2) {
+    filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_16BIT;
 
@@ -54,6 +56,7 @@ CAN_ClassSettingStatus Can::setTwoTypePathIdGroup(uint32_t minId1, uint32_t maxI
 }
 
 CAN_ClassSettingStatus Can::setTwoTypePathId(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2) {
+    filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 
@@ -79,6 +82,7 @@ CAN_ClassSettingStatus Can::setTwoTypePathId(IdentifierType type1, uint32_t id1,
 }
 
 CAN_ClassSettingStatus Can::setOneTypePathIdGroup(IdentifierType type, uint32_t minId, uint32_t maxId) {
+    filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 

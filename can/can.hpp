@@ -32,9 +32,9 @@ public:
     };
 
     Can(CAN_HandleTypeDef *hcan);
-    CAN_StatusType setup();
 
-    void setFilterActivationState(uint32_t state);
+    CAN_StatusType setup();
+    void disableFilter();
     void setFilterBank(uint32_t CAN2_filterBankNumber);
     void setStoreRxFifo(uint32_t rxFifo);
 
