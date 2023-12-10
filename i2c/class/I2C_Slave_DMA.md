@@ -8,7 +8,6 @@
 - [関数](#関数)
   - [init()](#i2c_slave_dmainit)
   - [init(uint8_t)](#i2c_slave_dmainituint8_t)
-  - [init(DIPSwitch)](#i2c_slave_dmainitdipswitch)
   - [startTransmit()](#i2c_slave_dmastarttransmit)
   - [startReceive()](#i2c_slave_dmastartreceive)
   - [setTxCallback(std::function<void()>)](#i2c_slave_dmasettxcallbackstdfunctionvoid)
@@ -76,20 +75,6 @@ T: 送受信するデータ型
 > ```c++
 > // 例
 > slave.init(0x01);
-> ```
-
-##### I2C_Slave_DMA::init(DIPSwitch)
-> ```c++
-> #ifndef CONFIG_DISABLE_MODULE_GPIO
-> void init(
->     DIPSwitch builder
-> ) noexcept;
-> #endif // CONFIG_DISABLE_MODULE_GPIO
-> ```
-> 自局アドレスを上書きし、再初期化します  
-> ```c++
-> // 例
-> slave.init(dip);
 > ```
 
 ##### I2C_Slave_DMA::startTransmit()

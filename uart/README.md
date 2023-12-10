@@ -1,11 +1,5 @@
 # UART
 
-## コンフィグ
-
-> #### CONFIG_DISABLE_MODULE_UART
-> UART モジュールの無効化  
-> 定義することでコンパイルされなくなります
-
 ## 関数
 - [Transmit](function/README.md#transmit)
   - [uartTransmit](function/README.md#uarttransmit)

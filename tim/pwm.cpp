@@ -1,5 +1,3 @@
-#ifndef CONFIG_DISABLE_MODULE_TIM
-
 #include "tim/pwm.hpp"
 
 namespace halex {
@@ -36,5 +34,3 @@ uint32_t PWM::getCounterPeriod() const noexcept {
 }
 
 } // namespace halex
-
-#endif // CONFIG_DISABLE_MODULE_TIM

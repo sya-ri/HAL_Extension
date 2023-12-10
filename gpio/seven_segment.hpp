@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_GPIO_SEVEN_SEGMENT_HPP
 #define HAL_EXTENSION_GPIO_SEVEN_SEGMENT_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_GPIO
+#if __has_include("gpio.h")
 
 #include <vector>
 #include "gpio.hpp"
@@ -26,6 +26,6 @@ public:
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_GPIO
+#endif // __has_include
 
 #endif // HAL_EXTENSION_GPIO_SEVEN_SEGMENT_HPP

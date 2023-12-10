@@ -1,10 +1,5 @@
 # TIM
 
-## コンフィグ
-> #### CONFIG_DISABLE_MODULE_TIM
-> TIM モジュールの無効化  
-> 定義することでコンパイルされなくなります
-
 ## 関数
 - [Callback](function/README.md#callback)
   - [setTIMPeriodElapsedCallback](function/README.md#settimperiodelapsedcallback)

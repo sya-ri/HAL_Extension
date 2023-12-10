@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_ADC_DMA_HPP
 #define HAL_EXTENSION_ADC_DMA_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_ADC
+#if __has_include("adc.h")
 
 #include "adc.h"
 #include <functional>
@@ -27,6 +27,6 @@ public:
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_ADC
+#endif // __has_include
 
 #endif // HAL_EXTENSION_ADC_DMA_HPP

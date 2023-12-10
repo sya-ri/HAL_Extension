@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_IWDG_MANAGER_HPP
 #define HAL_EXTENSION_IWDG_MANAGER_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_IWDG
+#if __has_include("iwdg.h")
 
 #include "iwdg.h"
 #include <array>
@@ -117,6 +117,6 @@ public:
 
 } // namespace halex
 
-#endif // CONFIG_DISABLE_MODULE_IWDG
+#endif // __has_include
 
 #endif // HAL_EXTENSION_IWDG_MANAGER_HPP
