@@ -1,7 +1,7 @@
 #ifndef HAL_EXTENSION_CAN_HPP
 #define HAL_EXTENSION_CAN_HPP
 
-#ifndef CONFIG_DISABLE_MODULE_CAN
+#if __has_include("can.h")
 
 #include "main.h"
 #include "can.h"
@@ -67,6 +67,6 @@ public:
 
 } // namespace halex
 
-#endif /* CONFIG_DISABLE_MODULE_CAN */
+#endif // __has_include
 
-#endif /* HAL_EXTENSION_CAN_HPP */
+#endif // HAL_EXTENSION_CAN_HPP

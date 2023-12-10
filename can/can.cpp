@@ -1,4 +1,4 @@
-#ifndef CONFIG_DISABLE_MODULE_CAN
+#if __has_include("can.h")
 
 #include "can.hpp"
 
@@ -252,4 +252,4 @@ uint32_t Can::getMaskId(uint8_t maskNum) {
 
 } // namespace halex
 
-#endif /* CONFIG_DISABLE_MODULE_CAN */
+#endif // __has_include
