@@ -6,7 +6,7 @@
 #include "can.h"
 #include "can_identifier_type.hpp"
 #include "can_receive_data.hpp"
-#include "can_remote_transmission_request.hpp"
+#include "can_transmit_message.hpp"
 #include "can_transmit_result.hpp"
 
 namespace halex {
@@ -15,7 +15,6 @@ class CAN_Communication {
 private:
     CAN_HandleTypeDef *hcan;
     CAN_FilterTypeDef filterConfig;
-    CAN_TxHeaderTypeDef txHeader;
 public:
     CAN_Communication(CAN_HandleTypeDef *hcan);
     CAN_Communication(CAN_HandleTypeDef &hcan);
@@ -23,11 +22,6 @@ public:
     // Setup
     HAL_StatusTypeDef init();
     HAL_StatusTypeDef start();
-
-    // Transmit config
-    void setId(uint32_t id);
-    void setId(CAN_IdentifierType type, uint32_t id);
-    void setRemoteTransmissionRequest(CAN_RemoteTransmissionRequest value);
 
     // Filter config
     void setFilterFIFOAssignment(uint32_t value);
@@ -52,7 +46,7 @@ public:
     HAL_StatusTypeDef applyFilterConfig();
 
     // Transmit & Receive
-    HAL_StatusTypeDef transmit(uint8_t data[], uint8_t dataLength, CAN_TransmitResult &result);
+    HAL_StatusTypeDef transmit(CAN_TransmitMessage &message, CAN_TransmitResult &result);
     HAL_StatusTypeDef receive(uint32_t rxFifo, CAN_ReceiveData &data);
 };
 

@@ -21,24 +21,6 @@ HAL_StatusTypeDef CAN_Communication::start() {
     return HAL_CAN_Start(hcan);
 }
 
-void CAN_Communication::setId(uint32_t id) {
-    setId(CAN_IdentifierType::Standard, id);
-}
-
-void CAN_Communication::setId(CAN_IdentifierType type, uint32_t id) {
-    txHeader.IDE = static_cast<uint32_t>(type);
-
-    if (type == CAN_IdentifierType::Standard) {
-        txHeader.StdId = id;
-    } else {
-        txHeader.ExtId = id;
-    }
-}
-
-void CAN_Communication::setRemoteTransmissionRequest(CAN_RemoteTransmissionRequest value) {
-    txHeader.RTR = static_cast<uint32_t>(value);
-}
-
 void CAN_Communication::setFilterFIFOAssignment(uint32_t value) {
     filterConfig.FilterFIFOAssignment = value;
 }
@@ -143,10 +125,9 @@ HAL_StatusTypeDef CAN_Communication::applyFilterConfig() {
     return HAL_CAN_ConfigFilter(hcan, &filterConfig);
 }
 
-HAL_StatusTypeDef CAN_Communication::transmit(uint8_t data[], uint8_t dataLength, CAN_TransmitResult &result) {
-    txHeader.DLC = dataLength;
+HAL_StatusTypeDef CAN_Communication::transmit(CAN_TransmitMessage &message, CAN_TransmitResult &result) {
     result.setInstance(hcan);
-    return HAL_CAN_AddTxMessage(hcan, &txHeader, data, result.getMailBox());
+    return HAL_CAN_AddTxMessage(hcan, message.getHeader(), message.getData(), result.getMailBox());
 }
 
 HAL_StatusTypeDef CAN_Communication::receive(uint32_t rxFifo, CAN_ReceiveData &data) {
