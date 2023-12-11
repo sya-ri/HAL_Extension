@@ -143,9 +143,9 @@ HAL_StatusTypeDef CAN_Communication::applyFilterConfig() {
     return HAL_CAN_ConfigFilter(hcan, &filterConfig);
 }
 
-HAL_StatusTypeDef CAN_Communication::transmit(uint8_t dataLength, uint8_t txData[]) {
+HAL_StatusTypeDef CAN_Communication::transmit(uint8_t data[], uint8_t dataLength) {
     txHeader.DLC = dataLength;
-    return HAL_CAN_AddTxMessage(hcan, &txHeader, txData, &usedTxMailbox);
+    return HAL_CAN_AddTxMessage(hcan, &txHeader, data, &usedTxMailbox);
 }
 
 HAL_StatusTypeDef CAN_Communication::abortTransmit(uint32_t txMailBox) {
@@ -163,11 +163,11 @@ uint32_t CAN_Communication::getUsedTxMailbox() {
     return usedTxMailbox;
 }
 
-HAL_StatusTypeDef CAN_Communication::receive(uint32_t rxFifo, uint8_t rxData[]) {
+HAL_StatusTypeDef CAN_Communication::receive(uint32_t rxFifo, uint8_t data[]) {
     if (HAL_CAN_GetRxFifoFillLevel(hcan, rxFifo) == 0) {
         return HAL_StatusTypeDef::HAL_OK;
     }
-    return HAL_CAN_GetRxMessage(hcan, rxFifo, &rxHeader, rxData);
+    return HAL_CAN_GetRxMessage(hcan, rxFifo, &rxHeader, data);
 }
 
 uint32_t CAN_Communication::getRxIdType() {

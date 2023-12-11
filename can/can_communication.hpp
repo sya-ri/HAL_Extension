@@ -61,13 +61,13 @@ public:
     HAL_StatusTypeDef applyFilterConfig();
 
     // Transmit
-    HAL_StatusTypeDef transmit(uint8_t dataLength, uint8_t txData[]);
+    HAL_StatusTypeDef transmit(uint8_t data[], uint8_t dataLength);
     HAL_StatusTypeDef abortTransmit(uint32_t txMailBox);
     bool isTxMessagePending(uint32_t txMailbox);
     uint32_t getUsedTxMailbox();
 
     // Receive
-    HAL_StatusTypeDef receive(uint32_t rxFifo, uint8_t rxData[]);
+    HAL_StatusTypeDef receive(uint32_t rxFifo, uint8_t data[]);
     uint32_t getRxIdType();
     uint32_t getRxId();
     uint32_t getRxDataLength();
