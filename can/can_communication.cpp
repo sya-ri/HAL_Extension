@@ -130,11 +130,11 @@ HAL_StatusTypeDef CAN_Communication::transmit(CAN_TransmitMessage &message, CAN_
     return HAL_CAN_AddTxMessage(hcan, message.getHeader(), message.getData(), result.getMailBox());
 }
 
-HAL_StatusTypeDef CAN_Communication::receive(uint32_t rxFifo, CAN_ReceiveData &data) {
+HAL_StatusTypeDef CAN_Communication::receive(uint32_t rxFifo, CAN_ReceiveMessage &message) {
     if (HAL_CAN_GetRxFifoFillLevel(hcan, rxFifo) == 0) {
         return HAL_StatusTypeDef::HAL_OK;
     }
-    return HAL_CAN_GetRxMessage(hcan, rxFifo, data.getHeader(), data.get());
+    return HAL_CAN_GetRxMessage(hcan, rxFifo, message.getHeader(), message.getData());
 }
 
 } // namespace halex

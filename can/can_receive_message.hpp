@@ -9,7 +9,7 @@
 
 namespace halex {
 
-class CAN_ReceiveData {
+class CAN_ReceiveMessage {
 private:
     CAN_RxHeaderTypeDef header = {};
 	uint8_t data[8] = {};
@@ -19,7 +19,7 @@ public:
 	CAN_IdentifierType getType();
 	CAN_RemoteTransmissionRequest getRemoteTransmissionRequest();
 	uint32_t getLength();
-	uint8_t* get();
+	uint8_t* getData();
 };
 
 } // namespace halex
