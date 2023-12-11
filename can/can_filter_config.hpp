@@ -11,7 +11,7 @@ namespace halex {
 
 class CAN_FilterConfig {
 private:
-    CAN_FilterTypeDef config;
+    CAN_FilterTypeDef config = {};
 public:
     void setFilterFIFOAssignment(uint32_t value);
     void setFilterBank(uint32_t value);
