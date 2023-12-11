@@ -22,20 +22,20 @@ HAL_StatusTypeDef CAN_Communication::start() {
 }
 
 void CAN_Communication::setId(uint32_t id) {
-    setId(IdentifierType::Standard, id);
+    setId(CAN_IdentifierType::Standard, id);
 }
 
-void CAN_Communication::setId(IdentifierType type, uint32_t id) {
+void CAN_Communication::setId(CAN_IdentifierType type, uint32_t id) {
     txHeader.IDE = static_cast<uint32_t>(type);
 
-    if (type == IdentifierType::Standard) {
+    if (type == CAN_IdentifierType::Standard) {
         txHeader.StdId = id;
     } else {
         txHeader.ExtId = id;
     }
 }
 
-void CAN_Communication::setRemoteTransmissionRequest(RemoteTransmissionRequest value) {
+void CAN_Communication::setRemoteTransmissionRequest(CAN_RemoteTransmissionRequest value) {
     txHeader.RTR = static_cast<uint32_t>(value);
 }
 
@@ -74,17 +74,17 @@ void CAN_Communication::setIdFilter(uint32_t id1, uint32_t id2, uint32_t id3, ui
     filterConfig.FilterMaskIdLow = id4 << 5;
 }
 
-void CAN_Communication::setIdFilter(IdentifierType type1, uint32_t id1) {
+void CAN_Communication::setIdFilter(CAN_IdentifierType type1, uint32_t id1) {
     setIdFilter(type1, id1, type1, id1);
 }
 
-void CAN_Communication::setIdFilter(IdentifierType type1, uint32_t id1, IdentifierType type2, uint32_t id2) {
+void CAN_Communication::setIdFilter(CAN_IdentifierType type1, uint32_t id1, CAN_IdentifierType type2, uint32_t id2) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDLIST;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 
-    uint32_t filterId = type1 == IdentifierType::Standard ? id1 << 21 : (id1 << 3) | 0x4;
-    uint32_t filterMask = type2 == IdentifierType::Standard ? id2 << 21 : (id2 << 3) | 0x4;
+    uint32_t filterId = type1 == CAN_IdentifierType::Standard ? id1 << 21 : (id1 << 3) | 0x4;
+    uint32_t filterMask = type2 == CAN_IdentifierType::Standard ? id2 << 21 : (id2 << 3) | 0x4;
 
     filterConfig.FilterIdHigh = filterId >> 16;
     filterConfig.FilterIdLow = filterId;
@@ -107,13 +107,13 @@ void CAN_Communication::setIdMaskFilter(uint32_t id1, uint32_t mask1, uint32_t i
     filterConfig.FilterMaskIdLow = mask2 << 5;
 }
 
-void CAN_Communication::setIdMaskFilter(IdentifierType type, uint32_t id, uint32_t mask) {
+void CAN_Communication::setIdMaskFilter(CAN_IdentifierType type, uint32_t id, uint32_t mask) {
     filterConfig.FilterActivation = CAN_FILTER_ENABLE;
     filterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     filterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
 
-    uint32_t filterId = type == IdentifierType::Standard ? id << 21 : (id << 3) | 0x4;
-    uint32_t filterMask = type == IdentifierType::Standard ? mask << 21 : (mask << 3) | 0x4;
+    uint32_t filterId = type == CAN_IdentifierType::Standard ? id << 21 : (id << 3) | 0x4;
+    uint32_t filterMask = type == CAN_IdentifierType::Standard ? mask << 21 : (mask << 3) | 0x4;
 
     filterConfig.FilterIdHigh = filterId >> 16;
     filterConfig.FilterIdLow = filterId;
@@ -130,7 +130,7 @@ void CAN_Communication::setIdRangeFilter(uint32_t minId1, uint32_t maxId1, uint3
     setIdMaskFilter(minId1, (~(minId1 ^ maxId1)) & mask21bit, minId2, (~(minId2 ^ maxId2)) & mask21bit);
 }
 
-void CAN_Communication::setIdRangeFilter(IdentifierType type, uint32_t minId, uint32_t maxId) {
+void CAN_Communication::setIdRangeFilter(CAN_IdentifierType type, uint32_t minId, uint32_t maxId) {
     uint32_t mask21bit = 0b111111111111111111111;
     setIdMaskFilter(type, minId, (~(minId ^ maxId)) & mask21bit);
 }
@@ -163,31 +163,11 @@ uint32_t CAN_Communication::getUsedTxMailbox() {
     return usedTxMailbox;
 }
 
-HAL_StatusTypeDef CAN_Communication::receive(uint32_t rxFifo, uint8_t data[]) {
+HAL_StatusTypeDef CAN_Communication::receive(uint32_t rxFifo, CAN_ReceiveData &data) {
     if (HAL_CAN_GetRxFifoFillLevel(hcan, rxFifo) == 0) {
         return HAL_StatusTypeDef::HAL_OK;
     }
-    return HAL_CAN_GetRxMessage(hcan, rxFifo, &rxHeader, data);
-}
-
-uint32_t CAN_Communication::getRxIdType() {
-    return rxHeader.IDE;
-}
-
-uint32_t CAN_Communication::getRxId() {
-    if (rxHeader.IDE == CAN_ID_STD) {
-        return rxHeader.StdId;
-    } else {
-        return rxHeader.ExtId;
-    }
-}
-
-uint32_t CAN_Communication::getRxDataLength() {
-    return rxHeader.DLC;
-}
-
-HAL_CAN_StateTypeDef CAN_Communication::getState() {
-    return hcan->State;
+    return HAL_CAN_GetRxMessage(hcan, rxFifo, data.getHeader(), data.get());
 }
 
 } // namespace halex
