@@ -12,6 +12,10 @@ uint32_t CAN_ReceiveMessage::getId() {
 	return getType() == CAN_IdentifierType::Standard ? header.StdId : header.ExtId;
 }
 
+CAN_IdentifierType CAN_ReceiveMessage::getType() {
+	return static_cast<CAN_IdentifierType>(header.IDE);
+}
+
 CAN_RemoteTransmissionRequest CAN_ReceiveMessage::getRemoteTransmissionRequest() {
 	return static_cast<CAN_RemoteTransmissionRequest>(header.RTR);
 }
