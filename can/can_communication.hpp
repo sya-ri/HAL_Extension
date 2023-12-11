@@ -20,6 +20,8 @@ public:
     HAL_StatusTypeDef init();
     HAL_StatusTypeDef start();
     HAL_StatusTypeDef setFilterConfig(CAN_FilterConfig &config);
+    HAL_StatusTypeDef activateNotification(uint32_t interrupts);
+    HAL_StatusTypeDef deactivateNotification(uint32_t interrupts);
     HAL_StatusTypeDef transmit(CAN_TransmitMessage &message, CAN_TransmitResult &result);
     HAL_StatusTypeDef receive(uint32_t rxFifo, CAN_ReceiveMessage &data);
 };

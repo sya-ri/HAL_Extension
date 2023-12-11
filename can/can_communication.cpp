@@ -25,6 +25,14 @@ HAL_StatusTypeDef CAN_Communication::setFilterConfig(CAN_FilterConfig &config) {
     return HAL_CAN_ConfigFilter(hcan, config.get());
 }
 
+HAL_StatusTypeDef CAN_Communication::activateNotification(uint32_t interrupts) {
+	return HAL_CAN_ActivateNotification(hcan, interrupts);
+}
+
+HAL_StatusTypeDef CAN_Communication::deactivateNotification(uint32_t interrupts) {
+	return HAL_CAN_DeactivateNotification(hcan, interrupts);
+}
+
 HAL_StatusTypeDef CAN_Communication::transmit(CAN_TransmitMessage &message, CAN_TransmitResult &result) {
     result.setInstance(hcan);
     return HAL_CAN_AddTxMessage(hcan, message.getHeader(), message.getData(), result.getMailBox());
