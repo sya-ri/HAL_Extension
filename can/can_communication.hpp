@@ -7,6 +7,7 @@
 #include "can_identifier_type.hpp"
 #include "can_receive_data.hpp"
 #include "can_remote_transmission_request.hpp"
+#include "can_transmit_result.hpp"
 
 namespace halex {
 
@@ -15,7 +16,6 @@ private:
     CAN_HandleTypeDef *hcan;
     CAN_FilterTypeDef filterConfig;
     CAN_TxHeaderTypeDef txHeader;
-    uint32_t usedTxMailbox;
 public:
     CAN_Communication(CAN_HandleTypeDef *hcan);
     CAN_Communication(CAN_HandleTypeDef &hcan);
@@ -51,13 +51,8 @@ public:
 
     HAL_StatusTypeDef applyFilterConfig();
 
-    // Transmit
-    HAL_StatusTypeDef transmit(uint8_t data[], uint8_t dataLength);
-    HAL_StatusTypeDef abortTransmit(uint32_t txMailBox);
-    bool isTxMessagePending(uint32_t txMailbox);
-    uint32_t getUsedTxMailbox();
-
-    // Receive
+    // Transmit & Receive
+    HAL_StatusTypeDef transmit(uint8_t data[], uint8_t dataLength, CAN_TransmitResult &result);
     HAL_StatusTypeDef receive(uint32_t rxFifo, CAN_ReceiveData &data);
 };
 

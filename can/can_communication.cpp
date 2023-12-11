@@ -143,24 +143,10 @@ HAL_StatusTypeDef CAN_Communication::applyFilterConfig() {
     return HAL_CAN_ConfigFilter(hcan, &filterConfig);
 }
 
-HAL_StatusTypeDef CAN_Communication::transmit(uint8_t data[], uint8_t dataLength) {
+HAL_StatusTypeDef CAN_Communication::transmit(uint8_t data[], uint8_t dataLength, CAN_TransmitResult &result) {
     txHeader.DLC = dataLength;
-    return HAL_CAN_AddTxMessage(hcan, &txHeader, data, &usedTxMailbox);
-}
-
-HAL_StatusTypeDef CAN_Communication::abortTransmit(uint32_t txMailBox) {
-    if (isTxMessagePending(txMailBox)) {
-        return HAL_CAN_AbortTxRequest(hcan, txMailBox);
-    }
-    return HAL_StatusTypeDef::HAL_OK;
-}
-
-bool CAN_Communication::isTxMessagePending(uint32_t txMailbox) {
-    return HAL_CAN_IsTxMessagePending(hcan, txMailbox) != 0;
-}
-
-uint32_t CAN_Communication::getUsedTxMailbox() {
-    return usedTxMailbox;
+    result.setInstance(hcan);
+    return HAL_CAN_AddTxMessage(hcan, &txHeader, data, result.getMailBox());
 }
 
 HAL_StatusTypeDef CAN_Communication::receive(uint32_t rxFifo, CAN_ReceiveData &data) {
