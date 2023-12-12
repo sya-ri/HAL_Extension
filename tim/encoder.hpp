@@ -13,6 +13,7 @@ private:
     bool isStart = false;
     uint16_t lastRawCount = 0;
     uint16_t rawCount = 0;
+    int32_t lastCount = 0;
     int32_t count = 0;
 public:
     Encoder();
@@ -22,6 +23,7 @@ public:
     void stop() noexcept;
     void update() noexcept;
     int32_t getCount() const noexcept;
+    int32_t getCountDiff() const noexcept;
     void setCount(int32_t count) noexcept;
     void resetCount() noexcept;
 };

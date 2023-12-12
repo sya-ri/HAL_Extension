@@ -36,6 +36,7 @@ void Encoder::update() noexcept {
     if(!isStart) return;
     lastRawCount = rawCount;
     rawCount = __HAL_TIM_GET_COUNTER(htim);
+    lastCount = count;
     count += rawCount - lastRawCount;
     if (((int32_t) (lastRawCount - rawCount)) > ((int32_t) (__HAL_TIM_GET_AUTORELOAD(htim) / 2))) { // overflow
         count += __HAL_TIM_GET_AUTORELOAD(htim);
@@ -46,6 +47,10 @@ void Encoder::update() noexcept {
 
 int32_t Encoder::getCount() const noexcept {
     return count;
+}
+
+int32_t Encoder::getCountDiff() const noexcept {
+    return count - lastCount;
 }
 
 void Encoder::setCount(int32_t count) noexcept {
