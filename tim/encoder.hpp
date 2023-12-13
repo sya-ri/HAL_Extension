@@ -10,7 +10,6 @@ namespace halex {
 class Encoder {
 private:
     TIM_HandleTypeDef *htim;
-    bool isStart = false;
     uint16_t lastRawCount = 0;
     uint16_t rawCount = 0;
     int32_t count = 0;

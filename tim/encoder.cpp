@@ -16,24 +16,17 @@ Encoder::Encoder(TIM_HandleTypeDef &htim): Encoder(&htim) {
 
 void Encoder::start() noexcept {
     __HAL_TIM_SET_COUNTER(htim , 0);
-    __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
-    if(!isStart) {
-        HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
-        isStart = true;
-    }
+    lastRawCount = 0;
+    rawCount = 0;
+    HAL_TIM_Encoder_Start(htim, TIM_CHANNEL_ALL);
 }
 
 void Encoder::stop() noexcept {
-    if(isStart) {
-        HAL_TIM_Encoder_Stop(htim, TIM_CHANNEL_ALL);
-        isStart = false;
-    }
+    HAL_TIM_Encoder_Stop(htim, TIM_CHANNEL_ALL);
     __HAL_TIM_SET_COUNTER(htim , 0);
-    __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
 }
 
 void Encoder::update() noexcept {
-    if(!isStart) return;
     lastRawCount = rawCount;
     rawCount = __HAL_TIM_GET_COUNTER(htim);
     count += rawCount - lastRawCount;
@@ -49,7 +42,6 @@ int32_t Encoder::getCount() const noexcept {
 }
 
 void Encoder::setCount(int32_t count) noexcept {
-    __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
     this->count = count;
 }
 
