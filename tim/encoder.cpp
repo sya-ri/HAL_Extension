@@ -32,25 +32,22 @@ void Encoder::stop() noexcept {
     __HAL_TIM_CLEAR_FLAG(htim, TIM_FLAG_UPDATE);
 }
 
-void Encoder::update() noexcept {
-    if(!isStart) return;
+int32_t Encoder::update() noexcept {
+    if(!isStart) return 0;
     lastRawCount = rawCount;
     rawCount = __HAL_TIM_GET_COUNTER(htim);
-    lastCount = count;
+    int32_t lastCount = count;
     count += rawCount - lastRawCount;
     if (((int32_t) (lastRawCount - rawCount)) > ((int32_t) (__HAL_TIM_GET_AUTORELOAD(htim) / 2))) { // overflow
         count += __HAL_TIM_GET_AUTORELOAD(htim);
     } else if (((int32_t) (rawCount - lastRawCount)) > ((int32_t) (__HAL_TIM_GET_AUTORELOAD(htim) / 2))) { // underflow
         count -= __HAL_TIM_GET_AUTORELOAD(htim);
     }
+    return count - lastCount;
 }
 
 int32_t Encoder::getCount() const noexcept {
     return count;
-}
-
-int32_t Encoder::getCountDiff() const noexcept {
-    return count - lastCount;
 }
 
 void Encoder::setCount(int32_t count) noexcept {
