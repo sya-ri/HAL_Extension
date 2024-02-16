@@ -19,6 +19,7 @@ private:
     uint32_t chatteringTime = 0; // チャタリング判定時間
 	uint32_t rawChangeTime;
 public:
+	Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, GPIO_PinState normalState, uint32_t chatteringTime);
 	Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, GPIO_PinState normalState);
     Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin);
 	void init(uint32_t chatteringTime);
