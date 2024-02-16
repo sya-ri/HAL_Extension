@@ -7,7 +7,7 @@
 
 namespace halex {
 
-class BooleanStateButton : Button{
+class BooleanStateButton : public Button{
 private:
     bool holdState;
 protected:

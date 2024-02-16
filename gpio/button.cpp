@@ -12,12 +12,14 @@ Button::Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, GPIO_PinState normalySta
 }
 
 
-Button::Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, GPIO_PinState normalyState){
-    Button(GPIOx, GPIO_Pin, normalyState, 0);
+Button::Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, GPIO_PinState normalyState) :
+        Button(GPIOx, GPIO_Pin, normalyState, 0)
+{
 }
 
-Button::Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin) {
-    Button(GPIOx, GPIO_Pin, GPIO_PIN_RESET);
+Button::Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin) :
+        Button(GPIOx, GPIO_Pin, GPIO_PIN_RESET)
+{
 }
 
 void Button::update() {
