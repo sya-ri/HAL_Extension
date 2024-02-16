@@ -25,17 +25,9 @@ void Button::update() {
 	    rawChangeTime = HAL_GetTick();
 	}
 	if( HAL_GetTick() - rawChangeTime >= chatteringTime ) {
+	    lastState = state;
 		state = rawState;
 	}
-
-    if(getState()) { // todo これがそれぞれのクラスのgetstateを使ってくれているかわからない
-        //long pressed
-        pressedTime = HAL_GetTick();
-    }
-}
-
-void Button::setChatteringDelayTim(uint32_t chatteringTime) {
-	this->chatteringTime = chatteringTime;
 }
 
 bool Button::isPushed() {
@@ -46,24 +38,8 @@ bool Button::isReleased() {
 	return (lastState ^ state) & lastState;
 }
 
-bool Button::isPushing() {
-	return state;
-}
-
-bool Button::isLongPushed(uint32_t longPushingTime) {
-    return (pressedTime + longPushingTime < HAL_GetTick());
-}
-
-uint32_t Button::getPushingTime() {
-    return HAL_GetTick() - pressedTime;
-}
-
 bool Button::getState() {
-    return isPushing();
-}
-
-bool Button::getRepeatedly(uint16_t outputPeriodTime, uint16_t waitingTim) {
-    return (getState() && getPushingTime() > waitingTim && ( (getPushingTime() - waitingTim) % outputPeriodTime) == 0);
+    return state;
 }
 
 } // namespace halex

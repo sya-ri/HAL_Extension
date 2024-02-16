@@ -15,7 +15,6 @@ public:
     using Button::Button;
     void update();
     bool getState() override;
-//    bool getRepeatedly(uint16_t outputPeriodTime, uint16_t waitingTim) override; //while the button is down
 };
 
 } // namespace halex
