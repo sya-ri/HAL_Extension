@@ -26,15 +26,17 @@ void Encoder::stop() noexcept {
     __HAL_TIM_SET_COUNTER(htim , 0);
 }
 
-void Encoder::update() noexcept {
+int32_t Encoder::update() noexcept {
     lastRawCount = rawCount;
     rawCount = __HAL_TIM_GET_COUNTER(htim);
+    int32_t lastCount = count;
     count += rawCount - lastRawCount;
     if (((int32_t) (lastRawCount - rawCount)) > ((int32_t) (__HAL_TIM_GET_AUTORELOAD(htim) / 2))) { // overflow
         count += __HAL_TIM_GET_AUTORELOAD(htim);
     } else if (((int32_t) (rawCount - lastRawCount)) > ((int32_t) (__HAL_TIM_GET_AUTORELOAD(htim) / 2))) { // underflow
         count -= __HAL_TIM_GET_AUTORELOAD(htim);
     }
+    return count - lastCount;
 }
 
 int32_t Encoder::getCount() const noexcept {
