@@ -7,5 +7,7 @@
 #include "seven_segment.hpp"
 #include "fixed_seven_segment.hpp"
 #include "dynamic_seven_segment.hpp"
+#include "button.hpp"
+#include "boolean_state_button.hpp"
 
 #endif // HAL_EXTENSION_GPIO_ALL_HPP
