@@ -16,6 +16,7 @@ IncludePath: HAL_Extension/ # フォルダ直下
 ## 目次
 - [Util](util/README.md)
   - [関数](util/README.md#関数)
+    - [General](util/function/general.md)
     - [std::map](util/function/map.md)
     - [math_angle](util/function/math_angle.md)
   - [列挙クラス](util/README.md#列挙クラス)

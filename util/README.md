@@ -1,6 +1,9 @@
 # Util
 
 ## 関数
+- [General](function/general.md)
+  - [getTick()](function/general.md#gettick)
+  - [delay(uint32_t)](function/general.md#delayuint32_t)
 - [std::map](function/map.md)
   - [map_contains](function/map.md#map_containsconst-stdmapk-v-const-k)
 - [math_angle](function/math_angle.md)
