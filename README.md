@@ -1,4 +1,4 @@
-# HAL_Extension - 7.0.0
+# HAL_Extension - 7.0.1
 
 ```c++
 #include "HAL_Extension.hpp
@@ -12,6 +12,8 @@ namespace halex
 SourcePath: HAL_Extension/ # フォルダ直下
 IncludePath: HAL_Extension/ # フォルダ直下
 ```
+
+- 最低サポート C++ バージョン: `C++17`
 
 ## なぜクラスを使うのか
 STM32 HAL は C のライブラリなので、1つ1つの操作を関数として直接呼ぶ形になります。  

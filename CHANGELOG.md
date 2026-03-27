@@ -1,5 +1,11 @@
 # 変更履歴
 
+## v7.0.1
+- `CAN_FilterConfig::setIdMaskFilter` を修正
+  - 標準 ID のマスクフィルタで IDE ビットも比較対象に含めるように変更
+  - 標準 ID のフィルタで拡張 ID が一致してしまう可能性を修正
+  - `setIdRangeFilter` から使用される標準 ID の範囲フィルタにも修正を反映
+
 ## v7.0.0
 - CAN モジュールを追加
   - `CAN_Communication`

@@ -68,8 +68,10 @@ void CAN_FilterConfig::setIdMaskFilter(uint32_t id1, uint32_t mask1, uint32_t id
 
     config.FilterIdHigh = id1 << 5;
     config.FilterIdLow = id2 << 5;
-    config.FilterMaskIdHigh = mask1 << 5;
-    config.FilterMaskIdLow = mask2 << 5;
+
+    // 標準 ID 用フィルタで拡張 ID を通さないように IDE も比較対象に含める
+    config.FilterMaskIdHigh = (mask1 << 5) | 0x8;
+    config.FilterMaskIdLow = (mask2 << 5) | 0x8;
 }
 
 void CAN_FilterConfig::setIdMaskFilter(CAN_IdentifierType type, uint32_t id, uint32_t mask) {
@@ -78,7 +80,9 @@ void CAN_FilterConfig::setIdMaskFilter(CAN_IdentifierType type, uint32_t id, uin
     config.FilterScale = CAN_FILTERSCALE_32BIT;
 
     uint32_t filterId = type == CAN_IdentifierType::Standard ? id << 21 : (id << 3) | 0x4;
-    uint32_t filterMask = type == CAN_IdentifierType::Standard ? mask << 21 : (mask << 3) | 0x4;
+
+    // 標準 ID 用フィルタで拡張 ID を通さないように IDE も比較対象に含める
+    uint32_t filterMask = type == CAN_IdentifierType::Standard ? (mask << 21) | 0x4 : (mask << 3) | 0x4;
 
     config.FilterIdHigh = filterId >> 16;
     config.FilterIdLow = filterId;
