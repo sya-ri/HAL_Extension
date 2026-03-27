@@ -76,6 +76,7 @@ IncludePath: HAL_Extension/ # フォルダ直下
     - [Callback](tim/function/README.md#callback)
   - [クラス](tim/README.md#クラス)
     - [PWM](tim/class/PWM.md)
+    - [ServoMotor](tim/class/ServoMotor.md)
     - [Motor](tim/class/Motor.md)
     - [Encoder](tim/class/Encoder.md)
     - [TimerInterrupt](tim/class/TimerInterrupt.md)

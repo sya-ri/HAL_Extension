@@ -3,6 +3,7 @@
 
 #include "callback.hpp"
 #include "pwm.hpp"
+#include "servo_motor.hpp"
 #include "motor.hpp"
 #include "encoder.hpp"
 #include "timer_interrupt.hpp"
