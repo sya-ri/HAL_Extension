@@ -22,7 +22,6 @@ public:
 	Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, GPIO_PinState normalState, uint32_t chatteringTime);
 	Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin, GPIO_PinState normalState);
     Button(GPIO_TypeDef * GPIOx, uint16_t GPIO_Pin);
-	void init(uint32_t chatteringTime);
 	void update();
 	bool isPushed();
 	bool isReleased();
