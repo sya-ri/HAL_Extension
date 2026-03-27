@@ -7,9 +7,14 @@
 - [関数](#関数)
   - [add(GPIO)](#dynamicsevensegmentaddgpio)
   - [add(GPIO_TypeDef*, uint16_t)](#dynamicsevensegmentaddgpio_typedef-uint16_t)
+  - [setZeroFill(bool)](#dynamicsevensegmentsetzerofillbool)
+  - [setAllowSign(bool)](#dynamicsevensegmentsetallowsignbool)
+  - [setOverflowError(bool)](#dynamicsevensegmentsetoverflowerrorbool)
   - [update(int64_t)](#dynamicsevensegmentupdateint64_t)
   - [updateFixedPoint(float, int8_t)](#dynamicsevensegmentupdatefixedpointfloat-int8_t)
   - [updateFloatPoint(float)](#dynamicsevensegmentupdatefloatpointfloat)
+  - [updateExp(float)](#dynamicsevensegmentupdateexpfloat)
+  - [updateHex(uint64_t)](#dynamicsevensegmentupdatehexuint64_t)
   - [next()](#dynamicsevensegmentnext)
   - [clear()](#dynamicsevensegmentclear)
 
@@ -64,6 +69,42 @@ PinOut: GPIO_Output
 >                    .add(GPIOB, GPIO_PIN_1) // 以下省略
 > ```
 
+##### DynamicSevenSegment::setZeroFill(bool)
+> ```c++
+> DynamicSevenSegment& setZeroFill(
+>     bool enable
+> ) noexcept;
+> ```
+> 先頭の空き桁を `0` で埋めるかどうかを設定します
+> ```c++
+> // 例
+> dynamicSevenSegment.setZeroFill(true);
+> ```
+
+##### DynamicSevenSegment::setAllowSign(bool)
+> ```c++
+> DynamicSevenSegment& setAllowSign(
+>     bool enable
+> ) noexcept;
+> ```
+> 負数表示で符号を使うかどうかを設定します
+> ```c++
+> // 例
+> dynamicSevenSegment.setAllowSign(false);
+> ```
+
+##### DynamicSevenSegment::setOverflowError(bool)
+> ```c++
+> DynamicSevenSegment& setOverflowError(
+>     bool enable
+> ) noexcept;
+> ```
+> 桁あふれ時にエラー表示を行うかどうかを設定します
+> ```c++
+> // 例
+> dynamicSevenSegment.setOverflowError(true);
+> ```
+
 ##### DynamicSevenSegment::update(int64_t)
 > ```c++
 > void update(
@@ -102,6 +143,30 @@ PinOut: GPIO_Output
 > // 例
 > dynamicSevenSegment.updateFloatPoint(123); // 123.0000...
 > dynamicSevenSegment.updateFloatPoint(-151.225); // -151.225...
+> ```
+
+##### DynamicSevenSegment::updateExp(float)
+> ```c++
+> void updateExp(
+>     float num
+> ) const noexcept;
+> ```
+> 表示する値を指数表記で変更します
+> ```c++
+> // 例
+> dynamicSevenSegment.updateExp(12345.0f);
+> ```
+
+##### DynamicSevenSegment::updateHex(uint64_t)
+> ```c++
+> void updateHex(
+>     uint64_t num
+> ) const noexcept;
+> ```
+> 表示する値を16進数で変更します
+> ```c++
+> // 例
+> dynamicSevenSegment.updateHex(0x1AF);
 > ```
 
 ##### DynamicSevenSegment::next()
