@@ -13,6 +13,34 @@ SourcePath: HAL_Extension/ # フォルダ直下
 IncludePath: HAL_Extension/ # フォルダ直下
 ```
 
+## なぜクラスを使うのか
+STM32 HAL は C のライブラリなので、1つ1つの操作を関数として直接呼ぶ形になります。  
+一方でロボット制御では、「左モータ」「右モータ」「このエンコーダ」「このサーボ」のように、部品ごとに状態と操作をまとめて扱いたい場面が多くあります。
+
+このライブラリでは、周辺機器や制御対象をクラスとして表現することで、オブジェクト指向を取り入れやすくしています。  
+これにより、ロボットを配線や HAL 関数の集まりとしてではなく、役割を持ったパーツの集まりとして考えやすくなります。
+
+例えば `Motor` クラスなら、正転用と逆転用の PWM をひとまとめにして、「モータを回す」という単位で扱えます。
+
+```c++
+halex::Motor leftMotor(&htim2, TIM_CHANNEL_1, &htim2, TIM_CHANNEL_2);
+halex::Motor rightMotor(&htim3, TIM_CHANNEL_1, &htim3, TIM_CHANNEL_2);
+
+leftMotor.start();
+rightMotor.start();
+
+leftMotor.setSpeed(true, 500);
+rightMotor.setSpeed(true, 500);
+```
+
+HAL を直接使うこと自体を否定するものではありませんが、クラスにすることで次のような利点があります。
+- 部品ごとに責務を分けて考えやすい
+- 状態と操作を同じ場所にまとめられる
+- 初期化や設定の再利用がしやすい
+- ロボット全体をパーツの組み合わせとして設計しやすい
+
+HAL_Extension は、STM32 HAL の上に薄くクラスを重ねることで、組み込みでもオブジェクト指向を使いやすくすることを目的としています。
+
 ## 目次
 - [Util](util/README.md)
   - [関数](util/README.md#関数)
