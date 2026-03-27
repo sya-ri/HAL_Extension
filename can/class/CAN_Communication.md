@@ -5,6 +5,9 @@
 - [コンストラクタ](#コンストラクタ)
   - [CAN_Communication(CAN_HandleTypeDef)](#can_communicationcan_communicationcan_handletypedef)
 - [関数](#関数)
+  - [getHandle()](#can_communicationgethandle)
+  - [equals(CAN_HandleTypeDef*)](#can_communicationequalscan_handletypedef)
+  - [equals(CAN_HandleTypeDef&)](#can_communicationequalscan_handletypedef-1)
   - [init()](#can_communicationinit)
   - [start()](#can_communicationstart)
   - [setFilterConfig(CAN_FilterConfig)](#can_communicationsetfilterconfigcan_filterconfig)
@@ -37,6 +40,25 @@ PinOut: CAN_RX / CAN_TX
 > ```
 
 ## 関数
+##### CAN_Communication::getHandle()
+> ```c++
+> CAN_HandleTypeDef* getHandle() const noexcept;
+> ```
+> 設定されている CAN ハンドルを返します
+
+##### CAN_Communication::equals(CAN_HandleTypeDef*)
+##### CAN_Communication::equals(CAN_HandleTypeDef&)
+> ```c++
+> bool equals(
+>     CAN_HandleTypeDef *hcan
+> ) const noexcept;
+>
+> bool equals(
+>     CAN_HandleTypeDef &hcan
+> ) const noexcept;
+> ```
+> 渡した CAN ハンドルと同じインスタンスか判定します
+
 ##### CAN_Communication::init()
 > ```c++
 > HAL_StatusTypeDef init();

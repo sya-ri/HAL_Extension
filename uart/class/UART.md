@@ -6,6 +6,9 @@
 - [コンストラクタ](#コンストラクタ)
   - [UART(UART_HandleTypeDef)](#uartuartuart_handletypedef)
 - [関数](#関数)
+  - [getHandle()](#uartgethandle)
+  - [equals(UART_HandleTypeDef*)](#uartequalsuart_handletypedef)
+  - [equals(UART_HandleTypeDef&)](#uartequalsuart_handletypedef-1)
   - [transmit(T, uint32_t)](#uarttransmitt-uint32_t)
   - [receive(T, uint32_t)](#uartreceivet-uint32_t)
 
@@ -44,6 +47,25 @@ T: 送受信するデータ型
 > ```
 
 ## 関数
+##### UART::getHandle()
+> ```c++
+> UART_HandleTypeDef* getHandle() const noexcept;
+> ```
+> 設定されている UART ハンドルを返します
+
+##### UART::equals(UART_HandleTypeDef*)
+##### UART::equals(UART_HandleTypeDef&)
+> ```c++
+> bool equals(
+>     UART_HandleTypeDef *huart
+> ) const noexcept;
+>
+> bool equals(
+>     UART_HandleTypeDef &huart
+> ) const noexcept;
+> ```
+> 渡した UART ハンドルと同じインスタンスか判定します
+
 ##### UART::transmit(T, uint32_t)
 > ```c++
 > HAL_StatusTypeDef transmit(

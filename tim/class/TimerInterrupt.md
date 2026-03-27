@@ -5,6 +5,9 @@
 - [コンストラクタ](#コンストラクタ)
   - [TimerInterrupt(TIM_HandleTypeDef)](#timerinterrupttimerinterrupttim_handletypedef)
 - [関数](#関数)
+  - [getHandle()](#timerinterruptgethandle)
+  - [equals(TIM_HandleTypeDef*)](#timerinterruptequalstim_handletypedef)
+  - [equals(TIM_HandleTypeDef&)](#timerinterruptequalstim_handletypedef-1)
   - [start()](#timerinterruptstart)
   - [start(uint16_t, uint16_t)](#timerinterruptstartuint16_t-uint16_t)
   - [stop()](#timerinterruptstop)
@@ -38,6 +41,25 @@ NVIC Settings:
 > ```
 
 ## 関数
+##### TimerInterrupt::getHandle()
+> ```c++
+> TIM_HandleTypeDef* getHandle() const noexcept;
+> ```
+> 設定されている TIM ハンドルを返します
+
+##### TimerInterrupt::equals(TIM_HandleTypeDef*)
+##### TimerInterrupt::equals(TIM_HandleTypeDef&)
+> ```c++
+> bool equals(
+>     TIM_HandleTypeDef *htim
+> ) const noexcept;
+>
+> bool equals(
+>     TIM_HandleTypeDef &htim
+> ) const noexcept;
+> ```
+> 渡した TIM ハンドルと同じインスタンスか判定します
+
 ##### TimerInterrupt::start()
 > ```c++
 > void start() noexcept;

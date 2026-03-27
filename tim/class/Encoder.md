@@ -4,6 +4,9 @@
 - [コンストラクタ](#コンストラクタ)
   - [Encoder(TIM_HandleTypeDef)](#encoderencodertim_handletypedef)
 - [関数](#関数)
+  - [getHandle()](#encodergethandle)
+  - [equals(TIM_HandleTypeDef*)](#encoderequalstim_handletypedef)
+  - [equals(TIM_HandleTypeDef&)](#encoderequalstim_handletypedef-1)
   - [start()](#encoderstart)
   - [stop()](#encoderstop)
   - [update()](#encoderupdate)
@@ -41,6 +44,25 @@ TIMn:
 > ```
 
 ## 関数
+##### Encoder::getHandle()
+> ```c++
+> TIM_HandleTypeDef* getHandle() const noexcept;
+> ```
+> 設定されている TIM ハンドルを返します
+
+##### Encoder::equals(TIM_HandleTypeDef*)
+##### Encoder::equals(TIM_HandleTypeDef&)
+> ```c++
+> bool equals(
+>     TIM_HandleTypeDef *htim
+> ) const noexcept;
+>
+> bool equals(
+>     TIM_HandleTypeDef &htim
+> ) const noexcept;
+> ```
+> 渡した TIM ハンドルと同じインスタンスか判定します
+
 ##### Encoder::start()
 > ```c++
 > void start() noexcept;

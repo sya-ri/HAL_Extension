@@ -17,6 +17,9 @@ public:
     Encoder();
     Encoder(TIM_HandleTypeDef *htim);
     Encoder(TIM_HandleTypeDef &htim);
+    TIM_HandleTypeDef* getHandle() const noexcept { return htim; }
+    bool equals(TIM_HandleTypeDef *htim) const noexcept { return this->htim == htim; }
+    bool equals(TIM_HandleTypeDef &htim) const noexcept { return equals(&htim); }
     void start() noexcept;
     void stop() noexcept;
     int32_t update() noexcept;

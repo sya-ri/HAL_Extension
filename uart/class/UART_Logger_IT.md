@@ -5,6 +5,9 @@
 - [コンストラクタ](#コンストラクタ)
   - [UART_Logger_IT(UART_HandleTypeDef)](#uart_logger_ituart_logger_ituart_handletypedef)
 - [関数](#関数)
+  - [getHandle()](#uart_logger_itgethandle)
+  - [equals(UART_HandleTypeDef*)](#uart_logger_itequalsuart_handletypedef)
+  - [equals(UART_HandleTypeDef&)](#uart_logger_itequalsuart_handletypedef-1)
   - [print(std::string)](#uart_logger_itprintstdstring)
   - [print(const char*)](#uart_logger_itprintconst-char)
   - [println(std::string)](#uart_logger_itprintlnstdstring)
@@ -41,6 +44,25 @@ USARTn:
 > ```
 
 ## 関数
+##### UART_Logger_IT::getHandle()
+> ```c++
+> UART_HandleTypeDef* getHandle() const noexcept;
+> ```
+> 設定されている UART ハンドルを返します
+
+##### UART_Logger_IT::equals(UART_HandleTypeDef*)
+##### UART_Logger_IT::equals(UART_HandleTypeDef&)
+> ```c++
+> bool equals(
+>     UART_HandleTypeDef *huart
+> ) const noexcept;
+>
+> bool equals(
+>     UART_HandleTypeDef &huart
+> ) const noexcept;
+> ```
+> 渡した UART ハンドルと同じインスタンスか判定します
+
 ##### UART_Logger_IT::print(std::string)
 ##### UART_Logger_IT::print(const char*)
 > ```c++

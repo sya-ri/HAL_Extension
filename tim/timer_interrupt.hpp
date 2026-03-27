@@ -15,6 +15,9 @@ public:
     TimerInterrupt();
     TimerInterrupt(TIM_HandleTypeDef *htim);
     TimerInterrupt(TIM_HandleTypeDef &htim);
+    TIM_HandleTypeDef* getHandle() const noexcept { return htim; }
+    bool equals(TIM_HandleTypeDef *htim) const noexcept { return this->htim == htim; }
+    bool equals(TIM_HandleTypeDef &htim) const noexcept { return equals(&htim); }
     void start() noexcept;
     void start(uint16_t prescaler, uint16_t counterPeriod) noexcept;
     void stop() noexcept;

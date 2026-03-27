@@ -5,6 +5,9 @@
 - [コンストラクタ](#コンストラクタ)
   - [ADC_DMA(ADC_HandleTypeDef, uint8_t)](#adc_dmaadc_dmaadc_handletypedef-uint8_t)
 - [関数](#関数)
+  - [getHandle()](#adc_dmagethandle)
+  - [equals(ADC_HandleTypeDef*)](#adc_dmaequalsadc_handletypedef)
+  - [equals(ADC_HandleTypeDef&)](#adc_dmaequalsadc_handletypedef-1)
   - [start()](#adc_dmastart)
   - [stop()](#adc_dmastop)
   - [get(uint8_t)](#adc_dmagetuint8_t)
@@ -57,6 +60,25 @@ ADCn:
 > ```
 
 ## 関数
+##### ADC_DMA::getHandle()
+> ```c++
+> ADC_HandleTypeDef* getHandle() const noexcept;
+> ```
+> 設定されている ADC ハンドルを返します
+
+##### ADC_DMA::equals(ADC_HandleTypeDef*)
+##### ADC_DMA::equals(ADC_HandleTypeDef&)
+> ```c++
+> bool equals(
+>     ADC_HandleTypeDef *hadc
+> ) const noexcept;
+>
+> bool equals(
+>     ADC_HandleTypeDef &hadc
+> ) const noexcept;
+> ```
+> 渡した ADC ハンドルと同じインスタンスか判定します
+
 ##### ADC_DMA::start()
 > ```c++
 > void start() noexcept;

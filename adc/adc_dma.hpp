@@ -18,6 +18,9 @@ public:
     ADC_DMA(ADC_HandleTypeDef *hadc, uint32_t adcBufLength);
     ADC_DMA(ADC_HandleTypeDef &hadc, uint32_t adcBufLength);
     ~ADC_DMA();
+    ADC_HandleTypeDef* getHandle() const noexcept { return hadc; }
+    bool equals(ADC_HandleTypeDef *hadc) const noexcept { return this->hadc == hadc; }
+    bool equals(ADC_HandleTypeDef &hadc) const noexcept { return equals(&hadc); }
     void start() noexcept;
     void stop() noexcept;
     uint32_t get(uint8_t index) const noexcept;

@@ -5,6 +5,9 @@
 - [コンストラクタ](#コンストラクタ)
   - [PWM(TIM_HandleTypeDef, uint32_t)](#pwmpwmtim_handletypedef-uint32_t)
 - [関数](#関数)
+  - [getHandle()](#pwmgethandle)
+  - [equals(TIM_HandleTypeDef*)](#pwmequalstim_handletypedef)
+  - [equals(TIM_HandleTypeDef&)](#pwmequalstim_handletypedef-1)
   - [start()](#pwmstart)
   - [stop()](#pwmstop)
   - [setCompare(uint32_t)](#pwmsetcompareuint32_t)
@@ -47,6 +50,25 @@ TIMn:
 > ```
 
 ## 関数
+##### PWM::getHandle()
+> ```c++
+> TIM_HandleTypeDef* getHandle() const noexcept;
+> ```
+> 設定されている TIM ハンドルを返します
+
+##### PWM::equals(TIM_HandleTypeDef*)
+##### PWM::equals(TIM_HandleTypeDef&)
+> ```c++
+> bool equals(
+>     TIM_HandleTypeDef *htim
+> ) const noexcept;
+>
+> bool equals(
+>     TIM_HandleTypeDef &htim
+> ) const noexcept;
+> ```
+> 渡した TIM ハンドルと同じインスタンスか判定します
+
 ##### PWM::start()
 > ```c++
 > void start() const noexcept;

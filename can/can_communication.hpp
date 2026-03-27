@@ -17,6 +17,9 @@ private:
 public:
     CAN_Communication(CAN_HandleTypeDef *hcan);
     CAN_Communication(CAN_HandleTypeDef &hcan);
+    CAN_HandleTypeDef* getHandle() const noexcept { return hcan; }
+    bool equals(CAN_HandleTypeDef *hcan) const noexcept { return this->hcan == hcan; }
+    bool equals(CAN_HandleTypeDef &hcan) const noexcept { return equals(&hcan); }
     HAL_StatusTypeDef init();
     HAL_StatusTypeDef start();
     HAL_StatusTypeDef setFilterConfig(CAN_FilterConfig &config);

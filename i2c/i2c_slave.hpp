@@ -25,6 +25,18 @@ public:
 
     }
 
+    I2C_HandleTypeDef* getHandle() const noexcept {
+        return hi2c;
+    }
+
+    bool equals(I2C_HandleTypeDef *hi2c) const noexcept {
+        return this->hi2c == hi2c;
+    }
+
+    bool equals(I2C_HandleTypeDef &hi2c) const noexcept {
+        return equals(&hi2c);
+    }
+
     void init() noexcept {
         HAL_I2C_DeInit(hi2c);
         hi2c->Init.OwnAddress1 = address << 1;

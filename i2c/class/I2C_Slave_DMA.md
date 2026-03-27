@@ -6,6 +6,9 @@
 - [コンストラクタ](#コンストラクタ)
   - [I2C_Slave_DMA(I2C_HandleTypeDef, T, uint8_t)](#i2c_slave_dmai2c_slave_dmai2c_handletypedef-t-uint8_t)
 - [関数](#関数)
+  - [getHandle()](#i2c_slave_dmagethandle)
+  - [equals(I2C_HandleTypeDef*)](#i2c_slave_dmaequalsi2c_handletypedef)
+  - [equals(I2C_HandleTypeDef&)](#i2c_slave_dmaequalsi2c_handletypedef-1)
   - [init()](#i2c_slave_dmainit)
   - [init(uint8_t)](#i2c_slave_dmainituint8_t)
   - [startTransmit()](#i2c_slave_dmastarttransmit)
@@ -57,6 +60,25 @@ T: 送受信するデータ型
 > ```
 
 ## 関数
+##### I2C_Slave_DMA::getHandle()
+> ```c++
+> I2C_HandleTypeDef* getHandle() const noexcept;
+> ```
+> 設定されている I2C ハンドルを返します
+
+##### I2C_Slave_DMA::equals(I2C_HandleTypeDef*)
+##### I2C_Slave_DMA::equals(I2C_HandleTypeDef&)
+> ```c++
+> bool equals(
+>     I2C_HandleTypeDef *hi2c
+> ) const noexcept;
+>
+> bool equals(
+>     I2C_HandleTypeDef &hi2c
+> ) const noexcept;
+> ```
+> 渡した I2C ハンドルと同じインスタンスか判定します
+
 ##### I2C_Slave_DMA::init()
 > ```c++
 > void init() noexcept;

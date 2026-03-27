@@ -16,6 +16,9 @@ public:
     UART_Logger();
     UART_Logger(UART_HandleTypeDef *huart, uint32_t timeout = 0x0F);
     UART_Logger(UART_HandleTypeDef &huart, uint32_t timeout = 0x0F);
+    UART_HandleTypeDef* getHandle() const noexcept { return huart; }
+    bool equals(UART_HandleTypeDef *huart) const noexcept { return this->huart == huart; }
+    bool equals(UART_HandleTypeDef &huart) const noexcept { return equals(&huart); }
     void print(std::string text) const noexcept;
     void print(const char* text) const noexcept;
     void println(std::string text) const noexcept;

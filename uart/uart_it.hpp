@@ -25,6 +25,18 @@ public:
 
     }
 
+    UART_HandleTypeDef* getHandle() const noexcept {
+        return huart;
+    }
+
+    bool equals(UART_HandleTypeDef *huart) const noexcept {
+        return this->huart == huart;
+    }
+
+    bool equals(UART_HandleTypeDef &huart) const noexcept {
+        return equals(&huart);
+    }
+
     HAL_StatusTypeDef transmit(const T &data) const noexcept {
         return uartTransmit_IT(huart, data);
     }

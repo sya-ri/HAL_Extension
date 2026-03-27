@@ -20,6 +20,9 @@ public:
     UART_Logger_IT();
     UART_Logger_IT(UART_HandleTypeDef *huart);
     UART_Logger_IT(UART_HandleTypeDef &huart);
+    UART_HandleTypeDef* getHandle() const noexcept { return huart; }
+    bool equals(UART_HandleTypeDef *huart) const noexcept { return this->huart == huart; }
+    bool equals(UART_HandleTypeDef &huart) const noexcept { return equals(&huart); }
     void print(std::string text) noexcept;
     void print(const char* text) noexcept;
     void println(std::string text) noexcept;

@@ -15,6 +15,9 @@ public:
     PWM();
     PWM(TIM_HandleTypeDef *htim, uint32_t channel);
     PWM(TIM_HandleTypeDef &htim, uint32_t channel);
+    TIM_HandleTypeDef* getHandle() const noexcept { return htim; }
+    bool equals(TIM_HandleTypeDef *htim) const noexcept { return this->htim == htim; }
+    bool equals(TIM_HandleTypeDef &htim) const noexcept { return equals(&htim); }
     void start() const noexcept;
     void stop() const noexcept;
     void setCompare(uint32_t compare) const noexcept;
