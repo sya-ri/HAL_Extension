@@ -1,5 +1,33 @@
 # 変更履歴
 
+## v7.0.0
+- CAN モジュールを追加
+  - `CAN_Communication`
+  - `CAN_FilterConfig`
+  - `CAN_ReceiveMessage`
+  - `CAN_TransmitMessage`
+  - `CAN_TransmitResult`
+  - `CAN_IdentifierType`
+  - `CAN_RemoteTransmissionRequest`
+- クラスを追加
+  - `Button`
+  - `BooleanStateButton`
+  - `ServoMotor`
+- 関数を追加
+  - `delay`
+  - `getTick`
+- 各クラスに関数を追加
+  - `equals`
+  - `getHandle`
+- `Encoder::update` の返り値として count の差分を返すように変更
+- コールバック関数の実行方式を変更
+  - 自動定義ではなく `runXXXCallback` を呼び出して実行するように変更
+- モジュール無効化の仕組みを変更
+  - `CONFIG_DISABLE_MODULE` を廃止し `__has_include` を使うように変更
+  - ソースファイル側でも無効化設定を反映するように変更
+- ドキュメント構成を変更
+  - `INDEX.md` を `README.md` に変更
+
 ## v6.0.0
 - Src, Inc, Doc を直下に置く様にした
 - ファイル名を短くした
