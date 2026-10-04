@@ -85,12 +85,12 @@ TIMn:
 
 ##### Encoder::update()
 > ```c++
-> void update() noexcept;
+> int32_t update() noexcept;
 > ```
-> カウントを更新します  
+> カウントを更新し、前回の `update()` からの変化量を返します  
 > ```c++
 > // 例
-> encoder.update();
+> int32_t diff = encoder.update();
 > ```
 
 ##### Encoder::getCount()
