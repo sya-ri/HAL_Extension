@@ -18,7 +18,7 @@
 ```yaml
 TIMn:
   - Combined Channels を Encoder Mode に設定
-  - Counter Period を好きな値に設定する
+  - Counter Period を好きな値に設定する(65535 以下。32bit タイマーでも 65535 以下にしてください)
   - Encoder:
     - A相とB相があるエンコーダーの場合、Encoder Mode を TI1 and TI2 に設定してください
     - カウントアップとダウンの方向は Polarity で逆にすることができます
